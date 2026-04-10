@@ -1,137 +1,113 @@
-import React from "react";
-import { motion } from "framer-motion";
-import {
-  XCircle,
-  CheckCircle2,
-  AlertCircle,
-  Sparkles,
-  ArrowRight,
-} from "lucide-react";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { XCircle, CheckCircle2, Minus, Plus } from 'lucide-react';
 
 const ComparisonSection = () => {
   const statusQuo = [
-    "2-3 hours of charting after clinic",
-    "Notes often missing critical details",
-    "Feeling like a data-entry clerk",
-    "Mental burnout and cognitive load",
-    "Documentation backlogs on weekends",
+    "40% of the day spent on documentation",
+    "Documentation backlog leading to burnout",
+    "Reduced patient eye contact during visits",
+    "Late-night chart completion at home",
   ];
 
-  const precisionNote = [
+  const withPrecision = [
+    "0 minutes spent on transcription",
     "Signed notes ready before the next patient",
-    "Captures 100% of the conversation context",
-    "Eye contact and empathy, not typing",
-    "Zero cognitive load during consults",
-    "Reclaim your personal life and weekends",
+    "100% focused on patient care and history",
+    "Finish your day when your last patient leaves",
   ];
 
   return (
-    <section id="features" className="py-24 bg-white relative overflow-hidden">
-      {/* Decorative Blur */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-brand-blue/5 rounded-full blur-[120px] -z-10" />
+    <section id="features" className="py-24 container-custom">
+      <div className="text-center max-w-3xl mx-auto mb-20">
+        <motion.div
+           initial={{ opacity: 0, y: 10 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           className="inline-flex items-center gap-2 px-3 py-1 bg-red-100 text-red-600 rounded-full mb-4"
+        >
+          <Minus className="w-4 h-4" />
+          <span className="text-[13px] font-bold uppercase tracking-wider">The Burden</span>
+        </motion.div>
+        <h2 className="text-4xl lg:text-7xl font-bold mb-8 text-brand-navy tracking-tight">See how much time you're wasting.</h2>
+        <p className="text-2xl text-brand-muted font-medium">Capture every detail without the keyboard fatigue.</p>
+      </div>
 
-      <div className="container-custom">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 bg-brand-blue/10 text-brand-blue rounded-full mb-4"
-          >
-            <AlertCircle className="w-4 h-4" />
-            <span className="text-[13px] font-bold uppercase tracking-wider">
-              The Problem
-            </span>
-          </motion.div>
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            Documentation was never your job.
-          </h2>
-          <p className="text-xl text-brand-muted">
-            You trained to heal, not to type. Here's how PrecisionNote restores
-            your clinical freedom.
-          </p>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {/* Status Quo Card */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="p-8 lg:p-12 rounded-[32px] bg-white border border-brand-border/60 shadow-card relative overflow-hidden group hover:border-brand-muted/20 transition-all"
-          >
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-12 h-12 bg-red-50 text-red-500 rounded-2xl flex items-center justify-center">
-                <XCircle className="w-6 h-6" />
+      <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+        {/* Status Quo */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          className="bg-white rounded-[40px] p-10 lg:p-14 border border-brand-border/60 relative overflow-hidden group hover:border-red-100 transition-colors"
+        >
+          <div className="relative z-10">
+            <div className="flex items-center gap-3 mb-10">
+              <div className="p-3 bg-red-50 rounded-2xl text-red-500">
+                <XCircle className="w-8 h-8" />
               </div>
-              <div>
-                <span className="text-xs font-bold text-brand-muted uppercase tracking-widest block mb-1">
-                  Status Quo
-                </span>
-                <h3 className="text-2xl font-bold">Yesterday's Charting</h3>
-              </div>
+              <h3 className="text-2xl font-bold text-brand-navy">Status Quo</h3>
             </div>
-
-            <ul className="space-y-5">
+            
+            <ul className="space-y-8">
               {statusQuo.map((item, i) => (
-                <li key={i} className="flex gap-4 items-start text-brand-muted">
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand-muted/30 mt-2.5" />
-                  <span className="text-[17px] leading-relaxed italic">
-                    {item}
-                  </span>
+                <li key={i} className="flex items-start gap-4">
+                  <div className="mt-1 w-6 h-6 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
+                    <div className="w-2 h-2 rounded-full bg-red-500" />
+                  </div>
+                  <span className="text-xl text-slate-600 leading-snug">{item}</span>
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
+          {/* Subtle Red Glow */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/5 blur-[80px] rounded-full group-hover:bg-red-500/10 transition-colors" />
+        </motion.div>
 
-          {/* PrecisionNote Card */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="p-8 lg:p-12 rounded-[32px] bg-brand-navy text-white shadow-2xl relative overflow-hidden group"
-          >
-            {/* Visual Flare */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue/20 rounded-full blur-3xl -z-0 opacity-50 group-hover:opacity-70 transition-opacity" />
-
-            <div className="relative z-10">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-12 bg-brand-blue text-white rounded-2xl flex items-center justify-center">
-                  <Sparkles className="w-6 h-6" />
-                </div>
-                <div>
-                  <span className="text-xs font-bold text-brand-blue uppercase tracking-widest block mb-1">
-                    PrecisionNote
-                  </span>
-                  <h3 className="text-2xl font-bold">The Future of Care</h3>
-                </div>
+        {/* PrecisionNote */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          className="bg-brand-navy rounded-[40px] p-10 lg:p-14 text-white relative overflow-hidden shadow-2xl shadow-brand-blue/20 group"
+        >
+          {/* Decorative Elements */}
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/20 to-transparent pointer-events-none" />
+          
+          <div className="relative z-10">
+            <div className="flex items-center gap-3 mb-10">
+              <div className="p-3 bg-brand-blue rounded-2xl text-white shadow-lg shadow-brand-blue/50">
+                <CheckCircle2 className="w-8 h-8" />
               </div>
-
-              <ul className="space-y-5">
-                {precisionNote.map((item, i) => (
-                  <li key={i} className="flex gap-4 items-start">
-                    <CheckCircle2 className="w-5 h-5 text-brand-blue mt-1 shrink-0" />
-                    <span className="text-[17px] leading-relaxed font-medium">
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-12 p-6 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm">
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-sm text-white/60">
-                    Ready to switch?
-                  </span>
-                  <button className="flex items-center gap-2 text-brand-blue font-bold group/btn">
-                    Get Started{" "}
-                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </button>
-                </div>
-              </div>
+              <h3 className="text-2xl font-bold">PrecisionNote</h3>
             </div>
-          </motion.div>
-        </div>
+
+            <ul className="space-y-8">
+              {withPrecision.map((item, i) => (
+                <li key={i} className="flex items-start gap-4">
+                  <div className="mt-1 w-6 h-6 rounded-full bg-brand-blue/20 flex items-center justify-center flex-shrink-0">
+                    <CheckCircle2 className="w-4 h-4 text-brand-blue" />
+                  </div>
+                  <span className="text-xl text-slate-300 leading-snug font-medium group-hover:text-white transition-colors">{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <motion.div 
+              className="mt-12 pt-10 border-t border-white/10"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+            >
+              <button className="w-full py-5 bg-white text-brand-navy rounded-full font-bold text-lg hover:scale-[1.02] transition-transform">
+                Experience the Difference
+              </button>
+            </motion.div>
+          </div>
+          
+          <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-brand-blue opacity-10 blur-[100px] rounded-full" />
+        </motion.div>
       </div>
     </section>
   );

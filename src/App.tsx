@@ -1,27 +1,22 @@
 import React from 'react';
 import LandingNav from './components/LandingNav';
 import Hero from './components/Hero';
+import TrustBar from './components/TrustBar';
 import ComparisonSection from './components/ComparisonSection';
 import StepSection from './components/StepSection';
 import Testimonials from './components/Testimonials';
+import FooterCTA from './components/FooterCTA';
 import LandingFooter from './components/LandingFooter';
 
 function App() {
   return (
-    <div className="min-h-screen bg-brand-bg relative selection:bg-brand-blue/30 overflow-x-hidden">
+    <div className="min-h-screen bg-brand-bg selection:bg-brand-blue selection:text-white">
       <LandingNav />
       
       <main>
         <Hero />
-        
-        {/* Floating Scroll Indicator for Section 1 */}
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-10 hidden lg:flex flex-col items-center gap-2 text-brand-muted opacity-40">
-           <span className="text-[10px] uppercase font-black tracking-[0.2em]">Scroll to Explore</span>
-           <div className="w-[1px] h-12 bg-gradient-to-b from-brand-muted to-transparent" />
-        </div>
-
+        <TrustBar />
         <ComparisonSection />
-        
         <StepSection />
         
         <Testimonials />

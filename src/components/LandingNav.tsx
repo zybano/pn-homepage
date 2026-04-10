@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronRight } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 
 const LandingNav = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -30,19 +30,21 @@ const LandingNav = () => {
       <div className="container-custom flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-2 group cursor-pointer">
-          <div className="w-10 h-10 bg-brand-blue rounded-xl flex items-center justify-center transform group-hover:rotate-6 transition-transform">
-            <div className="w-5 h-5 border-2 border-white rounded-sm" />
+          <div className="w-10 h-10 bg-brand-blue rounded-xl flex items-center justify-center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 12H7L9 18L13 6L15 12H20" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </div>
-          <span className="text-xl font-bold text-brand-navy tracking-tight">PrecisionNote</span>
+          <span className="text-2xl font-bold text-brand-navy tracking-tight">PrecisionNote</span>
         </div>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
             <a 
               key={link.name} 
               href={link.href}
-              className="text-[15px] font-medium text-brand-muted hover:text-brand-blue transition-colors"
+              className="text-[16px] font-semibold text-brand-muted hover:text-brand-blue transition-colors"
             >
               {link.name}
             </a>
@@ -51,12 +53,11 @@ const LandingNav = () => {
 
         {/* Desktop CTAs */}
         <div className="hidden md:flex items-center gap-4">
-          <button className="text-[15px] font-medium text-brand-navy hover:text-brand-blue transition-colors">
+          <button className="text-[16px] font-bold text-brand-navy px-6 py-3 bg-[#F1F5F9] rounded-full hover:bg-slate-200 transition-colors">
             Sign In
           </button>
-          <button className="btn-primary py-2.5 px-6 text-[15px]">
-            Try Free
-            <ChevronRight className="w-4 h-4" />
+          <button className="btn-primary py-3 px-6 text-[16px] flex items-center gap-2 shadow-lg shadow-brand-blue/20">
+            Try Free for 14 Days
           </button>
         </div>
 
@@ -91,10 +92,10 @@ const LandingNav = () => {
               ))}
               <hr className="border-brand-border" />
               <div className="flex flex-col gap-4">
-                <button className="w-full py-3 text-brand-navy font-medium border border-brand-border rounded-full">
+                <button className="w-full py-3 text-brand-navy font-bold bg-[#F1F5F9] rounded-full">
                   Sign In
                 </button>
-                <button className="w-full btn-primary py-3 font-medium">
+                <button className="w-full btn-primary py-4 font-bold">
                   Try Free for 14 Days
                 </button>
               </div>
@@ -107,3 +108,4 @@ const LandingNav = () => {
 };
 
 export default LandingNav;
+

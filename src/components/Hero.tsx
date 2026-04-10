@@ -49,23 +49,21 @@ const Hero = () => {
               </span>
             </div>
 
-            <h1 className="text-5xl lg:text-7xl font-bold leading-[1.1] mb-6">
-              Just talk. <br />
-              <span className="text-brand-blue">PrecisionNote</span> writes your SOAP notes.
+            <h1 className="text-5xl lg:text-7xl font-bold leading-[1.1] mb-8 text-brand-navy tracking-tight">
+              AI documentation that actually works for you.
             </h1>
 
-            <p className="text-xl text-brand-muted leading-relaxed mb-10 max-w-xl">
-              Save 2+ hours on charting daily. PrecisionNote listens in the background and generates structured, clinical-grade notes instantly.
+            <p className="text-xl lg:text-2xl text-brand-muted leading-relaxed mb-12 max-w-2xl font-medium">
+              Record your consultations ambiently and let our AI generate clinical-grade, peer-reviewed standard notes in seconds. Syncs directly with your EMR.
             </p>
 
+
             <div className="flex flex-col sm:flex-row items-center gap-4 mb-12">
-              <button className="btn-primary w-full sm:w-auto text-lg px-8 py-4">
-                Try Free for 14 Days
+              <button className="btn-primary w-full sm:w-auto text-lg px-8 py-4 flex items-center justify-center gap-2">
+                Try Free for 14 Days <ArrowRight className="w-5 h-5" />
               </button>
-              <button className="btn-secondary w-full sm:w-auto text-lg px-8 py-4">
-                <div className="w-8 h-8 rounded-full bg-brand-blue/10 flex items-center justify-center">
-                  <Play className="w-4 h-4 fill-brand-blue text-brand-blue ml-0.5" />
-                </div>
+              <button className="px-8 py-4 bg-gray-100 text-brand-navy rounded-full font-bold text-lg flex items-center justify-center gap-2 hover:bg-gray-200 transition-all">
+                <Play className="w-5 h-5 fill-brand-navy" />
                 Watch 1-Min Demo
               </button>
             </div>
