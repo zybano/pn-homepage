@@ -1,5 +1,6 @@
 import React from 'react';
-import { Shield, MessageCircle, Twitter, Linkedin, Github } from 'lucide-react';
+import { Shield } from 'lucide-react';
+import { IconBrandTwitter, IconBrandLinkedin, IconBrandGithub } from '@tabler/icons-react';
 
 const LandingFooter = () => {
   const footerLinks = {
@@ -41,13 +42,13 @@ const LandingFooter = () => {
             </p>
             <div className="flex items-center gap-4">
               <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-blue transition-colors">
-                <Twitter className="w-5 h-5" />
+                <IconBrandTwitter className="w-5 h-5" />
               </a>
               <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-blue transition-colors">
-                <Linkedin className="w-5 h-5" />
+                <IconBrandLinkedin className="w-5 h-5" />
               </a>
               <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-blue transition-colors">
-                <Github className="w-5 h-5" />
+                <IconBrandGithub className="w-5 h-5" />
               </a>
             </div>
           </div>
