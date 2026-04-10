@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 const LandingNav = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,10 +17,10 @@ const LandingNav = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Features', href: '#features' },
-    { name: 'How it Works', href: '#how-it-works' },
-    { name: 'Pricing', href: '#pricing' },
-    { name: 'Chat with Us', href: '#chat' },
+    { name: 'Features', href: '/#features' },
+    { name: 'How it Works', href: '/#how-it-works' },
+    { name: 'Pricing', href: '/pricing' },
+    { name: 'Chat with Us', href: '/#chat' },
   ];
 
   return (
@@ -29,25 +31,35 @@ const LandingNav = () => {
     >
       <div className="container-custom flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-2 group cursor-pointer">
+        <Link to="/" className="flex items-center gap-2 group cursor-pointer">
           <div className="w-10 h-10 bg-brand-blue rounded-xl flex items-center justify-center">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 12H7L9 18L13 6L15 12H20" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
           <span className="text-2xl font-bold text-brand-navy tracking-tight">PrecisionNote</span>
-        </div>
+        </Link>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href}
-              className="text-[16px] font-semibold text-brand-muted hover:text-brand-blue transition-colors"
-            >
-              {link.name}
-            </a>
+            link.href.startsWith('/#') ? (
+              <a 
+                key={link.name} 
+                href={link.href}
+                className="text-[16px] font-semibold text-brand-muted hover:text-brand-blue transition-colors"
+              >
+                {link.name}
+              </a>
+            ) : (
+              <Link 
+                key={link.name} 
+                to={link.href}
+                className={`text-[16px] font-semibold transition-colors ${location.pathname === link.href ? 'text-brand-blue' : 'text-brand-muted hover:text-brand-blue'}`}
+              >
+                {link.name}
+              </Link>
+            )
           ))}
         </div>
 
@@ -81,14 +93,25 @@ const LandingNav = () => {
           >
             <div className="container-custom py-6 flex flex-col gap-6">
               {navLinks.map((link) => (
-                <a 
-                  key={link.name} 
-                  href={link.href}
-                  className="text-lg font-medium text-brand-navy"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </a>
+                link.href.startsWith('/#') ? (
+                  <a 
+                    key={link.name} 
+                    href={link.href}
+                    className="text-lg font-medium text-brand-navy"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </a>
+                ) : (
+                  <Link 
+                    key={link.name} 
+                    to={link.href}
+                    className="text-lg font-medium text-brand-navy"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                )
               ))}
               <hr className="border-brand-border" />
               <div className="flex flex-col gap-4">
@@ -108,4 +131,5 @@ const LandingNav = () => {
 };
 
 export default LandingNav;
+
 

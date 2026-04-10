@@ -1,23 +1,40 @@
 import React from 'react';
 import { IconBrandTwitter, IconBrandLinkedin, IconBrandGithub } from '@tabler/icons-react';
+import { Link } from 'react-router-dom';
 
 const LandingFooter = () => {
   const sections = [
     {
       title: "Product",
-      links: ["Ambient Scribe", "Specialty Templates", "EMR Integrations", "Institutional"]
+      links: [
+        { name: "Ambient Scribe", href: "/#scribe" },
+        { name: "Specialty Templates", href: "/#templates" },
+        { name: "EMR Integrations", href: "/#integrations" },
+        { name: "Pricing", href: "/pricing" }
+      ]
     },
     {
       title: "Resources",
-      links: ["Doctor Stories", "Clinical Documentation", "Pricing", "API Docs"]
+      links: [
+        { name: "Doctor Stories", href: "#" },
+        { name: "Clinical Documentation", href: "#" },
+        { name: "API Docs", href: "#" }
+      ]
     },
     {
       title: "Legal",
-      links: ["Privacy Policy", "Terms of Service", "HIPAA Compliance"]
+      links: [
+        { name: "Privacy Policy", href: "#" },
+        { name: "Terms of Service", href: "#" },
+        { name: "HIPAA Compliance", href: "#" }
+      ]
     },
     {
       title: "Support",
-      links: ["Help Center", "Chat with Us"]
+      links: [
+        { name: "Help Center", href: "#" },
+        { name: "Chat with Us", href: "/#chat" }
+      ]
     }
   ];
 
@@ -27,14 +44,14 @@ const LandingFooter = () => {
         <div className="grid grid-cols-2 lg:grid-cols-6 gap-12 mb-20">
           {/* Brand Col */}
           <div className="col-span-2">
-            <div className="flex items-center gap-2 mb-8">
+            <Link to="/" className="flex items-center gap-2 mb-8">
               <div className="w-10 h-10 bg-brand-blue rounded-xl flex items-center justify-center">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4 12H7L9 18L13 6L15 12H20" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <span className="text-2xl font-bold tracking-tight">PrecisionNote</span>
-            </div>
+            </Link>
             <p className="text-slate-400 max-w-xs mb-8 text-lg leading-relaxed">
               Ambient AI clinical documentation for the modern physician.
             </p>
@@ -57,10 +74,16 @@ const LandingFooter = () => {
               <h4 className="font-bold text-slate-100 mb-6 uppercase tracking-widest text-xs">{section.title}</h4>
               <ul className="space-y-4">
                 {section.links.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="text-slate-400 hover:text-brand-blue transition-colors text-[15px]">
-                      {link}
-                    </a>
+                  <li key={link.name}>
+                    {link.href.startsWith('/') ? (
+                      <Link to={link.href} className="text-slate-400 hover:text-brand-blue transition-colors text-[15px]">
+                        {link.name}
+                      </Link>
+                    ) : (
+                      <a href={link.href} className="text-slate-400 hover:text-brand-blue transition-colors text-[15px]">
+                        {link.name}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -89,3 +112,4 @@ const LandingFooter = () => {
 };
 
 export default LandingFooter;
+
