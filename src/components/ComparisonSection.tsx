@@ -101,24 +101,27 @@ const ComparisonSection = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {[
-            { value: "2.4h", label: "Average time saved per day", color: "border-blue-200" },
-            { value: "98%", label: "Note accuracy rate (AI-verified)", color: "border-green-200" },
-            { value: "500+", label: "Physicians trust PrecisionNote", color: "border-orange-200" },
+            { value: "2.4h", label: "Average time saved per day", color: "text-[#556cfb]", borderColor: "border-blue-100", bg: "bg-blue-50/10" },
+            { value: "98%", label: "Note accuracy rate (AI-verified)", color: "text-[#10b981]", borderColor: "border-green-100", bg: "bg-green-50/10" },
+            { value: "500+", label: "Physicians trust PrecisionNote", color: "text-[#f59e0b]", borderColor: "border-orange-100", bg: "bg-orange-50/10" },
           ].map((stat, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className={`p-10 rounded-[32px] bg-white/50 backdrop-blur-sm border ${stat.color} text-center group hover:bg-white transition-all duration-500`}
+              className={`relative overflow-hidden h-[110px] flex flex-col items-center justify-center rounded-[24px] bg-white border ${stat.borderColor} shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] group hover:shadow-lg transition-all duration-500`}
             >
-              <div className="text-5xl font-black text-brand-navy mb-4 transform group-hover:scale-110 transition-transform">
+              {/* Noise Overlay */}
+              <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+              
+              <div className={`text-[42px] leading-none font-black ${stat.color} mb-2 tracking-tight`}>
                 {stat.value}
               </div>
-              <div className="text-sm font-bold text-slate-400 uppercase tracking-widest leading-relaxed">
+              <div className="text-[13px] font-medium text-slate-500 tracking-tight">
                 {stat.label}
               </div>
             </motion.div>
