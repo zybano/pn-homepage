@@ -27,9 +27,9 @@ const ComparisonSection = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-5xl lg:text-8xl font-black mb-10 text-[#040523] tracking-[-0.04em] leading-[0.9]"
+            className="text-[48px] md:text-[80px] font-bold mb-10 text-[#040523] tracking-tighter leading-[1.1]"
           >
-            Documentation was never your job.
+            Documentation was never your job
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -81,10 +81,10 @@ const ComparisonSection = () => {
             
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-8">
-                <div className="w-2 h-2 rounded-full bg-brand-blue" />
-                <span className="text-[11px] font-black uppercase tracking-[0.2em] text-brand-blue">After PrecisionNote</span>
+                <div className="w-2 h-2 rounded-full bg-[#5768fd]" />
+                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#5768fd]">After PrecisionNote</span>
               </div>
-              <h3 className="text-3xl lg:text-4xl font-black text-[#040523] mb-12">The Status Quo.</h3>
+              <h3 className="text-3xl lg:text-4xl font-bold text-[#040523] mb-12">The Status Quo.</h3>
 
               <ul className="space-y-6">
                 {withPrecision.map((item, i) => (
@@ -103,17 +103,17 @@ const ComparisonSection = () => {
         {/* Stats Section */}
         <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {[
-            { value: "2.4h", label: "Average time saved per day", color: "text-[#556cfb]", borderColor: "border-blue-100", bg: "bg-blue-50/10" },
-            { value: "98%", label: "Note accuracy rate (AI-verified)", color: "text-[#10b981]", borderColor: "border-green-100", bg: "bg-green-50/10" },
-            { value: "500+", label: "Physicians trust PrecisionNote", color: "text-[#f59e0b]", borderColor: "border-orange-100", bg: "bg-orange-50/10" },
+            { value: "2.4h", label: "Average time saved per day", color: "text-[#556cfb]", borderColor: "border-blue-200/50", shadow: "shadow-blue-500/5" },
+            { value: "98%", label: "Note accuracy rate (AI-verified)", color: "text-[#10b981]", borderColor: "border-emerald-200/50", shadow: "shadow-emerald-500/5" },
+            { value: "500+", label: "Physicians trust PrecisionNote", color: "text-[#f59e0b]", borderColor: "border-amber-200/50", shadow: "shadow-amber-500/5" },
           ].map((stat, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.98 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className={`relative overflow-hidden h-[110px] flex flex-col items-center justify-center rounded-[24px] bg-white border ${stat.borderColor} shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] group hover:shadow-lg transition-all duration-500`}
+              className={`relative overflow-hidden h-[110px] flex flex-col items-center justify-center rounded-[24px] bg-white border ${stat.borderColor} ${stat.shadow} transition-all duration-500`}
             >
               {/* Noise Overlay */}
               <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
