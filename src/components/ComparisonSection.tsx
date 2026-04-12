@@ -4,116 +4,126 @@ import { XCircle, CheckCircle2, Minus, Plus } from 'lucide-react';
 
 const ComparisonSection = () => {
   const statusQuo = [
-    "Hours of manual typing & transcription",
-    "Persistent chart burnout and fatigue",
-    "Late-night documentation at home",
-    "Reduced eye contact during visits",
-    "Delayed insurance reimbursements",
+    "Screen-time over patient-time",
+    "The \"Pajama Time\" charting tax",
+    "Context lost in messy referrals",
+    "Documentation errors under fatigue",
+    "Burnout masquerading as dedication",
   ];
 
   const withPrecision = [
-    "Ambient listening captures every detail",
-    "Instant, clinical-grade SOAP notes",
-    "Automated sync with your EMR system",
-    "Focus 100% on patient care",
-    "Finish charting before you leave the office",
+    "Eye contact, not keyboard clicks",
+    "Notes finished before the patient leaves",
+    "Human intent preserved across specialties",
+    "Zero-fatigue documentation, every session",
+    "Reclaimed evenings. Genuinely.",
   ];
 
   return (
-    <section id="features" className="py-24 container-custom bg-white">
-      <div className="text-center max-w-4xl mx-auto mb-20">
-        <motion.div
-           initial={{ opacity: 0, y: 10 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
-           className="inline-flex items-center gap-2 px-3 py-1 bg-brand-blue/10 text-brand-blue rounded-full mb-4"
-        >
-          <Plus className="w-4 h-4" />
-          <span className="text-[13px] font-bold uppercase tracking-wider">The Transformation</span>
-        </motion.div>
-        <h2 className="text-4xl lg:text-6xl font-bold mb-8 text-brand-navy tracking-tight">Documentation was never your passion.</h2>
-        <p className="text-xl lg:text-2xl text-brand-muted font-medium">You trained to heal, not to type. Here's what changes with PrecisionNote.</p>
-      </div>
+    <section id="transformation" className="py-32 px-4 md:px-0 bg-[#F9F7F1]/80 relative overflow-hidden">
+      <div className="container-custom relative z-10">
+        <div className="text-center max-w-4xl mx-auto mb-24">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-5xl lg:text-8xl font-black mb-10 text-[#040523] tracking-[-0.04em] leading-[0.9]"
+          >
+            Documentation was never your job.
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-xl lg:text-2xl text-slate-500 font-bold"
+          >
+            You trained to heal, not to type. Here's what changes with PrecisionNote.
+          </motion.p>
+        </div>
 
-      <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
-        {/* Status Quo */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          className="bg-[#F8FAFC] rounded-[40px] p-10 lg:p-14 border border-brand-border/60 relative overflow-hidden group transition-all"
-        >
-          <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-10">
-              <div className="p-3 bg-white rounded-2xl text-slate-400 border border-slate-200">
-                <Minus className="w-8 h-8" />
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch mb-24">
+          {/* Status Quo */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="bg-white rounded-[40px] p-10 lg:p-14 border border-slate-100 relative overflow-hidden group shadow-sm"
+          >
+            <div className="relative z-10">
+              <div className="flex items-center gap-2 mb-8">
+                <div className="w-2 h-2 rounded-full bg-slate-300" />
+                <span className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">Before</span>
               </div>
-              <div>
-                <div className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-1">Old Way</div>
-                <h3 className="text-2xl font-bold text-brand-navy">Traditional Charting</h3>
-              </div>
+              <h3 className="text-3xl lg:text-4xl font-black text-[#040523] mb-12">The Status Quo.</h3>
+              
+              <ul className="space-y-6">
+                {statusQuo.map((item, i) => (
+                  <li key={i} className="flex items-center gap-4">
+                    <div className="w-6 h-6 rounded-full bg-slate-50 flex items-center justify-center flex-shrink-0 border border-slate-100">
+                      <XCircle className="w-3.5 h-3.5 text-slate-300" />
+                    </div>
+                    <span className="text-lg text-slate-500 font-bold">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
+          </motion.div>
+
+          {/* PrecisionNote */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="bg-white/70 backdrop-blur-xl rounded-[40px] p-10 lg:p-14 border border-white/50 relative overflow-hidden shadow-2xl shadow-blue-500/5 group"
+          >
+            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-500/5 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2" />
             
-            <ul className="space-y-6">
-              {statusQuo.map((item, i) => (
-                <li key={i} className="flex items-start gap-4">
-                  <div className="mt-1 w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center flex-shrink-0">
-                    <XCircle className="w-4 h-4 text-slate-400" />
-                  </div>
-                  <span className="text-lg text-slate-600 leading-snug font-medium">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </motion.div>
+            <div className="relative z-10">
+              <div className="flex items-center gap-2 mb-8">
+                <div className="w-2 h-2 rounded-full bg-brand-blue" />
+                <span className="text-[11px] font-black uppercase tracking-[0.2em] text-brand-blue">After PrecisionNote</span>
+              </div>
+              <h3 className="text-3xl lg:text-4xl font-black text-[#040523] mb-12">The Status Quo.</h3>
 
-        {/* PrecisionNote */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          className="bg-brand-navy rounded-[40px] p-10 lg:p-14 text-white relative overflow-hidden shadow-2xl shadow-brand-blue/20 group"
-        >
-          {/* Decorative Elements */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(87,104,253,0.15),transparent)] pointer-events-none" />
-          
-          <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-10">
-              <div className="p-3 bg-brand-blue rounded-2xl text-white shadow-lg shadow-brand-blue/50">
-                <CheckCircle2 className="w-8 h-8" />
-              </div>
-              <div>
-                <div className="text-sm font-bold text-brand-blue uppercase tracking-widest mb-1">New Way</div>
-                <h3 className="text-2xl font-bold">The PrecisionNote Way</h3>
-              </div>
+              <ul className="space-y-6">
+                {withPrecision.map((item, i) => (
+                  <li key={i} className="flex items-center gap-4">
+                    <div className="w-6 h-6 rounded-full bg-brand-blue/10 flex items-center justify-center flex-shrink-0 border border-brand-blue/20">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-brand-blue" />
+                    </div>
+                    <span className="text-lg text-slate-700 font-black">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
+          </motion.div>
+        </div>
 
-            <ul className="space-y-6">
-              {withPrecision.map((item, i) => (
-                <li key={i} className="flex items-start gap-4">
-                  <div className="mt-1 w-6 h-6 rounded-full bg-brand-blue/20 flex items-center justify-center flex-shrink-0">
-                    <CheckCircle2 className="w-4 h-4 text-brand-blue" />
-                  </div>
-                  <span className="text-lg text-slate-200 leading-snug font-semibold group-hover:text-white transition-colors">{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            <motion.div 
-              className="mt-12 pt-10 border-t border-white/10"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+        {/* Stats Section */}
+        <div className="grid md:grid-cols-3 gap-8">
+          {[
+            { value: "2.4h", label: "Average time saved per day", color: "border-blue-200" },
+            { value: "98%", label: "Note accuracy rate (AI-verified)", color: "border-green-200" },
+            { value: "500+", label: "Physicians trust PrecisionNote", color: "border-orange-200" },
+          ].map((stat, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: i * 0.1 }}
+              className={`p-10 rounded-[32px] bg-white/50 backdrop-blur-sm border ${stat.color} text-center group hover:bg-white transition-all duration-500`}
             >
-              <button className="w-full py-5 bg-brand-blue text-white rounded-full font-bold text-lg hover:scale-[1.02] transition-transform shadow-xl shadow-brand-blue/20">
-                Switch to PrecisionNote
-              </button>
+              <div className="text-5xl font-black text-brand-navy mb-4 transform group-hover:scale-110 transition-transform">
+                {stat.value}
+              </div>
+              <div className="text-sm font-bold text-slate-400 uppercase tracking-widest leading-relaxed">
+                {stat.label}
+              </div>
             </motion.div>
-          </div>
-          
-          <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-brand-blue opacity-10 blur-[100px] rounded-full" />
-        </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
