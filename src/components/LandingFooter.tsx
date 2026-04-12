@@ -11,9 +11,9 @@ const LandingFooter = () => {
     {
       title: "Product",
       links: [
-        { name: "Ambient Scribe", href: "/#scribe" },
-        { name: "Specialty Templates", href: "/#templates" },
-        { name: "EMR Integrations", href: "/#integrations" },
+        { name: "Ambient Scribe", href: "/features#explore" },
+        { name: "Specialty Templates", href: "/features#explore" },
+        { name: "EMR Integrations", href: "/features#integrations" },
         { name: "Pricing", href: "/pricing" },
       ],
     },
