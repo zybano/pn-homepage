@@ -80,23 +80,23 @@ const PricingPage = () => {
              transition={{ delay: 0.2 }}
              className="flex flex-col md:flex-row items-center justify-center gap-4"
           >
-            <div className="bg-[#E9EBFF] p-1 rounded-2xl flex items-center shadow-inner">
+            <div className="bg-[#E9EBFF]/50 p-1 rounded-xl flex items-center border border-[#5768fd]/10">
               <button 
                 onClick={() => setViewMode('individual')}
-                className={`px-8 py-2.5 rounded-xl text-[13px] font-black tracking-wide transition-all ${viewMode === 'individual' ? 'bg-brand-blue text-white shadow-lg' : 'text-brand-blue/60 hover:text-brand-blue'}`}
+                className={`px-6 py-2 rounded-lg text-xs font-black tracking-wide transition-all ${viewMode === 'individual' ? 'bg-brand-blue text-white shadow-md' : 'text-brand-blue/60 hover:text-brand-blue'}`}
               >
                 Individual
               </button>
               <button 
                 onClick={() => setViewMode('teams')}
-                className={`px-8 py-2.5 rounded-xl text-[13px] font-black tracking-wide transition-all ${viewMode === 'teams' ? 'bg-brand-blue text-white shadow-lg' : 'text-brand-blue/60 hover:text-brand-blue'}`}
+                className={`px-6 py-2 rounded-lg text-xs font-black tracking-wide transition-all ${viewMode === 'teams' ? 'bg-brand-blue text-white shadow-md' : 'text-brand-blue/60 hover:text-brand-blue'}`}
               >
                 Teams and Enterprise
               </button>
             </div>
             
-            <div className="flex items-center gap-3 bg-white px-5 py-3 rounded-2xl border border-brand-border text-[13px] font-black text-brand-navy cursor-pointer hover:border-brand-blue transition-all shadow-sm">
-              USD <ChevronDown className="w-4 h-4 text-brand-muted" />
+            <div className="flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl border border-brand-border text-xs font-black text-brand-navy cursor-pointer hover:border-brand-blue transition-all shadow-sm">
+              USD <ChevronDown className="w-3.5 h-3.5 text-brand-muted" />
             </div>
           </motion.div>
         </section>
@@ -265,46 +265,33 @@ const PricingPage = () => {
         {/* Final CTA Section */}
         <section className="container-custom mb-24">
            <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-[#FFC738] rounded-[64px] p-12 lg:p-24 text-center relative overflow-hidden group"
+            className="bg-[#FFC738] rounded-[32px] p-10 lg:p-20 text-center relative overflow-hidden group border border-amber-200"
           >
             {/* Geometric Background pattern */}
-            <div className="absolute inset-0 opacity-[0.03] rotate-12 scale-150 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 30-30 30-30-30z' fill='%23000' fill-rule='evenodd'/%3E%3C/svg%3E")`, backgroundSize: '60px 60px' }} />
+            <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: `radial-gradient(circle at 1px 1px, black 1px, transparent 0)`, backgroundSize: '32px 32px' }} />
             
             <div className="relative z-10">
               <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-5xl lg:text-8xl font-black text-brand-navy mb-8 tracking-[ -0.04em] leading-[0.9]"
+                className="text-5xl lg:text-7xl font-black text-brand-navy mb-6 tracking-tight leading-none"
               >
                 Still have questions?
               </motion.h2>
               <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="text-xl lg:text-2xl text-brand-navy/60 font-bold mb-16 max-w-3xl mx-auto"
+                className="text-lg lg:text-xl text-brand-navy/60 font-black mb-12 max-w-2xl mx-auto"
               >
                 Our clinical team is ready to help you find the right plan for your practice.
               </motion.p>
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="flex flex-col sm:flex-row items-center justify-center gap-6"
-              >
-                <button className="px-12 py-6 bg-brand-navy text-white rounded-[24px] font-black text-xl flex items-center gap-3 hover:scale-105 transition-all shadow-2xl hover:shadow-brand-navy/20">
-                  Chat with our clinical team <ArrowRight className="w-6 h-6" />
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button className="px-10 py-5 bg-brand-navy text-white rounded-full font-black text-lg flex items-center gap-2 hover:opacity-90 transition-all shadow-xl">
+                  Chat with our clinical team <ArrowRight className="w-5 h-5" />
                 </button>
-                <button className="px-12 py-6 bg-white/40 backdrop-blur-md text-brand-navy rounded-[24px] font-black text-xl flex items-center gap-3 hover:bg-white/60 transition-all border border-brand-navy/5">
+                <button className="px-10 py-5 bg-white text-brand-navy rounded-full font-black text-lg flex items-center gap-2 hover:bg-white/90 transition-all border border-black/5">
                   Book a demo
                 </button>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         </section>
@@ -332,45 +319,45 @@ const PricingCard = ({
   <motion.div 
     whileHover={{ y: -8 }}
     transition={{ duration: 0.4, ease: "easeOut" }}
-    className={`p-10 rounded-[48px] border flex flex-col relative transition-all duration-300 ${isPopular ? 'bg-white border-brand-blue shadow-[0_32px_80px_-16px_rgba(87,104,253,0.12)] z-10' : 'bg-white border-brand-border hover:shadow-xl'}`}
+    className={`p-10 rounded-[24px] border flex flex-col relative transition-all duration-300 ${isPopular ? 'bg-white border-brand-blue shadow-[0_32px_80px_-16px_rgba(87,104,253,0.1)] z-10' : 'bg-white border-brand-border hover:shadow-lg'}`}
   >
     {isPopular && (
-      <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#FFC738] text-brand-navy text-[11px] font-black uppercase tracking-[0.2em] px-8 py-2.5 rounded-full shadow-lg">
+      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#FFC738] text-brand-navy text-[10px] font-black uppercase tracking-[0.1em] px-5 py-2 rounded-full shadow-md">
         Most Popular
       </div>
     )}
     
     <div className="mb-10">
-      <h3 className="text-2xl font-black text-brand-navy mb-3 tracking-tight">{name}</h3>
-      <p className="text-brand-muted text-[15px] font-bold leading-relaxed">{description}</p>
+      <h3 className="text-xl font-black text-brand-navy mb-2 tracking-tight">{name}</h3>
+      <p className="text-brand-muted text-[14px] font-bold leading-relaxed">{description}</p>
     </div>
 
     <div className="mb-10">
-      <div className="flex items-baseline gap-2">
-        <span className="text-7xl font-black text-brand-navy tracking-[-0.05em]">
+      <div className="flex items-baseline gap-1">
+        <span className="text-6xl font-black text-brand-navy tracking-tighter">
           {price === "0" || price === "Custom" ? price : `$${price}`}
         </span>
-        {period && <span className="text-brand-muted font-bold text-sm opacity-60 ml-2">{period}</span>}
+        {period && <span className="text-brand-muted font-bold text-xs opacity-50 ml-1">{period}</span>}
       </div>
 
       {onBillingToggle && (
-        <div className="mt-8 flex flex-wrap items-center gap-3">
-          <div className="p-1.5 bg-slate-50 rounded-2xl inline-flex items-center gap-1 border border-slate-100 shadow-inner">
+        <div className="mt-6 flex flex-wrap items-center gap-2">
+          <div className="p-1 bg-slate-50 rounded-xl inline-flex items-center border border-slate-100">
             <button 
               onClick={() => onBillingToggle()}
-              className={`px-5 py-2 rounded-xl text-[11px] font-black uppercase transition-all ${billingCycle === 'yearly' ? 'bg-white text-brand-navy shadow-sm' : 'text-brand-muted hover:text-brand-navy'}`}
+              className={`px-4 py-1.5 rounded-lg text-[10px] font-black uppercase transition-all ${billingCycle === 'yearly' ? 'bg-white text-brand-navy shadow-sm' : 'text-brand-muted hover:text-brand-navy'}`}
             >
               Yearly
             </button>
             <button 
               onClick={() => onBillingToggle()}
-              className={`px-5 py-2 rounded-xl text-[11px] font-black uppercase transition-all ${billingCycle === 'monthly' ? 'bg-white text-brand-navy shadow-sm' : 'text-brand-muted hover:text-brand-navy'}`}
+              className={`px-4 py-1.5 rounded-lg text-[10px] font-black uppercase transition-all ${billingCycle === 'monthly' ? 'bg-white text-brand-navy shadow-sm' : 'text-brand-muted hover:text-brand-navy'}`}
             >
               Monthly
             </button>
           </div>
           {saveText && (
-            <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 px-3 py-2 rounded-xl border border-emerald-100 uppercase tracking-widest leading-none">
+            <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 px-2 py-1 rounded-lg border border-emerald-100 uppercase tracking-wider">
               {saveText}
             </span>
           )}
@@ -378,31 +365,31 @@ const PricingCard = ({
       )}
     </div>
 
-    <button className={`w-full py-5 rounded-[24px] font-black text-xl mb-6 transition-all ${buttonVariant === 'primary' ? 'bg-brand-blue text-white shadow-xl shadow-brand-blue/20 hover:scale-[1.02] active:scale-[0.98]' : 'bg-slate-50 text-brand-navy border border-brand-border hover:bg-slate-100'}`}>
+    <button className={`w-full py-4 rounded-full font-black text-base mb-6 transition-all ${buttonVariant === 'primary' ? 'bg-brand-blue text-white shadow-lg shadow-brand-blue/15 hover:opacity-95' : 'bg-slate-50 text-brand-navy border border-brand-border hover:bg-slate-100'}`}>
       {buttonText}
     </button>
     
     {subtext && (
-      <div className="flex items-center justify-center gap-2 mb-10 text-brand-muted">
-        <Zap className="w-4 h-4 text-brand-blue fill-brand-blue/20" />
-        <p className="text-[12px] font-black uppercase tracking-[0.15em]">{subtext}</p>
+      <div className="flex items-center justify-center gap-2 mb-8 text-brand-muted/60">
+        <Zap className="w-3.5 h-3.5 text-brand-blue/60 fill-brand-blue/10" />
+        <p className="text-[11px] font-black uppercase tracking-[0.1em]">{subtext}</p>
       </div>
     )}
 
-    <div className="space-y-6 flex-1 pt-10 border-t border-brand-border/50">
-      <p className="text-[11px] font-black uppercase tracking-[0.2em] text-brand-navy/30 mb-2">Everything in the resident, plus:</p>
+    <div className="space-y-4 flex-1 pt-8 border-t border-slate-100">
+      <p className="text-[10px] font-black uppercase tracking-[0.15em] text-brand-navy/30 mb-1">Everything in the resident, plus:</p>
       {features.map((feature: string, i: number) => (
-        <div key={i} className="flex gap-4 items-start group">
-          <div className="mt-0.5 flex items-center justify-center w-6 h-6 rounded-full bg-brand-blue/10 shrink-0 group-hover:bg-brand-blue transition-colors">
-             <CheckCircle2 className="w-4 h-4 text-brand-blue group-hover:text-white transition-colors" />
+        <div key={i} className="flex gap-3 items-start group">
+          <div className="mt-0.5 flex items-center justify-center w-5 h-5 rounded-full bg-brand-blue/5 shrink-0 transition-colors">
+             <CheckCircle2 className="w-3.5 h-3.5 text-brand-blue" />
           </div>
-          <span className="text-[16px] font-bold text-brand-navy/80 leading-snug">{feature}</span>
+          <span className="text-[14px] font-bold text-brand-navy/70 leading-snug">{feature}</span>
         </div>
       ))}
     </div>
 
-    <button className="mt-12 text-brand-navy font-black text-sm flex items-center gap-2 group transition-all hover:text-brand-blue">
-      See more <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+    <button className="mt-8 text-brand-navy/60 font-black text-xs flex items-center gap-2 group transition-all hover:text-brand-blue hover:translate-x-1">
+      See more <ArrowRight className="w-3.5 h-3.5" />
     </button>
   </motion.div>
 );
@@ -462,15 +449,15 @@ const FAQItem = ({ question, answer, index }: any) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.05 }}
-      className={`bg-white border rounded-[32px] overflow-hidden transition-all duration-500 ${isOpen ? 'border-brand-blue/30 shadow-2xl shadow-brand-blue/5' : 'border-brand-border hover:border-brand-blue/20 shadow-sm'}`}
+      className={`bg-white border rounded-[16px] overflow-hidden transition-all duration-300 ${isOpen ? 'border-brand-blue/20 shadow-lg' : 'border-brand-border hover:border-brand-blue/10 shadow-sm'}`}
     >
       <button 
-        className="w-full p-8 lg:p-10 text-left flex justify-between items-center gap-6 group"
+        className="w-full p-6 text-left flex justify-between items-center gap-4 group"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="text-[20px] lg:text-[22px] font-black text-brand-navy leading-tight tracking-tight">{question}</span>
-        <div className={`shrink-0 w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-brand-blue border-brand-blue text-white rotate-180' : 'bg-white border-brand-border text-brand-muted group-hover:border-brand-blue group-hover:text-brand-blue'}`}>
-          <ChevronDown className="w-6 h-6" />
+        <span className="text-[17px] font-black text-brand-navy leading-tight tracking-tight">{question}</span>
+        <div className={`shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-brand-blue border-brand-blue text-white rotate-180' : 'bg-white border-brand-border text-brand-muted'}`}>
+          <ChevronDown className="w-4 h-4" />
         </div>
       </button>
       <AnimatePresence>
@@ -479,9 +466,9 @@ const FAQItem = ({ question, answer, index }: any) => {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
           >
-            <div className="p-8 lg:p-12 pt-0 text-[18px] text-brand-muted/70 leading-relaxed font-bold">
+            <div className="p-6 pt-0 text-[15px] text-brand-muted/70 leading-relaxed font-bold">
               {answer}
             </div>
           </motion.div>
