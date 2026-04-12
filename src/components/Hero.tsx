@@ -50,11 +50,11 @@ const Hero = () => {
             </div>
 
             <h1 className="text-5xl lg:text-7xl font-bold leading-[1.1] mb-8 text-brand-navy tracking-tight">
-              AI documentation that actually works for you.
+              Just talk. <span className="text-brand-blue">PrecisionNote</span> writes your SOAP notes.
             </h1>
 
             <p className="text-xl lg:text-2xl text-brand-muted leading-relaxed mb-12 max-w-2xl font-medium">
-              Record your consultations ambiently and let our AI generate clinical-grade, peer-reviewed standard notes in seconds. Syncs directly with your EMR.
+              Save 2+ hours on charting daily. PrecisionNote listens ambiently and generates clinical-grade, peer-reviewed standard notes in seconds. Syncs directly with your EMR.
             </p>
 
 
@@ -71,10 +71,10 @@ const Hero = () => {
             {/* Social Proof */}
             <div className="flex items-center gap-4">
               <div className="flex -space-x-3">
-                {[1, 2, 3].map((i) => (
+                {[12, 11, 15].map((i) => (
                   <div key={i} className="w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-brand-border">
                     <img 
-                      src={`https://i.pravatar.cc/100?img=${i + 10}`} 
+                      src={`https://i.pravatar.cc/100?img=${i}`} 
                       alt="Doctor headshot" 
                       className="w-full h-full object-cover"
                     />
@@ -99,71 +99,91 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="glass-card overflow-hidden border-brand-border/40 shadow-2xl">
+            <div className="glass-card overflow-hidden border-brand-border/40 shadow-2xl bg-white">
               {/* Dashboard Header */}
-              <div className="px-6 py-4 border-b border-brand-border flex items-center justify-between bg-white/50">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-400" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                  <div className="w-3 h-3 rounded-full bg-green-400" />
+              <div className="px-6 py-4 border-b border-brand-border flex items-center justify-between bg-white">
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-slate-200" />
+                    <div className="w-12 h-3 bg-slate-100 rounded-full" />
+                  </div>
                 </div>
-                <div className="text-xs font-semibold text-brand-muted tracking-widest uppercase">
-                  Active Scribe Session
+                <div className="flex items-center gap-4">
+                  <div className="w-20 h-3 bg-slate-100 rounded-full" />
+                  <div className="w-8 h-8 rounded-full bg-brand-blue/10 flex items-center justify-center">
+                    <div className="w-4 h-4 rounded-full bg-brand-blue/30" />
+                  </div>
                 </div>
               </div>
 
               {/* Dashboard Content */}
-              <div className="flex h-[400px]">
+              <div className="flex h-[450px]">
                 {/* Sidebar Mock */}
-                <div className="w-16 border-r border-brand-border flex flex-col items-center py-6 gap-6 bg-brand-bg/30">
+                <div className="w-16 border-r border-brand-border flex flex-col items-center py-6 gap-6 bg-slate-50/50">
+                   <div className="w-8 h-8 rounded-lg bg-brand-blue/10 text-brand-blue flex items-center justify-center">
+                    <div className="w-4 h-4 bg-brand-blue rounded-sm" />
+                  </div>
                   {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className={`w-8 h-8 rounded-lg ${i === 1 ? 'bg-brand-blue/10 text-brand-blue' : 'bg-transparent text-brand-muted'} flex items-center justify-center`}>
-                      <div className="w-4 h-4 border-2 border-current rounded-md opacity-50" />
+                    <div key={i} className="w-8 h-8 rounded-lg bg-transparent text-brand-muted flex items-center justify-center">
+                      <div className="w-4 h-4 border-2 border-slate-200 rounded-md" />
                     </div>
                   ))}
                 </div>
 
                 {/* Main Pane */}
-                <div className="flex-1 p-8 overflow-hidden bg-white/40">
-                  <div className="mb-8 flex items-center justify-between">
-                    <div>
-                      <h3 className="text-[13px] font-bold text-brand-muted uppercase tracking-wider mb-1">Patient Encounter</h3>
-                      <div className="text-xl font-bold">Adaeze Oladipo <span className="text-brand-muted font-normal text-base ml-2">ID: #49283</span></div>
-                    </div>
-                    <div className="px-3 py-1 bg-red-100 text-red-600 rounded-full text-[11px] font-bold flex items-center gap-1.5 animate-pulse">
-                      <div className="w-1.5 h-1.5 rounded-full bg-red-600" />
-                      LIVE RECORDING
-                    </div>
-                  </div>
-
-                  {/* Waveform Visualization */}
-                  <div className="mb-10 p-6 bg-white rounded-2xl border border-brand-border/50 shadow-sm relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                      <Shield className="w-20 h-20 text-brand-blue" />
-                    </div>
-                    <div className="flex flex-col gap-4">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-brand-muted capitalize">Ambient Listening...</span>
-                        <span className="text-xs font-mono text-brand-muted">04:23</span>
+                <div className="flex-1 p-6 overflow-hidden bg-white">
+                  {/* Stats Row */}
+                  <div className="grid grid-cols-3 gap-4 mb-6">
+                    {[
+                      { label: 'Sessions Today', value: '8' },
+                      { label: 'Notes Pending', value: '3' },
+                      { label: 'Hrs Saved', value: '2.4' }
+                    ].map((stat, i) => (
+                      <div key={i} className="p-4 border border-brand-border rounded-xl bg-slate-50/50">
+                        <div className="text-[11px] font-bold text-brand-muted uppercase tracking-wider mb-1">{stat.label}</div>
+                        <div className="text-2xl font-bold text-brand-navy">{stat.value}</div>
                       </div>
-                      <Waveform />
+                    ))}
+                  </div>
+
+                  <div className="mb-6 p-5 border border-brand-border rounded-2xl bg-white shadow-sm relative overflow-hidden group">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-2">
+                         <div className="text-[13px] font-bold text-brand-navy tracking-tight">Active Scribe</div>
+                         <div className="px-2 py-0.5 bg-red-100 text-red-600 rounded-full text-[10px] font-bold flex items-center gap-1 animate-pulse">
+                          <div className="w-1 h-1 rounded-full bg-red-600" />
+                          LIVE
+                        </div>
+                      </div>
+                      <div className="text-[11px] font-medium text-brand-muted uppercase tracking-widest">
+                        04:23 elapsed
+                      </div>
+                    </div>
+                    
+                    <Waveform />
+
+                    <div className="mt-4 pt-4 border-t border-brand-border/50">
+                      <div className="text-[12px] font-medium text-brand-muted">
+                        Patient: <span className="text-brand-navy font-bold">Adaeze Oladipo</span>
+                      </div>
                     </div>
                   </div>
 
-                  {/* AI Note Content Generation */}
+                  {/* Note Sections */}
                   <div className="space-y-4">
-                    <div className="flex gap-4">
-                      <div className="w-24 h-4 bg-brand-blue/10 rounded-md animate-pulse shrink-0" />
-                      <div className="w-full h-4 bg-brand-muted/5 rounded-md animate-pulse" />
-                    </div>
-                    <div className="flex gap-4">
-                      <div className="w-20 h-4 bg-brand-blue/10 rounded-md animate-pulse shrink-0" />
-                      <div className="w-3/4 h-4 bg-brand-muted/5 rounded-md animate-pulse" />
-                    </div>
-                    <div className="flex gap-4">
-                      <div className="w-16 h-4 bg-brand-blue/10 rounded-md animate-pulse shrink-0" />
-                      <div className="w-5/6 h-4 bg-brand-muted/5 rounded-md animate-pulse" />
-                    </div>
+                    {[
+                      { label: 'Subjective', width: 'w-full' },
+                      { label: 'Objective', width: 'w-3/4' },
+                      { label: 'Assessment', width: 'w-5/6' }
+                    ].map((section, i) => (
+                      <div key={i} className="flex gap-4 items-start">
+                        <div className="w-20 text-[11px] font-bold text-brand-muted uppercase tracking-wider pt-1">{section.label}</div>
+                        <div className="flex-1 space-y-2">
+                          <div className={`h-2 bg-slate-100 rounded-full ${section.width} animate-pulse`} />
+                          <div className={`h-2 bg-slate-50 rounded-full w-2/3 animate-pulse`} />
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -173,7 +193,7 @@ const Hero = () => {
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              className="absolute -bottom-6 -right-6 glass-card p-4 flex items-center gap-3 border-brand-border shadow-xl z-20"
+              className="absolute -bottom-6 -right-6 glass-card p-4 flex items-center gap-3 border-brand-border shadow-xl z-20 bg-white"
             >
               <div className="w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center">
                 <Shield className="w-5 h-5 text-green-600" />

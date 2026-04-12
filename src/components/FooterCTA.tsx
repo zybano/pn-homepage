@@ -1,13 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Play, Shield, Clock, Zap, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Play, Shield, Clock, Zap, CheckCircle2, HeartPulse } from 'lucide-react';
 
 const FooterCTA = () => {
   const benefits = [
-    { icon: <Shield className="w-5 h-5" />, text: "HIPAA Compliant" },
-    { icon: <Clock className="w-5 h-5" />, text: "14-Day Free Trial" },
-    { icon: <Zap className="w-5 h-5" />, text: "Setup in 5 Minutes" },
-    { icon: <CheckCircle2 className="w-5 h-5" />, text: "Cancel Anytime" },
+    { icon: <Shield className="w-5 h-5 text-brand-navy" />, text: "HIPAA Compliant" },
+    { icon: <Clock className="w-5 h-5 text-brand-navy" />, text: "14-Day Free Trial" },
+    { icon: <Zap className="w-5 h-5 text-brand-navy" />, text: "Setup in 5 Minutes" },
+    { icon: <CheckCircle2 className="w-5 h-5 text-brand-navy" />, text: "Cancel Anytime" },
   ];
 
   return (
@@ -16,45 +16,45 @@ const FooterCTA = () => {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="bg-[#FFC559] rounded-[48px] p-12 lg:p-24 text-center text-brand-navy relative overflow-hidden shadow-2xl"
+        className="bg-[#FFC559] rounded-[64px] p-12 lg:p-24 text-center text-brand-navy relative overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.2)]"
       >
         {/* Decorative Grid Pattern */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#000 2px, transparent 0)', backgroundSize: '30px 30px' }} />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/20 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-navy/5 blur-[80px] rounded-full translate-y-1/2 -translate-x-1/2" />
 
         <div className="relative z-10 max-w-4xl mx-auto">
           {/* Heartbeat Icon */}
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-navy rounded-2xl mb-8 shadow-xl">
-             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 12H7L9 18L13 6L15 12H20" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-             </svg>
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-brand-navy rounded-3xl mb-10 shadow-2xl transform hover:rotate-6 transition-transform">
+             <HeartPulse className="w-10 h-10 text-white" />
           </div>
 
-          <h2 className="text-4xl lg:text-7xl font-bold mb-8 tracking-tight">
+          <h2 className="text-5xl lg:text-8xl font-black mb-10 tracking-[ -0.04em] leading-[0.9]">
             Reclaim your time.<br />Re-focus on care.
           </h2>
           
-          <p className="text-xl lg:text-2xl text-brand-navy/80 mb-12 font-medium">
+          <p className="text-xl lg:text-2xl text-brand-navy/70 mb-16 font-bold max-w-2xl mx-auto">
             Join 500+ Nigerian physicians who have already reclaimed 2+ hours every day with PrecisionNote.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
-            <button className="px-10 py-6 bg-brand-navy text-white rounded-full font-bold text-xl flex items-center gap-3 hover:scale-105 transition-transform shadow-2xl">
-              Get Started (No Credit Card Required) <ArrowRight className="w-6 h-6" />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20">
+            <button className="px-12 py-7 bg-brand-navy text-white rounded-full font-black text-xl flex items-center gap-4 hover:scale-105 transition-all shadow-2xl active:scale-95 group">
+              Start Your Free Trial <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
             </button>
-            <button className="px-10 py-6 bg-white/30 text-brand-navy rounded-full font-bold text-xl flex items-center gap-3 backdrop-blur-md border border-white/20 hover:bg-white/40 transition-all">
-              <Play className="w-6 h-6 fill-brand-navy" />
-              Watch Demo
+            <button className="px-12 py-7 bg-white/40 text-brand-navy rounded-full font-black text-xl flex items-center gap-4 backdrop-blur-md border border-white/30 hover:bg-white/60 transition-all active:scale-95">
+              <Play className="w-6 h-6 fill-brand-navy rotate-0 group-hover:rotate-12" />
+              Watch the Demo
             </button>
           </div>
 
           {/* Benefits Grid */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 pt-12 border-t border-brand-navy/10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 pt-16 border-t border-brand-navy/10">
             {benefits.map((benefit, i) => (
               <div key={i} className="flex flex-col items-center gap-3">
-                <div className="p-3 bg-brand-navy/5 rounded-full">
+                <div className="p-4 bg-white/20 rounded-2xl backdrop-blur-sm border border-white/30">
                   {benefit.icon}
                 </div>
-                <span className="text-sm font-bold uppercase tracking-widest text-brand-navy/60">
+                <span className="text-sm font-black uppercase tracking-[0.2em] text-brand-navy/50">
                   {benefit.text}
                 </span>
               </div>
