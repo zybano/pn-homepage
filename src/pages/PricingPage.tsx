@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, XCircle, ChevronDown, ChevronUp, ArrowRight, Shield, Zap, Clock, MessageSquare, Star, HeartPulse } from 'lucide-react';
+import { CheckCircle2, XCircle, ChevronDown, ChevronUp, ArrowRight, Shield, Zap, Clock, MessageSquare, Star, HeartPulse, HelpCircle, MessageCircle, Calendar } from 'lucide-react';
 import LandingNav from '../components/LandingNav';
 import LandingFooter from '../components/LandingFooter';
 
 const PricingPage = () => {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('yearly');
-  const [viewMode, setViewMode] = useState<'individual' | 'organization'>('individual');
+  const [viewMode, setViewMode] = useState<'individual' | 'teams'>('individual');
 
   const faqs = [
     {
@@ -15,7 +15,7 @@ const PricingPage = () => {
     },
     {
       question: "Is my patient's data safe?",
-      answer: "YES. We are fully HIPAA-compliant. We use end-to-end encryption (AES-256) and never store audio files on our servers once the clinical note has been successfully generated."
+      answer: "100%. We are fully HIPAA-compliant. We use end-to-end encryption and never store audio files once the clinical note has been successfully generated."
     },
     {
       question: "How do the 'Credits' work?",
@@ -35,233 +35,276 @@ const PricingPage = () => {
     },
     {
       question: "Does it understand different accents?",
-      answer: "Yes. Our AI engine is built on diverse linguistic models that accurately process medical consultations in various Nigerian and international accents."
+      answer: "Yes. Our AI engine is built on diverse linguistic models that accurately process medical consultations in various international and regional accents."
     }
   ];
 
   return (
-    <div className="min-h-screen bg-white font-geist relative overflow-hidden">
+    <div className="min-h-screen bg-brand-bg font-geist relative overflow-hidden">
       <LandingNav />
 
       {/* Decorative Backgrounds */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-brand-bg/30 pointer-events-none" />
-      <div className="absolute top-40 left-1/2 -translate-x-1/2 w-[1400px] h-[600px] bg-brand-blue/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 left-0 w-full h-[1500px] pointer-events-none overflow-hidden">
+        <div className="absolute top-[-5%] left-[-10%] w-[60%] h-[50%] bg-[#5768fd]/10 blur-[180px] rounded-full animate-pulse" />
+        <div className="absolute top-[15%] right-[-15%] w-[50%] h-[50%] bg-[#5768fd]/10 blur-[180px] rounded-full" />
+      </div>
 
-      <main className="pt-40 pb-24 relative z-10">
+      <main className="pt-32 pb-24 relative z-10">
         
         {/* Header Section */}
-        <section className="container-custom text-center mb-32">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3 py-1 bg-brand-blue/10 text-brand-blue rounded-full mb-8"
-          >
-            <Shield className="w-4 h-4" />
-            <span className="text-[13px] font-black uppercase tracking-widest">Transparent Clinical Pricing</span>
-          </motion.div>
-          
+        <section className="container-custom text-center mb-24">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-6xl lg:text-8xl font-black text-brand-navy mb-10 tracking-[-0.04em] leading-[0.9]"
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-5xl lg:text-7xl font-black text-brand-navy mb-8 tracking-tight leading-[1.1]"
           >
-            Choose your level of<br /><span className="text-brand-blue">clinical excellence.</span>
+            PrecisionNote for every<br />stage of your practice
           </motion.h1>
           
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl lg:text-2xl text-brand-muted max-w-3xl mx-auto mb-16 font-medium"
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-lg lg:text-xl text-brand-muted max-w-2xl mx-auto mb-12 font-medium leading-relaxed"
           >
-            Flexible plans designed for every stage of your medical career, from residency to institutional leadership.
+            From your first residency to leading a department, we provide the clinical intelligence you need to focus on what matters most: your patients.
           </motion.p>
 
-          {/* Master Toggles */}
+          {/* Controls */}
           <motion.div 
              initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ delay: 0.3 }}
-             className="flex flex-col md:flex-row items-center justify-center gap-8"
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             transition={{ delay: 0.2 }}
+             className="flex flex-col md:flex-row items-center justify-center gap-4"
           >
-            <div className="bg-slate-100 p-2 rounded-[24px] flex items-center shadow-inner">
+            <div className="bg-[#E9EBFF] p-1 rounded-2xl flex items-center shadow-inner">
               <button 
                 onClick={() => setViewMode('individual')}
-                className={`px-10 py-4 rounded-[20px] text-sm font-black uppercase tracking-widest transition-all ${viewMode === 'individual' ? 'bg-white text-brand-navy shadow-xl' : 'text-brand-muted hover:text-brand-navy'}`}
+                className={`px-8 py-2.5 rounded-xl text-[13px] font-black tracking-wide transition-all ${viewMode === 'individual' ? 'bg-brand-blue text-white shadow-lg' : 'text-brand-blue/60 hover:text-brand-blue'}`}
               >
                 Individual
               </button>
               <button 
-                onClick={() => setViewMode('organization')}
-                className={`px-10 py-4 rounded-[20px] text-sm font-black uppercase tracking-widest transition-all ${viewMode === 'organization' ? 'bg-white text-brand-navy shadow-xl' : 'text-brand-muted hover:text-brand-navy'}`}
+                onClick={() => setViewMode('teams')}
+                className={`px-8 py-2.5 rounded-xl text-[13px] font-black tracking-wide transition-all ${viewMode === 'teams' ? 'bg-brand-blue text-white shadow-lg' : 'text-brand-blue/60 hover:text-brand-blue'}`}
               >
-                Organizations
+                Teams and Enterprise
               </button>
             </div>
             
-            <div className="flex items-center gap-4 bg-white px-6 py-4 rounded-2xl border border-brand-border text-sm font-black text-brand-navy cursor-pointer hover:border-brand-blue transition-colors shadow-sm uppercase tracking-widest">
-              Currency: USD <ChevronDown className="w-4 h-4 text-brand-blue" />
+            <div className="flex items-center gap-3 bg-white px-5 py-3 rounded-2xl border border-brand-border text-[13px] font-black text-brand-navy cursor-pointer hover:border-brand-blue transition-all shadow-sm">
+              USD <ChevronDown className="w-4 h-4 text-brand-muted" />
             </div>
           </motion.div>
         </section>
 
         {/* Pricing Cards */}
-        <section className="container-custom mb-40">
-          <div className="grid lg:grid-cols-3 gap-10">
+        <section className="container-custom mb-32">
+          <div className="grid lg:grid-cols-3 gap-8 items-stretch">
             <PricingCard 
               name="The Resident"
-              description="Perfect for medical students and residents getting started."
+              description="Start for free, No credit card required."
               price="0"
-              buttonText="Start Free Forever"
+              buttonText="Get PrecisionNote free"
+              subtext="20 credits per month"
               features={[
-                "15 consultations / month",
+                "AI Ambient Note Generation",
                 "Standard SOAP Templates",
-                "HIPAA Secure Environment",
-                "Basic AI Documentation"
+                "HIPAA Secure",
+                "E-Mail Support"
               ]}
+              buttonVariant="secondary"
             />
 
             <PricingCard 
               name="The Attending"
-              description="Unlimited clinical intelligence for high-volume practices."
-              price={billingCycle === 'yearly' ? 120 : 149}
-              period={billingCycle === 'yearly' ? "/ month (billed yearly)" : "/ month"}
+              description="Unlimited scribe solutions for your practice."
+              price="20"
+              period="Per user/month"
+              saveText="Save 20%"
               isPopular={true}
               billingCycle={billingCycle}
               onBillingToggle={() => setBillingCycle(billingCycle === 'monthly' ? 'yearly' : 'monthly')}
-              buttonText="14-Day Free Trial"
+              buttonText="Try free for 14 days"
+              subtext="60 credits per month"
               features={[
-                "Everything in Resident, plus:",
-                "Unlimited consultations",
-                "Specialty specific templates",
-                "Advanced AI Medical Logic",
-                "Priority Clinical Support",
-                "Universal EMR Integration"
+                "Everything in the resident, plus:",
+                "All Specialty Templates",
+                "Universal EMR Integration",
+                "Dedicated Success Call",
+                "Priority Support"
               ]}
+              buttonVariant="primary"
             />
 
             <PricingCard 
-              name="The Chief"
-              description="Scalable infrastructure for medical institutions."
+              name="The Chief of Medicine"
+              description="Customized integration for your whole department."
               price="Custom"
-              buttonText="Get Enterprise Quote"
+              buttonText="Contact Sales"
+              subtext="50+ people per month"
               features={[
-                "Everything in Attending, plus:",
-                "Multi-team admin controls",
-                "Full EHR/HMS Deep Sync",
-                "Dedicated Success Scribe",
-                "Institutional SLA Suite"
+                "Everything in the attending, plus:",
+                "Bulk User Management",
+                "Custom Security Reviews",
+                "Dedicated Account Manager",
+                "On-Site Training"
               ]}
+              buttonVariant="primary"
             />
           </div>
+          <p className="text-center text-brand-muted font-black text-sm mt-12 cursor-pointer hover:text-brand-blue transition-colors flex items-center justify-center gap-2">
+            See more <ChevronDown className="w-4 h-4" />
+          </p>
         </section>
 
-        {/* Detailed Comparison */}
         <section className="container-custom mb-40">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl lg:text-6xl font-black text-brand-navy tracking-tight mb-4">Compare Features</h2>
-            <p className="text-xl text-brand-muted font-bold">Find the right package for your documentation needs.</p>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+            <h2 className="text-5xl font-black text-brand-navy tracking-tight">Choose Your Plan</h2>
+            <div className="flex gap-4 overflow-x-auto pb-4 md:pb-0 no-scrollbar">
+              <div className="min-w-[150px] text-center">
+                <p className="text-sm font-black text-brand-navy mb-3">The Resident</p>
+                <button className="w-full px-4 py-3 bg-slate-50 border border-brand-border rounded-xl text-[11px] font-black uppercase text-brand-muted hover:bg-slate-100 transition-colors">Start for free</button>
+              </div>
+              <div className="min-w-[150px] text-center">
+                <p className="text-sm font-black text-brand-navy mb-3">The Attending</p>
+                <button className="w-full px-4 py-3 bg-brand-blue rounded-xl text-[11px] font-black uppercase text-white shadow-lg shadow-brand-blue/20 hover:opacity-90 transition-all">Try free for 14 days</button>
+              </div>
+              <div className="min-w-[150px] text-center">
+                <p className="text-sm font-black text-brand-navy mb-3">The Chief of Medicine</p>
+                <button className="w-full px-4 py-3 bg-brand-blue rounded-xl text-[11px] font-black uppercase text-white shadow-lg shadow-brand-blue/20 hover:opacity-90 transition-all">Contact Sales</button>
+              </div>
+            </div>
           </div>
           
-          <div className="bg-white rounded-[48px] border border-slate-100 overflow-hidden shadow-2xl">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="bg-slate-50/50">
-                  <th className="p-10 w-1/4"></th>
-                  <th className="p-10 w-1/4 text-center">
-                    <div className="text-2xl font-black text-brand-navy">The Resident</div>
-                  </th>
-                  <th className="p-10 w-1/4 text-center bg-brand-blue/5">
-                    <div className="text-2xl font-black text-brand-navy">The Attending</div>
-                    <div className="inline-block mt-3 px-3 py-1 bg-brand-blue text-white text-[10px] font-black uppercase tracking-widest rounded-full">Recommended</div>
-                  </th>
-                  <th className="p-10 w-1/4 text-center">
-                    <div className="text-2xl font-black text-brand-navy">The Chief</div>
-                  </th>
-                </tr>
-              </thead>
-              
-              <TableGroup 
-                title="Scribe Capabilities" 
-                rows={[
-                  { label: "Monthly consultations", values: ["15", "Unlimited", "Unlimited"] },
-                  { label: "AI Medical Intelligence", values: ["Standard", "Advanced", "Advanced"] },
-                  { label: "Ambient Conversation Support", values: [true, true, true] },
-                  { label: "Multi-Language Processing", values: ["Basic", "Full Support", "Full Support"] }
-                ]}
-              />
+          <div className="space-y-4">
+            <TableGroup 
+              title="Scribe" 
+              rows={[
+                { label: "Ambient Note Generation", values: ["Included", "Included", "Included"] },
+                { label: "Multi-Language Processing", values: ["Standard", "Advanced", "Custom"] }
+              ]}
+            />
 
-              <TableGroup 
-                title="Clinical Documentation" 
-                rows={[
-                  { label: "SOAP & Progress Notes", values: [true, true, true] },
-                  { label: "Specialty-Specific Templates", values: ["Basic", "50+ Specialties", "Customizable"] },
-                  { label: "Clinical Audit Logs", values: [false, true, true] },
-                  { label: "Custom Note Formatting", values: [false, true, true] }
-                ]}
-              />
+            <TableGroup 
+              title="Documentation" 
+              isOpenDefault={true}
+              rows={[
+                { label: "SOAP & Progress Notes", values: ["Included", "Included", "Included"] },
+                { label: "History & Physical (H&P)", values: [false, "Included", "Included"] },
+                { label: "Discharge & Consult Notes", values: [false, "Included", "Included"] },
+                { label: "Procedure Notes", values: [false, false, "Included"] },
+                { label: "Specialty Templates", values: ["Basic", "20+ Types", "Unlimited"] },
+                { label: "Custom Template Builder", values: [false, false, "Yes"] }
+              ]}
+            />
 
-              <TableGroup 
-                title="Security & Support" 
-                rows={[
-                  { label: "HIPAA & GDPR Compliance", values: [true, true, true] },
-                  { label: "End-to-End Encryption", values: [true, true, true] },
-                  { label: "Response Time", values: ["48h", "8h Priority", "1h VIP"] },
-                  { label: "Dedicated Account Manager", values: [false, false, true] }
-                ]}
-              />
-            </table>
+            <TableGroup 
+              title="Intelligence" 
+              isOpenDefault={true}
+              rows={[
+                { label: "Amber Handoff Memo", values: [false, "Included", "Unlimited"] },
+                { label: "Clinical Note Editing", values: ["Included", "Included", "Included"] },
+                { label: "Advanced Analytics", values: [false, false, "Yes"] }
+              ]}
+            />
+
+            <TableGroup 
+              title="Admin & Sync" 
+              rows={[
+                { label: "Direct EMR Integration", values: ["Manual Copy", "Auto-Sync", "Custom API"] },
+                { label: "Multi-Team Management", values: [false, false, "Yes"] },
+                { label: "Dedicated Account Mgr", values: [false, false, "Yes"] }
+              ]}
+            />
+
+            <TableGroup 
+              title="Security" 
+              rows={[
+                { label: "HIPAA Compliance", values: ["Yes", "Yes", "Yes"] },
+                { label: "SOC2 Type II", values: [false, false, "Yes"] },
+                { label: "Support Level", values: ["Help Center", "Priority", "24/7 VIP"] }
+              ]}
+            />
           </div>
         </section>
 
         {/* FAQ Section */}
         <section className="container-custom mb-40">
-          <div className="grid lg:grid-cols-2 gap-32">
+          <div className="grid lg:grid-cols-[1fr_1.5fr] gap-20">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-blue/10 text-brand-blue rounded-full mb-8">
-                <Star className="w-4 h-4 fill-brand-blue/20" />
-                <span className="text-[13px] font-black uppercase tracking-widest">Questions & Answers</span>
-              </div>
-              <h2 className="text-5xl lg:text-7xl font-black text-brand-navy mb-8 tracking-[-0.04em] leading-[0.9]">Everything you<br />need to know.</h2>
-              <p className="text-xl text-brand-muted font-bold mb-10">Can't find what you're looking for? Our team is available 24/7 to help.</p>
-              <button className="flex items-center gap-3 text-brand-blue font-black text-lg hover:underline">
-                Contact Technical Support <ArrowRight className="w-5 h-5" />
-              </button>
+              <motion.h2 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="text-5xl lg:text-6xl font-black text-brand-navy mb-8 tracking-[-0.03em] leading-[1]"
+              >
+                Frequently Asked<br/>Questions
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="text-xl text-brand-muted font-medium max-w-sm"
+              >
+                Everything you need to know about PrecisionNote.
+              </motion.p>
             </div>
-            <div className="space-y-6">
+            <div className="space-y-4">
               {faqs.map((faq, i) => (
-                <FAQItem key={i} question={faq.question} answer={faq.answer} />
+                <FAQItem key={i} question={faq.question} answer={faq.answer} index={i} />
               ))}
             </div>
           </div>
         </section>
 
-        {/* Final CTA */}
+        {/* Final CTA Section */}
         <section className="container-custom mb-24">
            <motion.div 
-            initial={{ opacity: 0, scale: 0.98 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="bg-[#040523] text-white rounded-[64px] p-12 lg:p-24 text-center relative overflow-hidden shadow-2xl"
+            className="bg-[#FFC738] rounded-[64px] p-12 lg:p-24 text-center relative overflow-hidden group"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/20 to-transparent pointer-events-none" />
-            <div className="relative z-10 max-w-4xl mx-auto">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-brand-blue rounded-3xl mb-12 shadow-2xl">
-                <HeartPulse className="w-10 h-10 text-white" />
-              </div>
-              <h2 className="text-5xl lg:text-8xl font-black mb-10 tracking-[-0.04em] leading-[0.9]">Start your 14-day<br />free trial.</h2>
-              <p className="text-xl lg:text-2xl text-slate-400 mb-16 font-bold max-w-2xl mx-auto">
-                No credit card required. Setup takes less than 5 minutes.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <button className="px-12 py-7 bg-brand-blue text-white rounded-full font-black text-xl flex items-center gap-4 hover:scale-105 transition-all shadow-2xl">
-                  Get Started Now <ArrowRight className="w-6 h-6" />
+            {/* Geometric Background pattern */}
+            <div className="absolute inset-0 opacity-[0.03] rotate-12 scale-150 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 30-30 30-30-30z' fill='%23000' fill-rule='evenodd'/%3E%3C/svg%3E")`, backgroundSize: '60px 60px' }} />
+            
+            <div className="relative z-10">
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-5xl lg:text-8xl font-black text-brand-navy mb-8 tracking-[ -0.04em] leading-[0.9]"
+              >
+                Still have questions?
+              </motion.h2>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="text-xl lg:text-2xl text-brand-navy/60 font-bold mb-16 max-w-3xl mx-auto"
+              >
+                Our clinical team is ready to help you find the right plan for your practice.
+              </motion.p>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="flex flex-col sm:flex-row items-center justify-center gap-6"
+              >
+                <button className="px-12 py-6 bg-brand-navy text-white rounded-[24px] font-black text-xl flex items-center gap-3 hover:scale-105 transition-all shadow-2xl hover:shadow-brand-navy/20">
+                  Chat with our clinical team <ArrowRight className="w-6 h-6" />
                 </button>
-                <button className="px-12 py-7 bg-white/5 text-white rounded-full font-black text-xl flex items-center gap-4 border border-white/10 hover:bg-white/10 transition-all">
-                  Contact Sales
+                <button className="px-12 py-6 bg-white/40 backdrop-blur-md text-brand-navy rounded-[24px] font-black text-xl flex items-center gap-3 hover:bg-white/60 transition-all border border-brand-navy/5">
+                  Book a demo
                 </button>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </section>
@@ -280,106 +323,153 @@ const PricingCard = ({
   features, 
   isPopular = false, 
   period,
+  subtext,
   billingCycle,
-  onBillingToggle
+  onBillingToggle,
+  saveText,
+  buttonVariant = "primary"
 }: any) => (
   <motion.div 
-    whileHover={{ y: -12 }}
-    className={`p-12 rounded-[56px] border-2 flex flex-col relative transition-all duration-500 ${isPopular ? 'bg-white border-brand-blue shadow-[0_40px_100px_-20px_rgba(59,130,246,0.15)]' : 'bg-white/50 border-slate-100 hover:border-brand-blue/20 shadow-sm'}`}
+    whileHover={{ y: -8 }}
+    transition={{ duration: 0.4, ease: "easeOut" }}
+    className={`p-10 rounded-[48px] border flex flex-col relative transition-all duration-300 ${isPopular ? 'bg-white border-brand-blue shadow-[0_32px_80px_-16px_rgba(87,104,253,0.12)] z-10' : 'bg-white border-brand-border hover:shadow-xl'}`}
   >
     {isPopular && (
-      <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-brand-blue text-white text-[11px] font-black uppercase tracking-[0.2em] px-8 py-2.5 rounded-full shadow-xl">
-        Most Recommended
+      <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#FFC738] text-brand-navy text-[11px] font-black uppercase tracking-[0.2em] px-8 py-2.5 rounded-full shadow-lg">
+        Most Popular
       </div>
     )}
     
-    <div className="mb-12">
-      <h3 className="text-3xl font-black text-brand-navy mb-6 tracking-tight">{name}</h3>
-      <p className="text-brand-muted text-[17px] font-bold leading-relaxed">{description}</p>
+    <div className="mb-10">
+      <h3 className="text-2xl font-black text-brand-navy mb-3 tracking-tight">{name}</h3>
+      <p className="text-brand-muted text-[15px] font-bold leading-relaxed">{description}</p>
     </div>
 
-    <div className="mb-12">
+    <div className="mb-10">
       <div className="flex items-baseline gap-2">
-        <span className="text-7xl font-black text-brand-navy tracking-tighter">
-          {typeof price === 'number' ? `$${price}` : price}
+        <span className="text-7xl font-black text-brand-navy tracking-[-0.05em]">
+          {price === "0" || price === "Custom" ? price : `$${price}`}
         </span>
-        {period && <span className="text-brand-muted font-bold text-[15px] opacity-60 tracking-tight max-w-[120px] leading-tight">{period}</span>}
+        {period && <span className="text-brand-muted font-bold text-sm opacity-60 ml-2">{period}</span>}
       </div>
 
       {onBillingToggle && (
-        <div className="mt-8 p-1.5 bg-slate-50 rounded-2xl inline-flex items-center gap-2 border border-slate-100">
-          <button 
-            onClick={() => onBillingToggle()}
-            className={`px-6 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest transition-all ${billingCycle === 'yearly' ? 'bg-white text-brand-navy shadow-lg text-[13px]' : 'text-brand-muted'}`}
-          >
-            Yearly
-          </button>
-          <button 
-            onClick={() => onBillingToggle()}
-            className={`px-6 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest transition-all ${billingCycle === 'monthly' ? 'bg-white text-brand-navy shadow-lg text-[13px]' : 'text-brand-muted'}`}
-          >
-            Monthly
-          </button>
+        <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="p-1.5 bg-slate-50 rounded-2xl inline-flex items-center gap-1 border border-slate-100 shadow-inner">
+            <button 
+              onClick={() => onBillingToggle()}
+              className={`px-5 py-2 rounded-xl text-[11px] font-black uppercase transition-all ${billingCycle === 'yearly' ? 'bg-white text-brand-navy shadow-sm' : 'text-brand-muted hover:text-brand-navy'}`}
+            >
+              Yearly
+            </button>
+            <button 
+              onClick={() => onBillingToggle()}
+              className={`px-5 py-2 rounded-xl text-[11px] font-black uppercase transition-all ${billingCycle === 'monthly' ? 'bg-white text-brand-navy shadow-sm' : 'text-brand-muted hover:text-brand-navy'}`}
+            >
+              Monthly
+            </button>
+          </div>
+          {saveText && (
+            <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 px-3 py-2 rounded-xl border border-emerald-100 uppercase tracking-widest leading-none">
+              {saveText}
+            </span>
+          )}
         </div>
       )}
     </div>
 
-    <button className={`w-full py-6 rounded-full font-black text-xl mb-12 transition-all ${isPopular ? 'bg-brand-blue text-white shadow-2xl shadow-brand-blue/30 hover:opacity-90 active:scale-95' : 'bg-slate-100 text-brand-navy hover:bg-slate-200'}`}>
+    <button className={`w-full py-5 rounded-[24px] font-black text-xl mb-6 transition-all ${buttonVariant === 'primary' ? 'bg-brand-blue text-white shadow-xl shadow-brand-blue/20 hover:scale-[1.02] active:scale-[0.98]' : 'bg-slate-50 text-brand-navy border border-brand-border hover:bg-slate-100'}`}>
       {buttonText}
     </button>
+    
+    {subtext && (
+      <div className="flex items-center justify-center gap-2 mb-10 text-brand-muted">
+        <Zap className="w-4 h-4 text-brand-blue fill-brand-blue/20" />
+        <p className="text-[12px] font-black uppercase tracking-[0.15em]">{subtext}</p>
+      </div>
+    )}
 
-    <div className="space-y-6 flex-1">
-      <p className="text-[11px] font-black uppercase tracking-[0.2em] text-brand-muted/60 mb-8">What's Included:</p>
+    <div className="space-y-6 flex-1 pt-10 border-t border-brand-border/50">
+      <p className="text-[11px] font-black uppercase tracking-[0.2em] text-brand-navy/30 mb-2">Everything in the resident, plus:</p>
       {features.map((feature: string, i: number) => (
-        <div key={i} className="flex gap-5 items-start">
-          <div className="mt-1 flex items-center justify-center w-6 h-6 rounded-full bg-brand-blue/10 shrink-0">
-             <CheckCircle2 className="w-4 h-4 text-brand-blue" />
+        <div key={i} className="flex gap-4 items-start group">
+          <div className="mt-0.5 flex items-center justify-center w-6 h-6 rounded-full bg-brand-blue/10 shrink-0 group-hover:bg-brand-blue transition-colors">
+             <CheckCircle2 className="w-4 h-4 text-brand-blue group-hover:text-white transition-colors" />
           </div>
-          <span className="text-[17px] font-bold text-slate-700 leading-tight">{feature}</span>
+          <span className="text-[16px] font-bold text-brand-navy/80 leading-snug">{feature}</span>
         </div>
       ))}
     </div>
 
-    <button className="mt-12 text-brand-blue font-black text-sm flex items-center gap-2 hover:gap-4 transition-all">
-      View Detailed Breakdown <ArrowRight className="w-4 h-4" />
+    <button className="mt-12 text-brand-navy font-black text-sm flex items-center gap-2 group transition-all hover:text-brand-blue">
+      See more <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
     </button>
   </motion.div>
 );
 
-const TableGroup = ({ title, rows }: any) => (
-  <>
-    <tr>
-      <td colSpan={4} className="px-10 py-8 text-[13px] font-black uppercase tracking-[0.3em] text-brand-blue/40 bg-slate-50 border-y border-slate-100">
-        {title}
-      </td>
-    </tr>
-    {rows.map((row: any, i: number) => (
-      <tr key={i} className="group hover:bg-slate-50 transition-colors border-b border-slate-50 last:border-0">
-        <td className="p-10 text-[17px] font-black text-brand-navy">{row.label}</td>
-        {row.values.map((val: any, j: number) => (
-          <td key={j} className={`p-10 text-center text-lg font-bold ${j === 1 ? 'bg-brand-blue/5 text-brand-navy' : 'text-brand-muted'}`}>
-            {typeof val === 'boolean' ? (
-              val ? <CheckCircle2 className="w-6 h-6 text-brand-blue mx-auto" /> : <XCircle className="w-6 h-6 text-slate-100 mx-auto" />
-            ) : (
-              val
-            )}
-          </td>
-        ))}
-      </tr>
-    ))}
-  </>
-);
-
-const FAQItem = ({ question, answer }: any) => {
-  const [isOpen, setIsOpen] = useState(false);
+const TableGroup = ({ title, rows, isOpenDefault = false }: any) => {
+  const [isOpen, setIsOpen] = useState(isOpenDefault);
+  
   return (
-    <div className="bg-white border border-slate-100 rounded-[32px] overflow-hidden transition-all hover:border-brand-blue/30 shadow-sm hover:shadow-xl hover:-translate-y-1 duration-300">
+    <div className="border-b border-brand-border last:border-0">
       <button 
-        className="w-full p-10 text-left flex justify-between items-center gap-8 group"
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full py-6 flex justify-between items-center group"
+      >
+        <span className="text-xl font-black text-brand-navy group-hover:text-brand-blue transition-colors">{title}</span>
+        <div className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+          <ChevronDown className="w-6 h-6 text-brand-muted" />
+        </div>
+      </button>
+      
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <div className="pb-8 space-y-1">
+              {rows.map((row: any, i: number) => (
+                <div key={i} className="grid grid-cols-1 md:grid-cols-4 gap-4 py-4 px-4 hover:bg-slate-50 rounded-xl transition-colors items-center">
+                  <div className="text-[15px] font-bold text-brand-navy/60">{row.label}</div>
+                  {row.values.map((val: any, j: number) => (
+                    <div key={j} className="text-center font-black text-[15px] text-brand-navy">
+                      {typeof val === 'boolean' ? (
+                        val ? <CheckCircle2 className="w-5 h-5 text-brand-blue mx-auto" /> : <span className="text-brand-muted/20">—</span>
+                      ) : (
+                        val
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+const FAQItem = ({ question, answer, index }: any) => {
+  const [isOpen, setIsOpen] = useState(index === 1); 
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.05 }}
+      className={`bg-white border rounded-[32px] overflow-hidden transition-all duration-500 ${isOpen ? 'border-brand-blue/30 shadow-2xl shadow-brand-blue/5' : 'border-brand-border hover:border-brand-blue/20 shadow-sm'}`}
+    >
+      <button 
+        className="w-full p-8 lg:p-10 text-left flex justify-between items-center gap-6 group"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="text-2xl font-black text-brand-navy group-hover:text-brand-blue transition-colors leading-tight">{question}</span>
-        <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${isOpen ? 'bg-brand-blue text-white rotate-180' : 'bg-slate-50 text-brand-muted group-hover:bg-brand-blue/10 group-hover:text-brand-blue'}`}>
+        <span className="text-[20px] lg:text-[22px] font-black text-brand-navy leading-tight tracking-tight">{question}</span>
+        <div className={`shrink-0 w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-brand-blue border-brand-blue text-white rotate-180' : 'bg-white border-brand-border text-brand-muted group-hover:border-brand-blue group-hover:text-brand-blue'}`}>
           <ChevronDown className="w-6 h-6" />
         </div>
       </button>
@@ -389,15 +479,15 @@ const FAQItem = ({ question, answer }: any) => {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="p-10 pt-0 text-xl text-brand-muted leading-relaxed font-bold opacity-80">
+            <div className="p-8 lg:p-12 pt-0 text-[18px] text-brand-muted/70 leading-relaxed font-bold">
               {answer}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };
 
