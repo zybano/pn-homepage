@@ -1,7 +1,6 @@
 import React from 'react';
 import LandingNav from '../components/LandingNav';
 import Hero from '../components/Hero';
-import TrustBar from '../components/TrustBar';
 import ComparisonSection from '../components/ComparisonSection';
 import StepSection from '../components/StepSection';
 import Testimonials from '../components/Testimonials';
@@ -15,7 +14,6 @@ function LandingPage() {
       
       <main>
         <Hero />
-        <TrustBar />
         <ComparisonSection />
         <StepSection />
         
