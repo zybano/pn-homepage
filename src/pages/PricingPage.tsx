@@ -26,6 +26,125 @@ const PricingPage = () => {
   const [viewMode, setViewMode] = useState<"individual" | "teams">(
     "individual",
   );
+  const [currencyCode, setCurrencyCode] = useState("USD");
+  const [isCurrencyOpen, setIsCurrencyOpen] = useState(false);
+
+  const currencies = [
+    { code: "USD", symbol: "$", rate: 1 },
+    { code: "EUR", symbol: "€", rate: 0.92 },
+    { code: "GBP", symbol: "£", rate: 0.79 },
+  ];
+
+  const activeCurrency = currencies.find((c) => c.code === currencyCode) || currencies[0];
+
+  const pricingData: any = {
+    individual: [
+      {
+        name: "The Resident",
+        description: "Start for free. No credit card required.",
+        price: 0,
+        buttonText: "Get PrecisionNote free",
+        subtext: "20 Credits per month",
+        features: [
+          "AI Ambient Note Generation",
+          "Standard SOAP Templates",
+          "HIPAA Secure",
+          "E-mail Secure",
+        ],
+        variant: "secondary",
+      },
+      {
+        name: "The Attending",
+        description: "Unlimited scribe solutions for your practice.",
+        price: billingCycle === "yearly" ? 20 : 25,
+        period: "Per user/month",
+        saveText: "SAVE 20%",
+        isPopular: true,
+        showBillingToggle: true,
+        buttonText: "Try free for 14 days",
+        subtext: "60 Credits per month",
+        features: [
+          "Everything in the resident, plus:",
+          "All Specialty Templates",
+          "Universal EMR Integration",
+          "Dedicated Success Call",
+          "Priority Support",
+        ],
+        variant: "primary",
+      },
+      {
+        name: "The Chief of Medicine",
+        description: "Customized integration for your whole department.",
+        price: "Custom",
+        buttonText: "Contact Sales",
+        subtext: "50+ people per month",
+        features: [
+          "Everything in the attending, plus:",
+          "Bulk User Management",
+          "Custom Security Reviews",
+          "Dedicated Account Manager",
+          "Onboarding Support",
+        ],
+        variant: "primary",
+      },
+    ],
+    teams: [
+      {
+        name: "Clinical Team",
+        description: "Collaborative tools for small practices.",
+        price: billingCycle === "yearly" ? 35 : 45,
+        period: "Per user/month",
+        saveText: "SAVE 20%",
+        showBillingToggle: true,
+        buttonText: "Request Team Demo",
+        subtext: "Unlimited notes for team",
+        features: [
+          "Everything in Attending",
+          "Shared Patient Context",
+          "Team Template Library",
+          "Centralized Billing",
+          "Admin Dashboard",
+        ],
+        variant: "secondary",
+      },
+      {
+        name: "Practice Plus",
+        description: "Advanced solutions for growing clinics.",
+        price: billingCycle === "yearly" ? 75 : 90,
+        period: "Per user/month",
+        isPopular: true,
+        saveText: "SAVE 20%",
+        showBillingToggle: true,
+        buttonText: "Start Practice Trial",
+        subtext: "Up to 50 providers",
+        features: [
+          "Everything in Clinical Team",
+          "Priority API Access",
+          "Custom Security Audit",
+          "On-site Training Option",
+          "Dedicated Account Mgr",
+        ],
+        variant: "primary",
+      },
+      {
+        name: "Enterprise",
+        description: "Organization-wide clinical intelligence.",
+        price: "Custom",
+        buttonText: "Contact Enterprise",
+        subtext: "Large Scale Hospital Systems",
+        features: [
+          "Everything in Practice Plus",
+          "Fleet Management",
+          "White-label Reports",
+          "Custom ML Models",
+          "24/7 Dedicated Support",
+        ],
+        variant: "primary",
+      },
+    ],
+  };
+
+
 
   const faqs = [
     {
@@ -107,9 +226,10 @@ const PricingPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="flex flex-col md:flex-row items-center justify-center gap-4"
+            className="flex items-center justify-center gap-4"
           >
-            <div className="bg-[#E9EBFF]/50 p-1 rounded-xl flex items-center border border-[#5768fd]/10">
+            {/* Main Category Switcher - Exactly as Figma */}
+            <div className="bg-[#5768fd]/10 p-1 rounded-xl flex items-center border border-[#5768fd]/5">
               <button
                 onClick={() => setViewMode("individual")}
                 className={`px-6 py-2 rounded-lg text-xs font-bold tracking-wide transition-all ${viewMode === "individual" ? "bg-brand-blue text-white shadow-md" : "text-brand-blue/60 hover:text-brand-blue"}`}
@@ -124,70 +244,67 @@ const PricingPage = () => {
               </button>
             </div>
 
-            <div className="flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl border border-brand-border text-xs font-bold text-brand-navy cursor-pointer hover:border-brand-blue transition-all shadow-sm">
-              USD <ChevronDown className="w-3.5 h-3.5 text-brand-muted" />
+            {/* Currency Selector - Exactly as Figma */}
+            <div className="relative">
+              <button
+                onClick={() => setIsCurrencyOpen(!isCurrencyOpen)}
+                className="flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl border border-brand-border text-xs font-bold text-brand-navy hover:border-brand-blue transition-all shadow-sm"
+              >
+                {activeCurrency.code}
+                <ChevronDown className={`w-3.5 h-3.5 text-brand-muted transition-transform duration-300 ${isCurrencyOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              <AnimatePresence>
+                {isCurrencyOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 5 }}
+                    className="absolute top-full right-0 mt-2 bg-white border border-brand-border rounded-xl shadow-xl z-50 overflow-hidden min-w-[100px]"
+                  >
+                    {currencies.map((c) => (
+                      <button
+                        key={c.code}
+                        onClick={() => {
+                          setCurrencyCode(c.code);
+                          setIsCurrencyOpen(false);
+                        }}
+                        className={`w-full px-4 py-2.5 text-left text-xs font-bold transition-colors hover:bg-brand-bg ${
+                          currencyCode === c.code ? "text-brand-blue bg-blue-50/50" : "text-brand-navy"
+                        }`}
+                      >
+                        {c.code}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         </section>
 
         {/* Pricing Cards */}
         <section className="container-custom mb-32">
-          <div className="grid lg:grid-cols-3 gap-8 items-stretch">
-            <PricingCard
-              name="The Resident"
-              description="Start for free, No credit card required."
-              price="0"
-              buttonText="Get PrecisionNote free"
-              subtext="20 credits per month"
-              features={[
-                "AI Ambient Note Generation",
-                "Standard SOAP Templates",
-                "HIPAA Secure",
-                "E-Mail Support",
-              ]}
-              buttonVariant="secondary"
-            />
-
-            <PricingCard
-              name="The Attending"
-              description="Unlimited scribe solutions for your practice."
-              price="20"
-              period="Per user/month"
-              saveText="Save 20%"
-              isPopular={true}
-              billingCycle={billingCycle}
-              onBillingToggle={() =>
-                setBillingCycle(
-                  billingCycle === "monthly" ? "yearly" : "monthly",
-                )
-              }
-              buttonText="Try free for 14 days"
-              subtext="60 credits per month"
-              features={[
-                "Everything in the resident, plus:",
-                "All Specialty Templates",
-                "Universal EMR Integration",
-                "Dedicated Success Call",
-                "Priority Support",
-              ]}
-              buttonVariant="primary"
-            />
-
-            <PricingCard
-              name="The Chief of Medicine"
-              description="Customized integration for your whole department."
-              price="Custom"
-              buttonText="Contact Sales"
-              subtext="50+ people per month"
-              features={[
-                "Everything in the attending, plus:",
-                "Bulk User Management",
-                "Custom Security Reviews",
-                "Dedicated Account Manager",
-                "On-Site Training",
-              ]}
-              buttonVariant="primary"
-            />
+          <div className={`grid gap-8 items-stretch ${pricingData[viewMode].length === 1 ? "max-w-md mx-auto" : "lg:grid-cols-3"}`}>
+            {pricingData[viewMode].map((plan: any) => (
+              <PricingCard
+                key={plan.name}
+                name={plan.name}
+                description={plan.description}
+                price={typeof plan.price === "number" ? Math.round(plan.price * activeCurrency.rate) : plan.price}
+                symbol={activeCurrency.symbol}
+                buttonText={plan.buttonText}
+                subtext={plan.subtext}
+                features={plan.features}
+                isPopular={plan.isPopular}
+                saveText={plan.saveText}
+                period={plan.period}
+                buttonVariant={plan.variant}
+                billingCycle={billingCycle}
+                showBillingToggle={plan.showBillingToggle}
+                onBillingToggle={() => setBillingCycle(billingCycle === "yearly" ? "monthly" : "yearly")}
+              />
+            ))}
           </div>
           <p className="text-center text-brand-muted font-bold text-sm mt-12 cursor-pointer hover:text-brand-blue transition-colors flex items-center justify-center gap-2">
             See more <ChevronDown className="w-4 h-4" />
@@ -230,14 +347,23 @@ const PricingPage = () => {
           <div className="space-y-4">
             <TableGroup
               title="Scribe"
+              isOpenDefault={true}
               rows={[
                 {
                   label: "Ambient Note Generation",
-                  values: ["Included", "Included", "Included"],
+                  values: [true, true, true],
                 },
                 {
-                  label: "Multi-Language Processing",
-                  values: ["Standard", "Advanced", "Custom"],
+                  label: "Multi-speaker recognition",
+                  values: [true, true, true],
+                },
+                {
+                  label: "Scribe mode (Live recording)",
+                  values: [true, true, true],
+                },
+                {
+                  label: "Direct Dictation mode",
+                  values: [true, true, true],
                 },
               ]}
             />
@@ -247,28 +373,20 @@ const PricingPage = () => {
               isOpenDefault={true}
               rows={[
                 {
-                  label: "SOAP & Progress Notes",
-                  values: ["Included", "Included", "Included"],
+                  label: "Standard SOAP templates",
+                  values: [true, true, true],
                 },
                 {
-                  label: "History & Physical (H&P)",
-                  values: [false, "Included", "Included"],
+                  label: "Custom specialty templates",
+                  values: [false, true, true],
                 },
                 {
-                  label: "Discharge & Consult Notes",
-                  values: [false, "Included", "Included"],
+                  label: "Auto-formatting for EMRs",
+                  values: [false, true, true],
                 },
                 {
-                  label: "Procedure Notes",
-                  values: [false, false, "Included"],
-                },
-                {
-                  label: "Specialty Templates",
-                  values: ["Basic", "20+ Types", "Unlimited"],
-                },
-                {
-                  label: "Custom Template Builder",
-                  values: [false, false, "Yes"],
+                  label: "Draft history & revisions",
+                  values: [false, true, true],
                 },
               ]}
             />
@@ -278,43 +396,66 @@ const PricingPage = () => {
               isOpenDefault={true}
               rows={[
                 {
-                  label: "Amber Handoff Memo",
-                  values: [false, "Included", "Unlimited"],
+                  label: "Smart ICD-10 suggestions",
+                  values: [false, true, true],
                 },
                 {
-                  label: "Clinical Note Editing",
-                  values: ["Included", "Included", "Included"],
+                  label: "Clinical summary generation",
+                  values: [false, true, true],
                 },
-                { label: "Advanced Analytics", values: [false, false, "Yes"] },
+                {
+                  label: "Insight Dashboard",
+                  values: [false, false, true],
+                },
+                {
+                  label: "Population health metrics",
+                  values: [false, false, true],
+                },
               ]}
             />
 
             <TableGroup
               title="Admin & Sync"
+              isOpenDefault={true}
               rows={[
                 {
-                  label: "Direct EMR Integration",
-                  values: ["Manual Copy", "Auto-Sync", "Custom API"],
+                  label: "Universal EMR Sync",
+                  values: [false, true, true],
                 },
                 {
-                  label: "Multi-Team Management",
-                  values: [false, false, "Yes"],
+                  label: "Mobile App Access",
+                  values: [true, true, true],
                 },
                 {
-                  label: "Dedicated Account Mgr",
-                  values: [false, false, "Yes"],
+                  label: "Multi-device syncing",
+                  values: [false, true, true],
+                },
+                {
+                  label: "Team management portal",
+                  values: [false, false, true],
                 },
               ]}
             />
 
             <TableGroup
               title="Security"
+              isOpenDefault={true}
               rows={[
-                { label: "HIPAA Compliance", values: ["Yes", "Yes", "Yes"] },
-                { label: "SOC2 Type II", values: [false, false, "Yes"] },
                 {
-                  label: "Support Level",
-                  values: ["Help Center", "Priority", "24/7 VIP"],
+                  label: "HIPAA Compliant",
+                  values: [true, true, true],
+                },
+                {
+                  label: "SOC2 Type II",
+                  values: [true, true, true],
+                },
+                {
+                  label: "Business Associate Agreement (BAA)",
+                  values: [false, true, true],
+                },
+                {
+                  label: "Identity provider (SSO) integration",
+                  values: [false, false, true],
                 },
               ]}
             />
@@ -404,15 +545,17 @@ const PricingPage = () => {
 const PricingCard = ({
   name,
   price,
+  symbol = "$",
   description,
   buttonText,
   features,
   isPopular = false,
   period,
   subtext,
-  billingCycle,
-  onBillingToggle,
   saveText,
+  billingCycle,
+  showBillingToggle,
+  onBillingToggle,
   buttonVariant = "primary",
 }: any) => (
   <motion.div
@@ -438,7 +581,7 @@ const PricingCard = ({
     <div className="mb-10">
       <div className="flex items-baseline gap-1">
         <span className="text-6xl font-bold text-brand-navy tracking-tighter">
-          {price === "0" || price === "Custom" ? price : `$${price}`}
+          {typeof price === "number" ? (price === 0 ? "0" : `${symbol}${price}`) : price}
         </span>
         {period && (
           <span className="text-brand-muted font-bold text-xs opacity-50 ml-1">
@@ -447,17 +590,17 @@ const PricingCard = ({
         )}
       </div>
 
-      {onBillingToggle && (
-        <div className="mt-6 flex flex-wrap items-center gap-2">
+      {showBillingToggle && (
+        <div className="mt-4 flex items-center gap-3">
           <div className="p-1 bg-slate-50 rounded-xl inline-flex items-center border border-slate-100">
             <button
-              onClick={() => onBillingToggle()}
+              onClick={() => billingCycle === "monthly" || onBillingToggle()}
               className={`px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase transition-all ${billingCycle === "yearly" ? "bg-white text-brand-navy shadow-sm" : "text-brand-muted hover:text-brand-navy"}`}
             >
               Yearly
             </button>
             <button
-              onClick={() => onBillingToggle()}
+              onClick={() => billingCycle === "yearly" || onBillingToggle()}
               className={`px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase transition-all ${billingCycle === "monthly" ? "bg-white text-brand-navy shadow-sm" : "text-brand-muted hover:text-brand-navy"}`}
             >
               Monthly
@@ -489,7 +632,7 @@ const PricingCard = ({
 
     <div className="space-y-4 flex-1 pt-8 border-t border-slate-100">
       <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-brand-navy/30 mb-1">
-        Everything in the resident, plus:
+        Included in this plan:
       </p>
       {features.map((feature: string, i: number) => (
         <div key={i} className="flex gap-3 items-start group">
@@ -504,7 +647,7 @@ const PricingCard = ({
     </div>
 
     <button className="mt-8 text-brand-navy/60 font-bold text-xs flex items-center gap-2 group transition-all hover:text-brand-blue hover:translate-x-1">
-      See more <ArrowRight className="w-3.5 h-3.5" />
+      See full feature list <ArrowRight className="w-3.5 h-3.5" />
     </button>
   </motion.div>
 );
