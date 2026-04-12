@@ -57,7 +57,25 @@ const StepSection = () => {
               </div>
               <div className="flex items-end gap-[3px] h-12 mb-4 overflow-hidden">
                 {[4, 2, 5, 3, 6, 2, 4, 8, 5, 3, 9, 4, 2, 7, 5, 3, 6, 8, 4, 2, 5].map((h, i) => (
-                  <div key={i} className="flex-1 bg-[#5768fd] rounded-full" style={{ height: `${h * 10}%` }} />
+                  <motion.div 
+                    key={i} 
+                    className="flex-1 bg-[#5768fd] rounded-full" 
+                    animate={{ 
+                      height: [
+                        `${h * 7}%`, 
+                        `${h * 12}%`, 
+                        `${h * 9}%`, 
+                        `${h * 11}%`, 
+                        `${h * 10}%`
+                      ] 
+                    }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 1.5 + Math.random() * 0.5,
+                      delay: i * 0.05,
+                      ease: "easeInOut"
+                    }}
+                  />
                 ))}
               </div>
               <p className="font-mono text-[11px] text-slate-400 leading-tight">
