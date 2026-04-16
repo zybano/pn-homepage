@@ -30,13 +30,13 @@ const Hero = () => {
 
                 <p className="text-[60px] font-bold tracking-[-1.2px] text-[#040523]">
                   <span className="bg-gradient-to-b from-[#5768fd] from-[77.404%] to-white bg-clip-text font-bold leading-[69px] text-transparent">
-                    Precision Notes
+                    PrecisionNote
                   </span>
                   <span className="leading-[69px]">{` writes your SOAP notes.`}</span>
                 </p>
 
                 <p className="text-[18px] leading-[27px] text-[#64748b]">
-                  PrecisionNote captures every clinical detail in real-time, delivering structured, HIPAA-compliant SOAP notes directly to your EHR.
+                  Save 2+ hours on charting daily. PrecisionNote listens to your clinical sessions and delivers structured, HIPAA-compliant SOAP notes directly to your EHR.
                 </p>
               </div>
 
@@ -57,30 +57,49 @@ const Hero = () => {
               </div>
             </div>
 
-            <div className="flex w-[287px] items-center gap-[12px]">
-              <div className="relative h-[32px] w-[80px]">
-                <div className="absolute left-0 top-0 h-[32px] w-[32px] rounded-full border-2 border-white">
-                  <img alt="" className="h-full w-full rounded-full object-cover" src={doctor1Png} />
+            <div className="flex flex-col gap-[32px]">
+              <div className="flex w-[287px] items-center gap-[12px]">
+                <div className="relative h-[32px] w-[80px]">
+                  <div className="absolute left-0 top-0 h-[32px] w-[32px] rounded-full border-2 border-white">
+                    <img alt="" className="h-full w-full rounded-full object-cover" src={doctor1Png} />
+                  </div>
+                  <div className="absolute left-[24px] top-0 h-[32px] w-[32px] rounded-full border-2 border-white">
+                    <img alt="" className="h-full w-full rounded-full object-cover" src={doctor2Png} />
+                  </div>
+                  <div className="absolute left-[48px] top-0 h-[32px] w-[32px] rounded-full border-2 border-white">
+                    <img alt="" className="h-full w-full rounded-full object-cover" src={doctor3Png} />
+                  </div>
                 </div>
-                <div className="absolute left-[24px] top-0 h-[32px] w-[32px] rounded-full border-2 border-white">
-                  <img alt="" className="h-full w-full rounded-full object-cover" src={doctor2Png} />
-                </div>
-                <div className="absolute left-[48px] top-0 h-[32px] w-[32px] rounded-full border-2 border-white">
-                  <img alt="" className="h-full w-full rounded-full object-cover" src={doctor3Png} />
+
+                <div className="relative h-[38px] w-[195px]">
+                  <div className="absolute left-0 top-0 flex h-[12px] items-center gap-[4px]">
+                    {Array.from({ length: 5 }).map((_, idx) => (
+                      <span key={idx} className="relative h-[12px] w-[12px]">
+                        <img alt="" className="absolute inset-0 h-full w-full" src={starSvg} />
+                      </span>
+                    ))}
+                  </div>
+                  <p className="absolute left-0 top-[20px] whitespace-nowrap text-[12px] leading-[16px] text-[#62748e]">
+                    Loved by <span className="font-medium text-[#040523]">500+ Nigerian physicians</span>
+                  </p>
                 </div>
               </div>
 
-              <div className="relative h-[38px] w-[195px]">
-                <div className="absolute left-0 top-0 flex h-[12px] items-center gap-[4px]">
-                  {Array.from({ length: 5 }).map((_, idx) => (
-                    <span key={idx} className="relative h-[12px] w-[12px]">
-                      <img alt="" className="absolute inset-0 h-full w-full" src={starSvg} />
-                    </span>
-                  ))}
-                </div>
-                <p className="absolute left-0 top-[20px] whitespace-nowrap text-[12px] leading-[16px] text-[#62748e]">
-                  Loved by <span className="font-medium text-[#040523]">500+ Nigerian physicians</span>
-                </p>
+              <div className="grid grid-cols-2 gap-[16px] md:grid-cols-4">
+                {[
+                  { value: '127', label: 'Total Patients', subLabel: '+12 this week' },
+                  { value: '8', label: 'Active Sessions', subLabel: '3 need review' },
+                  { value: '18m', label: 'Avg. Session Time', subLabel: '-2m from last month' },
+                  { value: '98%', label: 'Document Rate', subLabel: 'Above target' },
+                ].map((stat, idx) => (
+                  <div key={idx} className="flex flex-col gap-[4px] rounded-[12px] border border-[#f1f5f9] bg-white p-[16px] shadow-[0px_1px_2px_rgba(0,0,0,0.05)]">
+                    <p className="text-[24px] font-bold leading-tight text-[#040523]">{stat.value}</p>
+                    <div className="flex flex-col">
+                      <p className="text-[12px] font-medium text-[#64748b]">{stat.label}</p>
+                      <p className="text-[10px] text-[#22c55e]">{stat.subLabel}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

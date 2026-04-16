@@ -1,749 +1,244 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  CheckCircle2,
-  ChevronDown,
-  ArrowRight,
-  Zap,
-} from "lucide-react";
-import LandingNav from "../components/LandingNav";
-import LandingFooter from "../components/LandingFooter";
+import { useState } from 'react';
+import { ArrowRight, Check, ChevronDown, ChevronUp, CircleMinus, CirclePlus, Sparkles } from 'lucide-react';
+import LandingFooter from '../components/LandingFooter';
+import LandingNav from '../components/LandingNav';
 
 const PricingPage = () => {
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">(
-    "yearly",
-  );
-  const [viewMode, setViewMode] = useState<"individual" | "teams">(
-    "individual",
-  );
-  const [currencyCode, setCurrencyCode] = useState("USD");
-  const [isCurrencyOpen, setIsCurrencyOpen] = useState(false);
-
-  const currencies = [
-    { code: "USD", symbol: "$", rate: 1 },
-    { code: "EUR", symbol: "€", rate: 0.92 },
-    { code: "GBP", symbol: "£", rate: 0.79 },
-  ];
-
-  const activeCurrency = currencies.find((c) => c.code === currencyCode) || currencies[0];
-
-  const pricingData: any = {
-    individual: [
-      {
-        name: "The Resident",
-        description: "Start for free. No credit card required.",
-        price: 0,
-        buttonText: "Get PrecisionNote free",
-        subtext: "20 Credits per month",
-        features: [
-          "AI Ambient Note Generation",
-          "Standard SOAP Templates",
-          "HIPAA Secure",
-          "E-mail Secure",
-        ],
-        variant: "secondary",
-      },
-      {
-        name: "The Attending",
-        description: "Unlimited scribe solutions for your practice.",
-        price: billingCycle === "yearly" ? 20 : 25,
-        period: "Per user/month",
-        saveText: "SAVE 20%",
-        isPopular: true,
-        showBillingToggle: true,
-        buttonText: "Try free for 14 days",
-        subtext: "60 Credits per month",
-        features: [
-          "Everything in the resident, plus:",
-          "All Specialty Templates",
-          "Universal EMR Integration",
-          "Dedicated Success Call",
-          "Priority Support",
-        ],
-        variant: "primary",
-      },
-      {
-        name: "The Chief of Medicine",
-        description: "Customized integration for your whole department.",
-        price: "Custom",
-        buttonText: "Contact Sales",
-        subtext: "50+ people per month",
-        features: [
-          "Everything in the attending, plus:",
-          "Bulk User Management",
-          "Custom Security Reviews",
-          "Dedicated Account Manager",
-          "Onboarding Support",
-        ],
-        variant: "primary",
-      },
-    ],
-    teams: [
-      {
-        name: "Clinical Team",
-        description: "Collaborative tools for small practices.",
-        price: billingCycle === "yearly" ? 35 : 45,
-        period: "Per user/month",
-        saveText: "SAVE 20%",
-        showBillingToggle: true,
-        buttonText: "Request Team Demo",
-        subtext: "Unlimited notes for team",
-        features: [
-          "Everything in Attending",
-          "Shared Patient Context",
-          "Team Template Library",
-          "Centralized Billing",
-          "Admin Dashboard",
-        ],
-        variant: "secondary",
-      },
-      {
-        name: "Practice Plus",
-        description: "Advanced solutions for growing clinics.",
-        price: billingCycle === "yearly" ? 75 : 90,
-        period: "Per user/month",
-        isPopular: true,
-        saveText: "SAVE 20%",
-        showBillingToggle: true,
-        buttonText: "Start Practice Trial",
-        subtext: "Up to 50 providers",
-        features: [
-          "Everything in Clinical Team",
-          "Priority API Access",
-          "Custom Security Audit",
-          "On-site Training Option",
-          "Dedicated Account Mgr",
-        ],
-        variant: "primary",
-      },
-      {
-        name: "Enterprise",
-        description: "Organization-wide clinical intelligence.",
-        price: "Custom",
-        buttonText: "Contact Enterprise",
-        subtext: "Large Scale Hospital Systems",
-        features: [
-          "Everything in Practice Plus",
-          "Fleet Management",
-          "White-label Reports",
-          "Custom ML Models",
-          "24/7 Dedicated Support",
-        ],
-        variant: "primary",
-      },
-    ],
-  };
-
-
+  const [openFaq, setOpenFaq] = useState(1);
+  const [openRows, setOpenRows] = useState('documentation');
 
   const faqs = [
-    {
-      question: "Does this work with my specific EMR?",
-      answer:
-        "Yes. PrecisionNote is designed to be EMR-agnostic. We offer direct integrations with major systems like Epic, Cerner, and Athena, alongside a universal 'Smart Paste' which works with any web-based or local EMR.",
-    },
-    {
-      question: "Is my patient's data safe?",
-      answer:
-        "100%. We are fully HIPAA-compliant. We use end-to-end encryption and never store audio files once the clinical note has been successfully generated.",
-    },
-    {
-      question: "How do the 'Credits' work?",
-      answer:
-        "Each consultation uses one credit. Credits are refreshed monthly based on your plan. Unused credits do not roll over, but you can always top up if you have an exceptionally busy month.",
-    },
-    {
-      question: "What is an 'Ambient Note'?",
-      answer:
-        "An ambient note is a clinical document generated purely from the natural conversation between a doctor and patient. You don't need to dictate commands; our AI understands the context and extracts the medical data automatically.",
-    },
-    {
-      question: "How accurate is the medical transcription?",
-      answer:
-        "Our clinical models are trained specifically on medical terminology across 40+ specialties, achieving over 99% accuracy in clinical intent and terminology extraction.",
-    },
-    {
-      question: "Can I edit the notes after they are generated?",
-      answer:
-        "Absolutely. You maintain full clinical control. You can review, edit, and append any note before signing and syncing it to your EMR.",
-    },
-    {
-      question: "Does it understand different accents?",
-      answer:
-        "Yes. Our AI engine is built on diverse linguistic models that accurately process medical consultations in various international and regional accents.",
-    },
+    'Does this work with my specific EMR?',
+    "Is my patient's data safe?",
+    "How do the 'AI Voice Credits' work?",
+    'What is an "Enable Amber"?',
+    'How accurate is the medical transcription?',
+    'Can I edit the notes after they are generated?',
+    'Does it understand different accents?',
+  ];
+
+  const comparisonRows = [
+    ['SOAP & Progress Notes', 'Included', 'Included', 'Included'],
+    ['H&P / Physical Exam', '---', 'Included', 'Included'],
+    ['Discharge & Consult Notes', '---', 'Included', 'Included'],
+    ['Procedure Notes', '---', '---', 'Included'],
+    ['Specialty Templates', 'Basic', '25+ Specs', 'Unlimited'],
+    ['Custom Template Editor', '---', '---', 'Yes'],
   ];
 
   return (
-    <div className="min-h-screen bg-brand-bg font-geist relative overflow-hidden">
+    <div className="min-h-screen bg-[#fafbff] font-geist text-[#040523]">
       <LandingNav />
+      <main className="overflow-hidden">
+        <section className="relative px-6 pb-[80px] pt-[80px]">
+          <div className="pointer-events-none absolute left-[-220px] top-[90px] h-[360px] w-[560px] rounded-full border border-[#d3d8ff]" />
+          <div className="pointer-events-none absolute right-[-220px] top-[110px] h-[360px] w-[560px] rounded-full border border-[#d3d8ff]" />
+          <div className="mx-auto max-w-[1320px]">
+            <div className="mb-10 text-center">
+              <h1 className="mx-auto mb-4 max-w-[930px] text-[60px] font-bold leading-[69px] tracking-[-1.2px]">
+                PrecisionNote for every stage of your practice
+              </h1>
+              <p className="mx-auto max-w-[797px] text-[18px] leading-[27px] text-[#62748e]">
+                From your first residency to heading a department, we provide the clinical intelligence you need to focus on what matters most:
+                your patients.
+              </p>
+            </div>
 
-      {/* Decorative Backgrounds */}
-      <div className="absolute top-0 left-0 w-full h-[1500px] pointer-events-none overflow-hidden">
-        <div className="absolute top-[-5%] left-[-10%] w-[60%] h-[50%] bg-[#5768fd]/10 blur-[180px] rounded-full animate-pulse" />
-        <div className="absolute top-[15%] right-[-15%] w-[50%] h-[50%] bg-[#5768fd]/10 blur-[180px] rounded-full" />
-      </div>
-
-      <main className="pt-32 pb-24 relative z-10">
-        {/* Header Section */}
-        <section className="container-custom text-center mb-24">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-5xl lg:text-7xl font-bold text-brand-navy mb-8 tracking-tight leading-[1.1]"
-          >
-            PrecisionNote for every
-            <br />
-            stage of your practice
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-lg lg:text-xl text-brand-muted max-w-2xl mx-auto mb-12 font-medium leading-relaxed"
-          >
-            From your first residency to leading a department, we provide the
-            clinical intelligence you need to focus on what matters most: your
-            patients.
-          </motion.p>
-
-          {/* Controls */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="flex items-center justify-center gap-4"
-          >
-            {/* Main Category Switcher - Exactly as Figma */}
-            <div className="bg-[#5768fd]/10 p-1 rounded-xl flex items-center border border-[#5768fd]/5">
-              <button
-                onClick={() => setViewMode("individual")}
-                className={`px-6 py-2 rounded-lg text-xs font-bold tracking-wide transition-all ${viewMode === "individual" ? "bg-brand-blue text-white shadow-md" : "text-brand-blue/60 hover:text-brand-blue"}`}
-              >
-                Individual
-              </button>
-              <button
-                onClick={() => setViewMode("teams")}
-                className={`px-6 py-2 rounded-lg text-xs font-bold tracking-wide transition-all ${viewMode === "teams" ? "bg-brand-blue text-white shadow-md" : "text-brand-blue/60 hover:text-brand-blue"}`}
-              >
-                Teams and Enterprise
+            <div className="mb-5 flex items-center justify-center gap-10">
+              <div className="flex h-[42px] items-center gap-3 rounded-lg bg-[#5768fd] p-[10px]">
+                <button className="h-[26px] rounded px-[10px] text-[16px] font-medium text-[#040523] bg-white">Individuals</button>
+                <button className="h-[26px] rounded px-[10px] text-[16px] font-medium text-white">Teams and Enterprise</button>
+              </div>
+              <button className="flex h-[36px] items-center gap-2 rounded-lg border border-[rgba(87,104,253,0.6)] bg-white px-3 shadow-[0px_1px_2px_0px_rgba(0,0,0,0)]">
+                <span className="text-[16px]">USD ($)</span>
+                <ChevronDown className="h-4 w-4" />
               </button>
             </div>
 
-            {/* Currency Selector - Exactly as Figma */}
-            <div className="relative">
-              <button
-                onClick={() => setIsCurrencyOpen(!isCurrencyOpen)}
-                className="flex items-center gap-2 bg-white px-4 py-2.5 rounded-xl border border-brand-border text-xs font-bold text-brand-navy hover:border-brand-blue transition-all shadow-sm"
-              >
-                {activeCurrency.code}
-                <ChevronDown className={`w-3.5 h-3.5 text-brand-muted transition-transform duration-300 ${isCurrencyOpen ? "rotate-180" : ""}`} />
-              </button>
-
-              <AnimatePresence>
-                {isCurrencyOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 5 }}
-                    className="absolute top-full right-0 mt-2 bg-white border border-brand-border rounded-xl shadow-xl z-50 overflow-hidden min-w-[100px]"
-                  >
-                    {currencies.map((c) => (
-                      <button
-                        key={c.code}
-                        onClick={() => {
-                          setCurrencyCode(c.code);
-                          setIsCurrencyOpen(false);
-                        }}
-                        className={`w-full px-4 py-2.5 text-left text-xs font-bold transition-colors hover:bg-brand-bg ${
-                          currencyCode === c.code ? "text-brand-blue bg-blue-50/50" : "text-brand-navy"
-                        }`}
-                      >
-                        {c.code}
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </motion.div>
-        </section>
-
-        {/* Pricing Cards */}
-        <section className="container-custom mb-32">
-          <div className={`grid gap-8 items-stretch ${pricingData[viewMode].length === 1 ? "max-w-md mx-auto" : "lg:grid-cols-3"}`}>
-            {pricingData[viewMode].map((plan: any) => (
-              <PricingCard
-                key={plan.name}
-                name={plan.name}
-                description={plan.description}
-                price={typeof plan.price === "number" ? Math.round(plan.price * activeCurrency.rate) : plan.price}
-                symbol={activeCurrency.symbol}
-                buttonText={plan.buttonText}
-                subtext={plan.subtext}
-                features={plan.features}
-                isPopular={plan.isPopular}
-                saveText={plan.saveText}
-                period={plan.period}
-                buttonVariant={plan.variant}
-                billingCycle={billingCycle}
-                showBillingToggle={plan.showBillingToggle}
-                onBillingToggle={() => setBillingCycle(billingCycle === "yearly" ? "monthly" : "yearly")}
+            <div className="grid grid-cols-1 gap-[19px] lg:grid-cols-3">
+              <PlanCard
+                title="Basic"
+                description="Start for free. No credit card required."
+                price="$0"
+                cta="Get PrecisionNote free"
+                ctaSecondary
+                credits="2K credits per month"
+                intro="Free for everyone"
+                features={['10 Scribe Sessions / Month', 'Standard SOAP Templates', 'HIPAA Secure', 'E-mail Secure']}
               />
-            ))}
-          </div>
-          <p className="text-center text-brand-muted font-bold text-sm mt-12 cursor-pointer hover:text-brand-blue transition-colors flex items-center justify-center gap-2">
-            See more <ChevronDown className="w-4 h-4" />
-          </p>
-        </section>
-
-        <section className="container-custom mb-40">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
-            <h2 className="text-5xl font-bold text-brand-navy tracking-tight">
-              Choose Your Plan
-            </h2>
-            <div className="flex gap-4 overflow-x-auto pb-4 md:pb-0 no-scrollbar">
-              <div className="min-w-[150px] text-center">
-                <p className="text-sm font-bold text-brand-navy mb-3">
-                  The Resident
-                </p>
-                <button className="w-full px-4 py-3 bg-slate-50 border border-brand-border rounded-xl text-[11px] font-bold uppercase text-brand-muted hover:bg-slate-100 transition-colors">
-                  Start for free
-                </button>
-              </div>
-              <div className="min-w-[150px] text-center">
-                <p className="text-sm font-bold text-brand-navy mb-3">
-                  The Attending
-                </p>
-                <button className="w-full px-4 py-3 bg-brand-blue rounded-xl text-[11px] font-bold uppercase text-white shadow-lg shadow-brand-blue/20 hover:opacity-90 transition-all">
-                  Try free for 14 days
-                </button>
-              </div>
-              <div className="min-w-[150px] text-center">
-                <p className="text-sm font-bold text-brand-navy mb-3">
-                  The Chief of Medicine
-                </p>
-                <button className="w-full px-4 py-3 bg-brand-blue rounded-xl text-[11px] font-bold uppercase text-white shadow-lg shadow-brand-blue/20 hover:opacity-90 transition-all">
-                  Contact Sales
-                </button>
-              </div>
+              <PlanCard
+                title="Professional"
+                description="Unlimited scribe sessions for your practice."
+                price="$20"
+                priceSub="Per user/month"
+                cta="Try Free for 14 Days"
+                credits="8K credits per month"
+                intro="Everything in the resident, plus:"
+                badge="Most Popular"
+                showBilling
+                features={['All Specialty Templates', 'Unlimited Exports to EMR', 'Unlimited Amber Handoff Memos', 'Priority AI Processing']}
+                featured
+              />
+              <PlanCard
+                title="Enterprise"
+                description="Custom AI integration for your whole department."
+                price="Custom"
+                cta="Contact Sales"
+                credits="20K credits per month"
+                intro="Everything in the attending, plus:"
+                features={['Bulk Seat Management', 'Custom Specialty Workflows', 'Dedicated Account Manager', 'On-Site Training']}
+              />
             </div>
-          </div>
-
-          <div className="space-y-4">
-            <TableGroup
-              title="Scribe"
-              isOpenDefault={true}
-              rows={[
-                {
-                  label: "Ambient Note Generation",
-                  values: [true, true, true],
-                },
-                {
-                  label: "Multi-speaker recognition",
-                  values: [true, true, true],
-                },
-                {
-                  label: "Scribe mode (Live recording)",
-                  values: [true, true, true],
-                },
-                {
-                  label: "Direct Dictation mode",
-                  values: [true, true, true],
-                },
-              ]}
-            />
-
-            <TableGroup
-              title="Documentation"
-              isOpenDefault={true}
-              rows={[
-                {
-                  label: "Standard SOAP templates",
-                  values: [true, true, true],
-                },
-                {
-                  label: "Custom specialty templates",
-                  values: [false, true, true],
-                },
-                {
-                  label: "Auto-formatting for EMRs",
-                  values: [false, true, true],
-                },
-                {
-                  label: "Draft history & revisions",
-                  values: [false, true, true],
-                },
-              ]}
-            />
-
-            <TableGroup
-              title="Intelligence"
-              isOpenDefault={true}
-              rows={[
-                {
-                  label: "Smart ICD-10 suggestions",
-                  values: [false, true, true],
-                },
-                {
-                  label: "Clinical summary generation",
-                  values: [false, true, true],
-                },
-                {
-                  label: "Insight Dashboard",
-                  values: [false, false, true],
-                },
-                {
-                  label: "Population health metrics",
-                  values: [false, false, true],
-                },
-              ]}
-            />
-
-            <TableGroup
-              title="Admin & Sync"
-              isOpenDefault={true}
-              rows={[
-                {
-                  label: "Universal EMR Sync",
-                  values: [false, true, true],
-                },
-                {
-                  label: "Mobile App Access",
-                  values: [true, true, true],
-                },
-                {
-                  label: "Multi-device syncing",
-                  values: [false, true, true],
-                },
-                {
-                  label: "Team management portal",
-                  values: [false, false, true],
-                },
-              ]}
-            />
-
-            <TableGroup
-              title="Security"
-              isOpenDefault={true}
-              rows={[
-                {
-                  label: "HIPAA Compliant",
-                  values: [true, true, true],
-                },
-                {
-                  label: "SOC2 Type II",
-                  values: [true, true, true],
-                },
-                {
-                  label: "Business Associate Agreement (BAA)",
-                  values: [false, true, true],
-                },
-                {
-                  label: "Identity provider (SSO) integration",
-                  values: [false, false, true],
-                },
-              ]}
-            />
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section className="container-custom mb-40">
-          <div className="grid lg:grid-cols-[1fr_1.5fr] gap-20">
-            <div>
-              <motion.h2
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="text-5xl lg:text-6xl font-bold text-brand-navy mb-8 tracking-[-0.03em] leading-[1]"
-              >
-                Frequently Asked
-                <br />
-                Questions
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="text-xl text-brand-muted font-medium max-w-sm"
-              >
-                Everything you need to know about PrecisionNote.
-              </motion.p>
-            </div>
-            <div className="space-y-4">
-              {faqs.map((faq, i) => (
-                <FAQItem
-                  key={i}
-                  question={faq.question}
-                  answer={faq.answer}
-                  index={i}
-                />
+        <section className="bg-[#e6e9ff] px-6 py-[100px]">
+          <div className="mx-auto max-w-[1320px]">
+            <div className="mb-6 grid grid-cols-[1fr_219px_219px_219px] items-center gap-[93px] border-b border-[#a4a9d7] px-[10px] py-5">
+              <h2 className="text-[40px] font-bold leading-[69px] tracking-[-1.2px]">Choose Your Plan</h2>
+              {['The Resident', 'The Attending', 'The Chief of Medicine'].map((plan, i) => (
+                <div key={plan} className="text-center">
+                  <p className="mb-4 text-[24px] tracking-[-1px]">{plan}</p>
+                  <button className={`w-full rounded-lg px-8 py-3 text-[16px] font-semibold shadow-[0px_4px_14px_0px_rgba(87,104,253,0.35)] ${i === 0 ? 'bg-[#f1f5f9] text-[#040523]' : 'bg-[#5768fd] text-white'}`}>
+                    {i === 0 ? 'Start for free' : i === 1 ? 'Try Free for 14 Days' : 'Contact Sales'}
+                  </button>
+                </div>
               ))}
             </div>
+
+            <FeatureGroup title="Scribe" open={openRows === 'scribe'} onToggle={() => setOpenRows(openRows === 'scribe' ? '' : 'scribe')} />
+            <FeatureGroup title="Documentation" open={openRows === 'documentation'} onToggle={() => setOpenRows(openRows === 'documentation' ? '' : 'documentation')}>
+              {comparisonRows.map((row) => (
+                <div key={row[0]} className="grid h-[90px] grid-cols-[324px_219px_219px_219px] items-center gap-[107px] border-b border-[#a4a9d7] p-5">
+                  <p className="text-[18px]">{row[0]}</p>
+                  {row.slice(1).map((cell) => (
+                    <p key={cell + row[0]} className="text-center text-[18px]">
+                      {cell}
+                    </p>
+                  ))}
+                </div>
+              ))}
+            </FeatureGroup>
+            <FeatureGroup title="Intelligence" open={openRows === 'intelligence'} onToggle={() => setOpenRows(openRows === 'intelligence' ? '' : 'intelligence')} />
+            <FeatureGroup title="Admin & Sync" open={openRows === 'admin'} onToggle={() => setOpenRows(openRows === 'admin' ? '' : 'admin')} />
+            <FeatureGroup title="Security" open={openRows === 'security'} onToggle={() => setOpenRows(openRows === 'security' ? '' : 'security')} />
           </div>
         </section>
 
-        {/* Final CTA Section */}
-        <section className="container-custom mb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-[#FFC738] rounded-[32px] p-10 lg:p-20 text-center relative overflow-hidden group border border-amber-200"
-          >
-            {/* Geometric Background pattern */}
-            <div
-              className="absolute inset-0 opacity-[0.05] pointer-events-none"
-              style={{
-                backgroundImage: `radial-gradient(circle at 1px 1px, black 1px, transparent 0)`,
-                backgroundSize: "32px 32px",
-              }}
-            />
+        <section className="mx-auto flex w-full max-w-[1320px] gap-[22px] px-6 py-[120px]">
+          <div className="w-[645px]">
+            <h3 className="mb-4 text-[40px] font-bold leading-[69px] tracking-[-1.2px]">Frequently Asked Questions</h3>
+            <p className="text-[18px] leading-[27px] text-[#62748e]">Everything you need to know about PrecisionNote.</p>
+          </div>
+          <div className="w-[648px] space-y-3">
+            {faqs.map((q, i) => (
+              <div key={q} className="overflow-hidden rounded-2xl border border-[#d3d8ff] bg-white">
+                <button className="flex w-full items-center justify-between px-4 py-4 text-left" onClick={() => setOpenFaq(openFaq === i ? -1 : i)}>
+                  <span className="text-[20px] leading-[27px]">{q}</span>
+                  {openFaq === i ? <CircleMinus className="h-6 w-6 text-[#5768fd]" /> : <CirclePlus className="h-6 w-6 text-[#5768fd]" />}
+                </button>
+                {openFaq === i && (
+                  <p className="px-4 pb-4 text-[16px] leading-6 text-[#62748e]">
+                    PrecisionNote is built for medical teams with secure, HIPAA-compliant workflows and flexible integrations.
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
 
-            <div className="relative z-10">
-              <motion.h2 className="text-5xl lg:text-7xl font-bold text-brand-navy mb-6 tracking-tight leading-none">
-                Still have questions?
-              </motion.h2>
-              <motion.p className="text-lg lg:text-xl text-brand-navy/60 font-bold mb-12 max-w-2xl mx-auto">
-                Our clinical team is ready to help you find the right plan for
-                your practice.
-              </motion.p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button className="px-10 py-5 bg-brand-navy text-white rounded-full font-bold text-lg flex items-center gap-2 hover:opacity-90 transition-all shadow-xl">
-                  Chat with our clinical team <ArrowRight className="w-5 h-5" />
+        <section className="mx-auto mb-[120px] w-full max-w-[1320px] px-6">
+          <div className="relative overflow-hidden rounded-2xl bg-[#ffc738] px-6 py-14 text-center">
+            <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px)', backgroundSize: '64px 64px' }} />
+            <div className="relative">
+              <h3 className="mb-4 text-[48px] font-semibold leading-[48px] tracking-[-1.5px]">Still have questions?</h3>
+              <p className="mb-6 text-[18px] leading-[27px] text-[rgba(16,21,76,0.7)]">
+                Our clinical team is ready to help you find the right plan for your practice
+              </p>
+              <div className="flex items-center justify-center gap-3">
+                <button className="flex min-h-[40px] items-center gap-2 rounded-lg bg-[#040523] px-6 py-[10px] text-[16px] font-medium text-white">
+                  Chat with our clinical team
+                  <ArrowRight className="h-4 w-4" />
                 </button>
-                <button className="px-10 py-5 bg-white text-brand-navy rounded-full font-bold text-lg flex items-center gap-2 hover:bg-white/90 transition-all border border-black/5">
-                  Book a demo
-                </button>
+                <button className="min-h-[40px] rounded-lg bg-white px-6 py-[10px] text-[16px] font-medium text-[#040523]">Book a demo</button>
               </div>
             </div>
-          </motion.div>
+          </div>
         </section>
       </main>
-
       <LandingFooter />
     </div>
   );
 };
 
-const PricingCard = ({
-  name,
-  price,
-  symbol = "$",
-  description,
-  buttonText,
-  features,
-  isPopular = false,
-  period,
-  subtext,
-  saveText,
-  billingCycle,
-  showBillingToggle,
-  onBillingToggle,
-  buttonVariant = "primary",
-}: any) => (
-  <motion.div
-    whileHover={{ y: -8 }}
-    transition={{ duration: 0.4, ease: "easeOut" }}
-    className={`p-10 rounded-[24px] border flex flex-col relative transition-all duration-300 ${isPopular ? "bg-white border-brand-blue shadow-[0_32px_80px_-16px_rgba(87,104,253,0.1)] z-10" : "bg-white border-brand-border hover:shadow-lg"}`}
-  >
-    {isPopular && (
-      <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#FFC738] text-brand-navy text-[10px] font-bold uppercase tracking-[0.1em] px-5 py-2 rounded-full shadow-md">
-        Most Popular
-      </div>
-    )}
+type PlanCardProps = {
+  title: string;
+  description: string;
+  price: string;
+  priceSub?: string;
+  cta: string;
+  credits: string;
+  intro: string;
+  features: string[];
+  ctaSecondary?: boolean;
+  showBilling?: boolean;
+  featured?: boolean;
+  badge?: string;
+};
 
+const PlanCard = ({ title, description, price, priceSub, cta, credits, intro, features, ctaSecondary, showBilling, featured, badge }: PlanCardProps) => (
+  <article className={`relative rounded-2xl border bg-white px-5 py-[25px] ${featured ? 'border-[#5768fd] shadow-[0px_4px_14px_0px_rgba(87,104,253,0.35)]' : 'border-[#d3d8ff]'}`}>
+    {badge && <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-[#ffd176] px-3 py-[5px] text-[16px]">{badge}</div>}
     <div className="mb-10">
-      <h3 className="text-xl font-bold text-brand-navy mb-2 tracking-tight">
-        {name}
-      </h3>
-      <p className="text-brand-muted text-[14px] font-bold leading-relaxed">
-        {description}
-      </p>
-    </div>
-
-    <div className="mb-10">
-      <div className="flex items-baseline gap-1">
-        <span className="text-6xl font-bold text-brand-navy tracking-tighter">
-          {typeof price === "number" ? (price === 0 ? "0" : `${symbol}${price}`) : price}
-        </span>
-        {period && (
-          <span className="text-brand-muted font-bold text-xs opacity-50 ml-1">
-            {period}
-          </span>
-        )}
+      <h4 className="text-[24px] tracking-[-1px]">{title}</h4>
+      <p className="text-[16px] text-[#64748b]">{description}</p>
+      <div className="mt-4 flex items-end gap-2">
+        <p className="text-[48px] font-semibold leading-[69px] tracking-[-1.2px]">{price}</p>
+        {priceSub && <p className="mb-2 text-[14px] text-[#64748b]">{priceSub}</p>}
       </div>
-
-      {showBillingToggle && (
-        <div className="mt-4 flex items-center gap-3">
-          <div className="p-1 bg-slate-50 rounded-xl inline-flex items-center border border-slate-100">
-            <button
-              onClick={() => billingCycle === "monthly" || onBillingToggle()}
-              className={`px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase transition-all ${billingCycle === "yearly" ? "bg-white text-brand-navy shadow-sm" : "text-brand-muted hover:text-brand-navy"}`}
-            >
-              Yearly
-            </button>
-            <button
-              onClick={() => billingCycle === "yearly" || onBillingToggle()}
-              className={`px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase transition-all ${billingCycle === "monthly" ? "bg-white text-brand-navy shadow-sm" : "text-brand-muted hover:text-brand-navy"}`}
-            >
-              Monthly
-            </button>
+      {showBilling && (
+        <div className="mt-2 flex items-center gap-3">
+          <span className="text-[16px] text-[#64748b]">Billed</span>
+          <div className="flex h-7 items-center gap-1 rounded-full border border-[#afb6fb] bg-[rgba(194,201,254,0.33)] p-[2px]">
+            <span className="rounded-[14px] border border-[#afb6fb] bg-white px-3 text-[16px]">Yearly</span>
+            <span className="px-3 text-[14px] text-[#64748b]">Monthly</span>
           </div>
-          {saveText && (
-            <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-lg border border-emerald-100 uppercase tracking-wider">
-              {saveText}
-            </span>
-          )}
+          <span className="rounded-lg border border-[#007a55] bg-[#edfdf5] px-4 py-[2px] text-[16px] text-[#007a55]">Save $50</span>
         </div>
       )}
     </div>
-
-    <button
-      className={`w-full py-4 rounded-full font-bold text-base mb-6 transition-all ${buttonVariant === "primary" ? "bg-brand-blue text-white shadow-lg shadow-brand-blue/15 hover:opacity-95" : "bg-slate-50 text-brand-navy border border-brand-border hover:bg-slate-100"}`}
-    >
-      {buttonText}
+    <button className={`mb-5 w-full rounded-lg px-8 py-3 text-[16px] font-semibold shadow-[0px_4px_14px_0px_rgba(87,104,253,0.35)] ${ctaSecondary ? 'bg-[#f1f5f9] text-[#040523]' : 'bg-[#5768fd] text-white'}`}>
+      {cta}
     </button>
-
-    {subtext && (
-      <div className="flex items-center justify-center gap-2 mb-8 text-brand-muted/60">
-        <Zap className="w-3.5 h-3.5 text-brand-blue/60 fill-brand-blue/10" />
-        <p className="text-[11px] font-bold uppercase tracking-[0.1em]">
-          {subtext}
-        </p>
-      </div>
-    )}
-
-    <div className="space-y-4 flex-1 pt-8 border-t border-slate-100">
-      <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-brand-navy/30 mb-1">
-        Included in this plan:
-      </p>
-      {features.map((feature: string, i: number) => (
-        <div key={i} className="flex gap-3 items-start group">
-          <div className="mt-0.5 flex items-center justify-center w-5 h-5 rounded-full bg-brand-blue/5 shrink-0 transition-colors">
-            <CheckCircle2 className="w-3.5 h-3.5 text-brand-blue" />
-          </div>
-          <span className="text-[14px] font-bold text-brand-navy/70 leading-snug">
-            {feature}
-          </span>
-        </div>
-      ))}
+    <div className="mb-10 flex items-center gap-2">
+      <Sparkles className="h-4 w-4 text-[#5768fd]" />
+      <p className="text-[14px]">{credits}</p>
     </div>
-
-    <button className="mt-8 text-brand-navy/60 font-bold text-xs flex items-center gap-2 group transition-all hover:text-brand-blue hover:translate-x-1">
-      See full feature list <ArrowRight className="w-3.5 h-3.5" />
-    </button>
-  </motion.div>
+    <div className="border-t border-[#e2e8f0] px-[10px] py-5">
+      <p className="mb-4 text-[18px] font-medium">{intro}</p>
+      <div className="space-y-3">
+        {features.map((feature) => (
+          <div key={feature} className="flex items-center gap-2">
+            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#e6e9ff]">
+              <Check className="h-4 w-4 text-[#5768fd]" />
+            </span>
+            <span className="text-[14px]">{feature}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <button className="mt-4 text-[18px] font-medium">See more</button>
+  </article>
 );
 
-const TableGroup = ({ title, rows, isOpenDefault = false }: any) => {
-  const [isOpen, setIsOpen] = useState(isOpenDefault);
-
-  return (
-    <div className="border-b border-brand-border last:border-0">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full py-6 flex justify-between items-center group"
-      >
-        <span className="text-xl font-bold text-brand-navy group-hover:text-brand-blue transition-colors">
-          {title}
-        </span>
-        <div
-          className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
-        >
-          <ChevronDown className="w-6 h-6 text-brand-muted" />
-        </div>
-      </button>
-
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="overflow-hidden"
-          >
-            <div className="pb-8 space-y-1">
-              {rows.map((row: any, i: number) => (
-                <div
-                  key={i}
-                  className="grid grid-cols-1 md:grid-cols-4 gap-4 py-4 px-4 hover:bg-slate-50 rounded-xl transition-colors items-center"
-                >
-                  <div className="text-[15px] font-bold text-brand-navy/60">
-                    {row.label}
-                  </div>
-                  {row.values.map((val: any, j: number) => (
-                    <div
-                      key={j}
-                      className="text-center font-bold text-[15px] text-brand-navy"
-                    >
-                      {typeof val === "boolean" ? (
-                        val ? (
-                          <CheckCircle2 className="w-5 h-5 text-brand-blue mx-auto" />
-                        ) : (
-                          <span className="text-brand-muted/20">—</span>
-                        )
-                      ) : (
-                        val
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-};
-
-const FAQItem = ({ question, answer, index }: any) => {
-  const [isOpen, setIsOpen] = useState(index === 1);
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.05 }}
-      className={`bg-white border rounded-[16px] overflow-hidden transition-all duration-300 ${isOpen ? "border-brand-blue/20 shadow-lg" : "border-brand-border hover:border-brand-blue/10 shadow-sm"}`}
-    >
-      <button
-        className="w-full p-6 text-left flex justify-between items-center gap-4 group"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <span className="text-[17px] font-bold text-brand-navy leading-tight tracking-tight">
-          {question}
-        </span>
-        <div
-          className={`shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 ${isOpen ? "bg-brand-blue border-brand-blue text-white rotate-180" : "bg-white border-brand-border text-brand-muted"}`}
-        >
-          <ChevronDown className="w-4 h-4" />
-        </div>
-      </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            <div className="p-6 pt-0 text-[15px] text-brand-muted/70 leading-relaxed font-bold">
-              {answer}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-};
+const FeatureGroup = ({ title, open, onToggle, children }: { title: string; open: boolean; onToggle: () => void; children?: React.ReactNode }) => (
+  <div className="mb-6 rounded-lg bg-[#e6e9ff]">
+    <button onClick={onToggle} className="flex w-full items-center justify-between px-5 py-[30px]">
+      <span className="text-[24px] font-semibold">{title}</span>
+      {open ? <ChevronUp className="h-8 w-8" /> : <ChevronDown className="h-8 w-8" />}
+    </button>
+    {open && <div>{children}</div>}
+  </div>
+);
 
 export default PricingPage;

@@ -3,27 +3,27 @@ const checkIconPhone = 'https://www.figma.com/api/mcp/asset/6cf0d600-226c-4081-9
 
 const DocumentationSection = () => {
   return (
-    <section className="bg-[#f9f9f9] py-24">
-      <div className="container-custom font-geist">
-        <div className="mx-auto mb-10 max-w-[748px] text-center">
-          <h2 className="mb-4 text-[42px] font-semibold tracking-[-1.5px] text-[#040523] md:text-[56px] md:leading-[1.1]">
+    <section className="relative bg-[#f9f9f9] px-6 py-[100px] md:px-[60px]">
+      <div className="mx-auto flex w-full max-w-[1165px] flex-col items-center gap-10 font-geist">
+        <div className="flex w-full max-w-[748px] flex-col items-center gap-[15px] text-center">
+          <h2 className="text-[42px] font-semibold leading-[1.1] tracking-[-1.5px] text-[#040523] md:text-[56px] md:leading-[48px]">
             Documentation was never your job
           </h2>
           <p className="text-[18px] leading-[27px] text-[#64748b]">
-            Advanced AI that understands medical context, not just words.
+            You trained to heal, not to type. Here's what changes with PrecisionNote.
           </p>
         </div>
 
-        <div className="mx-auto grid max-w-[1120px] grid-cols-1 gap-8 md:grid-cols-3">
-          <article className="flex min-h-[486px] flex-col rounded-2xl border border-[rgba(105,107,124,0.2)] bg-white p-5 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_0px_rgba(0,0,0,0.1)]">
-            <div className="mb-6 space-y-5 rounded-lg border border-[#e2e8f0] bg-[#e2edf8] p-4">
+        <div className="flex w-full flex-col items-center gap-8 lg:flex-row lg:items-start lg:gap-8">
+          <article className="flex h-[486px] w-full max-w-[351px] flex-col gap-6 rounded-2xl border border-[rgba(105,107,124,0.2)] bg-white p-5 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_0px_rgba(0,0,0,0.1)]">
+            <div className="flex w-full flex-col gap-5 rounded-lg border border-[#e2e8f0] bg-[#e2edf8] p-4 shadow-[0px_1px_2px_0px_rgba(0,0,0,0)]">
               <div className="flex items-start gap-2">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#535c68]" />
                 <p className="text-[14px] leading-5 text-[#45556c]">
                   58yo M, chest pain radiating to left arm. Duration: 4 hours. PMH includes HTN, DM Type 2.
                 </p>
               </div>
-              <div className="rounded-lg border-l-4 border-[#f59e0b] bg-[#fff7ed] px-4 py-3">
+              <div className="flex h-[83px] w-full flex-col gap-1 rounded-[8px] border-l-4 border-[#f59e0b] bg-[#fff7ed] pb-0 pl-4 pr-3 pt-3">
                 <div className="mb-1 flex items-center gap-2">
                   <span className="h-2 w-2 rounded-full bg-[#fe9a00]" />
                   <span className="font-mono text-[12px] font-semibold uppercase tracking-[1px] text-[#bb4d00]">Memo</span>
@@ -34,23 +34,23 @@ const DocumentationSection = () => {
               </div>
             </div>
 
-            <h3 className="mb-2 text-[30px] font-semibold leading-[1.2] tracking-[-0.6px] text-[#040523] md:text-[32px]">
+            <h3 className="text-[32px] font-semibold leading-[1.2] tracking-[-0.6px] text-[#040523]">
               AI captures the words; you capture the intent.
             </h3>
-            <p className="mb-6 text-[14px] leading-5 text-[#64748b]">
+            <p className="text-[14px] leading-5 text-[#64748b]">
               Context-aware annotations let you add clinical insights without breaking your workflow.
             </p>
 
-            <div className="mt-auto flex items-center gap-2 rounded-lg bg-[#f1f2fe] p-3">
-              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full">
+            <div className="mt-auto flex h-[60px] w-full items-center gap-2 rounded-lg bg-[#f1f2fe] p-[10px]">
+              <span className="inline-flex h-5 w-5 items-center justify-center">
                 <img src={checkIcon} alt="" className="h-4 w-4" />
               </span>
               <p className="font-mono text-[14px] leading-5 text-[#5768fd]">Specialty templates: Cardiology, Surgery, IM</p>
             </div>
           </article>
 
-          <article className="flex min-h-[486px] flex-col rounded-2xl border border-[rgba(105,107,124,0.2)] bg-white p-5 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_0px_rgba(0,0,0,0.1)]">
-            <div className="mb-6 space-y-3 rounded-lg border border-[#e2e8f0] bg-[#e2edf8] p-4">
+          <article className="flex h-[486px] w-full max-w-[351px] flex-col gap-6 rounded-2xl border border-[rgba(105,107,124,0.2)] bg-white p-5 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_0px_rgba(0,0,0,0.1)]">
+            <div className="flex w-full flex-col gap-3 rounded-lg border border-[#e2e8f0] bg-[#e2edf8] p-4">
               <p className="text-[14px] font-semibold uppercase leading-5 text-[#45556c]">Assessment</p>
               <div className="flex items-start gap-2">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#535c68]" />
@@ -69,17 +69,17 @@ const DocumentationSection = () => {
               </div>
             </div>
 
-            <h3 className="mb-2 text-[30px] font-semibold leading-[1.2] tracking-[-0.6px] text-[#040523] md:text-[32px]">Actually speaks Medic.</h3>
+            <h3 className="text-[32px] font-semibold leading-[1.2] tracking-[-0.6px] text-[#040523]">Actually speaks Medic.</h3>
             <p className="text-[14px] leading-5 text-[#64748b]">
               Context-aware annotations let you add clinical insights without breaking your workflow.
             </p>
           </article>
 
-          <article className="flex min-h-[486px] flex-col rounded-2xl border border-[rgba(105,107,124,0.2)] bg-white p-5 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_0px_rgba(0,0,0,0.1)]">
-            <div className="mb-6 flex justify-center">
+          <article className="flex h-[486px] w-full max-w-[351px] flex-col gap-6 rounded-2xl border border-[rgba(105,107,124,0.2)] bg-white p-5 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_0px_rgba(0,0,0,0.1)]">
+            <div className="flex w-full justify-center">
               <div className="relative h-[320px] w-[192px] rounded-[24px] border-8 border-[#1e2030] bg-[#040523] p-2 shadow-[0px_20px_60px_0px_rgba(4,5,35,0.3)]">
                 <div className="h-full w-full bg-[#fafbff] px-4 pt-4">
-                  <div className="mb-10 flex items-center justify-between">
+                  <div className="mb-[40px] flex items-center justify-between">
                     <div className="flex items-center gap-1.5">
                       <span className="h-1.5 w-1.5 rounded-full bg-[#5768fd]" />
                       <span className="text-[8px] font-bold text-[#314158]">PrecisionNote</span>
@@ -87,7 +87,7 @@ const DocumentationSection = () => {
                     <span className="font-mono text-[8px] text-[#90a1b9]">14:23</span>
                   </div>
 
-                  <div className="mb-8 flex flex-col items-center">
+                  <div className="flex flex-col items-center">
                     <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#10b981] to-[#059669]">
                       <img src={checkIconPhone} alt="" className="h-8 w-8" />
                     </div>
@@ -107,8 +107,8 @@ const DocumentationSection = () => {
               </div>
             </div>
 
-            <h3 className="mb-2 text-[30px] font-semibold leading-[1.2] tracking-[-0.6px] text-[#040523] md:text-[32px]">
-              AI captures the words; you capture the intent.
+            <h3 className="text-[32px] font-semibold leading-[1.2] tracking-[-0.6px] text-[#040523]">
+              Automatic sync, guaranteed.
             </h3>
             <p className="text-[14px] leading-5 text-[#64748b]">
               Context-aware annotations let you add clinical insights without breaking your workflow.
