@@ -304,46 +304,42 @@ const PricingPage = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="group relative overflow-hidden rounded-[32px] bg-[#ffcf63] px-8 py-24 text-center shadow-xl shadow-yellow-500/10"
+            className="relative h-[391px] overflow-hidden rounded-[40px] px-8 py-20 text-center shadow-2xl flex flex-col items-center justify-center bg-[#ffcc4d]"
           >
-            {/* Mosaic Background Tile Pattern */}
-            <div className="absolute inset-0 z-0 opacity-40">
-              <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <pattern id="mosaic" width="220" height="220" patternUnits="userSpaceOnUse">
-                    <rect width="110" height="220" fill="#ffc130" />
-                    <rect x="110" width="110" height="220" fill="#ffd36b" />
-                    <rect width="220" height="110" fill="white" fillOpacity="0.05" />
-                  </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#mosaic)" />
-              </svg>
+            {/* Exactly Matching Background Stripes */}
+            <div className="absolute inset-0 z-0 flex whitespace-nowrap opacity-60">
+              {[...Array(10)].map((_, i) => (
+                <div 
+                  key={i} 
+                  className="h-full flex-grow"
+                  style={{
+                    backgroundColor: i % 3 === 0 ? '#ffda7d' : i % 3 === 1 ? '#ffd45e' : '#ffcc40'
+                  }}
+                />
+              ))}
             </div>
-            
-            {/* Bottom Glow */}
-            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-yellow-400/20 to-transparent" />
 
             <div className="relative z-10">
-              <h3 className="mb-6 text-[64px] font-bold leading-[64px] tracking-[-2.5px] text-[#040523]">
+              <h3 className="mb-4 text-[60px] font-bold leading-[60px] tracking-[-2.5px] text-[#040523]">
                 Still have questions?
               </h3>
-              <p className="mx-auto mb-12 max-w-[700px] text-[20px] leading-[32px] text-[#040523]/80 font-medium tracking-tight">
+              <p className="mx-auto mb-10 max-w-[700px] text-[20px] leading-[32px] text-[#040523]/70 font-medium">
                 Our clinical team is ready to help you find the right plan for your practice
               </p>
               
-              <div className="flex flex-wrap items-center justify-center gap-5">
+              <div className="flex flex-wrap items-center justify-center gap-4">
                 <motion.button 
-                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
-                  className="group flex min-h-[64px] items-center gap-3 rounded-[20px] bg-gradient-to-r from-[#040523] to-[#3b4fe8] px-10 py-5 text-[18px] font-bold text-white shadow-2xl shadow-[#040523]/30 transition-all hover:shadow-[#3b4fe8]/50"
+                  className="flex min-h-[64px] items-center gap-3 rounded-[20px] bg-gradient-to-r from-[#040523] to-[#3b4fe8] px-10 py-5 text-[18px] font-bold text-white shadow-[0px_20px_40px_-12px_rgba(4,5,35,0.4)]"
                 >
-                   Chat with our clinical team
-                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  Chat with our clinical team
+                  <ArrowRight className="h-5 w-5" />
                 </motion.button>
                 <motion.button 
-                  whileHover={{ scale: 1.05, backgroundColor: "#fff" }}
+                  whileHover={{ scale: 1.05, backgroundColor: "#fffef0" }}
                   whileTap={{ scale: 0.98 }}
-                  className="min-h-[64px] rounded-[20px] border border-[#d4a841]/30 bg-[#fff5d9]/60 px-10 py-5 text-[18px] font-bold text-[#040523] shadow-lg shadow-black/5 transition-all"
+                  className="min-h-[64px] rounded-[20px] border border-[rgba(4,5,35,0.1)] bg-[#fef3d1] px-10 py-5 text-[18px] font-bold text-[#040523] shadow-lg shadow-black/5"
                 >
                   Book a Demo
                 </motion.button>
