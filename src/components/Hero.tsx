@@ -19,9 +19,9 @@ const Hero = () => {
         <div className="grid items-center gap-[40px] lg:grid-cols-2">
           <div className="flex max-w-[649px] flex-col gap-[40px]">
             <div className="flex flex-col gap-[24px]">
-              <div className="inline-flex h-[29px] items-center gap-[8px] rounded-full border border-[#cfd4ff] bg-[#edefff] p-[10px]">
+              <div className="inline-flex items-center gap-[8px] rounded-full border border-[#cfd4ff] bg-[#edefff] px-[12px] py-[6px]">
                 <div className="h-[6px] w-[6px] rounded-full bg-[#5768fd] opacity-60" />
-                <p className="font-mono text-[12px] leading-[16px] text-[#5768fd]">
+                <p className="whitespace-nowrap font-mono text-[12px] leading-none text-[#5768fd]">
                   100% HIPAA Compliant · Ambient AI Scribe
                 </p>
               </div>
