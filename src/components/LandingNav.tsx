@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+
+const logoMark = 'https://www.figma.com/api/mcp/asset/6d576040-17cc-4549-9670-635bbf683399';
 
 const LandingNav = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -24,30 +26,30 @@ const LandingNav = () => {
   ];
 
   return (
-    <nav 
-      className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 backdrop-blur-lg border-b border-brand-border py-3' : 'bg-white border-b border-brand-border py-4'
+    <nav
+      className={`sticky top-0 left-0 right-0 z-50 border-b border-brand-border bg-white transition-all duration-300 ${
+        isScrolled ? 'shadow-[0_1px_2px_rgba(0,0,0,0.04)]' : ''
       }`}
     >
       <div className="container-custom flex items-center justify-between gap-8">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 cursor-pointer">
-          <div className="w-9 h-9 bg-brand-blue rounded-md flex items-center justify-center">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 12H7L9 18L13 6L15 12H20" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+        <Link to="/" className="flex cursor-pointer items-center gap-[6px]">
+          <div className="h-[46px] w-[35px]">
+            <img src={logoMark} alt="PrecisionNote logo" className="h-full w-full" />
           </div>
-          <span className="text-[32px] font-semibold text-brand-blue tracking-[1px] leading-none">PrecisionNote</span>
+          <span className="text-[22.76px] font-semibold leading-[22.76px] tracking-[1px] text-brand-blue">
+            PrecisionNote
+          </span>
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden lg:flex items-center gap-6">
+        <div className="hidden items-center gap-6 text-[16px] text-[#45556c] lg:flex">
           {navLinks.map((link) => (
             link.href.startsWith('/#') ? (
               <a 
                 key={link.name} 
                 href={link.href}
-                className="text-[16px] font-normal text-[#45556c] hover:text-brand-blue transition-colors"
+                className="font-normal leading-[24px] text-[#45556c] transition-colors hover:text-brand-blue"
               >
                 {link.name}
               </a>
@@ -64,11 +66,11 @@ const LandingNav = () => {
         </div>
 
         {/* Desktop CTAs */}
-        <div className="hidden lg:flex items-center gap-3">
-          <button className="text-[16px] font-medium text-brand-navy px-6 py-2.5 bg-[#F1F5F9] border border-brand-border rounded-lg hover:bg-slate-200 transition-colors">
+        <div className="hidden items-center gap-3 lg:flex">
+          <button className="min-h-[40px] rounded-lg border border-brand-border bg-[#f1f5f9] px-6 py-[10px] text-[16px] font-medium text-[#040523] transition-colors hover:bg-slate-200">
             Sign In
           </button>
-          <button className="bg-brand-blue text-white text-[16px] font-medium px-6 py-2.5 rounded-lg shadow-lg shadow-brand-blue/20">
+          <button className="min-h-[40px] rounded-lg bg-brand-blue px-6 py-[10px] text-[16px] font-medium text-white shadow-[0px_4px_14px_0px_rgba(87,104,253,0.35)]">
             Try Free for 14 Days
           </button>
         </div>
