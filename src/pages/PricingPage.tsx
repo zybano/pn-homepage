@@ -3,9 +3,36 @@ import { ArrowRight, Check, ChevronDown, ChevronUp, CircleMinus, CirclePlus, Spa
 import LandingFooter from '../components/LandingFooter';
 import LandingNav from '../components/LandingNav';
 
+type Currency = 'USD' | 'NGN';
+type BillingCycle = 'monthly' | 'yearly';
+
+interface PriceInfo {
+  monthly: number;
+  yearly: number;
+  saveAmount: number;
+  symbol: string;
+}
+
+const pricingData: Record<Currency, Record<string, PriceInfo>> = {
+  USD: {
+    Basic: { monthly: 0, yearly: 0, saveAmount: 0, symbol: '$' },
+    Professional: { monthly: 20, yearly: 190, saveAmount: 50, symbol: '$' },
+    Enterprise: { monthly: 0, yearly: 0, saveAmount: 0, symbol: '$' }
+  },
+  NGN: {
+    Basic: { monthly: 0, yearly: 0, saveAmount: 0, symbol: '₦' },
+    Professional: { monthly: 30000, yearly: 285000, saveAmount: 75000, symbol: '₦' },
+    Enterprise: { monthly: 0, yearly: 0, saveAmount: 0, symbol: '₦' }
+  }
+};
+
 const PricingPage = () => {
   const [openFaq, setOpenFaq] = useState(1);
   const [openRows, setOpenRows] = useState('documentation');
+  const [currency, setCurrency] = useState<Currency>('USD');
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>('yearly');
+  const [isCurrencyOpen, setIsCurrencyOpen] = useState(false);
+  const [activeSegment, setActiveSegment] = useState<'individuals' | 'teams'>('individuals');
 
   const faqs = [
     'Does this work with my specific EMR?',
@@ -26,6 +53,10 @@ const PricingPage = () => {
     ['Custom Template Editor', '---', '---', 'Yes'],
   ];
 
+  const toggleBilling = () => {
+    setBillingCycle(prev => prev === 'monthly' ? 'yearly' : 'monthly');
+  };
+
   return (
     <div className="min-h-screen bg-[#fafbff] font-geist text-[#040523]">
       <LandingNav />
@@ -45,32 +76,70 @@ const PricingPage = () => {
             </div>
 
             <div className="mb-5 flex items-center justify-center gap-10">
-              <div className="flex h-[42px] items-center gap-3 rounded-lg bg-[#5768fd] p-[10px]">
-                <button className="h-[26px] rounded px-[10px] text-[16px] font-medium text-[#040523] bg-white">Individuals</button>
-                <button className="h-[26px] rounded px-[10px] text-[16px] font-medium text-white">Teams and Enterprise</button>
+              <div className="flex h-[42px] items-center gap-1 rounded-lg bg-[#5768fd] p-[4px]">
+                <button 
+                  onClick={() => setActiveSegment('individuals')}
+                  className={`h-[34px] rounded-[6px] px-4 text-[16px] font-medium transition-colors ${activeSegment === 'individuals' ? 'bg-white text-[#040523]' : 'text-white'}`}
+                >
+                  Individuals
+                </button>
+                <button 
+                  onClick={() => setActiveSegment('teams')}
+                  className={`h-[34px] rounded-[6px] px-4 text-[16px] font-medium transition-colors ${activeSegment === 'teams' ? 'bg-white text-[#040523]' : 'text-white'}`}
+                >
+                  Teams and Enterprise
+                </button>
               </div>
-              <button className="flex h-[36px] items-center gap-2 rounded-lg border border-[rgba(87,104,253,0.6)] bg-white px-3 shadow-[0px_1px_2px_0px_rgba(0,0,0,0)]">
-                <span className="text-[16px]">USD ($)</span>
-                <ChevronDown className="h-4 w-4" />
-              </button>
+              
+              <div className="relative">
+                <button 
+                  onClick={() => setIsCurrencyOpen(!isCurrencyOpen)}
+                  className="flex h-[36px] items-center gap-2 rounded-lg border border-[rgba(87,104,253,0.6)] bg-white px-3 shadow-[0px_1px_2px_0px_rgba(0,0,0,0)]"
+                >
+                  <span className="text-[16px]">{currency} ({currency === 'USD' ? '$' : '₦'})</span>
+                  <ChevronDown className={`h-4 w-4 transition-transform ${isCurrencyOpen ? 'rotate-180' : ''}`} />
+                </button>
+                
+                {isCurrencyOpen && (
+                  <div className="absolute right-0 top-[40px] z-20 w-[120px] overflow-hidden rounded-lg border border-[#d3d8ff] bg-white shadow-lg">
+                    <button 
+                      onClick={() => { setCurrency('USD'); setIsCurrencyOpen(false); }}
+                      className="w-full px-4 py-2 text-left text-[16px] hover:bg-[#f3f4ff]"
+                    >
+                      USD ($)
+                    </button>
+                    <button 
+                      onClick={() => { setCurrency('NGN'); setIsCurrencyOpen(false); }}
+                      className="w-full px-4 py-2 text-left text-[16px] hover:bg-[#f3f4ff]"
+                    >
+                      NGN (₦)
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="grid grid-cols-1 gap-[19px] lg:grid-cols-3">
               <PlanCard
                 title="Basic"
                 description="Start for free. No credit card required."
-                price="$0"
+                price="0"
+                currencySymbol={pricingData[currency].Basic.symbol}
                 cta="Get PrecisionNote free"
                 ctaSecondary
                 credits="2K credits per month"
                 intro="Free for everyone"
                 features={['10 Scribe Sessions / Month', 'Standard SOAP Templates', 'HIPAA Secure', 'E-mail Secure']}
+                billingCycle={billingCycle}
+                onBillingToggle={toggleBilling}
               />
               <PlanCard
                 title="Professional"
                 description="Unlimited scribe sessions for your practice."
-                price="$20"
-                priceSub="Per user/month"
+                price={billingCycle === 'monthly' ? pricingData[currency].Professional.monthly.toLocaleString() : pricingData[currency].Professional.yearly.toLocaleString()}
+                priceSub={billingCycle === 'monthly' ? "Per user/month" : "Per user/year"}
+                currencySymbol={pricingData[currency].Professional.symbol}
+                saveAmount={pricingData[currency].Professional.saveAmount}
                 cta="Try Free for 14 Days"
                 credits="8K credits per month"
                 intro="Everything in the resident, plus:"
@@ -78,6 +147,8 @@ const PricingPage = () => {
                 showBilling
                 features={['All Specialty Templates', 'Unlimited Exports to EMR', 'Unlimited Amber Handoff Memos', 'Priority AI Processing']}
                 featured
+                billingCycle={billingCycle}
+                onBillingToggle={toggleBilling}
               />
               <PlanCard
                 title="Enterprise"
@@ -86,7 +157,10 @@ const PricingPage = () => {
                 cta="Contact Sales"
                 credits="20K credits per month"
                 intro="Everything in the attending, plus:"
+                showBilling
                 features={['Bulk Seat Management', 'Custom Specialty Workflows', 'Dedicated Account Manager', 'On-Site Training']}
+                billingCycle={billingCycle}
+                onBillingToggle={toggleBilling}
               />
             </div>
           </div>
@@ -176,6 +250,8 @@ type PlanCardProps = {
   description: string;
   price: string;
   priceSub?: string;
+  currencySymbol?: string;
+  saveAmount?: number;
   cta: string;
   credits: string;
   intro: string;
@@ -184,61 +260,87 @@ type PlanCardProps = {
   showBilling?: boolean;
   featured?: boolean;
   badge?: string;
+  billingCycle: BillingCycle;
+  onBillingToggle: () => void;
 };
 
-const PlanCard = ({ title, description, price, priceSub, cta, credits, intro, features, ctaSecondary, showBilling, featured, badge }: PlanCardProps) => (
-  <article className={`relative rounded-2xl border bg-white px-5 py-[25px] ${featured ? 'border-[#5768fd] shadow-[0px_4px_14px_0px_rgba(87,104,253,0.35)]' : 'border-[#d3d8ff]'}`}>
-    {badge && <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-[#ffd176] px-3 py-[5px] text-[16px]">{badge}</div>}
-    <div className="mb-10">
-      <h4 className="text-[24px] tracking-[-1px]">{title}</h4>
+const PlanCard = ({ title, description, price, priceSub, currencySymbol, saveAmount, cta, credits, intro, features, ctaSecondary, showBilling, featured, badge, billingCycle, onBillingToggle }: PlanCardProps) => (
+  <article className={`relative flex flex-col rounded-2xl border bg-white px-5 py-[25px] ${featured ? 'border-[#5768fd] shadow-[0px_4px_14px_0px_rgba(87,104,253,0.35)]' : 'border-[#d3d8ff]'}`}>
+    {badge && <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-[#ffd176] px-3 py-[5px] text-[16px] font-medium shadow-sm">{badge}</div>}
+    <div className="mb-8">
+      <h4 className="text-[24px] font-bold tracking-[-1px]">{title}</h4>
       <p className="text-[16px] text-[#64748b]">{description}</p>
-      <div className="mt-4 flex items-end gap-2">
-        <p className="text-[48px] font-semibold leading-[69px] tracking-[-1.2px]">{price}</p>
-        {priceSub && <p className="mb-2 text-[14px] text-[#64748b]">{priceSub}</p>}
+      <div className="mt-4 flex items-baseline gap-1">
+        <p className="text-[48px] font-bold leading-[60px] tracking-[-1.2px]">
+          {price === 'Custom' ? '' : currencySymbol}{price}
+        </p>
+        {priceSub && price !== 'Custom' && (
+          <p className="text-[14px] text-[#62748e]">{priceSub}</p>
+        )}
       </div>
       {showBilling && (
-        <div className="mt-2 flex items-center gap-3">
-          <span className="text-[16px] text-[#64748b]">Billed</span>
-          <div className="flex h-7 items-center gap-1 rounded-full border border-[#afb6fb] bg-[rgba(194,201,254,0.33)] p-[2px]">
-            <span className="rounded-[14px] border border-[#afb6fb] bg-white px-3 text-[16px]">Yearly</span>
-            <span className="px-3 text-[14px] text-[#64748b]">Monthly</span>
+        <div className="mt-4 flex flex-wrap items-center gap-3">
+          <span className="text-[16px] font-medium text-[#62748e]">Billed</span>
+          <div className="flex h-8 items-center rounded-full border border-[#afb6fb] bg-[#f0f2ff] p-1">
+            <button 
+              onClick={() => billingCycle !== 'yearly' && onBillingToggle()}
+              className={`h-full rounded-full px-4 text-[14px] font-medium transition-all ${billingCycle === 'yearly' ? 'bg-white text-[#040523] shadow-sm' : 'text-[#64748b]'}`}
+            >
+              Yearly
+            </button>
+            <button 
+              onClick={() => billingCycle !== 'monthly' && onBillingToggle()}
+              className={`h-full rounded-full px-4 text-[14px] font-medium transition-all ${billingCycle === 'monthly' ? 'bg-white text-[#040523] shadow-sm' : 'text-[#64748b]'}`}
+            >
+              Monthly
+            </button>
           </div>
-          <span className="rounded-lg border border-[#007a55] bg-[#edfdf5] px-4 py-[2px] text-[16px] text-[#007a55]">Save $50</span>
+          {billingCycle === 'yearly' && saveAmount && saveAmount > 0 && (
+            <span className="rounded-lg border border-[#007a55] bg-[#edfdf5] px-3 py-1 text-[14px] font-semibold text-[#007a55]">
+              Save {currencySymbol}{saveAmount}
+            </span>
+          )}
         </div>
       )}
     </div>
-    <button className={`mb-5 w-full rounded-lg px-8 py-3 text-[16px] font-semibold shadow-[0px_4px_14px_0px_rgba(87,104,253,0.35)] ${ctaSecondary ? 'bg-[#f1f5f9] text-[#040523]' : 'bg-[#5768fd] text-white'}`}>
-      {cta}
-    </button>
-    <div className="mb-10 flex items-center gap-2">
-      <Sparkles className="h-4 w-4 text-[#5768fd]" />
-      <p className="text-[14px]">{credits}</p>
-    </div>
-    <div className="border-t border-[#e2e8f0] px-[10px] py-5">
-      <p className="mb-4 text-[18px] font-medium">{intro}</p>
-      <div className="space-y-3">
-        {features.map((feature) => (
-          <div key={feature} className="flex items-center gap-2">
-            <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#e6e9ff]">
-              <Check className="h-4 w-4 text-[#5768fd]" />
-            </span>
-            <span className="text-[14px]">{feature}</span>
-          </div>
-        ))}
+    
+    <div className="mt-auto">
+      <button className={`mb-5 w-full rounded-lg px-8 py-3 text-[16px] font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] shadow-[0px_4px_14px_0px_rgba(87,104,253,0.35)] ${ctaSecondary ? 'bg-[#f1f5f9] text-[#040523] hover:bg-[#e2e8f0]' : 'bg-[#5768fd] text-white hover:bg-[#4a5af7]'}`}>
+        {cta}
+      </button>
+      <div className="mb-6 flex items-center gap-2">
+        <Sparkles className="h-4 w-4 text-[#5768fd]" />
+        <p className="text-[14px] font-medium">{credits}</p>
       </div>
+      <div className="border-t border-[#e2e8f0] px-[10px] py-6">
+        <p className="mb-4 text-[18px] font-bold">{intro}</p>
+        <div className="space-y-3">
+          {features.map((feature) => (
+            <div key={feature} className="flex items-start gap-3">
+              <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#e6e9ff]">
+                <Check className="h-4 w-4 text-[#5768fd]" />
+              </span>
+              <span className="text-[15px] leading-6 text-[#10154c]">{feature}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <button className="mt-4 flex items-center gap-1 text-[18px] font-bold text-[#040523] hover:underline">
+        See more
+      </button>
     </div>
-    <button className="mt-4 text-[18px] font-medium">See more</button>
   </article>
 );
 
 const FeatureGroup = ({ title, open, onToggle, children }: { title: string; open: boolean; onToggle: () => void; children?: React.ReactNode }) => (
-  <div className="mb-6 rounded-lg bg-[#e6e9ff]">
-    <button onClick={onToggle} className="flex w-full items-center justify-between px-5 py-[30px]">
-      <span className="text-[24px] font-semibold">{title}</span>
-      {open ? <ChevronUp className="h-8 w-8" /> : <ChevronDown className="h-8 w-8" />}
+  <div className="mb-6 overflow-hidden rounded-xl bg-[#e6e9ff]">
+    <button onClick={onToggle} className="flex w-full items-center justify-between px-6 py-6 transition-colors hover:bg-[#dce0ff]">
+      <span className="text-[24px] font-bold tracking-[-0.5px]">{title}</span>
+      {open ? <ChevronUp className="h-7 w-7 text-[#040523]" /> : <ChevronDown className="h-7 w-7 text-[#040523]" />}
     </button>
-    {open && <div>{children}</div>}
+    {open && <div className="border-t border-[#a4a9d7] bg-[#f8f9ff]">{children}</div>}
   </div>
 );
 
 export default PricingPage;
+
