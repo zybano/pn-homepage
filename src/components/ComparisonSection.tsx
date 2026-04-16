@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { XCircle, CheckCircle2, Minus, Plus } from "lucide-react";
+import { XCircle, CheckCircle2 } from "lucide-react";
 
 const ComparisonSection = () => {
   const statusQuo = [
@@ -20,17 +20,14 @@ const ComparisonSection = () => {
   ];
 
   return (
-    <section
-      id="transformation"
-      className="py-32 px-4 md:px-0 bg-[#F9F7F1]/80 relative overflow-hidden"
-    >
+    <section id="transformation" className="relative overflow-hidden bg-[#fdf2dd] px-4 py-24 md:px-0">
       <div className="container-custom relative z-10">
-        <div className="text-center max-w-4xl mx-auto mb-24">
+        <div className="mx-auto mb-14 max-w-4xl text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-[48px] md:text-[80px] font-bold mb-10 text-[#040523] tracking-tighter leading-[1.1]"
+            className="mb-4 text-[40px] font-semibold leading-[1.2] tracking-[-1.5px] text-[#040523] md:text-[48px]"
           >
             Documentation was never your job
           </motion.h2>
@@ -39,39 +36,39 @@ const ComparisonSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-xl lg:text-2xl text-slate-500 font-bold"
+            className="text-[18px] text-[#64748b]"
           >
             You trained to heal, not to type. Here's what changes with
             PrecisionNote.
           </motion.p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch mb-24">
+        <div className="mb-8 grid items-stretch gap-6 lg:grid-cols-2">
           {/* Status Quo */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-white rounded-[40px] p-10 lg:p-14 border border-slate-100 relative overflow-hidden group shadow-sm"
+            className="relative overflow-hidden rounded-2xl border border-[rgba(203,213,225,0.6)] bg-white p-8"
           >
             <div className="relative z-10">
-              <div className="flex items-center gap-2 mb-8">
+              <div className="mb-4 flex items-center gap-1">
                 <div className="w-2 h-2 rounded-full bg-slate-300" />
-                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                <span className="font-mono text-[12px] uppercase tracking-[1px] text-[#90a1b9]">
                   Before
                 </span>
               </div>
-              <h3 className="text-3xl lg:text-4xl font-bold text-[#040523] mb-12">
+              <h3 className="mb-6 text-[38px] font-semibold text-[#64748b] md:text-[40px]">
                 The Status Quo.
               </h3>
 
-              <ul className="space-y-6">
+              <ul className="space-y-4">
                 {statusQuo.map((item, i) => (
-                  <li key={i} className="flex items-center gap-4">
-                    <div className="w-6 h-6 rounded-full bg-slate-50 flex items-center justify-center flex-shrink-0 border border-slate-100">
-                      <XCircle className="w-3.5 h-3.5 text-slate-300" />
+                  <li key={i} className="flex items-center gap-3">
+                    <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[#f1f5f9]">
+                      <XCircle className="h-3 w-3 text-[#cbd5e1]" />
                     </div>
-                    <span className="text-lg text-slate-500 font-bold">
+                    <span className="text-[14px] text-[#64748b]">
                       {item}
                     </span>
                   </li>
@@ -85,28 +82,28 @@ const ComparisonSection = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-white/70 backdrop-blur-xl rounded-[40px] p-10 lg:p-14 border border-white/50 relative overflow-hidden shadow-2xl shadow-blue-500/5 group"
+            className="relative overflow-hidden rounded-2xl border border-[rgba(203,213,225,0.6)] bg-white p-8"
           >
-            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-500/5 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute right-[-150px] top-[-90px] h-[300px] w-[300px] rounded-full bg-[rgba(87,104,253,0.12)]" />
 
             <div className="relative z-10">
-              <div className="flex items-center gap-2 mb-8">
+              <div className="mb-4 flex items-center gap-1">
                 <div className="w-2 h-2 rounded-full bg-[#5768fd]" />
-                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#5768fd]">
+                <span className="font-mono text-[12px] uppercase tracking-[1px] text-[#5768fd]">
                   After PrecisionNote
                 </span>
               </div>
-              <h3 className="text-3xl lg:text-4xl font-bold text-[#040523] mb-12">
+              <h3 className="mb-6 text-[38px] font-semibold text-[#040523] md:text-[40px]">
                 The Status Quo.
               </h3>
 
-              <ul className="space-y-6">
+              <ul className="space-y-4">
                 {withPrecision.map((item, i) => (
-                  <li key={i} className="flex items-center gap-4">
-                    <div className="w-6 h-6 rounded-full bg-brand-blue/10 flex items-center justify-center flex-shrink-0 border border-brand-blue/20">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-brand-blue" />
+                  <li key={i} className="flex items-center gap-3">
+                    <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[rgba(87,104,253,0.12)]">
+                      <CheckCircle2 className="h-3 w-3 text-[#5768fd]" />
                     </div>
-                    <span className="text-lg text-slate-700 font-bold">
+                    <span className="text-[14px] font-medium text-[#040523]">
                       {item}
                     </span>
                   </li>
@@ -117,7 +114,7 @@ const ComparisonSection = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-7xl mx-auto">
+        <div className="grid gap-4 md:grid-cols-3">
           {[
             {
               value: "2.4h",
@@ -147,17 +144,14 @@ const ComparisonSection = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className={`relative overflow-hidden h-[110px] flex flex-col items-center justify-center rounded-[24px] bg-white border ${stat.borderColor} ${stat.shadow} transition-all duration-500`}
+              className={`relative flex h-[109px] flex-col items-center justify-center overflow-hidden rounded-2xl border bg-white ${stat.borderColor} ${stat.shadow}`}
             >
-              {/* Noise Overlay */}
-              <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-
               <div
-                className={`text-[42px] leading-none font-bold ${stat.color} mb-2 tracking-tight`}
+                className={`mb-1 font-mono text-[42px] font-bold leading-none ${stat.color}`}
               >
                 {stat.value}
               </div>
-              <div className="text-[13px] font-medium text-slate-500 tracking-tight">
+              <div className="text-[14px] text-[#64748b]">
                 {stat.label}
               </div>
             </motion.div>

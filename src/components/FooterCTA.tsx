@@ -10,6 +10,8 @@ import {
   HeartPulse,
 } from "lucide-react";
 
+const ctaPattern = "https://www.figma.com/api/mcp/asset/e429e8ca-56dd-4d73-8006-a20dc1575e01";
+
 const FooterCTA = () => {
   const benefits = [
     {
@@ -31,60 +33,49 @@ const FooterCTA = () => {
   ];
 
   return (
-    <section className="py-24 container-custom">
+    <section className="container-custom py-20">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="bg-[#FFC559] rounded-[64px] p-12 lg:p-24 text-center text-brand-navy relative overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.2)]"
+        className="relative overflow-hidden rounded-2xl bg-[#ffcd6a] p-10 text-center text-brand-navy md:p-20"
       >
-        {/* Decorative Grid Pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage: "radial-gradient(#000 2px, transparent 0)",
-            backgroundSize: "30px 30px",
-          }}
-        />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/20 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-navy/5 blur-[80px] rounded-full translate-y-1/2 -translate-x-1/2" />
+        <div className="absolute inset-0 opacity-30" style={{ backgroundImage: `url(${ctaPattern})` }} />
 
         <div className="relative z-10 max-w-4xl mx-auto">
           {/* Heartbeat Icon */}
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-brand-navy rounded-3xl mb-10 shadow-2xl transform hover:rotate-6 transition-transform">
-            <HeartPulse className="w-10 h-10 text-white" />
+          <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-[#040523] to-[#3b4fe8] shadow-[0_12px_32px_rgba(87,104,253,0.3)]">
+            <HeartPulse className="h-8 w-8 text-white" />
           </div>
 
-          <h2 className="text-5xl lg:text-8xl font-bold mb-10 tracking-[ -0.04em] leading-[0.9]">
-            Reclaim your time.
-            <br />
-            Re-focus on care.
+          <h2 className="mb-4 text-[40px] font-semibold leading-[1.1] tracking-[-1.5px] text-[#040523] md:text-[64px]">
+            Reclaim your time. Re-focus on care.
           </h2>
 
-          <p className="text-xl lg:text-2xl text-brand-navy/70 mb-16 font-bold max-w-2xl mx-auto">
+          <p className="mx-auto mb-8 max-w-3xl text-[18px] text-[rgba(16,21,76,0.7)]">
             Join 500+ Nigerian physicians who have already reclaimed 2+ hours
             every day with PrecisionNote.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20">
-            <button className="px-12 py-7 bg-brand-navy text-white rounded-full font-bold text-xl flex items-center gap-4 hover:scale-105 transition-all shadow-2xl active:scale-95 group">
-              Start Your Free Trial{" "}
-              <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+          <div className="mb-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <button className="group flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#040523] to-[#3b4fe8] px-8 py-3 text-[16px] font-semibold text-white shadow-[0_4px_14px_rgba(87,104,253,0.35)]">
+              Get Started (No Credit Card Required)
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </button>
-            <button className="px-12 py-7 bg-white/40 text-brand-navy rounded-full font-bold text-xl flex items-center gap-4 backdrop-blur-md border border-white/30 hover:bg-white/60 transition-all active:scale-95">
-              <Play className="w-6 h-6 fill-brand-navy rotate-0 group-hover:rotate-12" />
-              Watch the Demo
+            <button className="flex items-center gap-2 rounded-lg border border-[rgba(4,5,35,0.5)] bg-white/20 px-8 py-3 text-[16px] font-medium text-[#040523]">
+              <Play className="h-4 w-4" />
+              Watch Demo
             </button>
           </div>
 
           {/* Benefits Grid */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 pt-16 border-t border-brand-navy/10">
+          <div className="grid grid-cols-2 gap-4 border-t border-[rgba(4,5,35,0.12)] pt-6 md:grid-cols-4">
             {benefits.map((benefit, i) => (
-              <div key={i} className="flex flex-col items-center gap-3">
-                <div className="p-4 bg-white/20 rounded-2xl backdrop-blur-sm border border-white/30">
+              <div key={i} className="flex items-center justify-center gap-2">
+                <div className="rounded-full bg-transparent">
                   {benefit.icon}
                 </div>
-                <span className="text-sm font-bold uppercase tracking-[0.2em] text-brand-navy/50">
+                <span className="text-sm text-[rgba(4,5,35,0.7)]">
                   {benefit.text}
                 </span>
               </div>

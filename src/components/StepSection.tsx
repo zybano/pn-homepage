@@ -4,39 +4,40 @@ import { Mic, FileText, Send, Check } from 'lucide-react';
 
 const StepSection = () => {
   return (
-    <section id="how-it-works" className="py-24 bg-white relative overflow-hidden">
+    <section id="how-it-works" className="relative overflow-hidden bg-[#e6e9ff] py-24">
       {/* Grid Background Pattern */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-40" 
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-50" 
            style={{ 
-             backgroundImage: `linear-gradient(#f1f5f9 1px, transparent 1px), linear-gradient(90deg, #f1f5f9 1px, transparent 1px)`,
-             backgroundSize: '40px 40px' 
+             backgroundImage: `linear-gradient(#cfd4ff 1px, transparent 1px), linear-gradient(90deg, #cfd4ff 1px, transparent 1px)`,
+             backgroundSize: '33px 33px' 
            }} 
       />
       
       <div className="container-custom relative z-10">
-        <div className="text-center mb-20">
+        <div className="text-center mb-14">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-[40px] md:text-[56px] font-semibold text-[#040523] tracking-tighter leading-tight"
+            className="text-[42px] md:text-[56px] font-semibold text-[#040523] tracking-[-1.5px] leading-tight"
           >
             From consult to signed note in 3 steps
           </motion.h2>
+          <p className="mt-3 text-[18px] text-[#64748b]">PrecisionNote handles every part of the documentation workflow.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {/* Step 1: Start Scribing */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="bg-[#CFD9FF] rounded-[32px] p-8 md:p-10 flex flex-col h-full"
+            className="bg-[rgba(87,104,253,0.3)] rounded-2xl p-5 flex flex-col h-full border border-[rgba(87,104,253,0.12)]"
           >
             <div className="flex justify-between items-start mb-8">
-              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm">
-                <Mic className="w-6 h-6 text-[#5768fd]" />
+              <div className="w-10 h-10 bg-[rgba(255,255,255,0.5)] rounded-xl flex items-center justify-center">
+                <Mic className="w-5 h-5 text-[#5768fd]" />
               </div>
               <div className="bg-white/50 backdrop-blur-sm px-3 py-1 rounded-full border border-white/20 flex items-center gap-1.5">
                 <div className="w-1 h-1 rounded-full bg-[#5768fd]" />
@@ -44,13 +45,13 @@ const StepSection = () => {
               </div>
             </div>
             
-            <h3 className="text-[24px] font-bold text-[#040523] mb-4">1. Start Scribing</h3>
-            <p className="text-[#040523]/70 text-[16px] leading-relaxed mb-10">
+            <h3 className="text-[32px] font-semibold text-[#040523] mb-3">1. Start Scribing</h3>
+            <p className="text-[#040523]/70 text-[16px] leading-relaxed mb-6">
               Place your phone or laptop on the desk. PrecisionNote identifies the speaker, filters background noise, and recognises medical terminology instantly.
             </p>
 
             {/* Illustration Box 1 */}
-            <div className="mt-auto bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+            <div className="mt-auto bg-white rounded-xl p-4 border border-slate-100">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-2 h-2 rounded-full bg-[#5768fd] animate-pulse" />
                 <span className="font-mono text-[11px] font-bold text-slate-400 uppercase tracking-widest">Recording · 03:47</span>
@@ -90,11 +91,11 @@ const StepSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="bg-[#FFDE9E] rounded-[32px] p-8 md:p-10 flex flex-col h-full"
+            className="bg-[rgba(255,205,106,0.7)] rounded-2xl p-5 flex flex-col h-full border border-[rgba(255,205,106,0.12)]"
           >
             <div className="flex justify-between items-start mb-8">
-              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm">
-                <FileText className="w-6 h-6 text-[#D97706]" />
+              <div className="w-10 h-10 bg-[#fdeccb] rounded-xl flex items-center justify-center">
+                <FileText className="w-5 h-5 text-[#D97706]" />
               </div>
               <div className="bg-white/50 backdrop-blur-sm px-3 py-1 rounded-full border border-white/20 flex items-center gap-1.5">
                 <div className="w-1 h-1 rounded-full bg-[#D97706]" />
@@ -102,13 +103,13 @@ const StepSection = () => {
               </div>
             </div>
             
-            <h3 className="text-[24px] font-bold text-[#040523] mb-4">2. Get Structured Notes</h3>
-            <p className="text-[#040523]/70 text-[16px] leading-relaxed mb-10">
+            <h3 className="text-[32px] font-semibold text-[#040523] mb-3">2. Get Structured Notes</h3>
+            <p className="text-[#040523]/70 text-[16px] leading-relaxed mb-6">
               Your session is automatically converted into a clean SOAP note using your preferred specialty template — Subjective, Objective, Assessment, and Plan — fully formatted.
             </p>
 
             {/* Illustration Box 2 */}
-            <div className="mt-auto bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col gap-4">
+            <div className="mt-auto bg-white rounded-xl p-4 border border-slate-100 flex flex-col gap-4">
               {['Subjective', 'Objective', 'Assessment', 'Plan'].map((label, i) => (
                 <div key={label} className="flex flex-col gap-2">
                   <span className="font-mono text-[10px] font-bold text-slate-400 uppercase tracking-widest">{label}</span>
@@ -127,11 +128,11 @@ const StepSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="bg-[#4AC097] rounded-[32px] p-8 md:p-10 flex flex-col h-full"
+            className="bg-[rgba(13,174,121,0.7)] rounded-2xl p-5 flex flex-col h-full border border-[rgba(13,174,121,0.12)]"
           >
             <div className="flex justify-between items-start mb-8">
-              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm">
-                <Send className="w-6 h-6 text-[#10B981]" />
+              <div className="w-10 h-10 bg-[#daffed] rounded-xl flex items-center justify-center">
+                <Send className="w-5 h-5 text-[#10B981]" />
               </div>
               <div className="bg-white/50 backdrop-blur-sm px-3 py-1 rounded-full border border-white/20 flex items-center gap-1.5">
                 <div className="w-1 h-1 rounded-full bg-[#040523]" />
@@ -139,13 +140,13 @@ const StepSection = () => {
               </div>
             </div>
             
-            <h3 className="text-[24px] font-bold text-[#040523] mb-4">3. One-Click Sync</h3>
-            <p className="text-[#040523]/70 text-[16px] leading-relaxed mb-10">
+            <h3 className="text-[32px] font-semibold text-[#040523] mb-3">3. One-Click Sync</h3>
+            <p className="text-[#040523]/70 text-[16px] leading-relaxed mb-6">
               Review the note in seconds, then send it directly to Epic, Cerner, or Athena. No copy-paste. No re-typing. Just done.
             </p>
 
             {/* Illustration Box 3 */}
-            <div className="mt-auto bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+            <div className="mt-auto bg-white rounded-xl p-4 border border-slate-100">
               <span className="font-mono text-[10px] font-bold text-slate-300 uppercase tracking-widest block mb-4">Export to EMR</span>
               <div className="grid grid-cols-3 gap-2 mb-4">
                 {['Epic', 'Cerner', 'Athena'].map((emr) => (

@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  IconBrandTwitter,
-  IconBrandLinkedin,
-  IconBrandGithub,
-} from "@tabler/icons-react";
+import { IconBrandTwitter, IconBrandLinkedin, IconBrandInstagram, IconBrandFacebook } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 
 const LandingFooter = () => {
@@ -11,51 +7,44 @@ const LandingFooter = () => {
     {
       title: "Product",
       links: [
-        { name: "Ambient Scribe", href: "/features#explore" },
-        { name: "Specialty Templates", href: "/features#explore" },
-        { name: "EMR Integrations", href: "/features#integrations" },
+        { name: "Features", href: "/features#explore" },
+        { name: "How it Works", href: "/#how-it-works" },
         { name: "Pricing", href: "/pricing" },
+        { name: "Integrations", href: "/features#integrations" },
+        { name: "Security", href: "/features#integrations" },
       ],
     },
     {
       title: "Resources",
       links: [
-        { name: "Doctor Stories", href: "#" },
-        { name: "Clinical Documentation", href: "#" },
-        { name: "API Docs", href: "#" },
+        { name: "Documentation", href: "#" },
+        { name: "API Reference", href: "#" },
+        { name: "Clinical Blog", href: "#" },
+        { name: "Webinars", href: "#" },
+        { name: "Status", href: "#" },
       ],
     },
     {
-      title: "Legal",
+      title: "Company",
       links: [
+        { name: "About Us", href: "#" },
+        { name: "Careers", href: "#" },
+        { name: "Chat with Us", href: "/#chat" },
         { name: "Privacy Policy", href: "#" },
         { name: "Terms of Service", href: "#" },
-        { name: "HIPAA Compliance", href: "#" },
-      ],
-    },
-    {
-      title: "Support",
-      links: [
-        { name: "Help Center", href: "#" },
-        { name: "Chat with Us", href: "/#chat" },
       ],
     },
   ];
 
   return (
-    <footer className="bg-[#040523] text-white pt-32 pb-12 relative overflow-hidden">
-      {/* Footer Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-blue/30 to-transparent" />
+    <footer className="relative overflow-hidden bg-gradient-to-br from-[#040523] to-[#3b4fe8] pb-10 pt-16 text-white">
 
       <div className="container-custom relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-6 gap-16 mb-24">
+        <div className="mb-12 grid gap-10 lg:grid-cols-[1.4fr_2fr]">
           {/* Brand Col */}
           <div className="col-span-2">
-            <Link
-              to="/"
-              className="flex items-center gap-3 mb-10 transition-transform hover:scale-105 inline-flex"
-            >
-              <div className="w-12 h-12 bg-brand-blue rounded-2xl flex items-center justify-center shadow-lg shadow-brand-blue/20">
+            <Link to="/" className="mb-4 inline-flex items-center gap-2">
+              <div className="h-10 w-10 rounded-md bg-brand-blue flex items-center justify-center">
                 <svg
                   width="28"
                   height="28"
@@ -72,48 +61,41 @@ const LandingFooter = () => {
                   />
                 </svg>
               </div>
-              <span className="text-3xl font-bold tracking-tighter">
-                PrecisionNote<span className="text-brand-blue">.</span>
+              <span className="text-3xl font-semibold tracking-tight">
+                PrecisionNote
               </span>
             </Link>
-            <p className="text-slate-400 max-w-xs mb-10 text-xl leading-relaxed font-medium">
-              The ambient intelligence layer for the modern clinical workflow.
+            <p className="mb-4 max-w-xs text-[16px] leading-[24px] text-white/60">
+              AI-powered clinical documentation for modern physicians.
             </p>
-            <div className="flex gap-5">
-              {[IconBrandTwitter, IconBrandLinkedin, IconBrandGithub].map(
-                (Icon, i) => (
-                  <a
-                    key={i}
-                    href="#"
-                    className="w-12 h-12 flex items-center justify-center bg-white/5 rounded-2xl hover:bg-brand-blue hover:text-white transition-all duration-300 border border-white/5"
-                  >
-                    <Icon size={22} />
-                  </a>
-                ),
-              )}
+            <p className="mb-6 font-mono text-[12px] text-[#00d492]">HIPAA · HL7 FHIR Compliant</p>
+            <div className="mb-6 flex gap-2">
+              <input className="h-9 w-[267px] rounded-lg border border-white/60 bg-transparent px-3 text-[14px] text-white/60 placeholder:text-white/60" value="Subscribe to Our Newsletter" readOnly />
+              <button className="h-9 rounded-lg bg-brand-blue px-4 text-[14px] font-medium">Subscribe</button>
             </div>
           </div>
 
           {/* Links */}
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {sections.map((section) => (
-            <div key={section.title} className="col-span-1">
-              <h4 className="font-bold text-white mb-8 uppercase tracking-[0.2em] text-[11px] opacity-40">
+            <div key={section.title}>
+              <h4 className="mb-4 font-mono text-[16px] uppercase tracking-[1.2px] text-white">
                 {section.title}
               </h4>
-              <ul className="space-y-5">
+              <ul className="space-y-2">
                 {section.links.map((link) => (
                   <li key={link.name}>
                     {link.href.startsWith("/") ? (
                       <Link
                         to={link.href}
-                        className="text-slate-400 hover:text-brand-blue transition-colors text-[17px] font-bold"
+                        className="text-[14px] text-white/60 hover:text-white transition-colors"
                       >
                         {link.name}
                       </Link>
                     ) : (
                       <a
                         href={link.href}
-                        className="text-slate-400 hover:text-brand-blue transition-colors text-[17px] font-bold"
+                        className="text-[14px] text-white/60 hover:text-white transition-colors"
                       >
                         {link.name}
                       </a>
@@ -123,26 +105,20 @@ const LandingFooter = () => {
               </ul>
             </div>
           ))}
+          </div>
         </div>
 
-        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-10">
-          <p className="text-slate-500 text-sm font-bold opacity-60">
-            © 2026 PrecisionNote AI. All rights reserved. Built for physicians,
-            by physicians.
+        <div className="flex flex-col gap-4 border-t border-white/40 pt-4 md:flex-row md:items-center md:justify-between">
+          <p className="text-[16px] text-white/50">
+            ©2025 PrecisionNote Inc. All rights reserved
           </p>
-          <div className="flex gap-10">
-            <div className="flex items-center gap-3">
-              <div className="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.5)]" />
-              <span className="text-[11px] font-bold uppercase tracking-widest text-slate-500">
-                HIPAA Compliant
-              </span>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="w-2.5 h-2.5 rounded-full bg-blue-500 shadow-[0_0_12px_rgba(59,130,246,0.5)]" />
-              <span className="text-[11px] font-bold uppercase tracking-widest text-slate-500">
-                ISO 27001 Certified
-              </span>
-            </div>
+          <div className="flex items-center gap-4 text-white/60">
+            <span className="text-[16px]">Follow Us</span>
+            {[IconBrandTwitter, IconBrandLinkedin, IconBrandInstagram, IconBrandFacebook].map((Icon, i) => (
+              <a key={i} href="#" className="hover:text-white transition-colors">
+                <Icon size={22} />
+              </a>
+            ))}
           </div>
         </div>
       </div>

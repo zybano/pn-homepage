@@ -1,210 +1,127 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import { Play, Star, Shield, ArrowRight } from 'lucide-react';
+import { ArrowRight, Play, Shield, Star } from 'lucide-react';
 
-const Waveform = () => {
-  return (
-    <div className="flex items-center gap-[3px] h-10">
-      {[...Array(24)].map((_, i) => (
-        <motion.div
-          key={i}
-          initial={{ height: 4 }}
-          animate={{ 
-            height: [8, 24, 12, 32, 16, 8],
-          }}
-          transition={{ 
-            repeat: Infinity, 
-            duration: 1.5, 
-            delay: i * 0.05,
-            ease: "easeInOut"
-          }}
-          className="w-[3px] bg-brand-blue rounded-full opacity-60"
-        />
-      ))}
-    </div>
-  );
-};
+const doctor1 = 'https://www.figma.com/api/mcp/asset/9b257f81-4f7a-47d6-93f0-912f2f2198ef';
+const doctor2 = 'https://www.figma.com/api/mcp/asset/ce4d44de-b88d-4bd4-9768-337f573e1e2d';
+const doctor3 = 'https://www.figma.com/api/mcp/asset/3f6a4673-6dc4-4f87-90f0-cfd902f14e4f';
 
 const Hero = () => {
   return (
-    <section className="relative pt-32 pb-20 overflow-hidden bg-brand-bg">
-      {/* Background Decorative Circles */}
-      <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-[800px] h-[800px] bg-brand-blue/5 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-[600px] h-[600px] bg-brand-blue/5 rounded-full blur-3xl -z-10" />
-
-      <div className="container-custom">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          
-          {/* Content Left */}
+    <section className="relative overflow-hidden bg-[#f3f4f7] pb-14 pt-10 md:pt-16">
+      <div className="absolute right-[-360px] top-[-180px] h-[920px] w-[920px] rounded-full bg-[#d9def1]" />
+      <div className="container-custom relative z-10">
+        <div className="grid items-center gap-8 lg:grid-cols-2">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45 }}
+            className="max-w-[649px]"
           >
-            {/* HIPAA Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-brand-border rounded-full mb-6">
-              <Shield className="w-4 h-4 text-brand-blue" />
-              <span className="text-[13px] font-medium text-brand-muted uppercase tracking-wider">
-                100% HIPAA Compliant · Ambient AI Scribe
-              </span>
+            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#cfd4ff] bg-[#edefff] px-3 py-1">
+              <Shield className="h-3 w-3 text-[#5768fd]" />
+              <span className="font-mono text-[11px] text-[#5768fd]">100% HIPAA Compliant · Ambient AI Scribe</span>
             </div>
-
-            <h1 className="text-5xl lg:text-7xl font-bold leading-[1.1] mb-8 text-brand-navy tracking-tight">
-              Just talk. <span className="text-brand-blue">PrecisionNote</span> writes your SOAP notes.
+            <h1 className="mb-5 text-[42px] font-semibold leading-[1.12] tracking-[-1.5px] text-[#040523] md:text-[64px]">
+              Just talk.
+              <br />
+              <span className="text-[#5768fd]">Precision Notes</span> writes
+              <br />
+              your SOAP notes.
             </h1>
-
-            <p className="text-xl lg:text-2xl text-brand-muted leading-relaxed mb-12 max-w-2xl font-medium">
-              Save 2+ hours on charting daily. PrecisionNote listens ambiently and generates clinical-grade, peer-reviewed standard notes in seconds. Syncs directly with your EMR.
+            <p className="mb-8 text-[18px] leading-[1.5] text-[#64748b] md:max-w-[620px]">
+              PrecisionNote captures every clinical detail in real-time, delivering structured, HIPAA-compliant SOAP notes directly to your EHR.
             </p>
 
-
-            <div className="flex flex-col sm:flex-row items-center gap-4 mb-12">
-              <button className="btn-primary w-full sm:w-auto text-lg px-8 py-4 flex items-center justify-center gap-2">
-                Try Free for 14 Days <ArrowRight className="w-5 h-5" />
-              </button>
-              <button className="px-8 py-4 bg-gray-100 text-brand-navy rounded-full font-bold text-lg flex items-center justify-center gap-2 hover:bg-gray-200 transition-all">
-                <Play className="w-5 h-5 fill-brand-navy" />
-                Watch 1-Min Demo
-              </button>
+            <div className="mb-7 flex flex-col gap-3 sm:flex-row">
+              <motion.button whileHover={{ y: -1 }} whileTap={{ scale: 0.98 }} className="flex items-center justify-center gap-2 rounded-lg bg-[#5768fd] px-6 py-3 text-[16px] font-medium text-white shadow-[0_4px_14px_rgba(87,104,253,0.35)]">
+                Try Free for 14 Days <ArrowRight className="h-4 w-4" />
+              </motion.button>
+              <motion.button whileHover={{ y: -1 }} whileTap={{ scale: 0.98 }} className="flex items-center justify-center gap-2 rounded-lg border border-[#cfd4ff] bg-[#eef2fa] px-6 py-3 text-[16px] font-medium text-[#040523]">
+                <Play className="h-4 w-4" /> Watch 1-Min Demo
+              </motion.button>
             </div>
 
-            {/* Social Proof */}
-            <div className="flex items-center gap-4">
-              <div className="flex -space-x-3">
-                {[12, 11, 15].map((i) => (
-                  <div key={i} className="w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-brand-border">
-                    <img 
-                      src={`https://i.pravatar.cc/100?img=${i}`} 
-                      alt="Doctor headshot" 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+            <div className="flex items-center gap-3">
+              <div className="flex -space-x-2">
+                {[doctor1, doctor2, doctor3].map((src, idx) => (
+                  <img key={idx} src={src} alt="Doctor avatar" className="h-8 w-8 rounded-full border border-white object-cover" />
                 ))}
               </div>
-              <div className="flex flex-col">
-                <div className="flex gap-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+              <div>
+                <div className="mb-1 flex">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-3 w-3 fill-[#f59e0b] text-[#f59e0b]" />
                   ))}
                 </div>
-                <span className="text-sm font-medium text-brand-muted">Loved by 500+ Nigerian physicians</span>
+                <p className="text-[12px] text-[#64748b]">
+                  Loved by <span className="font-semibold text-[#040523]">500+ Nigerian physicians</span>
+                </p>
               </div>
             </div>
           </motion.div>
 
-          {/* Visual Right: Mock Dashboard */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="glass-card overflow-hidden border-brand-border/40 shadow-2xl bg-white">
-              {/* Dashboard Header */}
-              <div className="px-6 py-4 border-b border-brand-border flex items-center justify-between bg-white">
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-slate-200" />
-                    <div className="w-12 h-3 bg-slate-100 rounded-full" />
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-20 h-3 bg-slate-100 rounded-full" />
-                  <div className="w-8 h-8 rounded-full bg-brand-blue/10 flex items-center justify-center">
-                    <div className="w-4 h-4 rounded-full bg-brand-blue/30" />
-                  </div>
-                </div>
+          <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.55, delay: 0.1 }} className="relative">
+            <div className="rounded-2xl border-[8px] border-[#22253a] bg-white shadow-[0_24px_48px_rgba(4,5,35,0.25)]">
+              <div className="flex items-center justify-between border-b border-[#edf1f5] px-5 py-3">
+                <div className="text-[11px] text-[#45556c]">PrecisionNote</div>
+                <div className="h-3 w-3 rounded-full bg-[#5768fd]" />
               </div>
-
-              {/* Dashboard Content */}
-              <div className="flex h-[450px]">
-                {/* Sidebar Mock */}
-                <div className="w-16 border-r border-brand-border flex flex-col items-center py-6 gap-6 bg-slate-50/50">
-                   <div className="w-8 h-8 rounded-lg bg-brand-blue/10 text-brand-blue flex items-center justify-center">
-                    <div className="w-4 h-4 bg-brand-blue rounded-sm" />
-                  </div>
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="w-8 h-8 rounded-lg bg-transparent text-brand-muted flex items-center justify-center">
-                      <div className="w-4 h-4 border-2 border-slate-200 rounded-md" />
-                    </div>
+              <div className="flex h-[250px]">
+                <div className="w-[44px] border-r border-[#eef1f5] bg-[#f7f9fc] p-2">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <div key={i} className={`mb-3 h-5 w-5 rounded ${i === 0 ? 'bg-[#d8ddf9]' : 'bg-[#e3e8ef]'}`} />
                   ))}
                 </div>
-
-                {/* Main Pane */}
-                <div className="flex-1 p-6 overflow-hidden bg-white">
-                  {/* Stats Row */}
-                  <div className="grid grid-cols-3 gap-4 mb-6">
-                    {[
-                      { label: 'Sessions Today', value: '8' },
-                      { label: 'Notes Pending', value: '3' },
-                      { label: 'Hrs Saved', value: '2.4' }
-                    ].map((stat, i) => (
-                      <div key={i} className="p-4 border border-brand-border rounded-xl bg-slate-50/50">
-                        <div className="text-[11px] font-bold text-brand-muted uppercase tracking-wider mb-1">{stat.label}</div>
-                        <div className="text-2xl font-bold text-brand-navy">{stat.value}</div>
+                <div className="flex-1 p-4">
+                  <div className="mb-4 grid grid-cols-3 gap-2">
+                    {['Sessions Today', 'Notes Pending', 'Hrs Saved'].map((label, i) => (
+                      <div key={label} className="rounded-lg border border-[#edf1f5] bg-[#fbfcff] p-2">
+                        <div className="text-[10px] text-[#64748b]">{label}</div>
+                        <div className="text-[20px] font-semibold text-[#f59e0b]">{['8', '3', '2.4'][i]}</div>
                       </div>
                     ))}
                   </div>
-
-                  <div className="mb-6 p-5 border border-brand-border rounded-2xl bg-white shadow-sm relative overflow-hidden group">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-2">
-                         <div className="text-[13px] font-bold text-brand-navy tracking-tight">Active Scribe</div>
-                         <div className="px-2 py-0.5 bg-red-100 text-red-600 rounded-full text-[10px] font-bold flex items-center gap-1 animate-pulse">
-                          <div className="w-1 h-1 rounded-full bg-red-600" />
-                          LIVE
-                        </div>
-                      </div>
-                      <div className="text-[11px] font-medium text-brand-muted uppercase tracking-widest">
-                        04:23 elapsed
-                      </div>
+                  <div className="mb-4 rounded-lg border border-[#edf1f5] p-3">
+                    <div className="mb-3 flex items-center justify-between text-[12px] text-[#040523]">
+                      <span>Active Scribe</span>
+                      <span className="text-[10px] text-[#64748b]">04:23 elapsed</span>
                     </div>
-                    
-                    <Waveform />
-
-                    <div className="mt-4 pt-4 border-t border-brand-border/50">
-                      <div className="text-[12px] font-medium text-brand-muted">
-                        Patient: <span className="text-brand-navy font-bold">Adaeze Oladipo</span>
-                      </div>
+                    <div className="mb-3 flex h-8 items-center gap-[3px]">
+                      {Array.from({ length: 18 }).map((_, i) => (
+                        <motion.span
+                          key={i}
+                          className="w-[3px] rounded-full bg-[#5768fd]"
+                          animate={{ height: [6, 12 + ((i * 5) % 18), 6] }}
+                          transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.05 }}
+                        />
+                      ))}
                     </div>
+                    <div className="text-[11px] text-[#90a1b9]">Patient: Adaeze O. · 04:23 elapsed</div>
                   </div>
-
-                  {/* Note Sections */}
-                  <div className="space-y-4">
-                    {[
-                      { label: 'Subjective', width: 'w-full' },
-                      { label: 'Objective', width: 'w-3/4' },
-                      { label: 'Assessment', width: 'w-5/6' }
-                    ].map((section, i) => (
-                      <div key={i} className="flex gap-4 items-start">
-                        <div className="w-20 text-[11px] font-bold text-brand-muted uppercase tracking-wider pt-1">{section.label}</div>
-                        <div className="flex-1 space-y-2">
-                          <div className={`h-2 bg-slate-100 rounded-full ${section.width} animate-pulse`} />
-                          <div className={`h-2 bg-slate-50 rounded-full w-2/3 animate-pulse`} />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                  {['Subjective', 'Objective', 'Assessment'].map((label) => (
+                    <div key={label} className="mb-2 flex items-center gap-3">
+                      <span className="w-[70px] text-[10px] font-medium text-[#5768fd]">{label}</span>
+                      <div className="h-[6px] w-full rounded-full bg-[#e2e8f0]" />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
 
-            {/* Floating Security Badge */}
             <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              className="absolute -bottom-6 -right-6 glass-card p-4 flex items-center gap-3 border-brand-border shadow-xl z-20 bg-white"
+              animate={{ y: [0, -4, 0] }}
+              transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute left-[-16px] top-[34px] flex w-[251px] items-center gap-3 rounded-xl bg-white p-3 shadow-[0_8px_20px_rgba(4,5,35,0.12)]"
             >
-              <div className="w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center">
-                <Shield className="w-5 h-5 text-green-600" />
+              <div className="rounded-full bg-[#e6fff4] p-2">
+                <Shield className="h-4 w-4 text-[#10b981]" />
               </div>
-              <div className="flex flex-col">
-                <span className="text-sm font-bold text-brand-navy">AES-256 Secured</span>
-                <span className="text-[10px] text-brand-muted uppercase font-bold tracking-widest">End-to-end encrypted</span>
+              <div>
+                <p className="text-[14px] font-semibold text-[#040523]">HIPAA Compliant</p>
+                <p className="font-mono text-[10px] text-[#90a1b9]">AES-256 End-to-end encrypted</p>
               </div>
             </motion.div>
           </motion.div>
-
         </div>
       </div>
     </section>

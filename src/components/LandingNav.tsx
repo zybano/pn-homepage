@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const LandingNav = () => {
@@ -25,29 +25,29 @@ const LandingNav = () => {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/80 backdrop-blur-lg border-b border-brand-border py-3' : 'bg-transparent py-5'
+      className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-white/95 backdrop-blur-lg border-b border-brand-border py-3' : 'bg-white border-b border-brand-border py-4'
       }`}
     >
-      <div className="container-custom flex items-center justify-between">
+      <div className="container-custom flex items-center justify-between gap-8">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 group cursor-pointer">
-          <div className="w-10 h-10 bg-brand-blue rounded-xl flex items-center justify-center">
+        <Link to="/" className="flex items-center gap-2 cursor-pointer">
+          <div className="w-9 h-9 bg-brand-blue rounded-md flex items-center justify-center">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 12H7L9 18L13 6L15 12H20" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
-          <span className="text-2xl font-bold text-brand-navy tracking-tight">PrecisionNote</span>
+          <span className="text-[32px] font-semibold text-brand-blue tracking-[1px] leading-none">PrecisionNote</span>
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden lg:flex items-center gap-6">
           {navLinks.map((link) => (
             link.href.startsWith('/#') ? (
               <a 
                 key={link.name} 
                 href={link.href}
-                className="text-[16px] font-semibold text-brand-muted hover:text-brand-blue transition-colors"
+                className="text-[16px] font-normal text-[#45556c] hover:text-brand-blue transition-colors"
               >
                 {link.name}
               </a>
@@ -55,7 +55,7 @@ const LandingNav = () => {
               <Link 
                 key={link.name} 
                 to={link.href}
-                className={`text-[16px] font-semibold transition-colors ${location.pathname === link.href ? 'text-brand-blue' : 'text-brand-muted hover:text-brand-blue'}`}
+                className={`text-[16px] font-normal transition-colors ${location.pathname === link.href ? 'text-brand-blue' : 'text-[#45556c] hover:text-brand-blue'}`}
               >
                 {link.name}
               </Link>
@@ -64,18 +64,18 @@ const LandingNav = () => {
         </div>
 
         {/* Desktop CTAs */}
-        <div className="hidden md:flex items-center gap-4">
-          <button className="text-[16px] font-bold text-brand-navy px-6 py-3 bg-[#F1F5F9] rounded-full hover:bg-slate-200 transition-colors">
+        <div className="hidden lg:flex items-center gap-3">
+          <button className="text-[16px] font-medium text-brand-navy px-6 py-2.5 bg-[#F1F5F9] border border-brand-border rounded-lg hover:bg-slate-200 transition-colors">
             Sign In
           </button>
-          <button className="btn-primary py-3 px-6 text-[16px] flex items-center gap-2 shadow-lg shadow-brand-blue/20">
+          <button className="bg-brand-blue text-white text-[16px] font-medium px-6 py-2.5 rounded-lg shadow-lg shadow-brand-blue/20">
             Try Free for 14 Days
           </button>
         </div>
 
         {/* Mobile Toggle */}
         <button 
-          className="md:hidden p-2 text-brand-navy"
+          className="lg:hidden p-2 text-brand-navy"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? <X /> : <Menu />}
@@ -89,7 +89,7 @@ const LandingNav = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-b border-brand-border"
+            className="lg:hidden bg-white border-b border-brand-border"
           >
             <div className="container-custom py-6 flex flex-col gap-6">
               {navLinks.map((link) => (
