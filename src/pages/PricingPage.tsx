@@ -1,20 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   CheckCircle2,
-  XCircle,
   ChevronDown,
-  ChevronUp,
   ArrowRight,
-  Shield,
   Zap,
-  Clock,
-  MessageSquare,
-  Star,
-  HeartPulse,
-  HelpCircle,
-  MessageCircle,
-  Calendar,
 } from "lucide-react";
 import LandingNav from "../components/LandingNav";
 import LandingFooter from "../components/LandingFooter";

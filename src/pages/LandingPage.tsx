@@ -1,4 +1,3 @@
-import React from 'react';
 import LandingNav from '../components/LandingNav';
 import Hero from '../components/Hero';
 import ComparisonSection from '../components/ComparisonSection';

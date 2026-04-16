@@ -1,4 +1,3 @@
-import React from "react";
 import { IconBrandTwitter, IconBrandLinkedin, IconBrandInstagram, IconBrandFacebook } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 
