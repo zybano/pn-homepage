@@ -15,7 +15,7 @@ const DocumentationSection = () => {
         </div>
 
         <div className="flex w-full flex-col items-center gap-8 lg:flex-row lg:items-start lg:gap-8">
-          <article className="flex h-[486px] w-full max-w-[351px] flex-col gap-6 rounded-2xl border border-[rgba(105,107,124,0.2)] bg-white p-5 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_0px_rgba(0,0,0,0.1)]">
+          <article className="flex h-[600px] w-full max-w-[351px] flex-col gap-6 rounded-2xl border border-[rgba(105,107,124,0.2)] bg-white p-10 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_0px_rgba(0,0,0,0.1)]">
             <div className="flex w-full flex-col gap-5 rounded-lg border border-[#e2e8f0] bg-[#e2edf8] p-4 shadow-[0px_1px_2px_0px_rgba(0,0,0,0)]">
               <div className="flex items-start gap-2">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#535c68]" />
@@ -49,7 +49,7 @@ const DocumentationSection = () => {
             </div>
           </article>
 
-          <article className="flex h-[486px] w-full max-w-[351px] flex-col gap-6 rounded-2xl border border-[rgba(105,107,124,0.2)] bg-white p-5 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_0px_rgba(0,0,0,0.1)]">
+          <article className="flex h-[600px] w-full max-w-[351px] flex-col gap-6 rounded-2xl border border-[rgba(105,107,124,0.2)] bg-white p-10 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_0px_rgba(0,0,0,0.1)]">
             <div className="flex w-full flex-col gap-3 rounded-lg border border-[#e2e8f0] bg-[#e2edf8] p-4">
               <p className="text-[14px] font-semibold uppercase leading-5 text-[#45556c]">Assessment</p>
               <div className="flex items-start gap-2">
@@ -69,13 +69,13 @@ const DocumentationSection = () => {
               </div>
             </div>
 
-            <h3 className="text-[32px] font-semibold leading-[1.2] tracking-[-0.6px] text-[#040523]">Actually speaks Medic.</h3>
+            <h3 className="mt-auto text-[32px] font-semibold leading-[1.2] tracking-[-0.6px] text-[#040523]">Actually speaks Medic.</h3>
             <p className="text-[14px] leading-5 text-[#64748b]">
               Context-aware annotations let you add clinical insights without breaking your workflow.
             </p>
           </article>
 
-          <article className="flex h-[486px] w-full max-w-[351px] flex-col gap-6 rounded-2xl border border-[rgba(105,107,124,0.2)] bg-white p-5 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_0px_rgba(0,0,0,0.1)]">
+          <article className="flex h-[600px] w-full max-w-[351px] flex-col gap-6 rounded-2xl border border-[rgba(105,107,124,0.2)] bg-white p-10 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_0px_rgba(0,0,0,0.1)]">
             <div className="flex w-full justify-center">
               <div className="relative h-[320px] w-[192px] rounded-[24px] border-8 border-[#1e2030] bg-[#040523] p-2 shadow-[0px_20px_60px_0px_rgba(4,5,35,0.3)]">
                 <div className="h-full w-full bg-[#fafbff] px-4 pt-4">
@@ -107,7 +107,7 @@ const DocumentationSection = () => {
               </div>
             </div>
 
-            <h3 className="text-[32px] font-semibold leading-[1.2] tracking-[-0.6px] text-[#040523]">
+            <h3 className="mt-auto text-[32px] font-semibold leading-[1.2] tracking-[-0.6px] text-[#040523]">
               Automatic sync, guaranteed.
             </h3>
             <p className="text-[14px] leading-5 text-[#64748b]">
