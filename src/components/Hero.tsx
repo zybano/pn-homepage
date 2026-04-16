@@ -14,7 +14,7 @@ const waveformHeights = [
 const Hero = () => {
   return (
     <section className="relative overflow-hidden bg-brand-bg">
-      <div className="container-custom relative z-10 pb-[92px] pt-[91px]">
+      <div className="container-custom relative z-10 pb-[92px] pt-[21px]">
         <div className="grid items-center gap-[40px] lg:grid-cols-2">
           <div className="flex max-w-[649px] flex-col gap-[40px]">
             <div className="flex flex-col gap-[24px]">
@@ -29,7 +29,7 @@ const Hero = () => {
                 </div>
 
                 <p className="text-[60px] font-bold tracking-[-1.2px] text-[#040523]">
-                  <span className="bg-gradient-to-b from-[#5768fd] from-[27.404%] to-white bg-clip-text font-bold leading-[69px] text-transparent">
+                  <span className="bg-gradient-to-b from-[#5768fd] from-[77.404%] to-white bg-clip-text font-bold leading-[69px] text-transparent">
                     Precision Notes
                   </span>
                   <span className="leading-[69px]">{` writes your SOAP notes.`}</span>
