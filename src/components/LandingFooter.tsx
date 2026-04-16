@@ -1,6 +1,7 @@
 import { IconBrandTwitter, IconBrandLinkedin, IconBrandInstagram, IconBrandFacebook, IconShieldCheck } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import pricingVector from "../assets/pricing_page_vector.svg";
 
 const LandingFooter = () => {
   const sections = [
@@ -38,16 +39,18 @@ const LandingFooter = () => {
 
   return (
     <footer className="relative overflow-hidden bg-[#040523] pb-10 pt-24 text-white">
-      {/* Background Decorative Stripes (SVG Pattern) */}
-      <div className="absolute inset-0 z-0 opacity-10">
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="footer-grid" width="160" height="160" patternUnits="userSpaceOnUse">
-              <path d="M0 160 L160 0 M-40 40 L40 -40 M120 200 L200 120" stroke="white" strokeWidth="1" fill="none" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#footer-grid)" />
-        </svg>
+      {/* Background Geometric Vector */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.05] pointer-events-none">
+        <img 
+          src={pricingVector} 
+          alt="" 
+          className="absolute -right-40 top-0 h-[1200px] w-auto rotate-[15deg]"
+        />
+        <img 
+          src={pricingVector} 
+          alt="" 
+          className="absolute -left-60 bottom-0 h-[1000px] w-auto -rotate-[165deg] opacity-60"
+        />
       </div>
       
       {/* Radial Gradient for Glow */}

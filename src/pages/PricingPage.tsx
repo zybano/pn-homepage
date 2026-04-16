@@ -3,6 +3,7 @@ import { ArrowRight, Check, ChevronDown, ChevronUp, CircleMinus, CirclePlus, Spa
 import { motion, AnimatePresence } from 'framer-motion';
 import LandingFooter from '../components/LandingFooter';
 import LandingNav from '../components/LandingNav';
+import pricingVector from '../assets/pricing_page_vector.svg';
 
 type Currency = 'USD' | 'NGN';
 type BillingCycle = 'monthly' | 'yearly';
@@ -31,7 +32,6 @@ const PricingPage = () => {
   const [openFaq, setOpenFaq] = useState(1);
   const [openRows, setOpenRows] = useState('documentation');
   const [currency, setCurrency] = useState<Currency>('USD');
-  const [billingCycle, setBillingCycle] = useState<BillingCycle>('yearly');
   const [isCurrencyOpen, setIsCurrencyOpen] = useState(false);
   const [activeSegment, setActiveSegment] = useState<'individuals' | 'teams'>('individuals');
 
@@ -63,17 +63,19 @@ const PricingPage = () => {
       <LandingNav />
       <main className="overflow-hidden">
         <section className="relative px-6 pb-[80px] pt-[80px]">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+          <motion.img 
+            src={pricingVector}
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            className="pointer-events-none absolute left-[-220px] top-[90px] h-[360px] w-[560px] rounded-full border border-[#d3d8ff]" 
+            className="pointer-events-none absolute left-[-100px] top-[40px] h-[600px] w-auto opacity-[0.08]" 
           />
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+          <motion.img 
+            src={pricingVector}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
-            className="pointer-events-none absolute right-[-220px] top-[110px] h-[360px] w-[560px] rounded-full border border-[#d3d8ff]" 
+            className="pointer-events-none absolute right-[-100px] top-[120px] h-[600px] w-auto rotate-180 opacity-[0.08]" 
           />
           
           <div className="mx-auto max-w-[1320px]">
