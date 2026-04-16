@@ -167,22 +167,21 @@ const PricingPage = () => {
               <PlanCard
                 title="Basic"
                 description="Start for free. No credit card required."
-                price="0"
+                priceMonthly={pricingData[currency].Basic.monthly}
+                priceYearly={pricingData[currency].Basic.yearly}
                 currencySymbol={pricingData[currency].Basic.symbol}
                 cta="Get PrecisionNote free"
                 ctaSecondary
                 credits="2K credits per month"
                 intro="Free for everyone"
                 features={['10 Scribe Sessions / Month', 'Standard SOAP Templates', 'HIPAA Secure', 'E-mail Secure']}
-                billingCycle={billingCycle}
-                onBillingToggle={toggleBilling}
                 index={0}
               />
               <PlanCard
                 title="Professional"
                 description="Unlimited scribe sessions for your practice."
-                price={billingCycle === 'monthly' ? pricingData[currency].Professional.monthly.toLocaleString() : pricingData[currency].Professional.yearly.toLocaleString()}
-                priceSub={billingCycle === 'monthly' ? "Per user/month" : "Per user/year"}
+                priceMonthly={pricingData[currency].Professional.monthly}
+                priceYearly={pricingData[currency].Professional.yearly}
                 currencySymbol={pricingData[currency].Professional.symbol}
                 saveAmount={pricingData[currency].Professional.saveAmount}
                 cta="Try Free for 14 Days"
@@ -192,8 +191,6 @@ const PricingPage = () => {
                 showBilling
                 features={['All Specialty Templates', 'Unlimited Exports to EMR', 'Unlimited Amber Handoff Memos', 'Priority AI Processing']}
                 featured
-                billingCycle={billingCycle}
-                onBillingToggle={toggleBilling}
                 index={1}
               />
               <PlanCard
@@ -205,8 +202,6 @@ const PricingPage = () => {
                 intro="Everything in the attending, plus:"
                 showBilling
                 features={['Bulk Seat Management', 'Custom Specialty Workflows', 'Dedicated Account Manager', 'On-Site Training']}
-                billingCycle={billingCycle}
-                onBillingToggle={toggleBilling}
                 index={2}
               />
             </div>
@@ -344,8 +339,9 @@ const PricingPage = () => {
 type PlanCardProps = {
   title: string;
   description: string;
-  price: string;
-  priceSub?: string;
+  price?: string;
+  priceMonthly?: number;
+  priceYearly?: number;
   currencySymbol?: string;
   saveAmount?: number;
   cta: string;
@@ -356,139 +352,165 @@ type PlanCardProps = {
   showBilling?: boolean;
   featured?: boolean;
   badge?: string;
-  billingCycle: BillingCycle;
-  onBillingToggle: () => void;
   index: number;
 };
 
-const PlanCard = ({ title, description, price, priceSub, currencySymbol, saveAmount, cta, credits, intro, features, ctaSecondary, showBilling, featured, badge, billingCycle, onBillingToggle, index }: PlanCardProps) => (
-  <motion.article 
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: index * 0.1, duration: 0.5 }}
-    whileHover={{ y: -8, transition: { duration: 0.2 } }}
-    className={`relative flex flex-col rounded-[24px] border bg-white p-7 shadow-sm transition-all duration-300 ${featured ? 'border-[#5768fd] ring-1 ring-[#5768fd]/5 shadow-xl shadow-blue-500/10' : 'border-[#d3d8ff] hover:border-[#bfc7ff]'}`}
-  >
-    {badge && (
-      <motion.div 
-        initial={{ y: 10, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: index * 0.1 + 0.3 }}
-        className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-[#ffd176] px-5 py-2 text-[15px] font-bold shadow-md ring-2 ring-white"
-      >
-        {badge}
-      </motion.div>
-    )}
-    
-    <div className="mb-8">
-      <h4 className="mb-2 text-[26px] font-bold tracking-[-1px]">{title}</h4>
-      <p className="text-[17px] leading-relaxed text-[#64748b]">{description}</p>
-      
-      <div className="relative mt-6 h-[70px]">
-        <AnimatePresence mode="wait">
-          <motion.div 
-            key={price + currencySymbol}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.1 }}
-            transition={{ type: "spring", stiffness: 400, damping: 30 }}
-            className="flex items-baseline gap-1"
-          >
-            <p className="text-[52px] font-bold leading-none tracking-[-2px]">
-              {price === 'Custom' ? '' : currencySymbol}{price}
-            </p>
-            {priceSub && price !== 'Custom' && (
-              <p className="text-[15px] font-medium text-[#62748e]">{priceSub}</p>
-            )}
-          </motion.div>
-        </AnimatePresence>
-      </div>
+const PlanCard = ({ 
+  title, 
+  description, 
+  price, 
+  priceMonthly,
+  priceYearly,
+  currencySymbol, 
+  saveAmount, 
+  cta, 
+  credits, 
+  intro, 
+  features, 
+  ctaSecondary, 
+  showBilling, 
+  featured, 
+  badge, 
+  index 
+}: PlanCardProps) => {
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>('yearly');
 
-      {showBilling && (
-        <div className="mt-4 flex flex-wrap items-center gap-4">
-          <span className="text-[15px] font-semibold text-[#62748e]">Billed</span>
-          <div className="relative flex h-[38px] w-[160px] items-center rounded-full bg-[#f0f2ff] p-1 shadow-inner overflow-hidden">
-            <motion.div
-              className="absolute h-[30px] rounded-full bg-white shadow-md shadow-blue-500/10"
-              initial={false}
-              animate={{ x: billingCycle === 'yearly' ? 0 : 75, width: billingCycle === 'yearly' ? 80 : 80 }}
+  const displayPrice = price || (billingCycle === 'monthly' ? priceMonthly?.toLocaleString() : priceYearly?.toLocaleString());
+  const priceSub = price ? undefined : (billingCycle === 'monthly' ? "Per user/month" : "Per user/year");
+
+  const toggleBilling = () => {
+    setBillingCycle(prev => prev === 'monthly' ? 'yearly' : 'monthly');
+  };
+
+  return (
+    <motion.article 
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      whileHover={{ y: -8, transition: { duration: 0.2 } }}
+      className={`relative flex flex-col rounded-[24px] border bg-white p-7 shadow-sm transition-all duration-300 ${featured ? 'border-[#5768fd] ring-1 ring-[#5768fd]/5 shadow-xl shadow-blue-500/10' : 'border-[#d3d8ff] hover:border-[#bfc7ff]'}`}
+    >
+      {badge && (
+        <motion.div 
+          initial={{ y: 10, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: index * 0.1 + 0.3 }}
+          className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-[#ffd176] px-5 py-2 text-[15px] font-bold shadow-md ring-2 ring-white"
+        >
+          {badge}
+        </motion.div>
+      )}
+      
+      <div className="mb-8">
+        <h4 className="mb-2 text-[26px] font-bold tracking-[-1px]">{title}</h4>
+        <p className="text-[17px] leading-relaxed text-[#64748b]">{description}</p>
+        
+        <div className="relative mt-6 h-[70px]">
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={`${displayPrice}-${currencySymbol}`}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.1 }}
               transition={{ type: "spring", stiffness: 400, damping: 30 }}
-            />
-            <button 
-              onClick={() => billingCycle !== 'yearly' && onBillingToggle()}
-              className={`relative z-10 w-[80px] text-[13px] font-bold transition-colors ${billingCycle === 'yearly' ? 'text-[#040523]' : 'text-[#62748e]'}`}
+              className="flex items-baseline gap-1"
             >
-              Yearly
-            </button>
-            <button 
-              onClick={() => billingCycle !== 'monthly' && onBillingToggle()}
-              className={`relative z-10 w-[80px] text-[13px] font-bold transition-colors ${billingCycle === 'monthly' ? 'text-[#040523]' : 'text-[#62748e]'}`}
-            >
-              Monthly
-            </button>
-          </div>
-          <AnimatePresence>
-            {billingCycle === 'yearly' && saveAmount && saveAmount > 0 && (
-              <motion.span 
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
-                className="rounded-lg border border-[#007a55] bg-[#edfdf5] px-3 py-1 text-[13px] font-bold text-[#007a55]"
-              >
-                Save {currencySymbol}{saveAmount}
-              </motion.span>
-            )}
+              <p className="text-[52px] font-bold leading-none tracking-[-2px]">
+                {displayPrice === 'Custom' ? '' : currencySymbol}{displayPrice}
+              </p>
+              {priceSub && displayPrice !== 'Custom' && (
+                <p className="text-[15px] font-medium text-[#62748e]">{priceSub}</p>
+              )}
+            </motion.div>
           </AnimatePresence>
         </div>
-      )}
-    </div>
-    
-    <div className="mt-auto">
-      <motion.button 
-        whileHover={{ scale: 1.02, backgroundColor: ctaSecondary ? '#e2e8f0' : '#4a5af7' }}
-        whileTap={{ scale: 0.98 }}
-        className={`mb-6 h-[56px] w-full rounded-2xl text-[17px] font-bold transition-shadow shadow-[0px_8px_20px_-4px_rgba(87,104,253,0.3)] hover:shadow-2xl hover:shadow-blue-500/20 ${ctaSecondary ? 'bg-slate-100 text-[#040523]' : 'bg-[#5768fd] text-white'}`}
-      >
-        {cta}
-      </motion.button>
-      
-      <div className="mb-8 flex items-center gap-3">
-        <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-[#f0f2ff]">
-          <Sparkles className="h-4 w-4 text-[#5768fd]" />
-        </div>
-        <p className="text-[15px] font-bold text-[#10154c]">{credits}</p>
+
+        {showBilling && (
+          <div className="mt-4 flex flex-wrap items-center gap-4">
+            <span className="text-[15px] font-semibold text-[#62748e]">Billed</span>
+            <div className="relative flex h-[38px] w-[160px] items-center rounded-full bg-[#f0f2ff] p-1 shadow-inner overflow-hidden">
+              <motion.div
+                className="absolute h-[30px] rounded-full bg-white shadow-md shadow-blue-500/10"
+                initial={false}
+                animate={{ x: billingCycle === 'yearly' ? 0 : 75, width: billingCycle === 'yearly' ? 80 : 80 }}
+                transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              />
+              <button 
+                onClick={() => billingCycle !== 'yearly' && toggleBilling()}
+                className={`relative z-10 w-[80px] text-[13px] font-bold transition-colors ${billingCycle === 'yearly' ? 'text-[#040523]' : 'text-[#62748e]'}`}
+              >
+                Yearly
+              </button>
+              <button 
+                onClick={() => billingCycle !== 'monthly' && toggleBilling()}
+                className={`relative z-10 w-[80px] text-[13px] font-bold transition-colors ${billingCycle === 'monthly' ? 'text-[#040523]' : 'text-[#62748e]'}`}
+              >
+                Monthly
+              </button>
+            </div>
+            <AnimatePresence>
+              {billingCycle === 'yearly' && saveAmount && saveAmount > 0 && (
+                <motion.span 
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -10 }}
+                  className="rounded-lg border border-[#007a55] bg-[#edfdf5] px-3 py-1 text-[13px] font-bold text-[#007a55]"
+                >
+                  Save {currencySymbol}{saveAmount}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
       </div>
       
-      <div className="border-t border-slate-100 pt-7">
-        <p className="mb-5 text-[18px] font-bold text-[#040523]">{intro}</p>
-        <div className="space-y-4">
-          {features.map((feature, i) => (
-            <motion.div 
-               key={feature} 
-               initial={{ opacity: 0, x: -5 }}
-               animate={{ opacity: 1, x: 0 }}
-               transition={{ delay: index * 0.1 + (i * 0.05) + 0.5 }}
-               className="flex items-start gap-4"
-            >
-              <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#f3f4ff]">
-                <Check className="h-3.5 w-3.5 text-[#5768fd] stroke-[3px]" />
-              </div>
-              <span className="text-[16px] leading-tight text-[#475569] font-medium">{feature}</span>
-            </motion.div>
-          ))}
+      <div className="mt-auto">
+        <motion.button 
+          whileHover={{ scale: 1.02, backgroundColor: ctaSecondary ? '#e2e8f0' : '#4a5af7' }}
+          whileTap={{ scale: 0.98 }}
+          className={`mb-6 h-[56px] w-full rounded-2xl text-[17px] font-bold transition-shadow shadow-[0px_8px_20px_-4px_rgba(87,104,253,0.3)] hover:shadow-2xl hover:shadow-blue-500/20 ${ctaSecondary ? 'bg-slate-100 text-[#040523]' : 'bg-[#5768fd] text-white'}`}
+        >
+          {cta}
+        </motion.button>
+        
+        <div className="mb-8 flex items-center gap-3">
+          <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-[#f0f2ff]">
+            <Sparkles className="h-4 w-4 text-[#5768fd]" />
+          </div>
+          <p className="text-[15px] font-bold text-[#10154c]">{credits}</p>
         </div>
+        
+        <div className="border-t border-slate-100 pt-7">
+          <p className="mb-5 text-[18px] font-bold text-[#040523]">{intro}</p>
+          <div className="space-y-4">
+            {features.map((feature, i) => (
+              <motion.div 
+                 key={feature} 
+                 initial={{ opacity: 0, x: -5 }}
+                 animate={{ opacity: 1, x: 0 }}
+                 transition={{ delay: index * 0.1 + (i * 0.05) + 0.5 }}
+                 className="flex items-start gap-4"
+              >
+                <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#f3f4ff]">
+                  <Check className="h-3.5 w-3.5 text-[#5768fd] stroke-[3px]" />
+                </div>
+                <span className="text-[16px] leading-tight text-[#475569] font-medium">{feature}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+        
+        <motion.button 
+          whileHover={{ x: 5 }}
+          className="mt-8 flex items-center gap-2 text-[17px] font-bold text-[#040523]/80 hover:text-[#5768fd]"
+        >
+          See all features
+          <ChevronDown className="-rotate-90 h-4 w-4" />
+        </motion.button>
       </div>
-      
-      <motion.button 
-        whileHover={{ x: 5 }}
-        className="mt-8 flex items-center gap-2 text-[17px] font-bold text-[#040523]/80 hover:text-[#5768fd]"
-      >
-        See all features
-        <ChevronDown className="-rotate-90 h-4 w-4" />
-      </motion.button>
-    </div>
-  </motion.article>
-);
+    </motion.article>
+  );
+};
 
 const FeatureGroup = ({ title, open, onToggle, children }: { title: string; open: boolean; onToggle: () => void; children?: React.ReactNode }) => (
   <motion.div 

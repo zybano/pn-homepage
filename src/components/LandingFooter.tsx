@@ -1,5 +1,6 @@
-import { IconBrandTwitter, IconBrandLinkedin, IconBrandInstagram, IconBrandFacebook } from "@tabler/icons-react";
+import { IconBrandTwitter, IconBrandLinkedin, IconBrandInstagram, IconBrandFacebook, IconShieldCheck } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const LandingFooter = () => {
   const sections = [
@@ -36,17 +37,32 @@ const LandingFooter = () => {
   ];
 
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-br from-[#040523] to-[#3b4fe8] pb-10 pt-16 text-white">
+    <footer className="relative overflow-hidden bg-[#040523] pb-10 pt-24 text-white">
+      {/* Background Decorative Stripes (SVG Pattern) */}
+      <div className="absolute inset-0 z-0 opacity-10">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="footer-grid" width="160" height="160" patternUnits="userSpaceOnUse">
+              <path d="M0 160 L160 0 M-40 40 L40 -40 M120 200 L200 120" stroke="white" strokeWidth="1" fill="none" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#footer-grid)" />
+        </svg>
+      </div>
+      
+      {/* Radial Gradient for Glow */}
+      <div className="absolute -right-20 -top-20 h-[500px] w-[500px] rounded-full bg-[#3b4fe8]/20 blur-[120px]" />
+      <div className="absolute -left-20 bottom-0 h-[400px] w-[400px] rounded-full bg-[#3b4fe8]/15 blur-[100px]" />
 
-      <div className="container-custom relative z-10">
-        <div className="mb-12 grid gap-10 lg:grid-cols-[1.4fr_2fr]">
+      <div className="container-custom relative z-10 mx-auto max-w-[1320px] px-6">
+        <div className="mb-20 grid gap-16 lg:grid-cols-[1.2fr_2fr]">
           {/* Brand Col */}
-          <div className="col-span-2">
-            <Link to="/" className="mb-4 inline-flex items-center gap-2">
-              <div className="h-10 w-10 rounded-md bg-brand-blue flex items-center justify-center">
+          <div>
+            <Link to="/" className="mb-6 inline-flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#5768fd] shadow-lg shadow-[#5768fd]/30">
                 <svg
-                  width="28"
-                  height="28"
+                  width="26"
+                  height="26"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -60,64 +76,86 @@ const LandingFooter = () => {
                   />
                 </svg>
               </div>
-              <span className="text-3xl font-semibold tracking-tight">
+              <span className="text-3xl font-bold tracking-tight text-white">
                 PrecisionNote
               </span>
             </Link>
-            <p className="mb-4 max-w-xs text-[16px] leading-[24px] text-white/60">
+            <p className="mb-6 max-w-sm text-[18px] leading-[28px] text-white/70">
               AI-powered clinical documentation for modern physicians.
             </p>
-            <p className="mb-6 font-mono text-[12px] text-[#00d492]">HIPAA · HL7 FHIR Compliant</p>
-            <div className="mb-6 flex gap-2">
-              <input className="h-9 w-[267px] rounded-lg border border-white/60 bg-transparent px-3 text-[14px] text-white/60 placeholder:text-white/60" value="Subscribe to Our Newsletter" readOnly />
-              <button className="h-9 rounded-lg bg-brand-blue px-4 text-[14px] font-medium">Subscribe</button>
+            
+            <div className="mb-10 flex items-center gap-2 text-[#00d492]">
+              <IconShieldCheck size={20} className="stroke-[2.5px]" />
+              <span className="text-[14px] font-bold tracking-wide uppercase">HIPAA · HL7 FHIR Compliant</span>
+            </div>
+
+            <div className="flex max-w-md items-center gap-3">
+              <div className="relative flex-1">
+                <input 
+                  type="email" 
+                  placeholder="Subscribe to Our Newsletter" 
+                  className="h-[52px] w-full rounded-2xl border border-white/20 bg-white/5 px-5 text-[15px] text-white placeholder:text-white/40 focus:border-[#5768fd]/50 focus:outline-none transition-all"
+                />
+              </div>
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="h-[52px] rounded-2xl bg-[#5768fd] px-8 text-[16px] font-bold text-white shadow-lg shadow-[#5768fd]/20 transition-all hover:bg-[#4a5af7] hover:shadow-[#5768fd]/40"
+              >
+                Subscribe
+              </motion.button>
             </div>
           </div>
 
-          {/* Links */}
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {sections.map((section) => (
-            <div key={section.title}>
-              <h4 className="mb-4 font-mono text-[16px] uppercase tracking-[1.2px] text-white">
-                {section.title}
-              </h4>
-              <ul className="space-y-2">
-                {section.links.map((link) => (
-                  <li key={link.name}>
-                    {link.href.startsWith("/") ? (
-                      <Link
-                        to={link.href}
-                        className="text-[14px] text-white/60 hover:text-white transition-colors"
-                      >
-                        {link.name}
-                      </Link>
-                    ) : (
-                      <a
-                        href={link.href}
-                        className="text-[14px] text-white/60 hover:text-white transition-colors"
-                      >
-                        {link.name}
-                      </a>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Links Grid */}
+          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
+            {sections.map((section) => (
+              <div key={section.title}>
+                <h4 className="mb-7 text-[15px] font-bold uppercase tracking-[2px] text-white/50">
+                  {section.title}
+                </h4>
+                <ul className="space-y-4">
+                  {section.links.map((link) => (
+                    <li key={link.name}>
+                      {link.href.startsWith("/") ? (
+                        <Link
+                          to={link.href}
+                          className="text-[16px] font-medium text-white/70 hover:text-white transition-colors"
+                        >
+                          {link.name}
+                        </Link>
+                      ) : (
+                        <a
+                          href={link.href}
+                          className="text-[16px] font-medium text-white/70 hover:text-white transition-colors"
+                        >
+                          {link.name}
+                        </a>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 border-t border-white/40 pt-4 md:flex-row md:items-center md:justify-between">
-          <p className="text-[16px] text-white/50">
-            ©2025 PrecisionNote Inc. All rights reserved
-          </p>
-          <div className="flex items-center gap-4 text-white/60">
-            <span className="text-[16px]">Follow Us</span>
-            {[IconBrandTwitter, IconBrandLinkedin, IconBrandInstagram, IconBrandFacebook].map((Icon, i) => (
-              <a key={i} href="#" className="hover:text-white transition-colors">
-                <Icon size={22} />
-              </a>
-            ))}
+        {/* Bottom Bar */}
+        <div className="flex flex-col gap-8 border-t border-white/10 pt-10 md:flex-row md:items-center md:justify-between">
+          <div className="flex items-center gap-4">
+             <p className="text-[16px] font-medium text-white/50">
+               ©2025 PrecisionNote Inc. All rights reserved
+             </p>
+          </div>
+          <div className="flex items-center gap-8 text-white/50">
+            <span className="text-[15px] font-bold uppercase tracking-wider text-white/30">Follow Us</span>
+            <div className="flex items-center gap-6">
+              {[IconBrandTwitter, IconBrandLinkedin, IconBrandInstagram, IconBrandFacebook].map((Icon, i) => (
+                <a key={i} href="#" className="hover:text-white transition-all transform hover:-translate-y-1">
+                  <Icon size={24} stroke={1.5} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
