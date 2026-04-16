@@ -301,30 +301,51 @@ const PricingPage = () => {
 
         <section className="mx-auto mb-[120px] w-full max-w-[1320px] px-6">
           <motion.div 
-            whileHover={{ scale: 1.01 }}
-            className="group relative overflow-hidden rounded-[32px] bg-[#ffc738] px-8 py-20 text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="group relative overflow-hidden rounded-[32px] bg-[#ffcf63] px-8 py-24 text-center shadow-xl shadow-yellow-500/10"
           >
-            <div className="absolute inset-0 opacity-20 transition-opacity group-hover:opacity-30" style={{ backgroundImage: 'linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px)', backgroundSize: '72px 72px' }} />
-            <div className="relative">
-              <h3 className="mb-4 text-[56px] font-bold leading-[56px] tracking-[-2px]">Still have questions?</h3>
-              <p className="mx-auto mb-10 max-w-[600px] text-[20px] leading-[32px] text-[#040523]/70 font-medium">
-                Our clinical team is ready to help you find the right plan for your medical practice
+            {/* Mosaic Background Tile Pattern */}
+            <div className="absolute inset-0 z-0 opacity-40">
+              <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <pattern id="mosaic" width="220" height="220" patternUnits="userSpaceOnUse">
+                    <rect width="110" height="220" fill="#ffc130" />
+                    <rect x="110" width="110" height="220" fill="#ffd36b" />
+                    <rect width="220" height="110" fill="white" fillOpacity="0.05" />
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#mosaic)" />
+              </svg>
+            </div>
+            
+            {/* Bottom Glow */}
+            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-yellow-400/20 to-transparent" />
+
+            <div className="relative z-10">
+              <h3 className="mb-6 text-[64px] font-bold leading-[64px] tracking-[-2.5px] text-[#040523]">
+                Still have questions?
+              </h3>
+              <p className="mx-auto mb-12 max-w-[700px] text-[20px] leading-[32px] text-[#040523]/80 font-medium tracking-tight">
+                Our clinical team is ready to help you find the right plan for your practice
               </p>
-              <div className="flex flex-wrap items-center justify-center gap-4">
+              
+              <div className="flex flex-wrap items-center justify-center gap-5">
                 <motion.button 
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex min-h-[56px] items-center gap-3 rounded-2xl bg-[#040523] px-10 py-4 text-[18px] font-bold text-white shadow-xl shadow-black/20"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group flex min-h-[64px] items-center gap-3 rounded-[20px] bg-gradient-to-r from-[#040523] to-[#3b4fe8] px-10 py-5 text-[18px] font-bold text-white shadow-2xl shadow-[#040523]/30 transition-all hover:shadow-[#3b4fe8]/50"
                 >
-                  Chat with our clinical team
-                  <ArrowRight className="h-5 w-5" />
+                   Chat with our clinical team
+                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </motion.button>
                 <motion.button 
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="min-h-[56px] rounded-2xl bg-white px-10 py-4 text-[18px] font-bold text-[#040523] shadow-lg shadow-black/5"
+                  whileHover={{ scale: 1.05, backgroundColor: "#fff" }}
+                  whileTap={{ scale: 0.98 }}
+                  className="min-h-[64px] rounded-[20px] border border-[#d4a841]/30 bg-[#fff5d9]/60 px-10 py-5 text-[18px] font-bold text-[#040523] shadow-lg shadow-black/5 transition-all"
                 >
-                  Book a demo
+                  Book a Demo
                 </motion.button>
               </div>
             </div>
