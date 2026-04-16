@@ -27,7 +27,7 @@ const LandingNav = () => {
 
   return (
     <nav
-      className={`sticky top-0 left-0 right-0 z-50 border-b border-brand-border bg-white transition-all duration-300 ${
+      className={`sticky top-0 left-0 py-3 right-0 z-50 border-b border-brand-border bg-white transition-all duration-300 ${
         isScrolled ? 'shadow-[0_1px_2px_rgba(0,0,0,0.04)]' : ''
       }`}
     >
@@ -35,7 +35,7 @@ const LandingNav = () => {
         {/* Logo */}
         <Link to="/" className="flex cursor-pointer items-center gap-[6px]">
           <div className="h-[46px] w-[35px]">
-            <img src={logoMark} alt="PrecisionNote logo" className="h-full w-full" />
+            <img src={logoMark} alt="PrecisionNote logo" className="h-7 w-7" />
           </div>
           <span className="text-[22.76px] font-semibold leading-[22.76px] tracking-[1px] text-brand-blue">
             PrecisionNote
