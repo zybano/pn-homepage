@@ -2,6 +2,7 @@ import LandingNav from '../components/LandingNav';
 import Hero from '../components/Hero';
 import ComparisonSection from '../components/ComparisonSection';
 import StepSection from '../components/StepSection';
+import DocumentationSection from '../components/DocumentationSection';
 import Testimonials from '../components/Testimonials';
 import FooterCTA from '../components/FooterCTA';
 import LandingFooter from '../components/LandingFooter';
@@ -15,6 +16,7 @@ function LandingPage() {
         <Hero />
         <ComparisonSection />
         <StepSection />
+        <DocumentationSection />
         
         <Testimonials />
 
