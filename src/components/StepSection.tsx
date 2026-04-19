@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mic, FileText, Send, Check } from 'lucide-react';
+import { Mic, FileText, Send, Check, ArrowRight } from 'lucide-react';
 
 const StepSection = () => {
   return (
@@ -164,6 +164,16 @@ const StepSection = () => {
               </div>
             </div>
           </motion.div>
+        </div>
+
+        <div className="mt-20 text-center">
+          <a 
+            href="/how-it-works"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#040523] border border-[#cfd4ff] rounded-xl font-bold text-lg hover:bg-brand-bg transition-all shadow-sm"
+          >
+            Learn more about our process
+            <ArrowRight className="w-5 h-5" />
+          </a>
         </div>
       </div>
     </section>
