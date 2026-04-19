@@ -146,14 +146,13 @@ const HowItWorksPage = () => {
             viewport={{ once: true }}
             className="relative overflow-hidden rounded-[40px] bg-[#ffca40] p-12 md:p-20 text-center"
           >
-            {/* Block Pattern Overlay */}
-            <div className="absolute inset-0 opacity-10 pointer-events-none"
-                 style={{ 
-                   backgroundImage: `linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000), 
-                                     linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000)`,
-                   backgroundSize: '40px 40px',
-                   backgroundPosition: '0 0, 20px 20px'
-                 }}
+            {/* Block Pattern Overlay from Figma */}
+            <div 
+              className="absolute inset-0 opacity-20 pointer-events-none bg-repeat bg-center"
+              style={{ 
+                backgroundImage: `url('https://www.figma.com/api/mcp/asset/e429e8ca-56dd-4d73-8006-a20dc1575e01')`,
+                backgroundSize: '300px'
+              }}
             />
 
             <div className="relative z-10 max-w-3xl mx-auto">

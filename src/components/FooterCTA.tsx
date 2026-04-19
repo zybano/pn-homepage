@@ -39,7 +39,13 @@ const FooterCTA = () => {
         viewport={{ once: true }}
         className="relative overflow-hidden rounded-2xl bg-[#ffcd6a] p-10 text-center text-brand-navy md:p-20"
       >
-        <div className="absolute inset-0 opacity-30" style={{ backgroundImage: `url(${ctaPattern})` }} />
+        <div 
+          className="absolute inset-0 opacity-20 pointer-events-none bg-repeat bg-center" 
+          style={{ 
+            backgroundImage: `url(${ctaPattern})`,
+            backgroundSize: '250px'
+          }} 
+        />
 
         <div className="relative z-10 max-w-4xl mx-auto">
           {/* Heartbeat Icon */}
