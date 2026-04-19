@@ -4,6 +4,7 @@ import PricingPage from './pages/PricingPage';
 import FeaturesPage from './pages/FeaturesPage';
 import HowItWorksPage from './pages/HowItWorksPage';
 import IntegrationsPage from './pages/IntegrationsPage';
+import ChatPage from './pages/ChatPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/how-it-works" element={<HowItWorksPage />} />
         <Route path="/integrations" element={<IntegrationsPage />} />
+        <Route path="/chat" element={<ChatPage />} />
       </Routes>
     </Router>
   );
