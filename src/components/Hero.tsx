@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import arrowRightSvg from "../assets/figma-assets/hero/icon-arrow-right.svg";
 import bgCircleSvg from "../assets/figma-assets/hero/bg-circle.svg";
 import playSvg from "../assets/figma-assets/hero/icon-play.svg";
@@ -274,7 +275,11 @@ const Hero = () => {
                                   Active Scribe
                                 </p>
                                 <div className="flex items-center gap-[4.436px]">
-                                  <div className="h-[6.666px] w-[6.655px] rounded-full bg-[#5768fd] opacity-60" />
+                                  <motion.div 
+                                    className="h-[6.666px] w-[6.655px] rounded-full bg-[#5768fd]" 
+                                    animate={{ opacity: [0.3, 1, 0.3] }}
+                                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                                  />
                                   <p className="font-mono text-[10.015px] leading-[15.023px] text-[#5768fd]">
                                     LIVE
                                   </p>
@@ -283,10 +288,19 @@ const Hero = () => {
 
                               <div className="flex h-[53.516px] w-full items-center gap-[3.348px]">
                                 {waveformHeights.map((h, idx) => (
-                                  <div
+                                  <motion.div
                                     key={idx}
                                     className="w-[3.348px] rounded-full bg-[#5768fd]"
-                                    style={{ height: `${h}px` }}
+                                    animate={{ 
+                                      height: [h * 0.5, h * 1.3, h * 0.7, h],
+                                      opacity: [0.5, 1, 0.7, 1]
+                                    }}
+                                    transition={{
+                                      duration: 1.5,
+                                      repeat: Infinity,
+                                      ease: "easeInOut",
+                                      delay: idx * 0.08
+                                    }}
                                   />
                                 ))}
                               </div>
