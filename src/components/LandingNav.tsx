@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
-const logoMark = 'https://www.figma.com/api/mcp/asset/6d576040-17cc-4549-9670-635bbf683399';
+const logoMark =
+  "https://www.figma.com/api/mcp/asset/6d576040-17cc-4549-9670-635bbf683399";
 
 const LandingNav = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -14,21 +15,21 @@ const LandingNav = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
-    { name: 'Features', href: '/features' },
-    { name: 'How it Works', href: '/how-it-works' },
-    { name: 'Pricing', href: '/pricing' },
-    { name: 'Chat with Us', href: '/#chat' },
+    { name: "Features", href: "/features" },
+    { name: "How it Works", href: "/how-it-works" },
+    { name: "Pricing", href: "/pricing" },
+    { name: "Chat with Us", href: "/chat" },
   ];
 
   return (
     <nav
       className={`sticky top-0 left-0 py-3 right-0 z-50 border-b border-brand-border bg-white transition-all duration-300 ${
-        isScrolled ? 'shadow-[0_1px_2px_rgba(0,0,0,0.04)]' : ''
+        isScrolled ? "shadow-[0_1px_2px_rgba(0,0,0,0.04)]" : ""
       }`}
     >
       <div className="container-custom flex items-center justify-between gap-8">
@@ -44,25 +45,25 @@ const LandingNav = () => {
 
         {/* Desktop Links */}
         <div className="hidden items-center gap-6 text-[16px] text-[#45556c] lg:flex">
-          {navLinks.map((link) => (
-            link.href.startsWith('/#') ? (
-              <a 
-                key={link.name} 
+          {navLinks.map((link) =>
+            link.href.startsWith("/#") ? (
+              <a
+                key={link.name}
                 href={link.href}
                 className="font-normal leading-[24px] text-[#45556c] transition-colors hover:text-brand-blue"
               >
                 {link.name}
               </a>
             ) : (
-              <Link 
-                key={link.name} 
+              <Link
+                key={link.name}
                 to={link.href}
-                className={`text-[16px] font-normal transition-colors ${location.pathname === link.href ? 'text-brand-blue' : 'text-[#45556c] hover:text-brand-blue'}`}
+                className={`text-[16px] font-normal transition-colors ${location.pathname === link.href ? "text-brand-blue" : "text-[#45556c] hover:text-brand-blue"}`}
               >
                 {link.name}
               </Link>
-            )
-          ))}
+            ),
+          )}
         </div>
 
         {/* Desktop CTAs */}
@@ -76,7 +77,7 @@ const LandingNav = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <button 
+        <button
           className="lg:hidden p-2 text-brand-navy"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
@@ -89,15 +90,15 @@ const LandingNav = () => {
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden bg-white border-b border-brand-border"
           >
             <div className="container-custom py-6 flex flex-col gap-6">
-              {navLinks.map((link) => (
-                link.href.startsWith('/#') ? (
-                  <a 
-                    key={link.name} 
+              {navLinks.map((link) =>
+                link.href.startsWith("/#") ? (
+                  <a
+                    key={link.name}
                     href={link.href}
                     className="text-lg font-medium text-brand-navy"
                     onClick={() => setMobileMenuOpen(false)}
@@ -105,16 +106,16 @@ const LandingNav = () => {
                     {link.name}
                   </a>
                 ) : (
-                  <Link 
-                    key={link.name} 
+                  <Link
+                    key={link.name}
                     to={link.href}
                     className="text-lg font-medium text-brand-navy"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.name}
                   </Link>
-                )
-              ))}
+                ),
+              )}
               <hr className="border-brand-border" />
               <div className="flex flex-col gap-4">
                 <button className="w-full py-3 text-brand-navy font-bold bg-[#F1F5F9] rounded-full">
@@ -133,5 +134,3 @@ const LandingNav = () => {
 };
 
 export default LandingNav;
-
-
