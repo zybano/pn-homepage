@@ -11,7 +11,7 @@ const LandingFooter = () => {
         { name: "Features", href: "/features#explore" },
         { name: "How it Works", href: "/#how-it-works" },
         { name: "Pricing", href: "/pricing" },
-        { name: "Integrations", href: "/features#integrations" },
+        { name: "Integrations", href: "/integrations" },
         { name: "Security", href: "/features#integrations" },
       ],
     },
