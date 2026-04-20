@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mic, FileText, Sparkles, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Mic, FileText, Sparkles } from 'lucide-react';
 import LandingNav from '../components/LandingNav';
 import LandingFooter from '../components/LandingFooter';
 import Testimonials from '../components/Testimonials';

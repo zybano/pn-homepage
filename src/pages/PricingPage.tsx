@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, Check, ChevronDown, ChevronUp, CircleMinus, CirclePlus, Sparkles } from 'lucide-react';
+import { ArrowRight, Check, ChevronDown, CirclePlus, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LandingFooter from '../components/LandingFooter';
 import LandingNav from '../components/LandingNav';
@@ -54,9 +54,7 @@ const PricingPage = () => {
     ['Custom Template Editor', '---', '---', 'Yes'],
   ];
 
-  const toggleBilling = () => {
-    setBillingCycle(prev => prev === 'monthly' ? 'yearly' : 'monthly');
-  };
+
 
   return (
     <div className="min-h-screen bg-[#fafbff] font-geist text-[#040523]">
