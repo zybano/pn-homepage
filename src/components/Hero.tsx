@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
-import arrowRightSvg from "../assets/figma-assets/hero/icon-arrow-right.svg";
+import { ArrowRight, Play } from "lucide-react";
 import bgCircleSvg from "../assets/figma-assets/hero/bg-circle.svg";
-import playSvg from "../assets/figma-assets/hero/icon-play.svg";
 import shieldSvg from "../assets/figma-assets/hero/icon-shield.svg";
 import starSvg from "../assets/figma-assets/hero/icon-star.svg";
 import doctor1Png from "../assets/figma-assets/hero/doctor-1.png";
@@ -47,27 +46,15 @@ const Hero = () => {
               </div>
 
               <div className="flex flex-wrap items-center gap-[16px]">
-                <button className="inline-flex items-center justify-center gap-[8px] rounded-[8px] bg-[#5768fd] px-[32px] py-[12px] shadow-[0px_4px_14px_0px_rgba(87,104,253,0.35)]">
+                <button className="inline-flex items-center justify-center gap-[8px] rounded-[8px] bg-[#5768fd] px-[32px] py-[12px] shadow-[0px_4px_14px_0px_rgba(87,104,253,0.35)] hover:bg-[#4656e5] transition-colors">
                   <span className="text-[16px] font-semibold leading-[24px] text-white">
                     Try Free for 14 Days
                   </span>
-                  <span className="relative h-[16px] w-[16px] overflow-hidden">
-                    <img
-                      alt=""
-                      className="absolute inset-[17.71%]"
-                      src={arrowRightSvg}
-                    />
-                  </span>
+                  <ArrowRight size={16} className="text-white" />
                 </button>
 
-                <button className="inline-flex items-center justify-center gap-[8px] rounded-[8px] border border-[#e2e8f0] bg-[#f1f5f9] px-[32px] py-[12px]">
-                  <span className="relative h-[16px] w-[16px] overflow-hidden">
-                    <img
-                      alt=""
-                      className="absolute inset-[9.38%_13.54%_9.38%_21.88%]"
-                      src={playSvg}
-                    />
-                  </span>
+                <button className="inline-flex items-center justify-center gap-[8px] rounded-[8px] border border-[#e2e8f0] bg-[#f1f5f9] px-[32px] py-[12px] hover:bg-[#e2e8f0] transition-colors">
+                  <Play size={16} className="text-[#040523] fill-[#040523]" />
                   <span className="text-[16px] font-medium leading-[24px] text-[#040523]">
                     Watch 1-Min Demo
                   </span>
