@@ -24,6 +24,7 @@ const LandingNav = () => {
     { name: "How it Works", href: "/how-it-works" },
     { name: "Pricing", href: "/pricing" },
     { name: "Chat with Us", href: "/chat" },
+    { name: "Blog", href: "/blog" },
   ];
 
   return (
