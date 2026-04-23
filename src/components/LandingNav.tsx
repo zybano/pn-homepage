@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { AppImages } from "../lib/data";
 
 const logoMark =
-  "https://www.figma.com/api/mcp/asset/6d576040-17cc-4549-9670-635bbf683399";
+  AppImages.AppLogo;
 
 const LandingNav = () => {
   const [isScrolled, setIsScrolled] = useState(false);

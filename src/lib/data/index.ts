@@ -12,8 +12,10 @@ import PricingPageVector from '../../assets/img/pricing_page_vector.svg';
 import ReactLogo from '../../assets/img/react.svg';
 import ViteLogo from '../../assets/img/vite.svg';
 import YellowCTABg from '../../assets/img/yellow-cta-bg.png';
+import AppLogo from '../../assets/img/app-logo.svg';
 
 export const AppImages = {
+  AppLogo,
   BgCircle,
   Doctor1,
   Doctor2,
