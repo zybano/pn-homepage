@@ -26,8 +26,8 @@ const waveformHeights = [
 ];
 
 const ListeningScreen = ({ reduceMotion }: { reduceMotion: boolean }) => (
-  <div className="flex-1 flex items-center justify-center">
-    <div className="w-full max-w-[560px] rounded-2xl overflow-hidden border border-[#7c8dff] bg-gradient-to-b from-[#5f72f5] to-[#566af4] shadow-[0_24px_60px_rgba(82,102,241,0.35)]">
+  <div className="flex-1 h-full flex items-center justify-center">
+    <div className="h-full w-full rounded-2xl overflow-hidden border border-[#7c8dff] bg-gradient-to-b from-[#5f72f5] to-[#566af4] shadow-[0_24px_60px_rgba(82,102,241,0.35)]">
       <div className="h-full w-full px-5 md:px-7 py-4 md:py-5 bg-[linear-gradient(180deg,rgba(255,255,255,0.06)_0%,rgba(255,255,255,0.02)_100%)]">
         <div className="flex justify-center mb-5">
           <div className="h-8 px-4 rounded-full bg-[rgba(104,123,255,0.75)] border border-[rgba(255,255,255,0.15)] text-white flex items-center gap-2 text-[12px] font-bold tracking-wide">
@@ -86,8 +86,8 @@ const ListeningScreen = ({ reduceMotion }: { reduceMotion: boolean }) => (
 );
 
 const RefinementScreen = ({ reduceMotion }: { reduceMotion: boolean }) => (
-  <div className="flex-1 flex flex-col justify-center">
-    <div className="rounded-xl border border-[#e2e8f0] bg-white overflow-hidden">
+  <div className="flex-1 h-full flex flex-col">
+    <div className="h-full rounded-xl border border-[#e2e8f0] bg-white overflow-hidden">
       <div className="flex items-center justify-between gap-4 pl-4 pr-3 py-3 border-b border-[#e2e8f0]">
         <div className="min-w-0">
           <div className="mb-1 flex items-center gap-2">
@@ -146,8 +146,8 @@ const RefinementScreen = ({ reduceMotion }: { reduceMotion: boolean }) => (
 );
 
 const HumanTouchScreen = ({ reduceMotion }: { reduceMotion: boolean }) => (
-  <div className="flex-1 flex flex-col justify-center">
-    <div className="rounded-xl border border-[#e2e8f0] bg-white p-4">
+  <div className="flex-1 h-full flex flex-col">
+    <div className="h-full rounded-xl border border-[#e2e8f0] bg-white p-4">
       <div className="flex items-start justify-between gap-3 pb-3 border-b border-[#e2e8f0]">
         <div className="min-w-0">
           <div className="flex items-center gap-2 mb-1">
