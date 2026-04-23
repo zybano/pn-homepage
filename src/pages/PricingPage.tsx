@@ -608,7 +608,7 @@ const PlanCard = ({
 const FeatureGroup = ({ title, open, onToggle, children }: { title: string; open: boolean; onToggle: () => void; children?: React.ReactNode }) => (
   <motion.div 
     layout
-    className="overflow-hidden rounded-2xl bg-[#e6e9ff]/50 backdrop-blur-sm border border-slate-200"
+    className="overflow-hidden bg-[#e6e9ff]/50 border border-slate-200"
   >
     <motion.button 
       layout
@@ -630,7 +630,7 @@ const FeatureGroup = ({ title, open, onToggle, children }: { title: string; open
           animate={{ height: "auto", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
-          className="border-t border-[#a4a9d7]/30 bg-white"
+          className="border-t border-[#a4a9d7]/30 bg-transparent"
         >
           {children}
         </motion.div>

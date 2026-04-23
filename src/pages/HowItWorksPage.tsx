@@ -3,6 +3,7 @@ import { Mic, FileText, Sparkles } from 'lucide-react';
 import LandingNav from '../components/LandingNav';
 import LandingFooter from '../components/LandingFooter';
 import Testimonials from '../components/Testimonials';
+import { AppImages } from '../lib/data';
 
 const HowItWorksPage = () => {
   const steps = [
@@ -150,7 +151,7 @@ const HowItWorksPage = () => {
             <div 
               className="absolute inset-0 opacity-20 pointer-events-none bg-repeat bg-center"
               style={{ 
-                backgroundImage: `url('https://www.figma.com/api/mcp/asset/e429e8ca-56dd-4d73-8006-a20dc1575e01')`,
+                backgroundImage: `url(${AppImages.YellowCTABg})`,
                 backgroundSize: '300px'
               }}
             />

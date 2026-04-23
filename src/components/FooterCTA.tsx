@@ -7,9 +7,10 @@ import {
   Zap,
   CheckCircle2,
   HeartPulse,
+  Images,
 } from "lucide-react";
 
-const ctaPattern = "https://www.figma.com/api/mcp/asset/e429e8ca-56dd-4d73-8006-a20dc1575e01";
+import { AppImages } from "../lib/data";
 
 const FooterCTA = () => {
   const benefits = [
@@ -42,7 +43,7 @@ const FooterCTA = () => {
         <div 
           className="absolute inset-0 opacity-20 pointer-events-none bg-repeat bg-center" 
           style={{ 
-            backgroundImage: `url(${ctaPattern})`,
+            backgroundImage: `url(${AppImages.YellowCTABg})`,
             backgroundSize: '250px'
           }} 
         />
