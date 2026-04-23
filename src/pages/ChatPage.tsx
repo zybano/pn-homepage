@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
-import { Quote, Send, ArrowRight } from 'lucide-react';
+import { Quote, ArrowRight, ChevronDown, Send } from 'lucide-react';
 import LandingNav from '../components/LandingNav';
 import LandingFooter from '../components/LandingFooter';
 import { AppImages } from '../lib/data';
 
+const GB_FLAG_ICON = 'https://www.figma.com/api/mcp/asset/7543b70b-b0a7-4094-892a-2a049edd5d07';
 const ChatPage = () => {
   return (
     <div className="min-h-screen bg-[#F8FAFF] font-geist selection:bg-[#5768fd] selection:text-white">
@@ -68,95 +69,94 @@ const ChatPage = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
-              className="bg-white rounded-[40px] p-8 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.04)] border border-[#E2E8F0]"
+              className="bg-[#f7f8fc] rounded-2xl p-10 shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-[#E2E8F0]"
             >
-              <form className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-[14px] font-bold text-[#040523]">First name <span className="text-red-500">*</span></label>
-                    <input 
-                      type="text" 
-                      placeholder="Your first name"
-                      className="w-full h-14 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFF] px-5 text-[15px] focus:border-[#5768fd] focus:outline-none transition-all"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[14px] font-bold text-[#040523]">Last name <span className="text-red-500">*</span></label>
-                    <input 
-                      type="text" 
-                      placeholder="Your last name"
-                      className="w-full h-14 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFF] px-5 text-[15px] focus:border-[#5768fd] focus:outline-none transition-all"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-[14px] font-bold text-[#040523]">Work email <span className="text-red-500">*</span></label>
-                    <input 
-                      type="email" 
-                      placeholder="Your work email"
-                      className="w-full h-14 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFF] px-5 text-[15px] focus:border-[#5768fd] focus:outline-none transition-all"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[14px] font-bold text-[#040523]">Contact number <span className="text-red-500">*</span></label>
-                    <div className="flex gap-2">
-                      <div className="w-24 h-14 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFF] flex items-center justify-center gap-2 px-3">
-                        <img src="https://flagcdn.com/w20/gb.png" alt="GB" className="w-5" />
-                        <span className="text-[14px] font-medium">+44</span>
-                      </div>
+              <form className="flex flex-col gap-10">
+                <div className="flex flex-col gap-6">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-[14px] font-medium leading-5 text-[#040523]">First name <span className="text-[#FD3232]">*</span></label>
                       <input 
-                        type="tel" 
-                        className="flex-1 h-14 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFF] px-5 text-[15px] focus:border-[#5768fd] focus:outline-none transition-all"
+                        type="text" 
+                        placeholder="Your first name"
+                        className="w-full h-[49px] rounded-lg border border-[#CBD5E1] bg-white/90 px-3 text-[14px] leading-5 text-[#040523] placeholder:text-[#737373] focus:border-[#5768fd] focus:outline-none"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[14px] font-medium leading-5 text-[#040523]">Last name <span className="text-[#FD3232]">*</span></label>
+                      <input 
+                        type="text" 
+                        placeholder="Your last name"
+                        className="w-full h-[49px] rounded-lg border border-[#CBD5E1] bg-white/90 px-3 text-[14px] leading-5 text-[#040523] placeholder:text-[#737373] focus:border-[#5768fd] focus:outline-none"
                         required
                       />
                     </div>
                   </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label className="text-[14px] font-medium leading-5 text-[#040523]">Work email <span className="text-[#FD3232]">*</span></label>
+                      <input 
+                        type="email" 
+                        placeholder="Your work email"
+                        className="w-full h-[49px] rounded-lg border border-[#CBD5E1] bg-white/90 px-3 text-[14px] leading-5 text-[#040523] placeholder:text-[#737373] focus:border-[#5768fd] focus:outline-none"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[14px] font-medium leading-5 text-[#040523]">Contact number <span className="text-[#FD3232]">*</span></label>
+                      <div className="w-full h-[50px] rounded-lg border border-[#CBD5E1] bg-white/90 flex items-center gap-2 px-3">
+                        <img src={GB_FLAG_ICON} alt="United Kingdom" className="h-[17.5px] w-[23.4px]" />
+                        <span className="text-[14px] leading-5 text-[#737373]">+44</span>
+                        <ChevronDown className="w-4 h-4 text-[#8A8A8A]" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[14px] font-medium leading-5 text-[#040523]">Country <span className="text-[#FD3232]">*</span></label>
+                    <div className="relative">
+                      <select className="w-full h-[49px] rounded-lg border border-[#CBD5E1] bg-white/90 px-3 pr-10 text-[14px] leading-5 text-[#737373] focus:border-[#5768fd] focus:outline-none appearance-none">
+                        <option>Select country</option>
+                        <option>United Kingdom</option>
+                        <option>United States</option>
+                        <option>Nigeria</option>
+                        <option>Canada</option>
+                      </select>
+                      <ChevronDown className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-[#8A8A8A] pointer-events-none" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[14px] font-medium leading-5 text-[#040523]">Hospital/Clinic name <span className="text-[#FD3232]">*</span></label>
+                    <input 
+                      type="text" 
+                      placeholder="Your hospital/Clinic name"
+                      className="w-full h-[49px] rounded-lg border border-[#CBD5E1] bg-white/90 px-3 text-[14px] leading-5 text-[#040523] placeholder:text-[#737373] focus:border-[#5768fd] focus:outline-none"
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[14px] font-medium leading-5 text-[#040523]">How can we help?</label>
+                    <textarea 
+                      placeholder="I'm interested in learning more about PrecisionNote for my practice..."
+                      className="w-full h-[119px] rounded-lg border border-[#C9D0FF] bg-white p-3 text-[14px] leading-5 text-[#040523] placeholder:text-[#737373] focus:border-[#5768fd] focus:outline-none resize-none"
+                    ></textarea>
+                  </div>
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-[14px] font-bold text-[#040523]">Country <span className="text-red-500">*</span></label>
-                  <select className="w-full h-14 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFF] px-5 text-[15px] focus:border-[#5768fd] focus:outline-none appearance-none transition-all">
-                    <option>Select country</option>
-                    <option>United Kingdom</option>
-                    <option>United States</option>
-                    <option>Nigeria</option>
-                    <option>Canada</option>
-                  </select>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-[14px] font-bold text-[#040523]">Hospital/Clinic name <span className="text-red-500">*</span></label>
-                  <input 
-                    type="text" 
-                    placeholder="Your hospital/Clinic name"
-                    className="w-full h-14 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFF] px-5 text-[15px] focus:border-[#5768fd] focus:outline-none transition-all"
-                    required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-[14px] font-bold text-[#040523]">How can we help?</label>
-                  <textarea 
-                    placeholder="I'm interested in learning more about PrecisionNote for my practice..."
-                    className="w-full h-32 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFF] p-5 text-[15px] focus:border-[#5768fd] focus:outline-none transition-all resize-none"
-                  ></textarea>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <input type="checkbox" className="mt-1 w-5 h-5 rounded border-[#E2E8F0] text-[#5768fd] focus:ring-[#5768fd]" id="agree" />
-                  <label htmlFor="agree" className="text-[13px] text-[#64748b] leading-relaxed">
-                    I agree to the processing of my data by PrecisionNote for professional outreach in accordance with our <a href="#" className="text-[#5768fd] underline">Privacy Policy</a>.
+                <div className="flex items-center gap-2 w-full">
+                  <input type="checkbox" className="w-5 h-5 rounded-[2px] border-[1.5px] border-[#5768fd] appearance-none bg-transparent shrink-0" id="agree" />
+                  <label htmlFor="agree" className="text-[12px] leading-4 text-[#64748b] text-center flex-1">
+                    I agree to the processing of my data by PrecisionNote for professional outreach in accordance with our <a href="#" className="underline">Privacy Policy.</a>
                   </label>
                 </div>
 
-                <button className="w-full h-14 bg-[#5768fd] text-white rounded-2xl font-bold text-[16px] shadow-lg shadow-[#5768fd]/30 hover:bg-[#4a5af7] transition-all flex items-center justify-center gap-2 group">
-                  <Send className="w-4 h-4 group-hover:translate-x-1" />
-                  Send Message
+                <button className="w-full h-12 bg-[#5768fd] text-white rounded-lg font-semibold px-8 shadow-[0_10px_30px_rgba(87,104,253,0.3)] hover:bg-[#4a5af7] transition-all flex items-center justify-center gap-2 group">
+                  <Send className="w-4 h-4" />
+                  <span className="text-[16px] leading-6">Send Message</span>
                 </button>
               </form>
             </motion.div>
