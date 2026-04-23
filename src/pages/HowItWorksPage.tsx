@@ -185,8 +185,8 @@ const PhoneDisplay = ({ activeStep, reduceMotion }: { activeStep: number; reduce
       className="flex-1 flex flex-col"
     >
       {activeStep === 0 && <ListeningScreen reduceMotion={reduceMotion} />}
-      {activeStep === 1 && <RefinementScreen reduceMotion={reduceMotion} />}
-      {activeStep === 2 && <HumanTouchScreen reduceMotion={reduceMotion} />}
+      {activeStep === 1 && <HumanTouchScreen reduceMotion={reduceMotion} />}
+      {activeStep === 2 && <RefinementScreen reduceMotion={reduceMotion} />}
     </motion.div>
   </AnimatePresence>
 );
