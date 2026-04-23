@@ -26,30 +26,61 @@ const waveformHeights = [
 ];
 
 const ListeningScreen = ({ reduceMotion }: { reduceMotion: boolean }) => (
-  <div className="flex-1 flex flex-col items-center justify-center gap-12">
-    <div className="flex items-center gap-[4px] h-20 w-full justify-center">
-      {waveformHeights.map((h, i) => (
-        <motion.div
-          key={i}
-          className="w-[4px] bg-[#5768fd] rounded-full"
-          animate={reduceMotion ? undefined : { height: [h, h * 1.5, h * 0.8, h], opacity: [0.6, 1, 0.7, 1] }}
-          transition={
-            reduceMotion
-              ? undefined
-              : {
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                  delay: i * 0.05,
-                }
-          }
-          style={{ height: `${h}px`, opacity: 0.95 }}
-        />
-      ))}
-    </div>
-    <div className="px-6 py-3 bg-brand-blue/10 rounded-full flex items-center gap-2">
-      <div className="w-2 h-2 rounded-full bg-[#5768fd] animate-pulse" />
-      <span className="text-brand-blue font-bold text-sm tracking-wide">Listening...</span>
+  <div className="flex-1 flex items-center justify-center">
+    <div className="w-full max-w-[560px] rounded-2xl overflow-hidden border border-[#7c8dff] bg-gradient-to-b from-[#5f72f5] to-[#566af4] shadow-[0_24px_60px_rgba(82,102,241,0.35)]">
+      <div className="h-full w-full px-5 md:px-7 py-4 md:py-5 bg-[linear-gradient(180deg,rgba(255,255,255,0.06)_0%,rgba(255,255,255,0.02)_100%)]">
+        <div className="flex justify-center mb-5">
+          <div className="h-8 px-4 rounded-full bg-[rgba(104,123,255,0.75)] border border-[rgba(255,255,255,0.15)] text-white flex items-center gap-2 text-[12px] font-bold tracking-wide">
+            <motion.div
+              className="w-2.5 h-2.5 rounded-full bg-[#ff3b30]"
+              animate={reduceMotion ? undefined : { opacity: [1, 0.45, 1], scale: [1, 0.92, 1] }}
+              transition={reduceMotion ? undefined : { duration: 1, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            <span className="uppercase">Recording</span>
+            <span className="opacity-90">•</span>
+            <motion.span
+              animate={reduceMotion ? undefined : { opacity: [0.75, 1, 0.75] }}
+              transition={reduceMotion ? undefined : { duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              0:02
+            </motion.span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-[4px] h-[74px] w-full justify-center mb-6">
+          {waveformHeights.map((h, i) => (
+            <motion.div
+              key={i}
+              className="w-[4px] rounded-full bg-[#c9d3ff]"
+              animate={reduceMotion ? undefined : { height: [h * 0.72, h * 1.15, h * 0.82, h * 0.92], opacity: [0.72, 1, 0.78, 0.95] }}
+              transition={
+                reduceMotion
+                  ? undefined
+                  : {
+                      duration: 1.4,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                      delay: i * 0.045,
+                    }
+              }
+              style={{ height: `${Math.max(14, h * 0.8)}px` }}
+            />
+          ))}
+        </div>
+
+        <div className="flex justify-center">
+          <button
+            type="button"
+            className="h-10 px-5 rounded-xl bg-[rgba(148,165,255,0.55)] border border-[rgba(255,255,255,0.2)] text-white/95 text-[13px] font-semibold flex items-center gap-2"
+          >
+            <span className="flex items-center gap-[2px]">
+              <span className="w-[3px] h-3 rounded-full bg-white/85" />
+              <span className="w-[3px] h-3 rounded-full bg-white/85" />
+            </span>
+            Pause
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 );
