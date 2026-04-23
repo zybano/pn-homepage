@@ -184,8 +184,8 @@ const IntegrationsPage = () => {
               className="absolute inset-0 opacity-15 pointer-events-none bg-repeat bg-center"
               style={{ 
                 backgroundImage: `url(${AppImages.YellowCTABg})`,
-                backgroundSize: "cover",
-                backgroundPosition: 'center',
+                backgroundSize: "contain",
+                backgroundPosition: '40% 50%',
               }}
             />
 
