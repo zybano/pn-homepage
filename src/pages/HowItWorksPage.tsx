@@ -6,7 +6,7 @@ import {
   useReducedMotion,
   useScroll,
 } from 'framer-motion';
-import { Mic, FileText, PenLine, Shield, Sparkles, Zap } from 'lucide-react';
+import { Mic, FileText, PenLine, Shield, Sparkles, WandSparkles, X, Zap } from 'lucide-react';
 import LandingNav from '../components/LandingNav';
 import LandingFooter from '../components/LandingFooter';
 import Testimonials from '../components/Testimonials';
@@ -146,29 +146,57 @@ const RefinementScreen = ({ reduceMotion }: { reduceMotion: boolean }) => (
 );
 
 const HumanTouchScreen = ({ reduceMotion }: { reduceMotion: boolean }) => (
-  <div className="flex-1 flex flex-col justify-center gap-4">
-    <div className="rounded-2xl border border-[#dfe5f7] bg-white p-4 shadow-sm">
-      <div className="flex items-center justify-between mb-3">
-        <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#64748b]">Final Review</span>
-        <span className="px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[9px] font-bold uppercase tracking-wider">
-          Human Edit
-        </span>
+  <div className="flex-1 flex flex-col justify-center">
+    <div className="rounded-xl border border-[#e2e8f0] bg-white p-4">
+      <div className="flex items-start justify-between gap-3 pb-3 border-b border-[#e2e8f0]">
+        <div className="min-w-0">
+          <div className="flex items-center gap-2 mb-1">
+            <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-[#9810fa] to-[#155dfc] text-white flex items-center justify-center shadow-lg shadow-[#4c46ff]/30">
+              <WandSparkles className="w-3.5 h-3.5" />
+            </div>
+            <p className="text-[16px] font-medium text-[#040523]">Refine Clinical Note</p>
+          </div>
+          <p className="text-[11px] text-[#64748b]">Choose a quick refinement or provide custom feedback</p>
+        </div>
+        <button type="button" className="text-[#64748b] hover:text-[#040523] transition-colors">
+          <X className="w-4 h-4" />
+        </button>
       </div>
-      <div className="space-y-2 text-[11px] text-[#314158]">
-        <p>Assessment: likely viral URI, no respiratory distress.</p>
-        <motion.p
-          className="rounded-md bg-[#fff8da] px-2 py-1 border border-[#ffe98c]"
-          animate={reduceMotion ? undefined : { boxShadow: ['0 0 0 rgba(255,202,64,0)', '0 0 0 6px rgba(255,202,64,0.15)', '0 0 0 rgba(255,202,64,0)'] }}
-          transition={reduceMotion ? undefined : { repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}
-        >
-          Added: monitor nocturnal cough and reassess if persistent.
-        </motion.p>
-        <p>Plan: hydration, rest, supportive care; follow-up PRN.</p>
-      </div>
-    </div>
-    <div className="flex items-center justify-between gap-2">
-      <div className="flex-1 py-2 px-3 rounded-xl bg-emerald-50 text-[11px] font-semibold text-emerald-700 text-center">
-        Physician-approved updates saved
+
+      <div className="pt-3">
+        <p className="text-[13px] font-medium text-[#040523] mb-2">Quick Refinement</p>
+        <div className="flex flex-wrap gap-2 mb-3">
+          {['Make it more concise', 'Professional Tone', 'Focus on Plan', 'Add more clinical detail'].map((item, idx) => (
+            <motion.button
+              key={item}
+              type="button"
+              className="h-8 px-3 rounded-full border border-[#e2e8f0] bg-white text-[12px] text-[#040523]"
+              animate={reduceMotion ? undefined : { y: [0, -1, 0] }}
+              transition={reduceMotion ? undefined : { duration: 1.5, delay: idx * 0.08, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              {item}
+            </motion.button>
+          ))}
+        </div>
+
+        <div className="flex items-start gap-2">
+          <div className="flex-1">
+            <div className="h-10 rounded-lg border border-[#e5e5e5] bg-[#f3f3f5] px-3 text-[12px] text-[#737373] flex items-center">
+              Or provide custom feedback...
+            </div>
+            <p className="mt-1 text-center text-[10px] text-[#94a3b8]">
+              AI will regenerate the note based on your feedback while preserving medical accuracy
+            </p>
+          </div>
+          <motion.button
+            type="button"
+            className="h-10 px-5 rounded-lg bg-[#5768fd] text-white text-[14px] font-medium shrink-0"
+            animate={reduceMotion ? undefined : { boxShadow: ['0 0 0 rgba(87,104,253,0)', '0 0 0 6px rgba(87,104,253,0.16)', '0 0 0 rgba(87,104,253,0)'] }}
+            transition={reduceMotion ? undefined : { duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            Apply
+          </motion.button>
+        </div>
       </div>
     </div>
   </div>
