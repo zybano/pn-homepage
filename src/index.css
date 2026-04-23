@@ -15,6 +15,7 @@
     background-color: var(--brand-bg);
     color: var(--brand-navy);
     font-family: 'Geist', 'Inter', system-ui, -apple-system, sans-serif;
+    scroll-behavior: smooth;
   }
 
   body {

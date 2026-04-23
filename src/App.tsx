@@ -6,10 +6,12 @@ import HowItWorksPage from './pages/HowItWorksPage';
 import IntegrationsPage from './pages/IntegrationsPage';
 import ChatPage from './pages/ChatPage';
 import BlogPage from './pages/BlogsPage';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/features" element={<FeaturesPage />} />
