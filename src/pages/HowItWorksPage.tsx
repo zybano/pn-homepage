@@ -1,4 +1,4 @@
-import { type ReactNode, useRef, useState } from 'react';
+import { type ComponentType, useRef, useState } from 'react';
 import {
   AnimatePresence,
   motion,
@@ -15,8 +15,8 @@ import { AppImages } from '../lib/data';
 type Step = {
   title: string;
   description: string;
-  icon: ReactNode;
-  iconBg: string;
+  icon: ComponentType<{ className?: string }>;
+  activeIconBg: string;
 };
 
 const waveformHeights = [
@@ -147,20 +147,20 @@ const HowItWorksPage = () => {
     {
       title: 'The Listen',
       description: 'Place your device, start the consult. Our ambient AI filters out background noise to focus on clinical nuance.',
-      icon: <Mic className="w-6 h-6 text-white" />,
-      iconBg: 'bg-[#5768fd]',
+      icon: Mic,
+      activeIconBg: 'bg-[#5768fd]',
     },
     {
       title: 'The Refinement',
       description: 'Real-time medical reasoning. PrecisionNote drafts your H&P, SOAP, or Progress note using specialty-aware LLMs.',
-      icon: <FileText className="w-6 h-6 text-white" />,
-      iconBg: 'bg-[#c7d2fe]',
+      icon: FileText,
+      activeIconBg: 'bg-[#9baafc]',
     },
     {
       title: 'The Human Touch',
       description: 'Preserve your gut feeling. Add human context that EMRs usually lose.',
-      icon: <Sparkles className="w-6 h-6 text-white" />,
-      iconBg: 'bg-[#e0e7ff]',
+      icon: Sparkles,
+      activeIconBg: 'bg-[#8b9bff]',
     },
   ];
 
@@ -206,24 +206,28 @@ const HowItWorksPage = () => {
 
           <div className="lg:hidden grid gap-10 max-w-6xl mx-auto mb-24">
             <div className="relative flex justify-center">
-              <div className="relative w-[300px] h-[600px] bg-[#1e2030] rounded-[50px] p-[12px] shadow-2xl border-[4px] border-[#2a2c3e]">
-                <div className="absolute top-[35px] left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#2a2c3e]" />
-                <div className="h-full w-full bg-white rounded-[40px] overflow-hidden flex flex-col p-6 pt-12 relative">
-                  <div className="flex items-center gap-2 mb-8">
-                    <div className="w-2 h-2 rounded-full bg-[#5768fd]" />
-                    <span className="font-mono text-[11px] font-bold text-[#314158] uppercase tracking-wider">PrecisionNote</span>
-                    <span className="ml-auto font-mono text-[11px] text-[#90a1b9]">14:23</span>
+              <div className="w-full max-w-[640px]">
+                <div className="relative rounded-[26px] bg-[#1e2030] border-[5px] border-[#2a2c3e] shadow-2xl p-3">
+                  <div className="absolute top-2 left-1/2 -translate-x-1/2 w-20 h-1 rounded-full bg-[#3a3d52]" />
+                  <div className="h-[300px] md:h-[340px] w-full bg-white rounded-[18px] overflow-hidden flex flex-col p-6 pt-10 relative">
+                    <div className="flex items-center gap-2 mb-6">
+                      <div className="w-2 h-2 rounded-full bg-[#5768fd]" />
+                      <span className="font-mono text-[11px] font-bold text-[#314158] uppercase tracking-wider">PrecisionNote</span>
+                      <span className="ml-auto font-mono text-[11px] text-[#90a1b9]">14:23</span>
+                    </div>
+                    <ListeningScreen reduceMotion={false} />
                   </div>
-                  <ListeningScreen reduceMotion={false} />
                 </div>
+                <div className="mx-auto h-4 w-[88%] rounded-b-[22px] bg-[#2b2f42] shadow-[0_16px_30px_rgba(15,23,42,0.22)]" />
+                <div className="mx-auto -mt-2 h-2 w-[22%] rounded-b-xl bg-[#3a3d52]" />
               </div>
-              <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-brand-blue/10 blur-[100px] rounded-full" />
+              <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[460px] h-[360px] bg-brand-blue/10 blur-[100px] rounded-full" />
             </div>
             <div className="flex flex-col gap-10">
               {steps.map((step, i) => (
                 <div key={i} className="flex gap-6">
-                  <div className={`flex-shrink-0 w-14 h-14 ${step.iconBg} rounded-2xl flex items-center justify-center shadow-lg`}>
-                    {step.icon}
+                  <div className={`flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg ${step.activeIconBg}`}>
+                    <step.icon className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h3 className="text-[24px] font-bold text-[#040523] mb-3">{step.title}</h3>
@@ -236,28 +240,32 @@ const HowItWorksPage = () => {
 
           <div ref={storyRef} className="hidden lg:block relative h-[300vh] mb-20">
             <div className="sticky top-16 h-[calc(100vh-4rem)] flex items-center">
-              <div className="grid lg:grid-cols-2 gap-16 items-center w-full max-w-6xl mx-auto">
+              <div className="grid lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.65fr)] gap-10 xl:gap-12 items-center w-full max-w-[1200px] mx-auto">
                 <motion.div
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, ease: 'easeOut' }}
                   className="relative flex justify-center lg:justify-start"
                 >
-                  <div className="relative w-[300px] h-[600px] bg-[#1e2030] rounded-[50px] p-[12px] shadow-2xl border-[4px] border-[#2a2c3e]">
-                    <div className="absolute top-[35px] left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#2a2c3e]" />
-                    <div className="h-full w-full bg-white rounded-[40px] overflow-hidden flex flex-col p-6 pt-12 relative">
-                      <div className="flex items-center gap-2 mb-8">
-                        <div className="w-2 h-2 rounded-full bg-[#5768fd]" />
-                        <span className="font-mono text-[11px] font-bold text-[#314158] uppercase tracking-wider">PrecisionNote</span>
-                        <span className="ml-auto font-mono text-[11px] text-[#90a1b9]">14:23</span>
+                  <div className="w-full max-w-[760px]">
+                    <div className="relative rounded-[30px] bg-[#1e2030] border-[5px] border-[#2a2c3e] shadow-2xl p-3">
+                      <div className="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-1 rounded-full bg-[#3a3d52]" />
+                      <div className="h-[420px] xl:h-[460px] w-full bg-white rounded-[22px] overflow-hidden flex flex-col p-8 pt-11 relative">
+                        <div className="flex items-center gap-2 mb-8">
+                          <div className="w-2 h-2 rounded-full bg-[#5768fd]" />
+                          <span className="font-mono text-[11px] font-bold text-[#314158] uppercase tracking-wider">PrecisionNote</span>
+                          <span className="ml-auto font-mono text-[11px] text-[#90a1b9]">14:23</span>
+                        </div>
+                        <PhoneDisplay activeStep={activeStep} reduceMotion={Boolean(reduceMotion)} />
                       </div>
-                      <PhoneDisplay activeStep={activeStep} reduceMotion={Boolean(reduceMotion)} />
                     </div>
+                    <div className="mx-auto h-5 w-[90%] rounded-b-[26px] bg-[#2b2f42] shadow-[0_20px_34px_rgba(15,23,42,0.22)]" />
+                    <div className="mx-auto -mt-2 h-2.5 w-[26%] rounded-b-xl bg-[#3a3d52]" />
                   </div>
-                  <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] bg-brand-blue/10 blur-[110px] rounded-full" />
+                  <div className="absolute -z-10 top-1/2 left-[46%] -translate-x-1/2 -translate-y-1/2 w-[720px] h-[420px] bg-brand-blue/10 blur-[120px] rounded-full" />
                 </motion.div>
 
-                <div className="relative pl-8">
+                <div className="relative pl-6 xl:pl-7 max-w-[420px] justify-self-end w-full">
                   <div className="absolute left-0 top-2 bottom-2 w-[2px] rounded-full bg-[#dfe4ff]">
                     <motion.div
                       className="w-full bg-[#5768fd] rounded-full origin-top"
@@ -270,6 +278,7 @@ const HowItWorksPage = () => {
                   <div className="flex flex-col gap-10">
                     {steps.map((step, i) => {
                       const isActive = i === activeStep;
+                      const Icon = step.icon;
                       return (
                         <motion.div
                           key={i}
@@ -287,9 +296,11 @@ const HowItWorksPage = () => {
                               scale: isActive ? 1.05 : 1,
                             }}
                             transition={{ duration: reduceMotion ? 0.1 : 0.35, ease: 'easeOut' }}
-                            className={`flex-shrink-0 w-14 h-14 ${step.iconBg} rounded-2xl flex items-center justify-center`}
+                            className={`flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center ${
+                              isActive ? step.activeIconBg : 'bg-[#eef1ff]'
+                            }`}
                           >
-                            {step.icon}
+                            <Icon className={`w-6 h-6 ${isActive ? 'text-white' : 'text-[#c4cdee]'}`} />
                           </motion.div>
                           <div>
                             <h3 className="text-[26px] font-bold text-[#040523] mb-3">{step.title}</h3>
