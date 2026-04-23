@@ -6,7 +6,7 @@ import {
   useReducedMotion,
   useScroll,
 } from 'framer-motion';
-import { Mic, FileText, Sparkles } from 'lucide-react';
+import { Mic, FileText, PenLine, Shield, Sparkles, Zap } from 'lucide-react';
 import LandingNav from '../components/LandingNav';
 import LandingFooter from '../components/LandingFooter';
 import Testimonials from '../components/Testimonials';
@@ -86,43 +86,61 @@ const ListeningScreen = ({ reduceMotion }: { reduceMotion: boolean }) => (
 );
 
 const RefinementScreen = ({ reduceMotion }: { reduceMotion: boolean }) => (
-  <div className="flex-1 flex flex-col justify-center gap-4">
-    <div className="rounded-2xl bg-[#f8f9ff] border border-[#dbe3ff] p-4">
-      <div className="flex items-center justify-between mb-3">
-        <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#5768fd]">AI Refinement</span>
-        <div className="flex items-center gap-1">
-          {[0, 1, 2].map((dot) => (
-            <motion.div
-              key={dot}
-              className="w-1.5 h-1.5 rounded-full bg-[#5768fd]"
-              animate={reduceMotion ? undefined : { opacity: [0.3, 1, 0.3] }}
-              transition={reduceMotion ? undefined : { repeat: Infinity, duration: 1, delay: dot * 0.2 }}
-            />
-          ))}
+  <div className="flex-1 flex flex-col justify-center">
+    <div className="rounded-xl border border-[#e2e8f0] bg-white overflow-hidden">
+      <div className="flex items-center justify-between gap-4 pl-4 pr-3 py-3 border-b border-[#e2e8f0]">
+        <div className="min-w-0">
+          <div className="mb-1 flex items-center gap-2">
+            <span className="px-2 py-0.5 rounded-md bg-[#fef2f2] border border-[#ffc9c9] text-[#c10007] text-[10px] font-medium">
+              Cardiology
+            </span>
+          </div>
+          <div className="flex items-center gap-2 text-[#040523]">
+            <p className="text-[14px] font-semibold truncate max-w-[250px]">Patient: Oluwadamilola Adebowale...</p>
+            <span className="text-[#64748b]">.</span>
+            <p className="text-[13px] font-mono text-[#64748b] truncate">MRN: LGH-2026-09884</p>
+          </div>
+          <div className="mt-1 text-[12px] font-mono text-[#64748b]">Session Started: 1:19:32 PM</div>
+        </div>
+        <div className="flex items-center gap-2 shrink-0">
+          <motion.button
+            type="button"
+            className="h-9 px-3 rounded-lg bg-[#fff3e0] text-[#fe9a00] text-[12px] font-medium flex items-center gap-1.5 shadow-sm"
+            animate={reduceMotion ? undefined : { y: [0, -1, 0] }}
+            transition={reduceMotion ? undefined : { duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <Zap className="w-3.5 h-3.5" />
+            Emergency Handoff
+          </motion.button>
+          <button
+            type="button"
+            className="h-9 px-3.5 rounded-lg bg-[#5768fd] text-white text-[12px] font-medium flex items-center gap-1.5"
+          >
+            <Shield className="w-3.5 h-3.5" />
+            Export to EMR
+          </button>
         </div>
       </div>
-      {['Subjective', 'Objective', 'Assessment', 'Plan'].map((label, index) => (
-        <div key={label} className="mb-3 last:mb-0">
-          <p className="font-mono text-[9px] uppercase tracking-wider text-[#90a1b9] mb-1">{label}</p>
-          <motion.div
-            className="h-1.5 rounded-full bg-[#cad5ff]"
-            initial={{ width: '30%' }}
-            animate={{ width: reduceMotion ? '100%' : ['40%', '95%', '80%', '100%'] }}
-            transition={{ duration: 1.2, delay: index * 0.08, ease: 'easeOut' }}
-          />
-          {index < 2 && (
-            <motion.div
-              className="h-1.5 rounded-full bg-[#e2e8ff] mt-1"
-              initial={{ width: '20%' }}
-              animate={{ width: reduceMotion ? '75%' : ['25%', '70%', '60%', '75%'] }}
-              transition={{ duration: 1.1, delay: 0.15 + index * 0.08, ease: 'easeOut' }}
+
+      <div className="p-3.5 bg-[#fafbff]">
+        <div className="rounded-lg border border-[#e2e8f0] bg-[#fafbff] p-2.5">
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-[12px] font-medium text-[#040523]">Subjective</p>
+            <button type="button" className="h-7 px-2 rounded-md text-[12px] text-[#040523b3] flex items-center gap-1">
+              <PenLine className="w-3.5 h-3.5" />
+              Edit
+            </button>
+          </div>
+          <div className="rounded-lg border border-[#8fb4ff] shadow-[0_0_0_2px_rgba(143,180,255,0.35)] bg-white p-2.5 text-[11px] leading-[1.55] text-[#040523]">
+            Patient reports experiencing recurring headaches for the past week. Describes pain as intermittent, with increased severity in the afternoon hours, rating intensity at 6-7/10 during peak episodes. Patient identifies potential correlation with coffee consumption. Associated symptoms include intermittent dizziness 92% during severe headache episodes.
+            <motion.span
+              className="inline-block w-[1.5px] h-[13px] bg-[#5768fd] ml-0.5 align-[-2px]"
+              animate={reduceMotion ? undefined : { opacity: [1, 0.15, 1] }}
+              transition={reduceMotion ? undefined : { duration: 1, repeat: Infinity, ease: 'easeInOut' }}
             />
-          )}
+          </div>
         </div>
-      ))}
-    </div>
-    <div className="py-2 px-3 rounded-xl bg-[#eef2ff] text-[11px] font-medium text-[#5768fd] text-center">
-      Drafting complete. Clinically structured in real time.
+      </div>
     </div>
   </div>
 );
