@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowRight, Check, ChevronDown, CirclePlus, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LandingFooter from '../components/LandingFooter';
@@ -34,6 +34,14 @@ const PricingPage = () => {
   const [currency, setCurrency] = useState<Currency>('USD');
   const [isCurrencyOpen, setIsCurrencyOpen] = useState(false);
   const [activeSegment, setActiveSegment] = useState<'individuals' | 'teams'>('individuals');
+  
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, []);
 
   const faqs = [
     'Does this work with my specific EMR?',
