@@ -380,20 +380,16 @@ const PricingPage = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative h-[391px] overflow-hidden rounded-[40px] px-8 py-20 text-center shadow-2xl flex flex-col items-center justify-center bg-[#ffcc4d]"
+            className="relative h-[391px] overflow-hidden rounded-[40px] bg-[#ffca40] px-8 py-20 text-center shadow-2xl flex flex-col items-center justify-center"
           >
-            {/* Exactly Matching Background Stripes */}
-            <div className="absolute inset-0 z-0 flex whitespace-nowrap opacity-60">
-              {[...Array(10)].map((_, i) => (
-                <div 
-                  key={i} 
-                  className="h-full flex-grow"
-                  style={{
-                    backgroundColor: i % 3 === 0 ? '#ffda7d' : i % 3 === 1 ? '#ffd45e' : '#ffcc40'
-                  }}
-                />
-              ))}
-            </div>
+            <div
+              className="absolute inset-0 opacity-15 pointer-events-none bg-repeat bg-center"
+              style={{
+                backgroundImage: `url(${AppImages.YellowCTABg})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            />
 
             <div className="relative z-10">
               <h3 className="mb-4 text-[60px] font-bold leading-[60px] tracking-[-2.5px] text-[#040523]">
