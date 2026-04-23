@@ -3,7 +3,7 @@ import { ArrowRight, Check, ChevronDown, CirclePlus, Sparkles } from 'lucide-rea
 import { motion, AnimatePresence } from 'framer-motion';
 import LandingFooter from '../components/LandingFooter';
 import LandingNav from '../components/LandingNav';
-import pricingVector from '../assets/pricing_page_vector.svg';
+import { AppImages } from '../lib/data';
 
 type Currency = 'USD' | 'NGN';
 type BillingCycle = 'monthly' | 'yearly';
@@ -80,14 +80,14 @@ const PricingPage = () => {
       <main className="overflow-hidden">
         <section className="relative px-6 pb-[80px] pt-[80px]">
           <motion.img 
-            src={pricingVector}
+            src={AppImages.PricingPageVector}
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             className="pointer-events-none absolute left-[-100px] top-[40px] h-[600px] w-auto opacity-[0.08]" 
           />
           <motion.img 
-            src={pricingVector}
+            src={AppImages.PricingPageVector}
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}

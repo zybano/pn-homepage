@@ -7,7 +7,7 @@ import {
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import pricingVector from "../assets/pricing_page_vector.svg";
+import { AppImages } from "../lib/data";
 
 const LandingFooter = () => {
   const sections = [
@@ -48,12 +48,12 @@ const LandingFooter = () => {
       {/* Background Geometric Vector */}
       <div className="absolute inset-0 z-0 flex items-center justify-center opacity-[0.05] pointer-events-none">
         <img
-          src={pricingVector}
+          src={AppImages.PricingPageVector}
           alt=""
           className="absolute -right-40 top-0 h-[1200px] w-auto rotate-[15deg]"
         />
         <img
-          src={pricingVector}
+          src={AppImages.PricingPageVector}
           alt=""
           className="absolute -left-60 bottom-0 h-[1000px] w-auto -rotate-[165deg] opacity-60"
         />

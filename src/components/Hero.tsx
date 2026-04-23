@@ -1,11 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
-import bgCircleSvg from "../assets/figma-assets/hero/bg-circle.svg";
-import shieldSvg from "../assets/figma-assets/hero/icon-shield.svg";
-import starSvg from "../assets/figma-assets/hero/icon-star.svg";
-import doctor1Png from "../assets/figma-assets/hero/doctor-1.png";
-import doctor2Png from "../assets/figma-assets/hero/doctor-2.png";
-import doctor3Png from "../assets/figma-assets/hero/doctor-3.png";
+import { AppImages } from "../lib/data";
 
 const waveformHeights = [
   24.542, 26.352, 25.039, 29.239, 21.078, 8.879, 2.009, 8.902, 12.661, 16.849,
@@ -69,21 +64,21 @@ const Hero = () => {
                     <img
                       alt=""
                       className="h-full w-full rounded-full object-cover"
-                      src={doctor1Png}
+                      src={AppImages.Doctor1}
                     />
                   </div>
                   <div className="absolute left-[24px] top-0 h-[32px] w-[32px] rounded-full border-2 border-white">
                     <img
                       alt=""
                       className="h-full w-full rounded-full object-cover"
-                      src={doctor2Png}
+                      src={AppImages.Doctor2}
                     />
                   </div>
                   <div className="absolute left-[48px] top-0 h-[32px] w-[32px] rounded-full border-2 border-white">
                     <img
                       alt=""
                       className="h-full w-full rounded-full object-cover"
-                      src={doctor3Png}
+                      src={AppImages.Doctor3}
                     />
                   </div>
                 </div>
@@ -95,7 +90,7 @@ const Hero = () => {
                         <img
                           alt=""
                           className="absolute inset-0 h-full w-full"
-                          src={starSvg}
+                          src={AppImages.IconStar}
                         />
                       </span>
                     ))}
@@ -159,7 +154,7 @@ const Hero = () => {
                 <img
                   alt=""
                   className="absolute inset-0 h-full w-full"
-                  src={bgCircleSvg}
+                  src={AppImages.BgCircle}
                 />
               </div>
 
@@ -332,7 +327,7 @@ const Hero = () => {
                       <img
                         alt=""
                         className="absolute inset-[5.21%_13.54%_5.2%_13.54%]"
-                        src={shieldSvg}
+                        src={AppImages.IconShield}
                       />
                     </span>
                   </div>
