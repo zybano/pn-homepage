@@ -54,6 +54,24 @@ const PricingPage = () => {
     ['Custom Template Editor', '---', '---', 'Yes'],
   ];
 
+  const intelligenceRows = [
+    ['Amber Handoff Memos', '---', 'Unlimited', 'Unlimited'],
+    ['Clinical Note Editing', 'Included', 'Included', 'Included'],
+    ['Advanced Analytics', '---', '---', 'Yes'],
+  ];
+
+  const adminRows = [
+    ['EMR / HMS Integration', 'Manual Copy', 'Auto-Sync', 'Custom API'],
+    ['Multi-Team Management', '---', '---', 'Yes'],
+    ['Dedicated Account Mgr', '---', '---', 'Yes'],
+  ];
+
+  const securityRows = [
+    ['HIPAA Compliance', 'Yes', 'Yes', 'Yes'],
+    ['SOC2 Type II', '---', '---', 'Yes'],
+    ['Support Level', 'Help Center', 'Priority', '24/7 VIP'],
+  ];
+
 
 
   return (
@@ -232,7 +250,14 @@ const PricingPage = () => {
             </motion.div>
 
             <div className="space-y-4">
-              <FeatureGroup title="Scribe" open={openRows === 'scribe'} onToggle={() => setOpenRows(openRows === 'scribe' ? '' : 'scribe')} />
+              <FeatureGroup title="Scribe" open={openRows === 'scribe'} onToggle={() => setOpenRows(openRows === 'scribe' ? '' : 'scribe')}>
+                <div className="grid h-[80px] grid-cols-[324px_219px_219px_219px] items-center gap-[107px] border-b border-[#a4a9d7]/30 p-5 px-10">
+                  <p className="text-[17px] font-medium text-[#040523]">Core Scribe Coverage</p>
+                  <p className="text-center text-[17px] text-[#62748e]">Included</p>
+                  <p className="text-center text-[17px] text-[#62748e]">Included</p>
+                  <p className="text-center text-[17px] text-[#62748e]">Included</p>
+                </div>
+              </FeatureGroup>
               <FeatureGroup title="Documentation" open={openRows === 'documentation'} onToggle={() => setOpenRows(openRows === 'documentation' ? '' : 'documentation')}>
                 {comparisonRows.map((row, idx) => (
                   <motion.div 
@@ -251,9 +276,60 @@ const PricingPage = () => {
                   </motion.div>
                 ))}
               </FeatureGroup>
-              <FeatureGroup title="Intelligence" open={openRows === 'intelligence'} onToggle={() => setOpenRows(openRows === 'intelligence' ? '' : 'intelligence')} />
-              <FeatureGroup title="Admin & Sync" open={openRows === 'admin'} onToggle={() => setOpenRows(openRows === 'admin' ? '' : 'admin')} />
-              <FeatureGroup title="Security" open={openRows === 'security'} onToggle={() => setOpenRows(openRows === 'security' ? '' : 'security')} />
+              <FeatureGroup title="Intelligence" open={openRows === 'intelligence'} onToggle={() => setOpenRows(openRows === 'intelligence' ? '' : 'intelligence')}>
+                {intelligenceRows.map((row, idx) => (
+                  <motion.div
+                    key={row[0]}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.05 }}
+                    className="grid h-[80px] grid-cols-[324px_219px_219px_219px] items-center gap-[107px] border-b border-[#a4a9d7]/30 p-5 px-10"
+                  >
+                    <p className="text-[17px] font-medium text-[#040523]">{row[0]}</p>
+                    {row.slice(1).map((cell, i) => (
+                      <p key={cell + row[0] + i} className="text-center text-[17px] text-[#62748e]">
+                        {cell}
+                      </p>
+                    ))}
+                  </motion.div>
+                ))}
+              </FeatureGroup>
+              <FeatureGroup title="Admin & Sync" open={openRows === 'admin'} onToggle={() => setOpenRows(openRows === 'admin' ? '' : 'admin')}>
+                {adminRows.map((row, idx) => (
+                  <motion.div
+                    key={row[0]}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.05 }}
+                    className="grid h-[80px] grid-cols-[324px_219px_219px_219px] items-center gap-[107px] border-b border-[#a4a9d7]/30 p-5 px-10"
+                  >
+                    <p className="text-[17px] font-medium text-[#040523]">{row[0]}</p>
+                    {row.slice(1).map((cell, i) => (
+                      <p key={cell + row[0] + i} className="text-center text-[17px] text-[#62748e]">
+                        {cell}
+                      </p>
+                    ))}
+                  </motion.div>
+                ))}
+              </FeatureGroup>
+              <FeatureGroup title="Security" open={openRows === 'security'} onToggle={() => setOpenRows(openRows === 'security' ? '' : 'security')}>
+                {securityRows.map((row, idx) => (
+                  <motion.div
+                    key={row[0]}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.05 }}
+                    className="grid h-[80px] grid-cols-[324px_219px_219px_219px] items-center gap-[107px] border-b border-[#a4a9d7]/30 p-5 px-10"
+                  >
+                    <p className="text-[17px] font-medium text-[#040523]">{row[0]}</p>
+                    {row.slice(1).map((cell, i) => (
+                      <p key={cell + row[0] + i} className="text-center text-[17px] text-[#62748e]">
+                        {cell}
+                      </p>
+                    ))}
+                  </motion.div>
+                ))}
+              </FeatureGroup>
             </div>
           </div>
         </section>
@@ -556,7 +632,7 @@ const FeatureGroup = ({ title, open, onToggle, children }: { title: string; open
           transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
           className="border-t border-[#a4a9d7]/30 bg-white"
         >
-          {children || <div className="p-10 text-center text-slate-400 font-medium">Coming soon...</div>}
+          {children}
         </motion.div>
       )}
     </AnimatePresence>
