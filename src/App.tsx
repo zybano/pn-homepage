@@ -6,6 +6,7 @@ import HowItWorksPage from './pages/HowItWorksPage';
 import IntegrationsPage from './pages/IntegrationsPage';
 import ChatPage from './pages/ChatPage';
 import BlogPage from './pages/BlogsPage';
+import AboutPage from './pages/AboutPage';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/features" element={<FeaturesPage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/how-it-works" element={<HowItWorksPage />} />
         <Route path="/integrations" element={<IntegrationsPage />} />

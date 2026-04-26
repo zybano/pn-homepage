@@ -13,6 +13,10 @@ import ReactLogo from '../../assets/img/react.svg';
 import ViteLogo from '../../assets/img/vite.svg';
 import YellowCTABg from '../../assets/img/yellow-cta-bg.png';
 import AppLogo from '../../assets/img/app-logo.svg';
+import AboutHero from '../../assets/img/about-hero.png';
+import MedicineArt from '../../assets/img/medicine-art.png';
+import Team1 from '../../assets/img/team-1.png';
+import Team2 from '../../assets/img/team-2.png';
 
 export const AppImages = {
   AppLogo,
@@ -29,5 +33,9 @@ export const AppImages = {
   PricingPageVector,
   ReactLogo,
   ViteLogo,
-  YellowCTABg
+  YellowCTABg,
+  AboutHero,
+  MedicineArt,
+  Team1,
+  Team2
 };
