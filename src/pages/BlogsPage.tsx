@@ -1,96 +1,83 @@
 import { motion } from "framer-motion";
-import { Clock, Calendar, ArrowRight, Search } from "lucide-react";
+import { Clock, Calendar, ArrowRight } from "lucide-react";
 import LandingNav from "../components/LandingNav";
 import LandingFooter from "../components/LandingFooter";
 
-// Local images
-import featuredImg from "../assets/img/blog/featured.png";
-import article1Img from "../assets/img/blog/article-1.png";
-import article2Img from "../assets/img/blog/article-2.png";
-import article3Img from "../assets/img/blog/article-3.png";
-import article4Img from "../assets/img/blog/article-4.png";
-import article5Img from "../assets/img/blog/article-5.png";
-import article6Img from "../assets/img/blog/article-6.png";
-import article7Img from "../assets/img/blog/article-7.png";
-import article8Img from "../assets/img/blog/article-8.png";
-import article9Img from "../assets/img/blog/article-9.png";
+
 
 const BlogPage = () => {
   const latestArticles = [
     {
       id: 1,
-      tag: "CLINICAL WORKFLOW",
-      title:
-        "5 documentation patterns that slow you down (and how to fix them)",
-      readTime: "8 min read",
-      date: "April 8, 2026",
-      image: article1Img,
+      tag: "THISDAY",
+      title: "Africa-Born, AI-Powered Clinical Documentation App Set to Transform Healthcare Workflows Globally",
+      readTime: "5 min read",
+      date: "April 22, 2025",
+      image: "https://global.ariseplay.com/amg/www.thisdaylive.com/uploads/Screenshot_20250422-121530.jpg",
     },
     {
       id: 2,
-      tag: "BURNOUT PREVENTION",
-      title: "The hidden cost of 'just one more chart'",
-      readTime: "6 min read",
-      date: "April 8, 2026",
-      image: article2Img,
+      tag: "GUARDIAN",
+      title: "App designed by doctors to transform healthcare workflows globally",
+      readTime: "5 min read",
+      date: "April 21, 2025",
+      image: "https://cdn.guardian.ng/wp-content/uploads/2025/11/Guardian-grey.jpg",
     },
     {
       id: 3,
-      tag: "AI IN MEDICINE",
-      title: "Why ambient AI will replace traditional dictation",
-      readTime: "8 min read",
-      date: "April 8, 2026",
-      image: article3Img,
+      tag: "TECHPOINT",
+      title: "Precision Note: Africa-Born, AI-Powered Clinical Documentation App Set to Transform Healthcare Workflows Globally",
+      readTime: "5 min read",
+      date: "April 22, 2025",
+      image: "https://techpoint.africa/wp-content/uploads/2025/04/Co-founders.jpeg.webp",
     },
     {
       id: 4,
-      tag: "CLINICAL WORKFLOW",
-      title:
-        "The 2-minute SOAP: how cardiology residents are cutting note time in half",
-      readTime: "12 min read",
-      date: "April 8, 2026",
-      image: article4Img,
+      tag: "PUNCH",
+      title: "Nigerian doctors unveil app to document patients' consultation",
+      readTime: "5 min read",
+      date: "April 24, 2025",
+      image: "https://healthwise.punchng.com/wp-content/uploads/2025/04/Nigerian-doctors.jpg",
     },
     {
       id: 5,
-      tag: "EHR INTEGRATION",
-      title: "Epic vs. Cerner: which integrates faster with AI scribes?",
-      readTime: "8 min read",
-      date: "April 8, 2026",
-      image: article5Img,
+      tag: "AI NEWS",
+      title: "Precision Note: AI-Powered Clinical Documentation App Set to Transform Global Healthcare Workflows",
+      readTime: "5 min read",
+      date: "April 23, 2025",
+      image: "https://ainewstoday.net/uploads/images/202504/image_870x_6808fbb96d94c.webp",
     },
     {
       id: 6,
-      tag: "PHYSICIAN WELLNESS",
-      title: "What happens when you give doctors their evenings back",
-      readTime: "10 min read",
-      date: "April 8, 2026",
-      image: article6Img,
+      tag: "NAIRAMETRICS",
+      title: "Precision Note launches to transform medical documentation with AI-Powered Innovation",
+      readTime: "5 min read",
+      date: "May 2, 2025",
+      image: "https://nairametrics.com/wp-content/uploads/2025/05/IMG_7195.jpeg",
     },
     {
       id: 7,
-      tag: "CASE STUDY",
-      title:
-        "County General's 90-day journey from pilot to system-wide adoption",
-      readTime: "15 min read",
-      date: "April 8, 2026",
-      image: article7Img,
+      tag: "BUSINESS DAY",
+      title: "Nigerian doctors introduce AI-powered Precision Note to aid clinical documentation",
+      readTime: "5 min read",
+      date: "May 2, 2025",
+      image: "https://cdn.businessday.ng/wp-content/uploads/2023/11/Business-Day-Grey-e1691776368938.jpg",
     },
     {
       id: 8,
-      tag: "CLINICAL WORKFLOW",
-      title: "The Amber Memo: why physicians love leaving notes for themselves",
-      readTime: "8 min read",
-      date: "April 8, 2026",
-      image: article8Img,
+      tag: "NATION",
+      title: "Nigerian doctors launch AI tool to improve care for patient",
+      readTime: "5 min read",
+      date: "May 2, 2025",
+      image: "https://cdn.thenationonlineng.net/wp-content/uploads/2024/05/20003146/Nation.jpg",
     },
     {
       id: 9,
-      tag: "CLINICAL WORKFLOW",
-      title: "HIPAA compliance in AI medical scribes: what you need to know",
-      readTime: "6 min read",
-      date: "April 8, 2026",
-      image: article9Img,
+      tag: "TECHCABAL",
+      title: "Precision Note Launches to Transform Medical Documentation with AI-Powered Innovation",
+      readTime: "5 min read",
+      date: "May 2, 2025",
+      image: "https://c76c7bbc41.mjedge.net/wp-content/uploads/tc/2025/05/A-1-682x1024.jpeg",
     },
   ];
 
@@ -127,7 +114,7 @@ const BlogPage = () => {
           className="relative rounded-[48px] overflow-hidden aspect-[16/7] min-h-[500px] group cursor-pointer shadow-2xl"
         >
           <img
-            src={featuredImg}
+            src="https://global.ariseplay.com/amg/www.thisdaylive.com/uploads/Screenshot_20250422-121530.jpg"
             alt="Featured article"
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
           />
@@ -137,16 +124,16 @@ const BlogPage = () => {
                 FEATURED
               </span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-10 leading-[1.1] tracking-tight">
-                How Dr. Adeabo reclaimed 15 hours a week using the Amber Handoff
+                Africa-Born, AI-Powered Clinical Documentation App Set to Transform Healthcare Workflows Globally
               </h2>
               <div className="flex items-center gap-8 text-white/80 text-lg mb-12 font-medium">
                 <div className="flex items-center gap-3">
                   <Clock size={20} />
-                  <span>8 min read</span>
+                  <span>5 min read</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Calendar size={20} />
-                  <span>April 8, 2026</span>
+                  <span>April 22, 2025</span>
                 </div>
               </div>
               <button className="bg-white text-brand-navy px-12 py-5 rounded-full font-bold text-lg flex items-center gap-3 hover:bg-brand-navy hover:text-white transition-all shadow-xl group/btn">
