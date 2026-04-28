@@ -7,7 +7,6 @@ import {
   Zap,
   CheckCircle2,
   HeartPulse,
-  Images,
 } from "lucide-react";
 
 import { AppImages } from "../lib/data";

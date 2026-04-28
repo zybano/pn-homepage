@@ -6,7 +6,7 @@ import {
   useReducedMotion,
   useScroll,
 } from 'framer-motion';
-import { Mic, FileText, PenLine, Shield, Sparkles, WandSparkles, X, Zap } from 'lucide-react';
+import { Mic, FileText, PenLine, Sparkles, Zap } from 'lucide-react';
 import LandingNav from '../components/LandingNav';
 import LandingFooter from '../components/LandingFooter';
 import Testimonials from '../components/Testimonials';
