@@ -68,23 +68,11 @@ const LandingFooter = () => {
           {/* Brand Col */}
           <div>
             <Link to="/" className="mb-6 inline-flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#5768fd] shadow-lg shadow-[#5768fd]/30">
-                <svg
-                  width="26"
-                  height="26"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M4 12H7L9 18L13 6L15 12H20"
-                    stroke="white"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
+              <img
+                src={AppImages.AppLogo}
+                alt="PrecisionNote Logo"
+                className="h-9 w-9"
+              />
               <span className="text-3xl font-bold tracking-tight text-white">
                 PrecisionNote
               </span>
