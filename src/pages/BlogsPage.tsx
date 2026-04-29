@@ -3,33 +3,37 @@ import { Clock, Calendar, ArrowRight } from "lucide-react";
 import LandingNav from "../components/LandingNav";
 import LandingFooter from "../components/LandingFooter";
 
-
-
 const BlogPage = () => {
   const latestArticles = [
     {
       id: 1,
       tag: "THISDAY",
-      title: "Africa-Born, AI-Powered Clinical Documentation App Set to Transform Healthcare Workflows Globally",
+      title:
+        "Africa-Born, AI-Powered Clinical Documentation App Set to Transform Healthcare Workflows Globally",
       readTime: "5 min read",
       date: "April 22, 2025",
-      image: "https://global.ariseplay.com/amg/www.thisdaylive.com/uploads/Screenshot_20250422-121530.jpg",
+      image:
+        "https://global.ariseplay.com/amg/www.thisdaylive.com/uploads/Screenshot_20250422-121530.jpg",
     },
     {
       id: 2,
       tag: "GUARDIAN",
-      title: "App designed by doctors to transform healthcare workflows globally",
+      title:
+        "App designed by doctors to transform healthcare workflows globally",
       readTime: "5 min read",
       date: "April 21, 2025",
-      image: "https://cdn.guardian.ng/wp-content/uploads/2025/11/Guardian-grey.jpg",
+      image:
+        "https://cdn.guardian.ng/wp-content/uploads/2025/11/Guardian-grey.jpg",
     },
     {
       id: 3,
       tag: "TECHPOINT",
-      title: "Precision Note: Africa-Born, AI-Powered Clinical Documentation App Set to Transform Healthcare Workflows Globally",
+      title:
+        "Precision Note: Africa-Born, AI-Powered Clinical Documentation App Set to Transform Healthcare Workflows Globally",
       readTime: "5 min read",
       date: "April 22, 2025",
-      image: "https://techpoint.africa/wp-content/uploads/2025/04/Co-founders.jpeg.webp",
+      image:
+        "https://techpoint.africa/wp-content/uploads/2025/04/Co-founders.jpeg.webp",
     },
     {
       id: 4,
@@ -37,31 +41,38 @@ const BlogPage = () => {
       title: "Nigerian doctors unveil app to document patients' consultation",
       readTime: "5 min read",
       date: "April 24, 2025",
-      image: "https://healthwise.punchng.com/wp-content/uploads/2025/04/Nigerian-doctors.jpg",
+      image:
+        "https://healthwise.punchng.com/wp-content/uploads/2025/04/Nigerian-doctors.jpg",
     },
     {
       id: 5,
       tag: "AI NEWS",
-      title: "Precision Note: AI-Powered Clinical Documentation App Set to Transform Global Healthcare Workflows",
+      title:
+        "Precision Note: AI-Powered Clinical Documentation App Set to Transform Global Healthcare Workflows",
       readTime: "5 min read",
       date: "April 23, 2025",
-      image: "https://ainewstoday.net/uploads/images/202504/image_870x_6808fbb96d94c.webp",
+      image:
+        "https://ainewstoday.net/uploads/images/202504/image_870x_6808fbb96d94c.webp",
     },
     {
       id: 6,
       tag: "NAIRAMETRICS",
-      title: "Precision Note launches to transform medical documentation with AI-Powered Innovation",
+      title:
+        "Precision Note launches to transform medical documentation with AI-Powered Innovation",
       readTime: "5 min read",
       date: "May 2, 2025",
-      image: "https://nairametrics.com/wp-content/uploads/2025/05/IMG_7195.jpeg",
+      image:
+        "https://nairametrics.com/wp-content/uploads/2025/05/IMG_7195.jpeg",
     },
     {
       id: 7,
       tag: "BUSINESS DAY",
-      title: "Nigerian doctors introduce AI-powered Precision Note to aid clinical documentation",
+      title:
+        "Nigerian doctors introduce AI-powered Precision Note to aid clinical documentation",
       readTime: "5 min read",
       date: "May 2, 2025",
-      image: "https://cdn.businessday.ng/wp-content/uploads/2023/11/Business-Day-Grey-e1691776368938.jpg",
+      image:
+        "https://cdn.businessday.ng/wp-content/uploads/2023/11/Business-Day-Grey-e1691776368938.jpg",
     },
     {
       id: 8,
@@ -69,15 +80,18 @@ const BlogPage = () => {
       title: "Nigerian doctors launch AI tool to improve care for patient",
       readTime: "5 min read",
       date: "May 2, 2025",
-      image: "https://cdn.thenationonlineng.net/wp-content/uploads/2024/05/20003146/Nation.jpg",
+      image:
+        "https://cdn.thenationonlineng.net/wp-content/uploads/2024/05/20003146/Nation.jpg",
     },
     {
       id: 9,
       tag: "TECHCABAL",
-      title: "Precision Note Launches to Transform Medical Documentation with AI-Powered Innovation",
+      title:
+        "Precision Note Launches to Transform Medical Documentation with AI-Powered Innovation",
       readTime: "5 min read",
       date: "May 2, 2025",
-      image: "https://c76c7bbc41.mjedge.net/wp-content/uploads/tc/2025/05/A-1-682x1024.jpeg",
+      image:
+        "https://c76c7bbc41.mjedge.net/wp-content/uploads/tc/2025/05/A-1-682x1024.jpeg",
     },
   ];
 
@@ -124,7 +138,8 @@ const BlogPage = () => {
                 FEATURED
               </span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-10 leading-[1.1] tracking-tight">
-                Africa-Born, AI-Powered Clinical Documentation App Set to Transform Healthcare Workflows Globally
+                Africa-Born, AI-Powered Clinical Documentation App Set to
+                Transform Healthcare Workflows Globally
               </h2>
               <div className="flex items-center gap-8 text-white/80 text-lg mb-12 font-medium">
                 <div className="flex items-center gap-3">
@@ -201,7 +216,7 @@ const BlogPage = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="bg-brand-navy rounded-[64px] p-16 md:p-32 relative overflow-hidden text-center shadow-2xl"
+          className="bg-brand-navy rounded-[30px] p-16 md:p-32 relative overflow-hidden text-center shadow-2xl"
         >
           <div className="relative z-10">
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-medium text-white leading-[1.2] mb-16 max-w-5xl mx-auto italic">
@@ -231,7 +246,7 @@ const BlogPage = () => {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-[#F7C600] rounded-[64px] p-16 md:p-32 relative overflow-hidden text-center shadow-2xl"
+          className="bg-[#F7C600] rounded-[34px] p-16 md:p-32 relative overflow-hidden text-center shadow-2xl"
         >
           <div className="relative z-10">
             <h2 className="text-4xl md:text-7xl font-bold mb-8 tracking-tight text-brand-navy leading-none">
@@ -244,9 +259,9 @@ const BlogPage = () => {
               <input
                 type="email"
                 placeholder="your.email@hospital.com"
-                className="flex-1 px-10 py-7 rounded-3xl border-none focus:ring-4 focus:ring-brand-navy/10 transition-all bg-white text-xl shadow-inner placeholder:text-brand-navy/30"
+                className="flex-1 px-5 py-3 rounded-3xl border-none focus:ring-4 focus:ring-brand-navy/10 transition-all bg-white text-xl shadow-inner placeholder:text-brand-navy/30"
               />
-              <button className="bg-brand-navy text-white px-16 py-7 rounded-3xl font-bold text-xl hover:bg-brand-blue transition-all shadow-2xl active:scale-95 whitespace-nowrap">
+              <button className="bg-brand-navy text-white px-16 py-3 rounded-3xl font-bold text-xl hover:bg-brand-blue transition-all shadow-2xl active:scale-95 whitespace-nowrap">
                 Subscribe
               </button>
             </div>
