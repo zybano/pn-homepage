@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Clock, Calendar, ArrowRight } from "lucide-react";
 import LandingNav from "../components/LandingNav";
 import LandingFooter from "../components/LandingFooter";
+import { AppImages } from "../lib/data";
 
 const BlogPage = () => {
   const latestArticles = [
@@ -241,35 +242,44 @@ const BlogPage = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="container-custom mb-32 px-4 md:px-12 lg:px-28">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-[#F7C600] rounded-[34px] p-16 md:p-32 relative overflow-hidden text-center shadow-2xl"
-        >
-          <div className="relative z-10">
-            <h2 className="text-4xl md:text-7xl font-bold mb-8 tracking-tight text-brand-navy leading-none">
-              Want these insights in your inbox?
-            </h2>
-            <p className="text-xl md:text-2xl text-brand-navy/70 mb-16 max-w-2xl mx-auto font-medium">
-              Join 5,000+ physicians getting weekly tips on clinical efficiency.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 max-w-2xl mx-auto">
-              <input
-                type="email"
-                placeholder="your.email@hospital.com"
-                className="flex-1 px-5 py-3 rounded-3xl border-none focus:ring-4 focus:ring-brand-navy/10 transition-all bg-white text-xl shadow-inner placeholder:text-brand-navy/30"
-              />
-              <button className="bg-brand-navy text-white px-16 py-3 rounded-3xl font-bold text-xl hover:bg-brand-blue transition-all shadow-2xl active:scale-95 whitespace-nowrap">
-                Subscribe
-              </button>
+      <section className="py-24">
+        <div className="container-custom px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative overflow-hidden rounded-[40px] bg-[#ffca40] px-8 py-20 md:p-24 text-center overflow-hidden"
+          >
+            {/* Background Texture Asset */}
+            <div
+              className="absolute inset-0 opacity-15 pointer-events-none bg-repeat bg-center"
+              style={{
+                backgroundImage: `url(${AppImages.YellowCTABg})`,
+                backgroundSize: "contain",
+                backgroundPosition: "40% 50%",
+              }}
+            />
+
+            <div className="relative z-10 max-w-[800px] mx-auto">
+              <h2 className="text-[40px] md:text-[64px] font-bold text-[#040523] tracking-tight leading-tight mb-8">
+                Need help with integration?
+              </h2>
+              <p className="text-[18px] md:text-[22px] text-[#040523]/80 font-medium mb-12">
+                Our Integration specialists will work with your IT team to
+                ensure a seamless setup.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button className="h-16 px-10 bg-[#040523] text-white rounded-2xl font-bold text-[16px] hover:bg-black transition-all shadow-xl shadow-black/10 flex items-center gap-2 group">
+                  Contact Integration Team
+                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                </button>
+                <button className="h-16 px-10 bg-transparent text-[#040523] border border-[#040523]/20 rounded-2xl font-bold text-[16px] hover:bg-black/5 transition-all">
+                  Learn More
+                </button>
+              </div>
             </div>
-          </div>
-          {/* Decorative elements */}
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-white/20 rounded-full -translate-y-1/2 translate-x-1/2 blur-[120px]"></div>
-          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-navy/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-[100px]"></div>
-        </motion.div>
+          </motion.div>
+        </div>
       </section>
 
       <LandingFooter />
