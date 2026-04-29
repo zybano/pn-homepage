@@ -1,16 +1,16 @@
-import { type ComponentType, useEffect, useRef, useState } from 'react';
+import { type ComponentType, useEffect, useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
   useMotionValueEvent,
   useReducedMotion,
   useScroll,
-} from 'framer-motion';
-import { Mic, FileText, PenLine, Sparkles, Zap } from 'lucide-react';
-import LandingNav from '../components/LandingNav';
-import LandingFooter from '../components/LandingFooter';
-import Testimonials from '../components/Testimonials';
-import { AppImages } from '../lib/data';
+} from "framer-motion";
+import { Mic, FileText, PenLine, Sparkles, Zap } from "lucide-react";
+import LandingNav from "../components/LandingNav";
+import LandingFooter from "../components/LandingFooter";
+import Testimonials from "../components/Testimonials";
+import { AppImages } from "../lib/data";
 
 type Step = {
   title: string;
@@ -20,27 +20,38 @@ type Step = {
 };
 
 const waveformHeights = [
-  24, 32, 28, 48, 36, 18, 12, 18, 24, 30,
-  52, 20, 24, 15, 10, 15, 30, 45, 20, 12,
-  18, 25, 20, 40, 28, 18, 24, 32, 20, 15,
+  24, 32, 28, 48, 36, 18, 12, 18, 24, 30, 52, 20, 24, 15, 10, 15, 30, 45, 20,
+  12, 18, 25, 20, 40, 28, 18, 24, 32, 20, 15,
 ];
 
 const ListeningScreen = ({ reduceMotion }: { reduceMotion: boolean }) => (
   <div className="flex-1 h-full flex items-center justify-center">
-    <div className="h-full w-full rounded-2xl overflow-hidden border border-[#7c8dff] bg-gradient-to-b from-[#5f72f5] to-[#566af4] shadow-[0_24px_60px_rgba(82,102,241,0.35)]">
+    <div className="h-full w-full rounded-xl overflow-hidden border border-[#7c8dff] bg-gradient-to-b from-[#5f72f5] to-[#566af4] shadow-[0_24px_60px_rgba(82,102,241,0.35)]">
       <div className="h-full w-full px-5 md:px-7 py-4 md:py-5 bg-[linear-gradient(180deg,rgba(255,255,255,0.06)_0%,rgba(255,255,255,0.02)_100%)] flex flex-col items-center justify-center">
         <div className="flex justify-center mb-8">
           <div className="h-8 px-4 rounded-full bg-[rgba(104,123,255,0.75)] border border-[rgba(255,255,255,0.15)] text-white flex items-center gap-2 text-[12px] font-bold tracking-wide">
             <motion.div
               className="w-2.5 h-2.5 rounded-full bg-[#ff3b30]"
-              animate={reduceMotion ? undefined : { opacity: [1, 0.45, 1], scale: [1, 0.92, 1] }}
-              transition={reduceMotion ? undefined : { duration: 1, repeat: Infinity, ease: 'easeInOut' }}
+              animate={
+                reduceMotion
+                  ? undefined
+                  : { opacity: [1, 0.45, 1], scale: [1, 0.92, 1] }
+              }
+              transition={
+                reduceMotion
+                  ? undefined
+                  : { duration: 1, repeat: Infinity, ease: "easeInOut" }
+              }
             />
             <span className="uppercase">Recording</span>
             <span className="opacity-90">•</span>
             <motion.span
               animate={reduceMotion ? undefined : { opacity: [0.75, 1, 0.75] }}
-              transition={reduceMotion ? undefined : { duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+              transition={
+                reduceMotion
+                  ? undefined
+                  : { duration: 1.2, repeat: Infinity, ease: "easeInOut" }
+              }
             >
               0:02
             </motion.span>
@@ -52,14 +63,21 @@ const ListeningScreen = ({ reduceMotion }: { reduceMotion: boolean }) => (
             <motion.div
               key={i}
               className="w-[4px] rounded-full bg-[#c9d3ff]"
-              animate={reduceMotion ? undefined : { height: [h * 0.72, h * 1.15, h * 0.82, h * 0.92], opacity: [0.72, 1, 0.78, 0.95] }}
+              animate={
+                reduceMotion
+                  ? undefined
+                  : {
+                      height: [h * 0.72, h * 1.15, h * 0.82, h * 0.92],
+                      opacity: [0.72, 1, 0.78, 0.95],
+                    }
+              }
               transition={
                 reduceMotion
                   ? undefined
                   : {
                       duration: 1.4,
                       repeat: Infinity,
-                      ease: 'easeInOut',
+                      ease: "easeInOut",
                       delay: i * 0.045,
                     }
               }
@@ -86,12 +104,13 @@ const ListeningScreen = ({ reduceMotion }: { reduceMotion: boolean }) => (
 );
 
 const RefinementScreen = ({ reduceMotion }: { reduceMotion: boolean }) => {
-  const [displayText, setDisplayText] = useState('');
-  const fullText = "Patient reports experiencing recurring headaches for the past week. Describes pain as intermittent, with increased severity in the afternoon hours, rating intensity at 6-7/10 during peak episodes. Patient identifies potential correlation with coffee consumption. Associated symptoms include intermittent dizziness 92% during severe headache episodes.";
-  
+  const [displayText, setDisplayText] = useState("");
+  const fullText =
+    "Patient reports experiencing recurring headaches for the past week. Describes pain as intermittent, with increased severity in the afternoon hours, rating intensity at 6-7/10 during peak episodes. Patient identifies potential correlation with coffee consumption. Associated symptoms include intermittent dizziness 92% during severe headache episodes.";
+
   useEffect(() => {
-    setDisplayText('');
-    let current = '';
+    setDisplayText("");
+    let current = "";
     const interval = setInterval(() => {
       if (current.length < fullText.length) {
         current = fullText.slice(0, current.length + 2);
@@ -109,7 +128,7 @@ const RefinementScreen = ({ reduceMotion }: { reduceMotion: boolean }) => {
         <div className="flex items-center justify-between gap-4 pl-4 pr-3 py-3 border-b border-[#e2e8f0] bg-white">
           <div className="min-w-0">
             <div className="mb-1 flex items-center gap-2">
-              <motion.span 
+              <motion.span
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="px-2 py-0.5 rounded-md bg-[#fef2f2] border border-[#ffc9c9] text-[#c10007] text-[10px] font-medium"
@@ -118,20 +137,28 @@ const RefinementScreen = ({ reduceMotion }: { reduceMotion: boolean }) => {
               </motion.span>
               <div className="flex items-center gap-1">
                 <Sparkles className="w-3 h-3 text-[#5768fd] animate-pulse" />
-                <span className="text-[10px] text-[#5768fd] font-medium uppercase tracking-wider">AI Refining...</span>
+                <span className="text-[10px] text-[#5768fd] font-medium uppercase tracking-wider">
+                  AI Refining...
+                </span>
               </div>
             </div>
             <div className="flex items-center gap-2 text-[#040523]">
-              <p className="text-[14px] font-semibold truncate max-w-[250px]">Oluwadamilola Adebowale</p>
+              <p className="text-[14px] font-semibold truncate max-w-[250px]">
+                Oluwadamilola Adebowale
+              </p>
               <span className="text-[#64748b]">.</span>
-              <p className="text-[13px] font-mono text-[#64748b] truncate">LGH-2026-09884</p>
+              <p className="text-[13px] font-mono text-[#64748b] truncate">
+                LGH-2026-09884
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-2 shrink-0">
             <motion.div
               className="h-8 px-3 rounded-lg bg-[#5768fd]/5 border border-[#5768fd]/20 text-[#5768fd] text-[12px] font-medium flex items-center gap-1.5"
               animate={reduceMotion ? undefined : { opacity: [0.5, 1, 0.5] }}
-              transition={reduceMotion ? undefined : { duration: 2, repeat: Infinity }}
+              transition={
+                reduceMotion ? undefined : { duration: 2, repeat: Infinity }
+              }
             >
               <Zap className="w-3.5 h-3.5" />
               Real-time
@@ -147,18 +174,26 @@ const RefinementScreen = ({ reduceMotion }: { reduceMotion: boolean }) => {
                   <div className="w-5 h-5 rounded bg-[#5768fd] flex items-center justify-center">
                     <FileText className="w-3 h-3 text-white" />
                   </div>
-                  <p className="text-[12px] font-bold text-[#040523]">Subjective Note</p>
+                  <p className="text-[12px] font-bold text-[#040523]">
+                    Subjective Note
+                  </p>
                 </div>
-                <div className="h-5 px-2 rounded bg-green-50 text-green-600 text-[9px] font-bold uppercase tracking-wider flex items-center">Verified</div>
+                <div className="h-5 px-2 rounded bg-green-50 text-green-600 text-[9px] font-bold uppercase tracking-wider flex items-center">
+                  Verified
+                </div>
               </div>
               <div className="relative rounded-lg border border-[#8fb4ff] bg-[#5768fd]/[0.02] p-3 text-[11.5px] leading-[1.6] text-[#040523] min-h-[100px]">
                 {displayText}
                 <motion.span
                   className="inline-block w-[2px] h-[14px] bg-[#5768fd] ml-0.5 align-[-3px]"
                   animate={reduceMotion ? undefined : { opacity: [1, 0, 1] }}
-                  transition={reduceMotion ? undefined : { duration: 0.8, repeat: Infinity }}
+                  transition={
+                    reduceMotion
+                      ? undefined
+                      : { duration: 0.8, repeat: Infinity }
+                  }
                 />
-                
+
                 {/* Floating AI Particles */}
                 {!reduceMotion && (
                   <AnimatePresence>
@@ -167,19 +202,19 @@ const RefinementScreen = ({ reduceMotion }: { reduceMotion: boolean }) => {
                         key={i}
                         className="absolute w-1 h-1 bg-[#5768fd] rounded-full"
                         initial={{ opacity: 0, scale: 0 }}
-                        animate={{ 
+                        animate={{
                           opacity: [0, 1, 0],
                           scale: [0, 1.5, 0],
                           x: [0, (i - 2) * 20],
-                          y: [0, -30]
+                          y: [0, -30],
                         }}
-                        transition={{ 
-                          duration: 2, 
-                          repeat: Infinity, 
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
                           delay: i * 0.5,
-                          ease: "easeOut"
+                          ease: "easeOut",
                         }}
-                        style={{ left: '50%', top: '50%' }}
+                        style={{ left: "50%", top: "50%" }}
                       />
                     ))}
                   </AnimatePresence>
@@ -222,39 +257,56 @@ const HumanTouchScreen = ({ reduceMotion }: { reduceMotion: boolean }) => {
       <div className="h-full rounded-xl border border-[#e2e8f0] bg-white p-4 flex flex-col shadow-sm relative overflow-hidden">
         {/* Background Sparkles for demo feel */}
         <div className="absolute top-0 right-0 w-32 h-32 bg-brand-blue/5 blur-3xl -z-10" />
-        
+
         <div className="flex items-start justify-between gap-3 pb-4 border-b border-[#e2e8f0] shrink-0">
           <div className="min-w-0">
             <div className="flex items-center gap-2 mb-1.5">
               <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#5768fd] to-[#8b9bff] text-white flex items-center justify-center shadow-lg shadow-[#5768fd]/20">
                 <Sparkles className="w-4 h-4" />
               </div>
-              <p className="text-[15px] font-bold text-[#040523] tracking-tight">Human Refinement</p>
+              <p className="text-[15px] font-bold text-[#040523] tracking-tight">
+                Human Refinement
+              </p>
             </div>
-            <p className="text-[11px] text-[#64748b] font-medium">Add specialty nuance or adjust the note structure</p>
+            <p className="text-[11px] text-[#64748b] font-medium">
+              Add specialty nuance or adjust the note structure
+            </p>
           </div>
         </div>
 
         <div className="pt-5 flex-1 flex flex-col gap-6">
           <div>
             <div className="flex items-center justify-between mb-3">
-              <p className="text-[13px] font-bold text-[#040523]">Quick Presets</p>
+              <p className="text-[13px] font-bold text-[#040523]">
+                Quick Presets
+              </p>
               <div className="flex items-center gap-1">
                 <span className="w-1 h-1 rounded-full bg-[#5768fd]" />
-                <span className="text-[10px] text-[#5768fd] font-bold uppercase tracking-wider">Dynamic</span>
+                <span className="text-[10px] text-[#5768fd] font-bold uppercase tracking-wider">
+                  Dynamic
+                </span>
               </div>
             </div>
             <div className="flex flex-wrap gap-2.5">
-              {['Make it more concise', 'Professional Tone', 'Focus on Plan', 'Add clinical detail'].map((item, idx) => (
+              {[
+                "Make it more concise",
+                "Professional Tone",
+                "Focus on Plan",
+                "Add clinical detail",
+              ].map((item, idx) => (
                 <motion.button
                   key={item}
                   type="button"
                   className={`h-9 px-4 rounded-xl border text-[12px] font-medium transition-all duration-300 ${
-                    idx === selectedIdx 
-                      ? 'bg-[#5768fd] border-[#5768fd] text-white shadow-md shadow-[#5768fd]/20' 
-                      : 'border-[#e2e8f0] bg-white text-[#64748b] hover:border-[#5768fd]/30'
+                    idx === selectedIdx
+                      ? "bg-[#5768fd] border-[#5768fd] text-white shadow-md shadow-[#5768fd]/20"
+                      : "border-[#e2e8f0] bg-white text-[#64748b] hover:border-[#5768fd]/30"
                   }`}
-                  animate={idx === selectedIdx && !reduceMotion ? { scale: [1, 1.05, 1] } : {}}
+                  animate={
+                    idx === selectedIdx && !reduceMotion
+                      ? { scale: [1, 1.05, 1] }
+                      : {}
+                  }
                   transition={{ duration: 0.4 }}
                 >
                   {item}
@@ -267,13 +319,13 @@ const HumanTouchScreen = ({ reduceMotion }: { reduceMotion: boolean }) => {
             <div className="relative">
               <div className="h-12 rounded-xl border border-[#e2e8f0] bg-[#f8fafc] px-4 text-[12px] text-[#64748b] flex items-center font-medium italic">
                 "Emphasis patient's history of atrial fibrillation..."
-                <motion.div 
+                <motion.div
                   className="ml-1 w-1 h-4 bg-[#5768fd]"
                   animate={{ opacity: [1, 0, 1] }}
                   transition={{ duration: 0.8, repeat: Infinity }}
                 />
               </div>
-              <motion.div 
+              <motion.div
                 className="absolute -bottom-2 -right-2 w-6 h-6 bg-white rounded-full shadow-md flex items-center justify-center border border-[#e2e8f0]"
                 animate={{ y: [0, -3, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
@@ -281,24 +333,38 @@ const HumanTouchScreen = ({ reduceMotion }: { reduceMotion: boolean }) => {
                 <PenLine className="w-3 h-3 text-[#5768fd]" />
               </motion.div>
             </div>
-            
+
             <div className="flex items-center gap-3">
               <div className="flex-1 h-1 bg-[#f1f5f9] rounded-full overflow-hidden">
-                <motion.div 
+                <motion.div
                   className="h-full bg-[#5768fd]"
-                  animate={isApplying ? { width: ['0%', '100%'] } : { width: '0%' }}
+                  animate={
+                    isApplying ? { width: ["0%", "100%"] } : { width: "0%" }
+                  }
                   transition={{ duration: 0.8 }}
                 />
               </div>
               <motion.button
                 type="button"
                 className={`h-11 px-7 rounded-xl text-[14px] font-bold text-white transition-all shadow-lg ${
-                  isApplying ? 'bg-[#4c5edb] scale-95' : 'bg-[#5768fd] shadow-[#5768fd]/20'
+                  isApplying
+                    ? "bg-[#4c5edb] scale-95"
+                    : "bg-[#5768fd] shadow-[#5768fd]/20"
                 }`}
-                animate={!isApplying && !reduceMotion ? { boxShadow: ['0 10px 20px rgba(87,104,253,0.1)', '0 10px 20px rgba(87,104,253,0.3)', '0 10px 20px rgba(87,104,253,0.1)'] } : {}}
+                animate={
+                  !isApplying && !reduceMotion
+                    ? {
+                        boxShadow: [
+                          "0 10px 20px rgba(87,104,253,0.1)",
+                          "0 10px 20px rgba(87,104,253,0.3)",
+                          "0 10px 20px rgba(87,104,253,0.1)",
+                        ],
+                      }
+                    : {}
+                }
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                {isApplying ? 'Updating...' : 'Apply Nuance'}
+                {isApplying ? "Updating..." : "Apply Nuance"}
               </motion.button>
             </div>
           </div>
@@ -327,14 +393,20 @@ const HumanTouchScreen = ({ reduceMotion }: { reduceMotion: boolean }) => {
   );
 };
 
-const PhoneDisplay = ({ activeStep, reduceMotion }: { activeStep: number; reduceMotion: boolean }) => (
+const PhoneDisplay = ({
+  activeStep,
+  reduceMotion,
+}: {
+  activeStep: number;
+  reduceMotion: boolean;
+}) => (
   <AnimatePresence mode="wait">
     <motion.div
       key={activeStep}
       initial={reduceMotion ? { opacity: 1 } : { opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       exit={reduceMotion ? { opacity: 1 } : { opacity: 0, y: -12 }}
-      transition={{ duration: reduceMotion ? 0.05 : 0.35, ease: 'easeOut' }}
+      transition={{ duration: reduceMotion ? 0.05 : 0.35, ease: "easeOut" }}
       className="flex-1 flex flex-col h-full"
     >
       {activeStep === 0 && <ListeningScreen reduceMotion={reduceMotion} />}
@@ -347,22 +419,25 @@ const PhoneDisplay = ({ activeStep, reduceMotion }: { activeStep: number; reduce
 const HowItWorksPage = () => {
   const steps: Step[] = [
     {
-      title: 'The Listen',
-      description: 'Place your device, start the consult. Our ambient AI filters out background noise to focus on clinical nuance.',
+      title: "The Listen",
+      description:
+        "Place your device, start the consult. Our ambient AI filters out background noise to focus on clinical nuance.",
       icon: Mic,
-      activeIconBg: 'bg-[#5768fd]',
+      activeIconBg: "bg-[#5768fd]",
     },
     {
-      title: 'The Refinement',
-      description: 'Real-time medical reasoning. PrecisionNote drafts your H&P, SOAP, or Progress note using specialty-aware LLMs.',
+      title: "The Refinement",
+      description:
+        "Real-time medical reasoning. PrecisionNote drafts your H&P, SOAP, or Progress note using specialty-aware LLMs.",
       icon: FileText,
-      activeIconBg: 'bg-[#9baafc]',
+      activeIconBg: "bg-[#9baafc]",
     },
     {
-      title: 'The Human Touch',
-      description: 'Preserve your gut feeling. Add human context that EMRs usually lose.',
+      title: "The Human Touch",
+      description:
+        "Preserve your gut feeling. Add human context that EMRs usually lose.",
       icon: Sparkles,
-      activeIconBg: 'bg-[#8b9bff]',
+      activeIconBg: "bg-[#8b9bff]",
     },
   ];
 
@@ -371,7 +446,7 @@ const HowItWorksPage = () => {
   const [activeStep, setActiveStep] = useState(0);
   const { scrollYProgress } = useScroll({
     target: storyRef,
-    offset: ['start center', 'end center'],
+    offset: ["start center", "end center"],
   });
 
   const [mobileStep, setMobileStep] = useState(0);
@@ -383,7 +458,7 @@ const HowItWorksPage = () => {
     return () => clearInterval(interval);
   }, []);
 
-  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const progress = Math.max(0, Math.min(0.999, latest));
     const nextStep = Math.floor(progress * 3);
     setActiveStep((prev) => (prev === nextStep ? prev : nextStep));
@@ -397,21 +472,23 @@ const HowItWorksPage = () => {
       <section className="pt-32 pb-20 bg-white">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto text-center mb-24">
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-[48px] md:text-[64px] font-bold text-[#040523] tracking-[-2px] leading-tight mb-6"
             >
-              Built for your specialty.<br />
+              Built for your specialty.
+              <br />
               Not just another template.
             </motion.h1>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
               className="text-[18px] text-[#64748b] max-w-2xl mx-auto"
             >
-              Specialty-aware AI trained on millions of clinical hours in your specific domain.
+              Specialty-aware AI trained on millions of clinical hours in your
+              specific domain.
             </motion.p>
           </div>
 
@@ -423,10 +500,17 @@ const HowItWorksPage = () => {
                   <div className="h-[300px] md:h-[340px] w-full bg-white rounded-[18px] overflow-hidden flex flex-col p-6 pt-10 relative">
                     <div className="flex items-center gap-2 mb-6">
                       <div className="w-2 h-2 rounded-full bg-[#5768fd]" />
-                      <span className="font-mono text-[11px] font-bold text-[#314158] uppercase tracking-wider">PrecisionNote</span>
-                      <span className="ml-auto font-mono text-[11px] text-[#90a1b9]">14:23</span>
+                      <span className="font-mono text-[11px] font-bold text-[#314158] uppercase tracking-wider">
+                        PrecisionNote
+                      </span>
+                      <span className="ml-auto font-mono text-[11px] text-[#90a1b9]">
+                        14:23
+                      </span>
                     </div>
-                    <PhoneDisplay activeStep={mobileStep} reduceMotion={false} />
+                    <PhoneDisplay
+                      activeStep={mobileStep}
+                      reduceMotion={false}
+                    />
                   </div>
                 </div>
                 <div className="mx-auto h-4 w-[88%] rounded-b-[22px] bg-[#2b2f42] shadow-[0_16px_30px_rgba(15,23,42,0.22)]" />
@@ -437,25 +521,34 @@ const HowItWorksPage = () => {
             <div className="flex flex-col gap-10">
               {steps.map((step, i) => (
                 <div key={i} className="flex gap-6">
-                  <div className={`flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg ${step.activeIconBg}`}>
+                  <div
+                    className={`flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg ${step.activeIconBg}`}
+                  >
                     <step.icon className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-[24px] font-bold text-[#040523] mb-3">{step.title}</h3>
-                    <p className="text-[16px] text-[#64748b] leading-relaxed">{step.description}</p>
+                    <h3 className="text-[24px] font-bold text-[#040523] mb-3">
+                      {step.title}
+                    </h3>
+                    <p className="text-[16px] text-[#64748b] leading-relaxed">
+                      {step.description}
+                    </p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div ref={storyRef} className="hidden lg:block relative h-[300vh] mb-20">
+          <div
+            ref={storyRef}
+            className="hidden lg:block relative h-[300vh] mb-20"
+          >
             <div className="sticky top-16 h-[calc(100vh-4rem)] flex items-center">
               <div className="grid lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.65fr)] gap-10 xl:gap-12 items-center w-full max-w-[1200px] mx-auto">
                 <motion.div
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, ease: 'easeOut' }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
                   className="relative flex justify-center lg:justify-start"
                 >
                   <div className="w-full max-w-[760px]">
@@ -464,10 +557,17 @@ const HowItWorksPage = () => {
                       <div className="h-[420px] xl:h-[460px] w-full bg-white rounded-[22px] overflow-hidden flex flex-col p-8 pt-11 relative">
                         <div className="flex items-center gap-2 mb-8">
                           <div className="w-2 h-2 rounded-full bg-[#5768fd]" />
-                          <span className="font-mono text-[11px] font-bold text-[#314158] uppercase tracking-wider">PrecisionNote</span>
-                          <span className="ml-auto font-mono text-[11px] text-[#90a1b9]">14:23</span>
+                          <span className="font-mono text-[11px] font-bold text-[#314158] uppercase tracking-wider">
+                            PrecisionNote
+                          </span>
+                          <span className="ml-auto font-mono text-[11px] text-[#90a1b9]">
+                            14:23
+                          </span>
                         </div>
-                        <PhoneDisplay activeStep={activeStep} reduceMotion={Boolean(reduceMotion)} />
+                        <PhoneDisplay
+                          activeStep={activeStep}
+                          reduceMotion={Boolean(reduceMotion)}
+                        />
                       </div>
                     </div>
                     <div className="mx-auto h-5 w-[90%] rounded-b-[26px] bg-[#2b2f42] shadow-[0_20px_34px_rgba(15,23,42,0.22)]" />
@@ -482,7 +582,7 @@ const HowItWorksPage = () => {
                       className="w-full bg-[#5768fd] rounded-full origin-top"
                       style={{
                         scaleY: scrollYProgress,
-                        height: '100%',
+                        height: "100%",
                       }}
                     />
                   </div>
@@ -498,24 +598,38 @@ const HowItWorksPage = () => {
                             y: isActive ? 0 : 8,
                             scale: isActive ? 1 : 0.97,
                           }}
-                          transition={{ duration: reduceMotion ? 0.1 : 0.35, ease: 'easeOut' }}
+                          transition={{
+                            duration: reduceMotion ? 0.1 : 0.35,
+                            ease: "easeOut",
+                          }}
                           className="flex gap-6"
                         >
                           <motion.div
                             animate={{
-                              boxShadow: isActive ? '0 14px 28px rgba(87,104,253,0.25)' : '0 8px 20px rgba(15,23,42,0.08)',
+                              boxShadow: isActive
+                                ? "0 14px 28px rgba(87,104,253,0.25)"
+                                : "0 8px 20px rgba(15,23,42,0.08)",
                               scale: isActive ? 1.05 : 1,
                             }}
-                            transition={{ duration: reduceMotion ? 0.1 : 0.35, ease: 'easeOut' }}
+                            transition={{
+                              duration: reduceMotion ? 0.1 : 0.35,
+                              ease: "easeOut",
+                            }}
                             className={`flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center ${
-                              isActive ? step.activeIconBg : 'bg-[#eef1ff]'
+                              isActive ? step.activeIconBg : "bg-[#eef1ff]"
                             }`}
                           >
-                            <Icon className={`w-6 h-6 ${isActive ? 'text-white' : 'text-[#c4cdee]'}`} />
+                            <Icon
+                              className={`w-6 h-6 ${isActive ? "text-white" : "text-[#c4cdee]"}`}
+                            />
                           </motion.div>
                           <div>
-                            <h3 className="text-[26px] font-bold text-[#040523] mb-3">{step.title}</h3>
-                            <p className="text-[16px] text-[#64748b] leading-relaxed">{step.description}</p>
+                            <h3 className="text-[26px] font-bold text-[#040523] mb-3">
+                              {step.title}
+                            </h3>
+                            <p className="text-[16px] text-[#64748b] leading-relaxed">
+                              {step.description}
+                            </p>
                           </div>
                         </motion.div>
                       );
@@ -533,19 +647,19 @@ const HowItWorksPage = () => {
       {/* CTA Section */}
       <section className="pb-32">
         <div className="container-custom">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="relative overflow-hidden rounded-[40px] bg-[#ffca40] p-12 md:p-20 text-center"
+            className="relative overflow-hidden rounded-[20px] bg-[#ffca40] p-12 md:p-20 text-center"
           >
             {/* Block Pattern Overlay from Figma */}
-            <div 
+            <div
               className="absolute inset-0 opacity-20 pointer-events-none bg-repeat bg-center"
-              style={{ 
+              style={{
                 backgroundImage: `url(${AppImages.YellowCTABg})`,
                 backgroundSize: "contain",
-                backgroundPosition: '40% 50%',
+                backgroundPosition: "40% 50%",
               }}
             />
 
@@ -554,7 +668,7 @@ const HowItWorksPage = () => {
                 Ready to reclaim your time?
               </h2>
               <p className="text-[18px] md:text-[20px] text-[#040523]/80 font-medium mb-10">
-                 Join 2,000+ physicians who've eliminated documentation burden.
+                Join 2,000+ physicians who've eliminated documentation burden.
               </p>
               <button className="px-10 py-5 bg-[#040523] text-white rounded-xl font-bold text-lg hover:bg-black transition-all shadow-xl shadow-black/10">
                 Start Free Trial

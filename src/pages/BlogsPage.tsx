@@ -126,7 +126,7 @@ const BlogPage = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="relative rounded-[48px] overflow-hidden aspect-[16/7] min-h-[500px] group cursor-pointer shadow-2xl"
+          className="relative rounded-[20px] overflow-hidden aspect-[16/7] min-h-[500px] group cursor-pointer shadow-2xl"
         >
           <img
             src="https://global.ariseplay.com/amg/www.thisdaylive.com/uploads/Screenshot_20250422-121530.jpg"
@@ -135,7 +135,7 @@ const BlogPage = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/90 via-brand-navy/40 to-transparent flex flex-col justify-center p-12 md:p-24">
             <div className="max-w-3xl">
-              <span className="inline-block bg-brand-blue text-white text-sm font-bold px-4 py-1.5 rounded-full mb-8 uppercase tracking-[0.1em]">
+              <span className="inline-block bg-brand-blue text-white text-sm font-bold px-4 py-2 rounded-lg mb-8 uppercase ">
                 FEATURED
               </span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-10 leading-[1.1] tracking-tight">
@@ -152,7 +152,7 @@ const BlogPage = () => {
                   <span>April 22, 2025</span>
                 </div>
               </div>
-              <button className="bg-white text-brand-navy px-12 py-5 rounded-full font-bold text-lg flex items-center gap-3 hover:bg-brand-navy hover:text-white transition-all shadow-xl group/btn">
+              <button className="bg-white text-brand-blue px-7 py-4 rounded-lg font-bold text-lg flex items-center gap-3 hover:bg-brand-navy hover:text-white transition-all shadow-xl group/btn">
                 Read Story{" "}
                 <ArrowRight
                   size={24}
