@@ -42,21 +42,22 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, style, ...props }, ref) => {
     const isPrimary = variant === "primary" || !variant;
 
     return (
       <motion.button
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
-        style={
-          isPrimary
+        style={{
+          ...(isPrimary
             ? {
                 backgroundImage:
                   "linear-gradient(94.9deg, #040523 2.59%, #3B4FE8 105%)",
               }
-            : undefined
-        }
+            : {}),
+          ...style,
+        }}
         whileHover={{ y: -2 }}
         whileTap={{ scale: 0.98 }}
         {...props}
