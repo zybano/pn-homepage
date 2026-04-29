@@ -211,36 +211,6 @@ const BlogPage = () => {
         </div>
       </section>
 
-      {/* Testimonial Section */}
-      <section className="container-custom mb-48 px-4 md:px-12 lg:px-28">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="bg-brand-navy rounded-[30px] p-16 md:p-32 relative overflow-hidden text-center shadow-2xl"
-        >
-          <div className="relative z-10">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-medium text-white leading-[1.2] mb-16 max-w-5xl mx-auto italic">
-              "Precision Note has reduced my clinical documentation time by 70%.
-              I finally feel like a doctor again, not a data entry clerk."
-            </h2>
-            <div className="flex flex-col items-center">
-              <div className="w-24 h-24 rounded-full bg-brand-blue mb-8 flex items-center justify-center text-white text-3xl font-bold shadow-2xl shadow-brand-blue/40 border-4 border-white/10">
-                BI
-              </div>
-              <h4 className="text-white text-2xl font-bold mb-2">
-                Dr. Bukola Idowu
-              </h4>
-              <p className="text-white/40 text-xl font-medium tracking-wide uppercase">
-                Chief of Clinical Operations
-              </p>
-            </div>
-          </div>
-          {/* Subtle background glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-brand-blue/20 blur-[150px] pointer-events-none"></div>
-        </motion.div>
-      </section>
-
       {/* Newsletter Section */}
       <section className="py-24">
         <div className="container-custom px-6">
@@ -261,7 +231,7 @@ const BlogPage = () => {
             />
 
             <div className="relative z-10 max-w-[800px] mx-auto">
-              <h2 className="text-[40px] md:text-[64px] font-bold text-[#040523] tracking-tight leading-tight mb-8">
+              <h2 className="text-[50px] md:text-[50px] font-bold text-[#040523] tracking-tight leading-tight mb-8">
                 Want these insights in your inbox?
               </h2>
               <p className="text-[18px] md:text-[22px] text-[#040523]/80 font-medium mb-12">
