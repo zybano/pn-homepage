@@ -262,11 +262,11 @@ const BlogPage = () => {
 
             <div className="relative z-10 max-w-[800px] mx-auto">
               <h2 className="text-[40px] md:text-[64px] font-bold text-[#040523] tracking-tight leading-tight mb-8">
-                Need help with integration?
+                Want these insights in your inbox?
               </h2>
               <p className="text-[18px] md:text-[22px] text-[#040523]/80 font-medium mb-12">
-                Our Integration specialists will work with your IT team to
-                ensure a seamless setup.
+                Join 5,000+ physicians getting weekly tips on clinical
+                efficiency.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <button className="h-16 px-10 bg-[#040523] text-white rounded-2xl font-bold text-[16px] hover:bg-black transition-all shadow-xl shadow-black/10 flex items-center gap-2 group">
