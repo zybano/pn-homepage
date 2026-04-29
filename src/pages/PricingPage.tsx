@@ -19,11 +19,13 @@ const pricingData: Record<Currency, Record<string, PriceInfo>> = {
   USD: {
     Basic: { monthly: 0, yearly: 0, saveAmount: 0, symbol: '$' },
     Professional: { monthly: 20, yearly: 190, saveAmount: 50, symbol: '$' },
+    Organization: { monthly: 50, yearly: 550, saveAmount: 50, symbol: '$' },
     Enterprise: { monthly: 0, yearly: 0, saveAmount: 0, symbol: '$' }
   },
   NGN: {
     Basic: { monthly: 0, yearly: 0, saveAmount: 0, symbol: '₦' },
     Professional: { monthly: 30000, yearly: 285000, saveAmount: 75000, symbol: '₦' },
+    Organization: { monthly: 75000, yearly: 825000, saveAmount: 75000, symbol: '₦' },
     Enterprise: { monthly: 0, yearly: 0, saveAmount: 0, symbol: '₦' }
   }
 };
@@ -54,30 +56,30 @@ const PricingPage = () => {
   ];
 
   const comparisonRows = [
-    ['SOAP & Progress Notes', 'Included', 'Included', 'Included'],
-    ['H&P / Physical Exam', '---', 'Included', 'Included'],
-    ['Discharge & Consult Notes', '---', 'Included', 'Included'],
-    ['Procedure Notes', '---', '---', 'Included'],
-    ['Specialty Templates', 'Basic', '25+ Specs', 'Unlimited'],
-    ['Custom Template Editor', '---', '---', 'Yes'],
+    ['SOAP & Progress Notes', 'Included', 'Included', 'Included', 'Included'],
+    ['H&P / Physical Exam', '---', 'Included', 'Included', 'Included'],
+    ['Discharge & Consult Notes', '---', 'Included', 'Included', 'Included'],
+    ['Procedure Notes', '---', '---', 'Included', 'Included'],
+    ['Specialty Templates', 'Basic', '25+ Specs', 'Unlimited', 'Custom'],
+    ['Custom Template Editor', '---', '---', '---', 'Yes'],
   ];
 
   const intelligenceRows = [
-    ['Amber Handoff Memos', '---', 'Unlimited', 'Unlimited'],
-    ['Clinical Note Editing', 'Included', 'Included', 'Included'],
-    ['Advanced Analytics', '---', '---', 'Yes'],
+    ['Amber Handoff Memos', '---', 'Unlimited', 'Unlimited', 'Unlimited'],
+    ['Clinical Note Editing', 'Included', 'Included', 'Included', 'Included'],
+    ['Advanced Analytics', '---', '---', '---', 'Yes'],
   ];
 
   const adminRows = [
-    ['EMR / HMS Integration', 'Manual Copy', 'Auto-Sync', 'Custom API'],
-    ['Multi-Team Management', '---', '---', 'Yes'],
-    ['Dedicated Account Mgr', '---', '---', 'Yes'],
+    ['EMR / HMS Integration', 'Manual Copy', 'Auto-Sync', 'Auto-Sync', 'Custom API'],
+    ['Multi-Team Management', '---', '---', '---', 'Yes'],
+    ['Dedicated Account Mgr', '---', '---', '---', 'Yes'],
   ];
 
   const securityRows = [
-    ['HIPAA Compliance', 'Yes', 'Yes', 'Yes'],
-    ['SOC2 Type II', '---', '---', 'Yes'],
-    ['Support Level', 'Help Center', 'Priority', '24/7 VIP'],
+    ['HIPAA Compliance', 'Yes', 'Yes', 'Yes', 'Yes'],
+    ['SOC2 Type II', '---', '---', '---', 'Yes'],
+    ['Support Level', 'Help Center', 'Priority', 'Priority', '24/7 VIP'],
   ];
 
 
@@ -189,46 +191,63 @@ const PricingPage = () => {
               </div>
             </motion.div>
 
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-              <PlanCard
-                title="Basic"
-                description="Start for free. No credit card required."
-                priceMonthly={pricingData[currency].Basic.monthly}
-                priceYearly={pricingData[currency].Basic.yearly}
-                currencySymbol={pricingData[currency].Basic.symbol}
-                cta="Get PrecisionNote free"
-                ctaSecondary
-                credits="2K credits per month"
-                intro="Free for everyone"
-                features={['10 Scribe Sessions / Month', 'Standard SOAP Templates', 'HIPAA Secure', 'E-mail Secure']}
-                index={0}
-              />
-              <PlanCard
-                title="Professional"
-                description="Unlimited scribe sessions for your practice."
-                priceMonthly={pricingData[currency].Professional.monthly}
-                priceYearly={pricingData[currency].Professional.yearly}
-                currencySymbol={pricingData[currency].Professional.symbol}
-                saveAmount={pricingData[currency].Professional.saveAmount}
-                cta="Try Free for 14 Days"
-                credits="8K credits per month"
-                intro="Everything in the resident, plus:"
-                badge="Most Popular"
-                showBilling
-                features={['All Specialty Templates', 'Unlimited Exports to EMR', 'Unlimited Amber Handoff Memos', 'Priority AI Processing']}
-                featured
-                index={1}
-              />
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+                <PlanCard
+                  title="Basic"
+                  description="Start for free. No credit card required."
+                  priceMonthly={pricingData[currency].Basic.monthly}
+                  priceYearly={pricingData[currency].Basic.yearly}
+                  currencySymbol={pricingData[currency].Basic.symbol}
+                  cta="Get PrecisionNote free"
+                  ctaSecondary
+                  credits="2K credits per month"
+                  intro="Free for everyone"
+                  features={['10 Scribe Sessions / Month', 'Standard SOAP Templates', 'No EHR integration', 'HIPAA Secure']}
+                  index={0}
+                />
+                <PlanCard
+                  title="Professional"
+                  description="Unlimited scribe sessions for your practice."
+                  priceMonthly={pricingData[currency].Professional.monthly}
+                  priceYearly={pricingData[currency].Professional.yearly}
+                  currencySymbol={pricingData[currency].Professional.symbol}
+                  saveAmount={pricingData[currency].Professional.saveAmount}
+                  cta="Try Free for 14 Days"
+                  credits="8K credits per month"
+                  intro="Everything in basic, plus:"
+                  showBilling
+                  features={['50 Scribe Sessions / Month', '1 Specialty Module', 'Basic EHR Export', 'Standard Amber Memo (AI summary)']}
+                  index={1}
+                />
+                <PlanCard
+                  title="Organization"
+                  description="Unlimited scribe sessions for your practice."
+                  priceMonthly={pricingData[currency].Organization.monthly}
+                  priceYearly={pricingData[currency].Organization.yearly}
+                  currencySymbol={pricingData[currency].Organization.symbol}
+                  saveAmount={pricingData[currency].Organization.saveAmount}
+                  cta="Try Free for 14 Days"
+                  credits="20K credits per month"
+                  intro="Everything in professional, plus:"
+                  badge="Most Popular"
+                  showBilling
+                  features={['All Specialty Templates', '1 Specialty Module', 'Basic EHR Export', 'Standard Amber Memo (AI summary)']}
+                  featured
+                  index={2}
+                />
+              </div>
+              
               <PlanCard
                 title="Enterprise"
                 description="Custom AI integration for your whole department."
                 price="Custom"
                 cta="Contact Sales"
-                credits="20K credits per month"
-                intro="Everything in the attending, plus:"
-                showBilling
+                credits="Unlimited credits per month"
+                intro="Everything in organization, plus:"
                 features={['Bulk Seat Management', 'Custom Specialty Workflows', 'Dedicated Account Manager', 'On-Site Training']}
-                index={2}
+                index={3}
+                fullWidth
               />
             </div>
           </div>
@@ -240,18 +259,18 @@ const PricingPage = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mb-6 grid grid-cols-[1fr_219px_219px_219px] items-center gap-[93px] border-b border-[#a4a9d7] px-[10px] py-10"
+              className="mb-6 grid grid-cols-1 md:grid-cols-[1fr_repeat(4,200px)] items-center gap-6 md:gap-[40px] border-b border-[#a4a9d7] px-[10px] py-10"
             >
-              <h2 className="text-[40px] font-bold leading-[69px] tracking-[-1.2px]">Choose Your Plan</h2>
-              {['The Resident', 'The Attending', 'The Chief of Medicine'].map((plan, i) => (
+              <h2 className="text-[32px] md:text-[40px] font-bold leading-tight md:leading-[69px] tracking-[-1.2px]">Choose Your Plan</h2>
+              {['Basic', 'Professional', 'Organization', 'Enterprise'].map((plan, i) => (
                 <div key={plan} className="text-center">
-                  <p className="mb-4 text-[22px] font-semibold tracking-[-0.5px]">{plan}</p>
+                  <p className="mb-4 text-[18px] md:text-[22px] font-semibold tracking-[-0.5px]">{plan}</p>
                   <motion.button 
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`w-full rounded-xl px-4 py-3 text-[16px] font-bold shadow-lg shadow-black/5 ${i === 0 ? 'bg-white text-[#040523] border border-slate-200' : 'bg-[#5768fd] text-white'}`}
+                    className={`w-full rounded-xl px-4 py-3 text-[14px] md:text-[16px] font-bold shadow-lg shadow-black/5 ${i === 0 ? 'bg-white text-[#040523] border border-slate-200' : 'bg-[#5768fd] text-white'}`}
                   >
-                    {i === 0 ? 'Start for free' : i === 1 ? 'Try Free for 14 Days' : 'Contact Sales'}
+                    {i === 0 ? 'Start for free' : i === 1 || i === 2 ? 'Try Free for 14 Days' : 'Contact Sales'}
                   </motion.button>
                 </div>
               ))}
@@ -259,8 +278,9 @@ const PricingPage = () => {
 
             <div className="space-y-4">
               <FeatureGroup title="Scribe" open={openRows === 'scribe'} onToggle={() => setOpenRows(openRows === 'scribe' ? '' : 'scribe')}>
-                <div className="grid h-[80px] grid-cols-[324px_219px_219px_219px] items-center gap-[107px] border-b border-[#a4a9d7]/30 p-5 px-10">
+                <div className="grid grid-cols-1 md:grid-cols-[1fr_repeat(4,200px)] items-center gap-4 md:gap-[40px] border-b border-[#a4a9d7]/30 p-5 px-10">
                   <p className="text-[17px] font-medium text-[#040523]">Core Scribe Coverage</p>
+                  <p className="text-center text-[17px] text-[#62748e]">Included</p>
                   <p className="text-center text-[17px] text-[#62748e]">Included</p>
                   <p className="text-center text-[17px] text-[#62748e]">Included</p>
                   <p className="text-center text-[17px] text-[#62748e]">Included</p>
@@ -273,7 +293,7 @@ const PricingPage = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.05 }}
-                    className="grid h-[80px] grid-cols-[324px_219px_219px_219px] items-center gap-[107px] border-b border-[#a4a9d7]/30 p-5 px-10"
+                    className="grid grid-cols-1 md:grid-cols-[1fr_repeat(4,200px)] items-center gap-4 md:gap-[40px] border-b border-[#a4a9d7]/30 p-5 px-10"
                   >
                     <p className="text-[17px] font-medium text-[#040523]">{row[0]}</p>
                     {row.slice(1).map((cell, i) => (
@@ -291,7 +311,7 @@ const PricingPage = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.05 }}
-                    className="grid h-[80px] grid-cols-[324px_219px_219px_219px] items-center gap-[107px] border-b border-[#a4a9d7]/30 p-5 px-10"
+                    className="grid grid-cols-1 md:grid-cols-[1fr_repeat(4,200px)] items-center gap-4 md:gap-[40px] border-b border-[#a4a9d7]/30 p-5 px-10"
                   >
                     <p className="text-[17px] font-medium text-[#040523]">{row[0]}</p>
                     {row.slice(1).map((cell, i) => (
@@ -309,7 +329,7 @@ const PricingPage = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.05 }}
-                    className="grid h-[80px] grid-cols-[324px_219px_219px_219px] items-center gap-[107px] border-b border-[#a4a9d7]/30 p-5 px-10"
+                    className="grid grid-cols-1 md:grid-cols-[1fr_repeat(4,200px)] items-center gap-4 md:gap-[40px] border-b border-[#a4a9d7]/30 p-5 px-10"
                   >
                     <p className="text-[17px] font-medium text-[#040523]">{row[0]}</p>
                     {row.slice(1).map((cell, i) => (
@@ -327,7 +347,7 @@ const PricingPage = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.05 }}
-                    className="grid h-[80px] grid-cols-[324px_219px_219px_219px] items-center gap-[107px] border-b border-[#a4a9d7]/30 p-5 px-10"
+                    className="grid grid-cols-1 md:grid-cols-[1fr_repeat(4,200px)] items-center gap-4 md:gap-[40px] border-b border-[#a4a9d7]/30 p-5 px-10"
                   >
                     <p className="text-[17px] font-medium text-[#040523]">{row[0]}</p>
                     {row.slice(1).map((cell, i) => (
@@ -450,6 +470,7 @@ type PlanCardProps = {
   featured?: boolean;
   badge?: string;
   index: number;
+  fullWidth?: boolean;
 };
 
 const PlanCard = ({ 
@@ -468,7 +489,8 @@ const PlanCard = ({
   showBilling, 
   featured, 
   badge, 
-  index 
+  index,
+  fullWidth
 }: PlanCardProps) => {
   const [billingCycle, setBillingCycle] = useState<BillingCycle>('yearly');
 
@@ -485,7 +507,7 @@ const PlanCard = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
       whileHover={{ y: -8, transition: { duration: 0.2 } }}
-      className={`relative flex flex-col rounded-[24px] border bg-white p-7 shadow-sm transition-all duration-300 ${featured ? 'border-[#5768fd] ring-1 ring-[#5768fd]/5 shadow-xl shadow-blue-500/10' : 'border-[#d3d8ff] hover:border-[#bfc7ff]'}`}
+      className={`relative flex rounded-[24px] border bg-white shadow-sm transition-all duration-300 ${featured ? 'border-[#5768fd] ring-1 ring-[#5768fd]/5 shadow-xl shadow-blue-500/10' : 'border-[#d3d8ff] hover:border-[#bfc7ff]'} ${fullWidth ? 'flex-col lg:flex-row p-10 gap-10 items-center' : 'flex-col p-7'}`}
     >
       {badge && (
         <motion.div 
@@ -498,7 +520,7 @@ const PlanCard = ({
         </motion.div>
       )}
       
-      <div className="mb-8">
+      <div className={`${fullWidth ? 'lg:w-1/3' : 'mb-8'}`}>
         <h4 className="mb-2 text-[26px] font-bold tracking-[-1px]">{title}</h4>
         <p className="text-[17px] leading-relaxed text-[#64748b]">{description}</p>
         
@@ -561,49 +583,97 @@ const PlanCard = ({
         )}
       </div>
       
-      <div className="mt-auto">
-        <motion.button 
-          whileHover={{ scale: 1.02, backgroundColor: ctaSecondary ? '#e2e8f0' : '#4a5af7' }}
-          whileTap={{ scale: 0.98 }}
-          className={`mb-6 h-[56px] w-full rounded-2xl text-[17px] font-bold transition-shadow shadow-[0px_8px_20px_-4px_rgba(87,104,253,0.3)] hover:shadow-2xl hover:shadow-blue-500/20 ${ctaSecondary ? 'bg-slate-100 text-[#040523]' : 'bg-[#5768fd] text-white'}`}
-        >
-          {cta}
-        </motion.button>
-        
-        <div className="mb-8 flex items-center gap-3">
-          <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-[#f0f2ff]">
-            <Sparkles className="h-4 w-4 text-[#5768fd]" />
-          </div>
-          <p className="text-[15px] font-bold text-[#10154c]">{credits}</p>
-        </div>
-        
-        <div className="border-t border-slate-100 pt-7">
-          <p className="mb-5 text-[18px] font-bold text-[#040523]">{intro}</p>
-          <div className="space-y-4">
-            {features.map((feature, i) => (
-              <motion.div 
-                 key={feature} 
-                 initial={{ opacity: 0, x: -5 }}
-                 animate={{ opacity: 1, x: 0 }}
-                 transition={{ delay: index * 0.1 + (i * 0.05) + 0.5 }}
-                 className="flex items-start gap-4"
-              >
-                <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#f3f4ff]">
-                  <Check className="h-3.5 w-3.5 text-[#5768fd] stroke-[3px]" />
+      <div className={`flex flex-col ${fullWidth ? 'lg:flex-row lg:flex-1 lg:items-center lg:gap-12' : 'mt-auto'}`}>
+        {fullWidth ? (
+          <>
+            <div className="flex-1">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-[#f0f2ff]">
+                  <Sparkles className="h-4 w-4 text-[#5768fd]" />
                 </div>
-                <span className="text-[16px] leading-tight text-[#475569] font-medium">{feature}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-        
-        <motion.button 
-          whileHover={{ x: 5 }}
-          className="mt-8 flex items-center gap-2 text-[17px] font-bold text-[#040523]/80 hover:text-[#5768fd]"
-        >
-          See all features
-          <ChevronDown className="-rotate-90 h-4 w-4" />
-        </motion.button>
+                <p className="text-[15px] font-bold text-[#10154c]">{credits}</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                {features.map((feature, i) => (
+                  <motion.div 
+                     key={feature} 
+                     initial={{ opacity: 0, x: -5 }}
+                     animate={{ opacity: 1, x: 0 }}
+                     transition={{ delay: index * 0.1 + (i * 0.05) + 0.5 }}
+                     className="flex items-start gap-4"
+                  >
+                    <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#f3f4ff]">
+                      <Check className="h-3.5 w-3.5 text-[#5768fd] stroke-[3px]" />
+                    </div>
+                    <span className="text-[16px] leading-tight text-[#475569] font-medium">{feature}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+            
+            <div className="lg:w-[300px] flex flex-col gap-4">
+              <motion.button 
+                whileHover={{ scale: 1.02, backgroundColor: ctaSecondary ? '#e2e8f0' : '#4a5af7' }}
+                whileTap={{ scale: 0.98 }}
+                className={`h-[56px] w-full rounded-2xl text-[17px] font-bold transition-shadow shadow-[0px_8px_20px_-4px_rgba(87,104,253,0.3)] hover:shadow-2xl hover:shadow-blue-500/20 ${ctaSecondary ? 'bg-slate-100 text-[#040523]' : 'bg-[#5768fd] text-white'}`}
+              >
+                {cta}
+              </motion.button>
+              <motion.button 
+                whileHover={{ x: 5 }}
+                className="flex items-center justify-center gap-2 text-[17px] font-bold text-[#040523]/80 hover:text-[#5768fd]"
+              >
+                See more
+                <ChevronDown className="-rotate-90 h-4 w-4" />
+              </motion.button>
+            </div>
+          </>
+        ) : (
+          <>
+            <motion.button 
+              whileHover={{ scale: 1.02, backgroundColor: ctaSecondary ? '#e2e8f0' : '#4a5af7' }}
+              whileTap={{ scale: 0.98 }}
+              className={`mb-6 h-[56px] w-full rounded-2xl text-[17px] font-bold transition-shadow shadow-[0px_8px_20px_-4px_rgba(87,104,253,0.3)] hover:shadow-2xl hover:shadow-blue-500/20 ${ctaSecondary ? 'bg-slate-100 text-[#040523]' : 'bg-[#5768fd] text-white'}`}
+            >
+              {cta}
+            </motion.button>
+            
+            <div className="mb-8 flex items-center gap-3">
+              <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-[#f0f2ff]">
+                <Sparkles className="h-4 w-4 text-[#5768fd]" />
+              </div>
+              <p className="text-[15px] font-bold text-[#10154c]">{credits}</p>
+            </div>
+            
+            <div className="border-t border-slate-100 pt-7">
+              <p className="mb-5 text-[18px] font-bold text-[#040523]">{intro}</p>
+              <div className="space-y-4">
+                {features.map((feature, i) => (
+                  <motion.div 
+                     key={feature} 
+                     initial={{ opacity: 0, x: -5 }}
+                     animate={{ opacity: 1, x: 0 }}
+                     transition={{ delay: index * 0.1 + (i * 0.05) + 0.5 }}
+                     className="flex items-start gap-4"
+                  >
+                    <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#f3f4ff]">
+                      <Check className="h-3.5 w-3.5 text-[#5768fd] stroke-[3px]" />
+                    </div>
+                    <span className="text-[16px] leading-tight text-[#475569] font-medium">{feature}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+            
+            <motion.button 
+              whileHover={{ x: 5 }}
+              className="mt-8 flex items-center gap-2 text-[17px] font-bold text-[#040523]/80 hover:text-[#5768fd]"
+            >
+              See more
+              <ChevronDown className="-rotate-90 h-4 w-4" />
+            </motion.button>
+          </>
+        )}
       </div>
     </motion.article>
   );
