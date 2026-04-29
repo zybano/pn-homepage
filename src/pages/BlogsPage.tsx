@@ -238,13 +238,18 @@ const BlogPage = () => {
                 Join 5,000+ physicians getting weekly tips on clinical
                 efficiency.
               </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button className="h-16 px-10 bg-[#040523] text-white rounded-2xl font-bold text-[16px] hover:bg-black transition-all shadow-xl shadow-black/10 flex items-center gap-2 group">
-                  Contact Integration Team
-                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                </button>
-                <button className="h-16 px-10 bg-transparent text-[#040523] border border-[#040523]/20 rounded-2xl font-bold text-[16px] hover:bg-black/5 transition-all">
-                  Learn More
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-lg mx-auto">
+                <div className="w-full sm:w-[314px]">
+                  <input
+                    type="email"
+                    placeholder="your.email@hospital.com"
+                    className="w-full h-12 px-4 rounded-lg border border-[#040523]/60 bg-transparent placeholder:text-[#040523]/60 focus:outline-none focus:ring-2 focus:ring-[#3B4FE8]/40 transition-all"
+                  />
+                </div>
+                <button 
+                  className="w-full sm:w-auto h-12 px-10 rounded-lg bg-gradient-to-r from-[#040523] to-[#3B4FE8] text-white font-semibold shadow-[0px_4px_7px_rgba(87,104,253,0.35)] hover:opacity-90 transition-opacity whitespace-nowrap"
+                >
+                  Subscribe
                 </button>
               </div>
             </div>
