@@ -143,7 +143,7 @@ const LandingFooter = () => {
         <div className="flex flex-col gap-8 border-t border-white/10 pt-10 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <p className="text-[16px] font-medium text-white/50">
-              ©2025 PrecisionNote Inc. All rights reserved
+              ©{new Date().getFullYear()} PrecisionNote Inc. All rights reserved
             </p>
           </div>
           <div className="flex items-center gap-8 text-white/50">
