@@ -5,11 +5,19 @@ import {
   IconBrandFacebook,
   IconShieldCheck,
 } from "@tabler/icons-react";
+import { type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AppImages } from "../lib/data";
+import { contactEmail, isExternalLink, links } from "../lib/links";
 
 const LandingFooter = () => {
+  const handleNewsletterSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const email = new FormData(event.currentTarget).get("email") ?? "";
+    window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent("PrecisionNote newsletter signup")}&body=${encodeURIComponent(`Please add ${email} to the PrecisionNote newsletter.`)}`;
+  };
+
   const sections = [
     {
       title: "Product",
@@ -24,21 +32,21 @@ const LandingFooter = () => {
     {
       title: "Resources",
       links: [
-        { name: "Documentation", href: "#" },
-        { name: "API Reference", href: "#" },
-        { name: "Clinical Blog", href: "#" },
-        { name: "Webinars", href: "#" },
-        { name: "Status", href: "#" },
+        { name: "Documentation", href: links.documentation },
+        { name: "API Reference", href: links.integrations },
+        { name: "Clinical Blog", href: links.blog },
+        { name: "Webinars", href: links.demo },
+        { name: "Status", href: links.status },
       ],
     },
     {
       title: "Company",
       links: [
-        { name: "About Us", href: "#" },
-        { name: "Careers", href: "#" },
+        { name: "About Us", href: links.about },
+        { name: "Careers", href: links.careers },
         { name: "Chat with Us", href: "/chat" },
-        { name: "Privacy Policy", href: "#" },
-        { name: "Terms of Service", href: "#" },
+        { name: "Privacy Policy", href: links.privacy },
+        { name: "Terms of Service", href: links.terms },
       ],
     },
   ];
@@ -88,22 +96,25 @@ const LandingFooter = () => {
               </span>
             </div>
 
-            <div className="flex max-w-md items-center gap-3">
+            <form className="flex max-w-md items-center gap-3" onSubmit={handleNewsletterSubmit}>
               <div className="relative flex-1">
                 <input
                   type="email"
+                  name="email"
                   placeholder="Subscribe to Our Newsletter"
                   className="h-[52px] w-full rounded-2xl border border-white/20 bg-white/5 px-5 text-[15px] text-white placeholder:text-white/40 focus:border-[#5768fd]/50 focus:outline-none transition-all"
+                  required
                 />
               </div>
               <motion.button
+                type="submit"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="h-[52px] rounded-2xl bg-[#5768fd] px-8 text-[16px] font-bold text-white shadow-lg shadow-[#5768fd]/20 transition-all hover:bg-[#4a5af7] hover:shadow-[#5768fd]/40"
               >
                 Subscribe
               </motion.button>
-            </div>
+            </form>
           </div>
 
           {/* Links Grid */}
@@ -126,6 +137,8 @@ const LandingFooter = () => {
                       ) : (
                         <a
                           href={link.href}
+                          target={isExternalLink(link.href) ? "_blank" : undefined}
+                          rel={isExternalLink(link.href) ? "noreferrer" : undefined}
                           className="text-[16px] font-medium text-white/70 hover:text-white transition-colors"
                         >
                           {link.name}
@@ -152,14 +165,16 @@ const LandingFooter = () => {
             </span>
             <div className="flex items-center gap-6">
               {[
-                IconBrandTwitter,
-                IconBrandLinkedin,
-                IconBrandInstagram,
-                IconBrandFacebook,
-              ].map((Icon, i) => (
+                { Icon: IconBrandTwitter, href: links.twitter },
+                { Icon: IconBrandLinkedin, href: links.linkedIn },
+                { Icon: IconBrandInstagram, href: links.instagram },
+                { Icon: IconBrandFacebook, href: links.facebook },
+              ].map(({ Icon, href }) => (
                 <a
-                  key={i}
-                  href="#"
+                  key={href}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
                   className="hover:text-white transition-all transform hover:-translate-y-1"
                 >
                   <Icon size={24} stroke={1.5} />

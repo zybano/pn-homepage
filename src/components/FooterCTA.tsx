@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 
 import { AppImages } from "../lib/data";
+import { links } from "../lib/links";
 
 const FooterCTA = () => {
   const benefits = [
@@ -64,14 +65,14 @@ const FooterCTA = () => {
           </p>
 
           <div className="mb-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <button className="group flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#040523] to-[#3b4fe8] px-8 py-3 text-[16px] font-semibold text-white shadow-[0_4px_14px_rgba(87,104,253,0.35)]">
+            <a href={links.signUp} className="group flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#040523] to-[#3b4fe8] px-8 py-3 text-[16px] font-semibold text-white shadow-[0_4px_14px_rgba(87,104,253,0.35)]">
               Get Started (No Credit Card Required)
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </button>
-            <button className="flex items-center gap-2 rounded-lg border border-[rgba(4,5,35,0.5)] bg-white/20 px-8 py-3 text-[16px] font-medium text-[#040523]">
+            </a>
+            <a href={links.demo} className="flex items-center gap-2 rounded-lg border border-[rgba(4,5,35,0.5)] bg-white/20 px-8 py-3 text-[16px] font-medium text-[#040523]">
               <Play className="h-4 w-4" />
               Watch Demo
-            </button>
+            </a>
           </div>
 
           {/* Benefits Grid */}

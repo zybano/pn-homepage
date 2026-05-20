@@ -1,10 +1,18 @@
 import { motion } from "framer-motion";
+import { type FormEvent } from "react";
 import { Clock, Calendar, ArrowRight } from "lucide-react";
 import LandingNav from "../components/LandingNav";
 import LandingFooter from "../components/LandingFooter";
 import { AppImages } from "../lib/data";
+import { contactEmail } from "../lib/links";
 
 const BlogPage = () => {
+  const handleNewsletterSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const email = new FormData(event.currentTarget).get("email") ?? "";
+    window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent("PrecisionNote newsletter signup")}&body=${encodeURIComponent(`Please add ${email} to the PrecisionNote newsletter.`)}`;
+  };
+
   const latestArticles = [
     {
       id: 1,
@@ -13,6 +21,7 @@ const BlogPage = () => {
         "Africa-Born, AI-Powered Clinical Documentation App Set to Transform Healthcare Workflows Globally",
       readTime: "5 min read",
       date: "April 22, 2025",
+      url: "https://www.thisdaylive.com/2025/04/22/africa-born-ai-powered-clinical-documentation-app-set-to-transform-healthcare-workflows-globally/",
       image:
         "https://global.ariseplay.com/amg/www.thisdaylive.com/uploads/Screenshot_20250422-121530.jpg",
     },
@@ -23,6 +32,7 @@ const BlogPage = () => {
         "App designed by doctors to transform healthcare workflows globally",
       readTime: "5 min read",
       date: "April 21, 2025",
+      url: "https://guardian.ng/features/app-designed-by-doctors-to-transform-healthcare-workflows-globally/",
       image:
         "https://cdn.guardian.ng/wp-content/uploads/2025/11/Guardian-grey.jpg",
     },
@@ -33,6 +43,7 @@ const BlogPage = () => {
         "Precision Note: Africa-Born, AI-Powered Clinical Documentation App Set to Transform Healthcare Workflows Globally",
       readTime: "5 min read",
       date: "April 22, 2025",
+      url: "https://techpoint.africa/brandpress/precision-note-africa-born-ai-powered-clinical-documentation-app-set-to-transform-healthcare-workflows-globally/",
       image:
         "https://techpoint.africa/wp-content/uploads/2025/04/Co-founders.jpeg.webp",
     },
@@ -42,6 +53,7 @@ const BlogPage = () => {
       title: "Nigerian doctors unveil app to document patients' consultation",
       readTime: "5 min read",
       date: "April 24, 2025",
+      url: "https://healthwise.punchng.com/nigerian-doctors-unveil-app-to-document-patients-consultation/",
       image:
         "https://healthwise.punchng.com/wp-content/uploads/2025/04/Nigerian-doctors.jpg",
     },
@@ -52,6 +64,7 @@ const BlogPage = () => {
         "Precision Note: AI-Powered Clinical Documentation App Set to Transform Global Healthcare Workflows",
       readTime: "5 min read",
       date: "April 23, 2025",
+      url: "https://ainewstoday.net/",
       image:
         "https://ainewstoday.net/uploads/images/202504/image_870x_6808fbb96d94c.webp",
     },
@@ -62,6 +75,7 @@ const BlogPage = () => {
         "Precision Note launches to transform medical documentation with AI-Powered Innovation",
       readTime: "5 min read",
       date: "May 2, 2025",
+      url: "https://nairametrics.com/2025/05/02/precision-note-launches-to-transform-medical-documentation-with-ai-powered-innovation/",
       image:
         "https://nairametrics.com/wp-content/uploads/2025/05/IMG_7195.jpeg",
     },
@@ -72,6 +86,7 @@ const BlogPage = () => {
         "Nigerian doctors introduce AI-powered Precision Note to aid clinical documentation",
       readTime: "5 min read",
       date: "May 2, 2025",
+      url: "https://businessday.ng/news/article/nigerian-doctors-introduce-ai-powered-precision-note-to-aid-clinical-documentation/",
       image:
         "https://cdn.businessday.ng/wp-content/uploads/2023/11/Business-Day-Grey-e1691776368938.jpg",
     },
@@ -81,6 +96,7 @@ const BlogPage = () => {
       title: "Nigerian doctors launch AI tool to improve care for patient",
       readTime: "5 min read",
       date: "May 2, 2025",
+      url: "https://thenationonlineng.net/nigerian-doctors-launch-ai-tool-to-improve-care-for-patient/",
       image:
         "https://cdn.thenationonlineng.net/wp-content/uploads/2024/05/20003146/Nation.jpg",
     },
@@ -91,6 +107,7 @@ const BlogPage = () => {
         "Precision Note Launches to Transform Medical Documentation with AI-Powered Innovation",
       readTime: "5 min read",
       date: "May 2, 2025",
+      url: "https://techcabal.com/",
       image:
         "https://c76c7bbc41.mjedge.net/wp-content/uploads/tc/2025/05/A-1-682x1024.jpeg",
     },
@@ -152,13 +169,13 @@ const BlogPage = () => {
                   <span>April 22, 2025</span>
                 </div>
               </div>
-              <button className="bg-white text-brand-blue px-7 py-4 rounded-lg font-bold text-lg flex items-center gap-3 hover:bg-brand-navy hover:text-white transition-all shadow-xl group/btn">
+              <a href={latestArticles[0].url} target="_blank" rel="noreferrer" className="bg-white text-brand-blue px-7 py-4 rounded-lg font-bold text-lg flex items-center gap-3 hover:bg-brand-navy hover:text-white transition-all shadow-xl group/btn">
                 Read Story{" "}
                 <ArrowRight
                   size={24}
                   className="transition-transform group-hover/btn:translate-x-2"
                 />
-              </button>
+              </a>
             </div>
           </div>
         </motion.div>
@@ -174,7 +191,10 @@ const BlogPage = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {latestArticles.map((article, index) => (
-            <motion.div
+            <motion.a
+              href={article.url}
+              target="_blank"
+              rel="noreferrer"
               key={article.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -206,7 +226,7 @@ const BlogPage = () => {
                   <span>{article.date}</span>
                 </div>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </section>
@@ -238,20 +258,23 @@ const BlogPage = () => {
                 Join 5,000+ physicians getting weekly tips on clinical
                 efficiency.
               </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-lg mx-auto">
+              <form className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-lg mx-auto" onSubmit={handleNewsletterSubmit}>
                 <div className="w-full sm:w-[314px]">
                   <input
                     type="email"
+                    name="email"
                     placeholder="your.email@hospital.com"
                     className="w-full h-12 px-4 rounded-lg border border-[#040523]/60 bg-transparent placeholder:text-[#040523]/60 focus:outline-none focus:ring-2 focus:ring-[#3B4FE8]/40 transition-all"
+                    required
                   />
                 </div>
                 <button 
+                  type="submit"
                   className="w-full sm:w-auto h-12 px-10 rounded-lg bg-gradient-to-r from-[#040523] to-[#3B4FE8] text-white font-semibold shadow-[0px_4px_7px_rgba(87,104,253,0.35)] hover:opacity-90 transition-opacity whitespace-nowrap"
                 >
                   Subscribe
                 </button>
-              </div>
+              </form>
             </div>
           </motion.div>
         </div>

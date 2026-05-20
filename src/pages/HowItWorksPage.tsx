@@ -11,6 +11,7 @@ import LandingNav from "../components/LandingNav";
 import LandingFooter from "../components/LandingFooter";
 import Testimonials from "../components/Testimonials";
 import { AppImages } from "../lib/data";
+import { links } from "../lib/links";
 
 type Step = {
   title: string;
@@ -670,9 +671,9 @@ const HowItWorksPage = () => {
               <p className="text-[18px] md:text-[20px] text-[#040523]/80 font-medium mb-10">
                 Join 2,000+ physicians who've eliminated documentation burden.
               </p>
-              <button className="px-10 py-5 bg-[#040523] text-white rounded-xl font-bold text-lg hover:bg-black transition-all shadow-xl shadow-black/10">
+              <a href={links.signUp} className="inline-flex px-10 py-5 bg-[#040523] text-white rounded-xl font-bold text-lg hover:bg-black transition-all shadow-xl shadow-black/10">
                 Start Free Trial
-              </button>
+              </a>
             </div>
           </motion.div>
         </div>

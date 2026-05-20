@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
 import { AppImages } from "../lib/data";
+import { links } from "../lib/links";
 
 const waveformHeights = [
   24.542, 26.352, 25.039, 29.239, 21.078, 8.879, 2.009, 8.902, 12.661, 16.849,
@@ -23,15 +24,18 @@ const Hero = () => {
          
 
               <div className="flex flex-col gap-[16px]">
-                <div className="text-[60px] font-semibold tracking-[-1.5px] text-[#040523]">
-                  <p className="leading-[90px]">Just talk.</p>
+                <div className="text-[48px] font-semibold tracking-[-1.5px] text-[#040523] sm:text-[60px]">
+                  <p className="leading-[1.12] sm:leading-[90px]">Just talk.</p>
                 </div>
 
-                <p className="text-[60px] font-bold tracking-[-1.2px] text-[#040523]">
-                  <span className="bg-gradient-to-b from-[#5768fd] from-[77.404%] to-white bg-clip-text font-bold leading-[69px] text-transparent">
-                    PrecisionNote
+                <p className="text-[38px] font-bold tracking-[-1.2px] text-[#040523] sm:text-[60px]">
+                  <span className="sm:whitespace-nowrap">
+                    <span className="bg-gradient-to-b from-[#5768fd] from-[77.404%] to-white bg-clip-text font-bold leading-[1.15] text-transparent sm:leading-[69px]">
+                      PrecisionNote
+                    </span>
+                    <span className="leading-[1.15] sm:leading-[69px]">{` writes`}</span>
                   </span>
-                  <span className="leading-[69px]">{` writes your SOAP notes.`}</span>
+                  <span className="leading-[1.15] sm:leading-[69px]">{` your SOAP notes.`}</span>
                 </p>
 
                 <p className="text-[18px] leading-[27px] text-[#64748b]">
@@ -42,19 +46,19 @@ const Hero = () => {
               </div>
 
               <div className="flex flex-wrap items-center gap-[16px]">
-                <button className="inline-flex items-center justify-center gap-[8px] rounded-[8px] bg-[#5768fd] px-[32px] py-[12px] shadow-[0px_4px_14px_0px_rgba(87,104,253,0.35)] hover:bg-[#4656e5] transition-colors">
+                <a href={links.signUp} className="inline-flex items-center justify-center gap-[8px] rounded-[8px] bg-[#5768fd] px-[32px] py-[12px] shadow-[0px_4px_14px_0px_rgba(87,104,253,0.35)] hover:bg-[#4656e5] transition-colors">
                   <span className="text-[16px] font-semibold leading-[24px] text-white">
                     Try Free for 14 Days
                   </span>
                   <ArrowRight size={16} className="text-white" />
-                </button>
+                </a>
 
-                <button className="inline-flex items-center justify-center gap-[8px] rounded-[8px] border border-[#e2e8f0] bg-[#f1f5f9] px-[32px] py-[12px] hover:bg-[#e2e8f0] transition-colors">
+                <a href={links.demo} className="inline-flex items-center justify-center gap-[8px] rounded-[8px] border border-[#e2e8f0] bg-[#f1f5f9] px-[32px] py-[12px] hover:bg-[#e2e8f0] transition-colors">
                   <Play size={16} className="text-[#040523] fill-[#040523]" />
                   <span className="text-[16px] font-medium leading-[24px] text-[#040523]">
                     Watch 1-Min Demo
                   </span>
-                </button>
+                </a>
               </div>
             </div>
 

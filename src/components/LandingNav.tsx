@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { AppImages } from "../lib/data";
+import { links } from "../lib/links";
 
 const logoMark = AppImages.AppLogo;
 
@@ -135,12 +136,12 @@ const LandingNav = () => {
 
         {/* Desktop CTAs */}
         <div className="hidden items-center gap-4 lg:flex">
-          <button className="min-h-[48px] rounded-xl bg-[#f1f5f9] px-8 py-3 text-[16px] font-semibold text-[#040523] transition-colors hover:bg-slate-200">
+          <a href={links.signIn} className="min-h-[48px] rounded-xl bg-[#f1f5f9] px-8 py-3 text-[16px] font-semibold text-[#040523] transition-colors hover:bg-slate-200">
             Sign In
-          </button>
-          <button className="min-h-[48px] rounded-xl bg-brand-blue px-8 py-3 text-[16px] font-semibold text-white shadow-[0px_4px_14px_0px_rgba(87,104,253,0.35)] transition-transform hover:scale-[1.02] active:scale-[0.98]">
+          </a>
+          <a href={links.signUp} className="min-h-[48px] rounded-xl bg-brand-blue px-8 py-3 text-[16px] font-semibold text-white shadow-[0px_4px_14px_0px_rgba(87,104,253,0.35)] transition-transform hover:scale-[1.02] active:scale-[0.98]">
             Try Free for 14 Days
-          </button>
+          </a>
         </div>
 
         {/* Mobile Toggle */}
@@ -214,12 +215,12 @@ const LandingNav = () => {
               ))}
               <hr className="border-brand-border" />
               <div className="flex flex-col gap-4 pt-2">
-                <button className="w-full rounded-xl bg-[#f1f5f9] py-4 font-bold text-[#040523]">
+                <a href={links.signIn} className="w-full rounded-xl bg-[#f1f5f9] py-4 text-center font-bold text-[#040523]">
                   Sign In
-                </button>
-                <button className="w-full rounded-xl bg-brand-blue py-4 font-bold text-white shadow-lg">
+                </a>
+                <a href={links.signUp} className="w-full rounded-xl bg-brand-blue py-4 text-center font-bold text-white shadow-lg">
                   Try Free for 14 Days
-                </button>
+                </a>
               </div>
             </div>
           </motion.div>

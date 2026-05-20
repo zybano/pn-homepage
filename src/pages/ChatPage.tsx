@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Quote, ArrowRight, ChevronDown, Send, Check } from 'lucide-react';
 import LandingNav from '../components/LandingNav';
 import LandingFooter from '../components/LandingFooter';
 import { AppImages } from '../lib/data';
+import { contactEmail, links } from '../lib/links';
 
 const GB_FLAG_ICON = 'https://www.figma.com/api/mcp/asset/7543b70b-b0a7-4094-892a-2a049edd5d07';
 type PhoneCode = { country: string; code: string; flag: string };
@@ -23,6 +24,26 @@ const ChatPage = () => {
   const [selectedPhone, setSelectedPhone] = useState<PhoneCode>(PHONE_CODES[0]);
   const [selectedCountry, setSelectedCountry] = useState<(typeof COUNTRIES)[number] | 'Select country'>('Select country');
   const [agreedToPolicy, setAgreedToPolicy] = useState(false);
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const form = new FormData(event.currentTarget);
+    const subject = encodeURIComponent('PrecisionNote clinical solutions inquiry');
+    const body = encodeURIComponent(
+      [
+        `Name: ${form.get('firstName') ?? ''} ${form.get('lastName') ?? ''}`,
+        `Email: ${form.get('email') ?? ''}`,
+        `Phone: ${selectedPhone.code} ${form.get('phone') ?? ''}`,
+        `Country: ${selectedCountry}`,
+        `Hospital/Clinic: ${form.get('organization') ?? ''}`,
+        '',
+        `${form.get('message') ?? ''}`,
+      ].join('\n'),
+    );
+
+    window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
+  };
 
   return (
     <div className="min-h-screen bg-[#F8FAFF] font-geist selection:bg-[#5768fd] selection:text-white">
@@ -89,13 +110,14 @@ const ChatPage = () => {
               transition={{ delay: 0.3 }}
               className="bg-[#f7f8fc] rounded-2xl p-10 shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-[#E2E8F0]"
             >
-              <form className="flex flex-col gap-10">
+              <form className="flex flex-col gap-10" onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label className="text-[14px] font-medium leading-5 text-[#040523]">First name <span className="text-[#FD3232]">*</span></label>
                       <input 
                         type="text" 
+                        name="firstName"
                         placeholder="Your first name"
                         className="w-full h-[49px] rounded-lg border border-[#CBD5E1] bg-white/90 px-3 text-[14px] leading-5 text-[#040523] placeholder:text-[#737373] focus:border-[#5768fd] focus:outline-none"
                         required
@@ -105,6 +127,7 @@ const ChatPage = () => {
                       <label className="text-[14px] font-medium leading-5 text-[#040523]">Last name <span className="text-[#FD3232]">*</span></label>
                       <input 
                         type="text" 
+                        name="lastName"
                         placeholder="Your last name"
                         className="w-full h-[49px] rounded-lg border border-[#CBD5E1] bg-white/90 px-3 text-[14px] leading-5 text-[#040523] placeholder:text-[#737373] focus:border-[#5768fd] focus:outline-none"
                         required
@@ -117,6 +140,7 @@ const ChatPage = () => {
                       <label className="text-[14px] font-medium leading-5 text-[#040523]">Work email <span className="text-[#FD3232]">*</span></label>
                       <input 
                         type="email" 
+                        name="email"
                         placeholder="Your work email"
                         className="w-full h-[49px] rounded-lg border border-[#CBD5E1] bg-white/90 px-3 text-[14px] leading-5 text-[#040523] placeholder:text-[#737373] focus:border-[#5768fd] focus:outline-none"
                         required
@@ -172,6 +196,13 @@ const ChatPage = () => {
                           )}
                         </AnimatePresence>
                       </div>
+                      <input
+                        type="tel"
+                        name="phone"
+                        placeholder="Phone number"
+                        className="mt-2 w-full h-[49px] rounded-lg border border-[#CBD5E1] bg-white/90 px-3 text-[14px] leading-5 text-[#040523] placeholder:text-[#737373] focus:border-[#5768fd] focus:outline-none"
+                        required
+                      />
                     </div>
                   </div>
 
@@ -225,6 +256,7 @@ const ChatPage = () => {
                     <label className="text-[14px] font-medium leading-5 text-[#040523]">Hospital/Clinic name <span className="text-[#FD3232]">*</span></label>
                     <input 
                       type="text" 
+                      name="organization"
                       placeholder="Your hospital/Clinic name"
                       className="w-full h-[49px] rounded-lg border border-[#CBD5E1] bg-white/90 px-3 text-[14px] leading-5 text-[#040523] placeholder:text-[#737373] focus:border-[#5768fd] focus:outline-none"
                       required
@@ -234,6 +266,7 @@ const ChatPage = () => {
                   <div className="space-y-2">
                     <label className="text-[14px] font-medium leading-5 text-[#040523]">How can we help?</label>
                     <textarea 
+                      name="message"
                       placeholder="I'm interested in learning more about PrecisionNote for my practice..."
                       className="w-full h-[119px] rounded-lg border border-[#C9D0FF] bg-white p-3 text-[14px] leading-5 text-[#040523] placeholder:text-[#737373] focus:border-[#5768fd] focus:outline-none resize-none"
                     ></textarea>
@@ -250,8 +283,16 @@ const ChatPage = () => {
                   >
                     {agreedToPolicy && <Check className="w-3 h-3 text-[#5768fd]" />}
                   </button>
+                  <input
+                    className="sr-only"
+                    tabIndex={-1}
+                    required
+                    checked={agreedToPolicy}
+                    onChange={() => setAgreedToPolicy((prev) => !prev)}
+                    type="checkbox"
+                  />
                   <span className="text-[12px] leading-4 text-[#64748b] text-center flex-1">
-                    I agree to the processing of my data by PrecisionNote for professional outreach in accordance with our <a href="#" className="underline">Privacy Policy.</a>
+                    I agree to the processing of my data by PrecisionNote for professional outreach in accordance with our <a href={links.privacy} className="underline">Privacy Policy.</a>
                   </span>
                 </div>
 
@@ -292,10 +333,10 @@ const ChatPage = () => {
               <p className="text-[18px] md:text-[22px] text-[#040523]/80 font-medium mb-12">
                 Join 2,000+ physicians who've eliminated documentation burden.
               </p>
-              <button className="h-16 px-10 bg-[#040523] text-white rounded-2xl font-bold text-[16px] hover:bg-black transition-all shadow-xl shadow-black/10 flex items-center gap-2 group mx-auto">
+              <a href={links.signUp} className="h-16 px-10 bg-[#040523] text-white rounded-2xl font-bold text-[16px] hover:bg-black transition-all shadow-xl shadow-black/10 flex items-center gap-2 group mx-auto">
                 Start Free Trial
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </button>
+              </a>
             </div>
           </motion.div>
         </div>

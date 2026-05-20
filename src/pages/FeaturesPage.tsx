@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import LandingNav from '../components/LandingNav';
 import LandingFooter from '../components/LandingFooter';
+import { links } from '../lib/links';
 
 const FeaturesPage = () => {
   const [activeSpecialty, setActiveSpecialty] = useState('All');
@@ -142,9 +143,9 @@ const FeaturesPage = () => {
                   className="w-full pl-14 pr-6 py-5 bg-white border border-brand-border rounded-2xl shadow-sm focus:ring-4 focus:ring-brand-blue/10 focus:border-brand-blue transition-all font-bold text-brand-navy outline-none"
                 />
               </div>
-              <button className="px-10 py-5 bg-brand-navy text-white rounded-2xl font-black text-lg hover:bg-brand-navy/90 transition-all shadow-xl shadow-brand-navy/20">
+              <a href={links.contact} className="px-10 py-5 bg-brand-navy text-white rounded-2xl font-black text-lg hover:bg-brand-navy/90 transition-all shadow-xl shadow-brand-navy/20">
                 Request Specialty
-              </button>
+              </a>
             </motion.div>
           </div>
         </div>
@@ -230,9 +231,9 @@ const FeaturesPage = () => {
                 </div>
 
                 <div className="mt-10 pt-8 border-t border-slate-50">
-                  <button className="flex items-center gap-2 text-brand-blue font-black text-sm group/btn">
+                  <a href={links.contact} className="flex items-center gap-2 text-brand-blue font-black text-sm group/btn">
                     Explore Module <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                  </button>
+                  </a>
                 </div>
               </motion.div>
             ))}
@@ -293,9 +294,9 @@ const FeaturesPage = () => {
                     </div>
                   </div>
                   <div className="flex justify-center mt-4">
-                    <button className="px-10 py-5 bg-brand-blue text-white rounded-2xl font-black text-sm shadow-xl shadow-brand-blue/30 hover:scale-105 transition-transform">
+                    <a href={links.integrations} className="px-10 py-5 bg-brand-blue text-white rounded-2xl font-black text-sm shadow-xl shadow-brand-blue/30 hover:scale-105 transition-transform">
                       View Integration List
-                    </button>
+                    </a>
                   </div>
                </div>
                {/* Floating Badges */}
@@ -319,12 +320,12 @@ const FeaturesPage = () => {
               Our clinical engineering team builds custom models for rare sub-specialties. Tell us what you need.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <button className="w-full sm:w-auto px-12 py-6 bg-brand-blue text-white rounded-2xl font-black text-xl hover:scale-105 transition-all shadow-2xl shadow-brand-blue/30">
+              <a href={links.contact} className="w-full sm:w-auto px-12 py-6 bg-brand-blue text-center text-white rounded-2xl font-black text-xl hover:scale-105 transition-all shadow-2xl shadow-brand-blue/30">
                 Contact Sales
-              </button>
-              <button className="w-full sm:w-auto px-12 py-6 bg-white text-brand-navy border border-brand-border rounded-2xl font-black text-xl hover:bg-slate-50 transition-all">
+              </a>
+              <a href={links.pricing} className="w-full sm:w-auto px-12 py-6 bg-white text-center text-brand-navy border border-brand-border rounded-2xl font-black text-xl hover:bg-slate-50 transition-all">
                 View Roadmap
-              </button>
+              </a>
             </div>
           </div>
         </div>

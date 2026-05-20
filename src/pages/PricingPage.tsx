@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import LandingFooter from "../components/LandingFooter";
 import LandingNav from "../components/LandingNav";
 import { AppImages } from "../lib/data";
+import { links } from "../lib/links";
 
 type Currency = "USD" | "NGN";
 type BillingCycle = "monthly" | "yearly";
@@ -228,6 +229,7 @@ const PricingPage = () => {
                   priceYearly={pricingData[currency].Basic.yearly}
                   currencySymbol={pricingData[currency].Basic.symbol}
                   cta="Get PrecisionNote free"
+                  ctaHref={links.signUp}
                   ctaSecondary
                   credits="2K credits per month"
                   intro="Free for everyone"
@@ -247,6 +249,7 @@ const PricingPage = () => {
                   currencySymbol={pricingData[currency].Professional.symbol}
                   saveAmount={pricingData[currency].Professional.saveAmount}
                   cta="Try Free for 14 Days"
+                  ctaHref={links.signUp}
                   credits="8K credits per month"
                   intro="Everything in basic, plus:"
                   showBilling
@@ -266,6 +269,7 @@ const PricingPage = () => {
                   currencySymbol={pricingData[currency].Organization.symbol}
                   saveAmount={pricingData[currency].Organization.saveAmount}
                   cta="Try Free for 14 Days"
+                  ctaHref={links.signUp}
                   credits="20K credits per month"
                   intro="Everything in professional, plus:"
                   badge="Most Popular"
@@ -286,6 +290,7 @@ const PricingPage = () => {
                 description="Custom AI integration for your whole department."
                 price="Custom"
                 cta="Contact Sales"
+                ctaHref={links.contact}
                 credits="Unlimited credits per month"
                 intro="Everything in organization, plus:"
                 features={[
@@ -301,7 +306,7 @@ const PricingPage = () => {
           </div>
         </section>
 
-        <section className="bg-[#e6e9ff] px-6 py-[100px]">
+        <section id="pricing-comparison" className="bg-[#e6e9ff] px-6 py-[100px]">
           <div className="mx-auto max-w-[1320px]">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -318,7 +323,8 @@ const PricingPage = () => {
                     <p className="mb-4 text-[18px] md:text-[22px] font-semibold tracking-[-0.5px]">
                       {plan}
                     </p>
-                    <motion.button
+                    <motion.a
+                      href={i === 3 ? links.contact : links.signUp}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       className={`w-full rounded-xl px-4 py-3 text-[14px] md:text-[16px] font-bold shadow-lg shadow-black/5 ${i === 0 ? "bg-white text-[#040523] border border-slate-200" : "bg-[#5768fd] text-white"}`}
@@ -328,7 +334,7 @@ const PricingPage = () => {
                         : i === 1 || i === 2
                           ? "Try Free for 14 Days"
                           : "Contact Sales"}
-                    </motion.button>
+                    </motion.a>
                   </div>
                 ),
               )}
@@ -564,21 +570,23 @@ const PricingPage = () => {
               </p>
 
               <div className="flex flex-wrap items-center justify-center gap-4">
-                <motion.button
+                <motion.a
+                  href={links.contact}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
                   className="flex items-center gap-3 rounded-[10px] bg-gradient-to-r from-[#040523] to-[#3b4fe8] px-10 py-4 text-[18px] font-bold text-white shadow-[0px_20px_40px_-12px_rgba(4,5,35,0.4)]"
                 >
                   Chat with our clinical team
                   <ArrowRight className="h-5 w-5" />
-                </motion.button>
-                <motion.button
+                </motion.a>
+                <motion.a
+                  href={links.demo}
                   whileHover={{ scale: 1.05, backgroundColor: "#fffef0" }}
                   whileTap={{ scale: 0.98 }}
                   className="rounded-[10px] border border-[rgba(4,5,35,0.1)] bg-[#fef3d1] px-10 py-4 text-[18px] font-bold text-[#040523] shadow-lg shadow-black/5"
                 >
                   Book a Demo
-                </motion.button>
+                </motion.a>
               </div>
             </div>
           </motion.div>
@@ -598,6 +606,7 @@ type PlanCardProps = {
   currencySymbol?: string;
   saveAmount?: number;
   cta: string;
+  ctaHref: string;
   credits: string;
   intro: string;
   features: string[];
@@ -618,6 +627,7 @@ const PlanCard = ({
   currencySymbol,
   saveAmount,
   cta,
+  ctaHref,
   credits,
   intro,
   features,
@@ -773,37 +783,40 @@ const PlanCard = ({
             </div>
 
             <div className="lg:w-[300px] flex flex-col gap-4">
-              <motion.button
+              <motion.a
+                href={ctaHref}
                 whileHover={{
                   scale: 1.02,
                   backgroundColor: ctaSecondary ? "#e2e8f0" : "#4a5af7",
                 }}
                 whileTap={{ scale: 0.98 }}
-                className={`h-[56px] w-full rounded-2xl text-[17px] font-bold transition-shadow shadow-[0px_8px_20px_-4px_rgba(87,104,253,0.3)] hover:shadow-2xl hover:shadow-blue-500/20 ${ctaSecondary ? "bg-slate-100 text-[#040523]" : "bg-[#5768fd] text-white"}`}
+                className={`flex h-[56px] w-full items-center justify-center rounded-2xl text-[17px] font-bold transition-shadow shadow-[0px_8px_20px_-4px_rgba(87,104,253,0.3)] hover:shadow-2xl hover:shadow-blue-500/20 ${ctaSecondary ? "bg-slate-100 text-[#040523]" : "bg-[#5768fd] text-white"}`}
               >
                 {cta}
-              </motion.button>
-              <motion.button
+              </motion.a>
+              <motion.a
+                href="#pricing-comparison"
                 whileHover={{ x: 5 }}
                 className="flex items-center justify-center gap-2 text-[17px] font-bold text-[#040523]/80 hover:text-[#5768fd]"
               >
                 See more
                 <ChevronDown className="-rotate-90 h-4 w-4" />
-              </motion.button>
+              </motion.a>
             </div>
           </>
         ) : (
           <>
-            <motion.button
+            <motion.a
+              href={ctaHref}
               whileHover={{
                 scale: 1.02,
                 backgroundColor: ctaSecondary ? "#e2e8f0" : "#4a5af7",
               }}
               whileTap={{ scale: 0.98 }}
-              className={`mb-6 h-[56px] w-full rounded-2xl text-[17px] font-bold transition-shadow shadow-[0px_8px_20px_-4px_rgba(87,104,253,0.3)] hover:shadow-2xl hover:shadow-blue-500/20 ${ctaSecondary ? "bg-slate-100 text-[#040523]" : "bg-[#5768fd] text-white"}`}
+              className={`mb-6 flex h-[56px] w-full items-center justify-center rounded-2xl text-[17px] font-bold transition-shadow shadow-[0px_8px_20px_-4px_rgba(87,104,253,0.3)] hover:shadow-2xl hover:shadow-blue-500/20 ${ctaSecondary ? "bg-slate-100 text-[#040523]" : "bg-[#5768fd] text-white"}`}
             >
               {cta}
-            </motion.button>
+            </motion.a>
 
             <div className="mb-8 flex items-center gap-3">
               <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-[#f0f2ff]">
@@ -836,13 +849,14 @@ const PlanCard = ({
               </div>
             </div>
 
-            <motion.button
+            <motion.a
+              href="#pricing-comparison"
               whileHover={{ x: 5 }}
               className="mt-8 flex items-center gap-2 text-[17px] font-bold text-[#040523]/80 hover:text-[#5768fd]"
             >
               See more
               <ChevronDown className="-rotate-90 h-4 w-4" />
-            </motion.button>
+            </motion.a>
           </>
         )}
       </div>

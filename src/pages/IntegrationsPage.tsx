@@ -4,6 +4,7 @@ import { IconBrandChrome } from '@tabler/icons-react';
 import LandingNav from '../components/LandingNav';
 import LandingFooter from '../components/LandingFooter';
 import { AppImages } from '../lib/data';
+import { links } from '../lib/links';
 
 const IntegrationsPage = () => {
   const syncMethods = [
@@ -197,13 +198,13 @@ const IntegrationsPage = () => {
                 Our Integration specialists will work with your IT team to ensure a seamless setup.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button className="h-16 px-10 bg-[#040523] text-white rounded-2xl font-bold text-[16px] hover:bg-black transition-all shadow-xl shadow-black/10 flex items-center gap-2 group">
+                <a href={links.contact} className="h-16 px-10 bg-[#040523] text-white rounded-2xl font-bold text-[16px] hover:bg-black transition-all shadow-xl shadow-black/10 flex items-center gap-2 group">
                   Contact Integration Team
                   <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                </button>
-                <button className="h-16 px-10 bg-transparent text-[#040523] border border-[#040523]/20 rounded-2xl font-bold text-[16px] hover:bg-black/5 transition-all">
+                </a>
+                <a href={links.documentation} className="h-16 px-10 bg-transparent text-[#040523] border border-[#040523]/20 rounded-2xl font-bold text-[16px] hover:bg-black/5 transition-all flex items-center">
                   Learn More
-                </button>
+                </a>
               </div>
             </div>
           </motion.div>
