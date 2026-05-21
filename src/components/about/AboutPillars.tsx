@@ -5,7 +5,7 @@ const pillars = [
   {
     icon: <Shield className="w-8 h-8 text-brand-blue" />,
     title: "01. Privacy First",
-    description: "End-to-end encryption, SOC2 Type II, and full HIPAA compliance. Your patient data never leaves your secure environment.",
+    description: "Encryption-first workflows and strict access controls help keep patient data protected within your care environment.",
     delay: 0.1
   },
   {

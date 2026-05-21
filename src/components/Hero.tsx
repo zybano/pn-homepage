@@ -18,7 +18,7 @@ const Hero = () => {
               <div className="inline-flex items-center gap-[8px] rounded-full border border-[#cfd4ff] bg-[#edefff] px-[12px] py-[6px] w-fit">
                 <div className="h-[6px] w-[6px] rounded-full bg-[#5768fd] opacity-60" />
                 <p className="whitespace-nowrap font-mono text-[12px] leading-none text-[#5768fd]">
-                  100% HIPAA Compliant · Ambient AI Scribe
+                  Privacy-minded ambient AI scribe
                 </p>
               </div>
          
@@ -40,8 +40,8 @@ const Hero = () => {
 
                 <p className="text-[18px] leading-[27px] text-[#64748b]">
                   Save 2+ hours on charting daily. PrecisionNote listens to your
-                  clinical sessions and delivers structured, HIPAA-compliant
-                  SOAP notes directly to your EHR.
+                  clinical sessions and delivers structured SOAP notes directly
+                  to your EHR.
                 </p>
               </div>
 
@@ -338,7 +338,7 @@ const Hero = () => {
                   </div>
                   <div className="flex w-[181px] flex-col gap-[4px]">
                     <p className="text-[12px] font-semibold leading-[16px] text-[#040523]">
-                      HIPAA Compliant
+                      Encrypted Workflow
                     </p>
                     <p className="font-mono text-[10.015px] leading-[15.023px] text-[#90a1b9]">
                       AES-256 · End-to-end encrypted

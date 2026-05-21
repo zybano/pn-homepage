@@ -92,7 +92,7 @@ const LandingFooter = () => {
             <div className="mb-10 flex items-center gap-2 text-[#00d492]">
               <IconShieldCheck size={20} className="stroke-[2.5px]" />
               <span className="text-[14px] font-bold tracking-wide uppercase">
-                HIPAA · HL7 FHIR Compliant
+                Privacy-focused clinical documentation
               </span>
             </div>
 

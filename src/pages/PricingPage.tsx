@@ -11,40 +11,216 @@ import LandingFooter from "../components/LandingFooter";
 import LandingNav from "../components/LandingNav";
 import { AppImages } from "../lib/data";
 import { links } from "../lib/links";
+import { landingApi, type PublicPlan, type PublicPlanPrice } from "../lib/api";
 
 type Currency = "USD" | "NGN";
 type BillingCycle = "monthly" | "yearly";
 
-interface PriceInfo {
-  monthly: number;
-  yearly: number;
-  saveAmount: number;
-  symbol: string;
-}
+type PlanCardModel = {
+  id: string;
+  title: string;
+  description: string;
+  displayPrice?: string;
+  priceMonthly?: number;
+  priceYearly?: number;
+  currencySymbol: string;
+  saveAmount?: number;
+  cta: string;
+  ctaHref: string;
+  credits: string;
+  intro: string;
+  features: string[];
+  ctaSecondary?: boolean;
+  showBilling?: boolean;
+  featured?: boolean;
+  badge?: string;
+  fullWidth?: boolean;
+};
 
-const pricingData: Record<Currency, Record<string, PriceInfo>> = {
-  USD: {
-    Basic: { monthly: 0, yearly: 0, saveAmount: 0, symbol: "$" },
-    Professional: { monthly: 20, yearly: 190, saveAmount: 50, symbol: "$" },
-    Organization: { monthly: 50, yearly: 550, saveAmount: 50, symbol: "$" },
-    Enterprise: { monthly: 0, yearly: 0, saveAmount: 0, symbol: "$" },
+const bannedClaims = /\b(hipaa|hippa|soc\s*2|soc2)\b/i;
+
+const fallbackPlans: PlanCardModel[] = [
+  {
+    id: "basic",
+    title: "Basic",
+    description: "Start for free. No credit card required.",
+    priceMonthly: 0,
+    priceYearly: 0,
+    currencySymbol: "$",
+    cta: "Get PrecisionNote free",
+    ctaHref: links.signUp,
+    ctaSecondary: true,
+    credits: "2K credits per month",
+    intro: "Free for everyone",
+    features: [
+      "10 Scribe Sessions / Month",
+      "Standard SOAP Templates",
+      "No EHR integration",
+      "Secure workspace",
+    ],
   },
-  NGN: {
-    Basic: { monthly: 0, yearly: 0, saveAmount: 0, symbol: "₦" },
-    Professional: {
-      monthly: 30000,
-      yearly: 285000,
-      saveAmount: 75000,
-      symbol: "₦",
-    },
-    Organization: {
-      monthly: 75000,
-      yearly: 825000,
-      saveAmount: 75000,
-      symbol: "₦",
-    },
-    Enterprise: { monthly: 0, yearly: 0, saveAmount: 0, symbol: "₦" },
+  {
+    id: "professional",
+    title: "Professional",
+    description: "More scribe sessions for your practice.",
+    priceMonthly: 20,
+    priceYearly: 190,
+    currencySymbol: "$",
+    saveAmount: 50,
+    cta: "Try Free for 14 Days",
+    ctaHref: links.signUp,
+    credits: "8K credits per month",
+    intro: "Everything in basic, plus:",
+    showBilling: true,
+    features: [
+      "50 Scribe Sessions / Month",
+      "1 Specialty Module",
+      "Basic EHR Export",
+      "Standard Amber Memo (AI summary)",
+    ],
   },
+  {
+    id: "organization",
+    title: "Organization",
+    description: "Team-ready documentation workflows.",
+    priceMonthly: 50,
+    priceYearly: 550,
+    currencySymbol: "$",
+    saveAmount: 50,
+    cta: "Try Free for 14 Days",
+    ctaHref: links.signUp,
+    credits: "20K credits per month",
+    intro: "Everything in professional, plus:",
+    badge: "Most Popular",
+    showBilling: true,
+    featured: true,
+    features: [
+      "All Specialty Templates",
+      "Team workflow controls",
+      "Basic EHR Export",
+      "Standard Amber Memo (AI summary)",
+    ],
+  },
+  {
+    id: "enterprise",
+    title: "Enterprise",
+    description: "Custom AI integration for your whole department.",
+    displayPrice: "Custom",
+    currencySymbol: "$",
+    cta: "Contact Sales",
+    ctaHref: links.contact,
+    credits: "Custom usage allocation",
+    intro: "Everything in organization, plus:",
+    fullWidth: true,
+    features: [
+      "Bulk Seat Management",
+      "Custom Specialty Workflows",
+      "Dedicated Account Manager",
+      "On-Site Training",
+    ],
+  },
+];
+
+const getFallbackPlans = (currency: Currency): PlanCardModel[] => {
+  if (currency === "USD") {
+    return fallbackPlans;
+  }
+
+  return fallbackPlans.map((plan) => ({
+    ...plan,
+    currencySymbol: "₦",
+    priceMonthly:
+      plan.id === "professional"
+        ? 30000
+        : plan.id === "organization"
+          ? 75000
+          : plan.priceMonthly,
+    priceYearly:
+      plan.id === "professional"
+        ? 285000
+        : plan.id === "organization"
+          ? 825000
+          : plan.priceYearly,
+    saveAmount:
+      plan.id === "professional" || plan.id === "organization"
+        ? 75000
+        : plan.saveAmount,
+  }));
+};
+
+const countryForCurrency: Record<Currency, string> = {
+  USD: "US",
+  NGN: "NG",
+};
+
+const currencySymbol = (currency?: string | null) =>
+  currency?.toUpperCase() === "NGN" ? "₦" : "$";
+
+const amountFromCents = (value?: number | null) =>
+  typeof value === "number" ? value / 100 : undefined;
+
+const pickPrice = (prices: PublicPlanPrice[] | undefined, interval: "MONTH" | "YEAR") =>
+  prices?.find((price) => price.billingInterval === interval && price.isDefault) ??
+  prices?.find((price) => price.billingInterval === interval);
+
+const safeText = (value: string | null | undefined, fallback: string) =>
+  value && !bannedClaims.test(value) ? value : fallback;
+
+const safeBullets = (bullets: string[] | null | undefined, fallback: string[]) => {
+  const filtered = (bullets ?? []).filter((bullet) => !bannedClaims.test(bullet));
+  return filtered.length > 0 ? filtered : fallback;
+};
+
+const toPlanCardModel = (
+  plan: PublicPlan,
+  index: number,
+  fallback: PlanCardModel,
+): PlanCardModel => {
+  const prices = plan.prices ?? [];
+  const monthly = pickPrice(prices, "MONTH");
+  const yearly = pickPrice(prices, "YEAR");
+  const symbol = currencySymbol(monthly?.currency ?? yearly?.currency);
+  const monthlyAmount = amountFromCents(monthly?.amountCents);
+  const yearlyAmount = amountFromCents(yearly?.amountCents);
+  const saveAmount =
+    typeof monthlyAmount === "number" && typeof yearlyAmount === "number"
+      ? Math.max(0, monthlyAmount * 12 - yearlyAmount)
+      : undefined;
+
+  return {
+    id: plan.id,
+    title: safeText(plan.publicName ?? plan.name, fallback.title),
+    description: safeText(plan.summary ?? plan.description, fallback.description),
+    displayPrice: safeText(plan.displayPrice, "") || fallback.displayPrice,
+    priceMonthly: monthlyAmount ?? fallback.priceMonthly,
+    priceYearly: yearlyAmount ?? fallback.priceYearly,
+    currencySymbol: symbol,
+    saveAmount: saveAmount || fallback.saveAmount,
+    cta: safeText(plan.ctaLabel, fallback.cta),
+    ctaHref: fallback.ctaHref,
+    ctaSecondary: fallback.ctaSecondary,
+    credits: fallback.credits,
+    intro: fallback.intro,
+    features: safeBullets(plan.featureBullets, fallback.features),
+    badge: safeText(plan.badge, "") || fallback.badge,
+    showBilling:
+      fallback.showBilling &&
+      (typeof monthlyAmount === "number" || typeof yearlyAmount === "number"),
+    featured: fallback.featured || Boolean(plan.isDefault),
+    fullWidth: fallback.fullWidth || index > 2,
+  };
+};
+
+const priceSubLabel = (
+  billingCycle: BillingCycle,
+  displayPrice?: string,
+  monthly?: number,
+  yearly?: number,
+) => {
+  if (displayPrice || (monthly === undefined && yearly === undefined)) {
+    return undefined;
+  }
+  return billingCycle === "monthly" ? "Per user/month" : "Per user/year";
 };
 
 const PricingPage = () => {
@@ -52,6 +228,8 @@ const PricingPage = () => {
   const [openRows, setOpenRows] = useState("documentation");
   const [currency, setCurrency] = useState<Currency>("USD");
   const [isCurrencyOpen, setIsCurrencyOpen] = useState(false);
+  const [apiPlans, setApiPlans] = useState<PublicPlan[]>([]);
+  const [isPricingLoading, setIsPricingLoading] = useState(true);
   const [activeSegment, setActiveSegment] = useState<"individuals" | "teams">(
     "individuals",
   );
@@ -63,6 +241,33 @@ const PricingPage = () => {
       behavior: "smooth",
     });
   }, []);
+
+  useEffect(() => {
+    let isActive = true;
+    setIsPricingLoading(true);
+
+    landingApi
+      .getPublicB2cPlans(countryForCurrency[currency])
+      .then((plans) => {
+        if (isActive) {
+          setApiPlans(plans);
+        }
+      })
+      .catch(() => {
+        if (isActive) {
+          setApiPlans([]);
+        }
+      })
+      .finally(() => {
+        if (isActive) {
+          setIsPricingLoading(false);
+        }
+      });
+
+    return () => {
+      isActive = false;
+    };
+  }, [currency]);
 
   const faqs = [
     "Does this work with my specific EMR?",
@@ -101,9 +306,29 @@ const PricingPage = () => {
     ["Dedicated Account Mgr", "---", "---", "---", "Yes"],
   ];
 
+  const fallbackDisplayPlans = getFallbackPlans(currency);
+  const apiDisplayPlans = apiPlans.map((plan, index) =>
+    toPlanCardModel(
+      plan,
+      index,
+      fallbackDisplayPlans[Math.min(index, fallbackDisplayPlans.length - 1)],
+    ),
+  );
+  const displayPlans =
+    apiDisplayPlans.length > 0
+      ? [
+          ...apiDisplayPlans,
+          ...fallbackDisplayPlans.slice(apiDisplayPlans.length),
+        ]
+      : fallbackDisplayPlans;
+
+  const primaryPlans = displayPlans.filter((plan) => !plan.fullWidth);
+  const widePlans = displayPlans.filter((plan) => plan.fullWidth);
+  const comparisonPlanNames = displayPlans.slice(0, 4).map((plan) => plan.title);
+
   const securityRows = [
-    ["HIPAA Compliance", "Yes", "Yes", "Yes", "Yes"],
-    ["SOC2 Type II", "---", "---", "---", "Yes"],
+    ["Data Encryption", "Included", "Included", "Included", "Included"],
+    ["Access Controls", "Basic", "Included", "Included", "Custom"],
     ["Support Level", "Help Center", "Priority", "Priority", "24/7 VIP"],
   ];
 
@@ -220,88 +445,26 @@ const PricingPage = () => {
               </div>
             </motion.div>
 
+            {!isPricingLoading && apiPlans.length === 0 && (
+              <p className="mb-6 text-center text-sm font-medium text-[#62748e]">
+                Showing default pricing while live plan data is unavailable.
+              </p>
+            )}
+
             <div className="space-y-6">
               <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-                <PlanCard
-                  title="Basic"
-                  description="Start for free. No credit card required."
-                  priceMonthly={pricingData[currency].Basic.monthly}
-                  priceYearly={pricingData[currency].Basic.yearly}
-                  currencySymbol={pricingData[currency].Basic.symbol}
-                  cta="Get PrecisionNote free"
-                  ctaHref={links.signUp}
-                  ctaSecondary
-                  credits="2K credits per month"
-                  intro="Free for everyone"
-                  features={[
-                    "10 Scribe Sessions / Month",
-                    "Standard SOAP Templates",
-                    "No EHR integration",
-                    "HIPAA Secure",
-                  ]}
-                  index={0}
-                />
-                <PlanCard
-                  title="Professional"
-                  description="Unlimited scribe sessions for your practice."
-                  priceMonthly={pricingData[currency].Professional.monthly}
-                  priceYearly={pricingData[currency].Professional.yearly}
-                  currencySymbol={pricingData[currency].Professional.symbol}
-                  saveAmount={pricingData[currency].Professional.saveAmount}
-                  cta="Try Free for 14 Days"
-                  ctaHref={links.signUp}
-                  credits="8K credits per month"
-                  intro="Everything in basic, plus:"
-                  showBilling
-                  features={[
-                    "50 Scribe Sessions / Month",
-                    "1 Specialty Module",
-                    "Basic EHR Export",
-                    "Standard Amber Memo (AI summary)",
-                  ]}
-                  index={1}
-                />
-                <PlanCard
-                  title="Organization"
-                  description="Unlimited scribe sessions for your practice."
-                  priceMonthly={pricingData[currency].Organization.monthly}
-                  priceYearly={pricingData[currency].Organization.yearly}
-                  currencySymbol={pricingData[currency].Organization.symbol}
-                  saveAmount={pricingData[currency].Organization.saveAmount}
-                  cta="Try Free for 14 Days"
-                  ctaHref={links.signUp}
-                  credits="20K credits per month"
-                  intro="Everything in professional, plus:"
-                  badge="Most Popular"
-                  showBilling
-                  features={[
-                    "All Specialty Templates",
-                    "1 Specialty Module",
-                    "Basic EHR Export",
-                    "Standard Amber Memo (AI summary)",
-                  ]}
-                  featured
-                  index={2}
-                />
+                {primaryPlans.map((plan, index) => (
+                  <PlanCard key={plan.id} {...plan} index={index} />
+                ))}
               </div>
 
-              <PlanCard
-                title="Enterprise"
-                description="Custom AI integration for your whole department."
-                price="Custom"
-                cta="Contact Sales"
-                ctaHref={links.contact}
-                credits="Unlimited credits per month"
-                intro="Everything in organization, plus:"
-                features={[
-                  "Bulk Seat Management",
-                  "Custom Specialty Workflows",
-                  "Dedicated Account Manager",
-                  "On-Site Training",
-                ]}
-                index={3}
-                fullWidth
-              />
+              {widePlans.map((plan, index) => (
+                <PlanCard
+                  key={plan.id}
+                  {...plan}
+                  index={primaryPlans.length + index}
+                />
+              ))}
             </div>
           </div>
         </section>
@@ -317,7 +480,7 @@ const PricingPage = () => {
               <h2 className="text-[32px] md:text-[40px] font-bold leading-tight md:leading-[69px] tracking-[-1.2px]">
                 Choose Your Plan
               </h2>
-              {["Basic", "Professional", "Organization", "Enterprise"].map(
+              {comparisonPlanNames.map(
                 (plan, i) => (
                   <div key={plan} className="text-center">
                     <p className="mb-4 text-[18px] md:text-[22px] font-semibold tracking-[-0.5px]">
@@ -600,7 +763,7 @@ const PricingPage = () => {
 type PlanCardProps = {
   title: string;
   description: string;
-  price?: string;
+  displayPrice?: string;
   priceMonthly?: number;
   priceYearly?: number;
   currencySymbol?: string;
@@ -621,7 +784,7 @@ type PlanCardProps = {
 const PlanCard = ({
   title,
   description,
-  price,
+  displayPrice: staticDisplayPrice,
   priceMonthly,
   priceYearly,
   currencySymbol,
@@ -641,15 +804,16 @@ const PlanCard = ({
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
 
   const displayPrice =
-    price ||
+    staticDisplayPrice ||
     (billingCycle === "monthly"
       ? priceMonthly?.toLocaleString()
       : priceYearly?.toLocaleString());
-  const priceSub = price
-    ? undefined
-    : billingCycle === "monthly"
-      ? "Per user/month"
-      : "Per user/year";
+  const priceSub = priceSubLabel(
+    billingCycle,
+    staticDisplayPrice,
+    priceMonthly,
+    priceYearly,
+  );
 
   const toggleBilling = () => {
     setBillingCycle((prev) => (prev === "monthly" ? "yearly" : "monthly"));
@@ -691,10 +855,10 @@ const PlanCard = ({
               className="flex items-baseline gap-1"
             >
               <p className="text-[52px] font-bold leading-none tracking-[-2px]">
-                {displayPrice === "Custom" ? "" : currencySymbol}
+                {staticDisplayPrice ? "" : currencySymbol}
                 {displayPrice}
               </p>
-              {priceSub && displayPrice !== "Custom" && (
+              {priceSub && (
                 <p className="text-[15px] font-medium text-[#62748e]">
                   {priceSub}
                 </p>

@@ -16,7 +16,7 @@ const FooterCTA = () => {
   const benefits = [
     {
       icon: <Shield className="w-5 h-5 text-brand-navy" />,
-      text: "HIPAA Compliant",
+      text: "Privacy Focused",
     },
     {
       icon: <Clock className="w-5 h-5 text-brand-navy" />,

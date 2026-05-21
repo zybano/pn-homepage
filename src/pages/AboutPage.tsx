@@ -4,7 +4,7 @@ import LandingFooter from "../components/LandingFooter";
 import AboutHero from "../components/about/AboutHero";
 import AboutMission from "../components/about/AboutMission";
 import AboutPillars from "../components/about/AboutPillars";
-import AboutAdvisoryBoard from "../components/about/AboutAdvisoryBoard";
+// import AboutAdvisoryBoard from "../components/about/AboutAdvisoryBoard";
 import ScrollToTop from "../components/ScrollToTop";
 
 const AboutPage = () => {
@@ -27,9 +27,9 @@ const AboutPage = () => {
         
         <AboutPillars />
         
-        <AboutAdvisoryBoard />
+        {/* <AboutAdvisoryBoard /> */}
         
-        {/* Team Grid Placeholder - Simplified as requested */}
+        {/* Team Grid Placeholder - hidden for now, kept for future restoration.
         <section className="py-24 bg-brand-bg">
           <div className="container-custom">
             <div className="text-center mb-16">
@@ -49,6 +49,7 @@ const AboutPage = () => {
             </div>
           </div>
         </section>
+        */}
       </main>
       
       <LandingFooter />

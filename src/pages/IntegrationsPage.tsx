@@ -29,7 +29,7 @@ const IntegrationsPage = () => {
       features: [
         'Automatic chart updates',
         'Real-time bidirectional sync',
-        'HL7 and FHIR compliant',
+        'HL7 and FHIR-ready workflows',
         'Dedicated implementation support'
       ]
     }
@@ -37,13 +37,13 @@ const IntegrationsPage = () => {
 
   const securityFeatures = [
     {
-      title: 'HIPAA Verified',
-      description: 'Full compliance with patient data protection standards',
+      title: 'Privacy-Aware Design',
+      description: 'Built around careful handling of patient information',
       icon: <Shield className="w-8 h-8 text-[#5768fd]" />
     },
     {
-      title: 'SOC 2 Type II Certified',
-      description: 'Independently audited security controls',
+      title: 'Access Controls',
+      description: 'Role-aware controls for clinical and operational teams',
       icon: <Lock className="w-8 h-8 text-[#5768fd]" />
     },
     {
