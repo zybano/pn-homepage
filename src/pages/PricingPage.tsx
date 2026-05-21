@@ -153,6 +153,31 @@ const countryForCurrency: Record<Currency, string> = {
   NGN: "NG",
 };
 
+const detectInitialCurrency = (): Currency => {
+  if (typeof navigator !== "undefined") {
+    const locales = [
+      ...(Array.isArray(navigator.languages) ? navigator.languages : []),
+      navigator.language,
+    ].filter(Boolean);
+    const regionCodes = locales
+      .map((locale) => locale.split(/[-_]/)[1]?.toUpperCase())
+      .filter(Boolean);
+
+    if (regionCodes.includes("NG")) {
+      return "NGN";
+    }
+  }
+
+  if (typeof Intl !== "undefined") {
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (timeZone === "Africa/Lagos") {
+      return "NGN";
+    }
+  }
+
+  return "USD";
+};
+
 const currencySymbol = (currency?: string | null) =>
   currency?.toUpperCase() === "NGN" ? "₦" : "$";
 
@@ -226,7 +251,7 @@ const priceSubLabel = (
 const PricingPage = () => {
   const [openFaq, setOpenFaq] = useState(1);
   const [openRows, setOpenRows] = useState("documentation");
-  const [currency, setCurrency] = useState<Currency>("USD");
+  const [currency, setCurrency] = useState<Currency>(detectInitialCurrency);
   const [isCurrencyOpen, setIsCurrencyOpen] = useState(false);
   const [apiPlans, setApiPlans] = useState<PublicPlan[]>([]);
   const [isPricingLoading, setIsPricingLoading] = useState(true);
